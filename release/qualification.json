@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.1",
+  "schema_version": "1.0",
   "release": "0.8.0-rc.1",
   "status": "blocked",
   "production_claim_allowed": false,
@@ -96,13 +96,14 @@
       "required": true,
       "status": "pending",
       "evidence": null
-    },
-    "secondary_waza_cross_executor": {
-      "required": false,
-      "status": "pending",
+    }
+  },
+  "secondary_evidence": {
+    "waza_cross_executor": {
+      "status": "optional_pending",
       "upstream_commit": "f466c4fddf71144f42311d7c4157e8c8b3f0fed6",
       "evidence": null,
-      "nonclaim": "A Waza or Copilot-executor pass does not establish behavior in the target Codex or ChatGPT Skills host."
+      "nonclaim": "A Waza or Copilot-executor pass does not establish behavior in the target Codex or ChatGPT Skills host and cannot replace a required gate."
     }
   },
   "promotion_invariant": "status may be qualified and production_claim_allowed may be true only when every required gate is passed, the qualification_commit equals the exact release commit, package and evaluation hashes are present, and no unresolved hard failure remains",
