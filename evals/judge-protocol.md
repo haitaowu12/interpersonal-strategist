@@ -66,7 +66,7 @@ Each judgment must contain:
   "case_id": "...",
   "condition": "skill|no-skill",
   "judge_id": "pseudonymous-reviewer-id",
-  "rubric_version": "2.0",
+  "rubric_version": "2.1",
   "invocation_label": "...",
   "substantive_route": "...",
   "hard_gates": {"gate_id": false},
