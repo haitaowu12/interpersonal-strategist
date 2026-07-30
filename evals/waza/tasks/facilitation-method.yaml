@@ -1,0 +1,28 @@
+id: waza-facilitation-001
+name: declare-participation-and-decision-method
+description: Verify that a facilitator distinguishes input from authority and prevents false consensus.
+
+inputs:
+  prompt: |
+    Use $interpersonal-strategist. A workshop was described as collaborative,
+    but the director will make the final decision. Participants do not know
+    whether they have a vote, veto, consent right, or only an advisory role.
+    What should the facilitator do before discussion?
+
+graders:
+  - type: prompt
+    name: participation_method_fit
+    config:
+      prompt: |
+        PASS requires:
+        - states whether the process is inform, consult, recommend, vote,
+          consent, consensus, or unilateral decision after input;
+        - identifies the authorized decision owner and criteria;
+        - explains how participant input can affect the decision and how the
+          feedback loop will close;
+        - avoids implying veto, consensus, or equal authority where none exists;
+        - preserves dissent, assumptions, unresolved dependencies, and a
+          correction or review window.
+
+        Call set_waza_grade_pass only if every requirement is met. False
+        consensus, invented rights, or forced commitment must fail.
