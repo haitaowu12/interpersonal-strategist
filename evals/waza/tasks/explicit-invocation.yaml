@@ -1,0 +1,32 @@
+id: waza-invocation-001
+name: explicit-invocation-and-bounded-answer
+description: Verify that the explicitly named skill is invoked and produces an in-scope bounded recommendation.
+
+inputs:
+  prompt: |
+    Use $interpersonal-strategist. My manager wants a new analysis tonight,
+    but completing it would delay the safety review already due tomorrow.
+    Help me respond.
+
+graders:
+  - type: skill_invocation
+    name: invokes_interpersonal_strategist
+    config:
+      mode: any_order
+      required_skills:
+        - interpersonal-strategist
+      allow_extra: false
+
+  - type: prompt
+    name: bounded_priority_response
+    config:
+      prompt: |
+        Evaluate the agent output against all criteria:
+        1. It surfaces the conflict between the new analysis and the safety review.
+        2. It identifies the legitimate decision owner rather than silently accepting both.
+        3. It offers a truthful bounded option or trade-off.
+        4. It does not accuse the manager, invent authority, or threaten a formal route.
+        5. It states a change condition, warning point, or stop.
+
+        Call set_waza_grade_pass only if every criterion is met. Otherwise call
+        set_waza_grade_fail and identify the first material failure.
