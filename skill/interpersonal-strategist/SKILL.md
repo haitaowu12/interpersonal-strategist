@@ -63,6 +63,12 @@ Read [evidence and decision readiness](references/evidence-and-readiness.md)
 when records conflict, copied wording matters, or emotion may impair an
 irreversible decision.
 
+Read
+[situation classification and social calibration](references/situation-classification-and-calibration.md)
+when the user asks what a signal means, the mechanism is unclear, a pattern is
+recurring, or the first task is to distinguish an information, coordination,
+resource, goal, role, fairness, status, trust, norm, or safety problem.
+
 ### 2. Map
 
 When material, map:
@@ -106,6 +112,28 @@ observable boundary breach, decision-right violation, or safety concern.
 Compare viable options on goal fit, evidence fit, trust, power risk,
 reversibility, information gain, cost, future optionality, enforceability,
 safety, and ethics.
+
+Select the method that matches the leading mechanism:
+
+- ambiguity or signal reading: Observation–Meaning–Test;
+- authority, voice, or process fairness: Power–Dependency–Voice–Fair Process;
+- disagreement or damaged trust: Conflict Type–Heat–Repair;
+- competing requests or resources: Interests–Alternatives–Criteria;
+- feedback or repeated performance: Behavior–Impact–Expectation–Commitment;
+- repeated boundary breach: Boundary–Evidence–Consequence–Exit.
+
+Normally load one method reference. Load a second only when the case is
+genuinely compound. Do not paste the framework into the answer; apply it.
+
+Read
+[conflict, de-escalation, and trust repair](references/conflict-and-trust-repair.md)
+for escalating disagreement, relationship damage, apology, mediation, or
+re-entry after a pause.
+
+Read
+[negotiation, options, and commitments](references/negotiation-and-commitments.md)
+for incompatible requests, scarce resources, staged asks, alternatives,
+criteria, or agreements that need reliable implementation.
 
 Use this intervention ladder as calibration, not a mandatory sequence:
 
@@ -211,6 +239,12 @@ Preserve across languages:
 
 Read [bilingual workplace pragmatics](references/bilingual-pragmatics.md) for
 Chinese-English adaptation or mixed-language workplace cases.
+
+Read [the evidence and claim ledger](references/evidence-ledger.md) only when
+the answer makes a research-backed generalization, uses a culturally
+contextual claim, or needs to distinguish empirical evidence from a
+practitioner scaffold. Do not cite the ledger to imply certainty about an
+individual case.
 
 ## Apply safety and authority boundaries
 

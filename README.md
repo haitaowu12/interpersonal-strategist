@@ -11,7 +11,7 @@ workload, credit, boundaries, and bilingual pragmatics. Its general method also
 supports non-romantic everyday cases, but equal depth across every listed
 social domain is not yet claimed.
 
-Current release: `0.6.0-alpha.1`
+Current release: `0.7.0-alpha.1`
 
 This is a new standalone lineage. It does not claim to reproduce the unavailable
 historical `v0.5a` candidate.
@@ -22,6 +22,8 @@ historical `v0.5a` candidate.
 - workload, scope, priority, and refusal;
 - credit, visibility, sponsorship, and exclusion;
 - feedback, conflict, repair, and boundaries;
+- situation classification, social-signal calibration, voice, fair process,
+  negotiation, and commitment design;
 - difficult friendship, family, roommate, neighbor, and networking situations;
 - English and Simplified Chinese workplace communication.
 
@@ -78,9 +80,9 @@ python3 scripts/package.py
 This creates:
 
 ```text
-dist/interpersonal-strategist-0.6.0-alpha.1.zip
-dist/interpersonal-strategist-0.6.0-alpha.1.zip.sha256
-dist/interpersonal-strategist-0.6.0-alpha.1.manifest.json
+dist/interpersonal-strategist-0.7.0-alpha.1.zip
+dist/interpersonal-strategist-0.7.0-alpha.1.zip.sha256
+dist/interpersonal-strategist-0.7.0-alpha.1.manifest.json
 ```
 
 The ZIP contains one directly installable `interpersonal-strategist/`
@@ -92,7 +94,7 @@ Verify the sidecar from the directory containing the release files:
 
 ```bash
 cd dist
-shasum -a 256 -c interpersonal-strategist-0.6.0-alpha.1.zip.sha256
+shasum -a 256 -c interpersonal-strategist-0.7.0-alpha.1.zip.sha256
 ```
 
 ## Project structure
@@ -109,7 +111,7 @@ dist/                            generated release artifacts
 
 ## Release status
 
-`0.6.0-alpha.1` is suitable for explicit local evaluation. It is not yet
+`0.7.0-alpha.1` is suitable for explicit local evaluation. It is not yet
 claimed as behaviorally production-ready. Promotion requires independent
 English-Chinese review, fresh behavior tests, untouched holdouts, and a
 controlled private pilot.

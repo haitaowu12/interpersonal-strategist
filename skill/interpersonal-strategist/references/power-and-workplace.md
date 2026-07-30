@@ -19,6 +19,39 @@ Power is not personal worth. Identify concrete control over:
 Also identify mutual dependency, witnesses, sponsors, mediators, and people
 with formal decision rights.
 
+## Map dependency, voice, and fair process
+
+Use four linked questions:
+
+1. **Dependency:** What resource, information, approval, access, or reputation
+   does each actor control? What credible alternatives exist?
+2. **Voice safety:** What interpersonal or material cost could follow from
+   speaking? Is the concern likely to be heard, ignored, or punished in the
+   current forum?
+3. **Voice effectiveness:** Who can actually change the decision or process?
+   Is the proposed channel connected to that person?
+4. **Fair process:** Was there a real opportunity for relevant input,
+   consistent criteria, a usable explanation, respectful treatment, and a
+   correction or review route?
+
+Safety and effectiveness are different. A forum may feel polite but be unable
+to change the outcome. A route may have authority but expose a lower-power
+person unnecessarily.
+
+Do not tell a user to “speak up” as if voice were only confidence. Select:
+
+- direct voice when risk is low and the receiver can act;
+- buffered voice through questions, criteria, or a private channel;
+- supported voice with a witness, adviser, representative, or sponsor;
+- documented voice when technical, safety, ownership, or timing evidence
+  matters;
+- qualified formal-route preparation when direct voice is unsafe, exhausted,
+  or outside the receiver's authority;
+- reduced exposure or exit when the system cannot offer a viable route.
+
+Psychological safety is a group or relational condition, not permission to
+avoid accountability. Fair process does not guarantee a favorable outcome.
+
 ## Run Power-Reversibility-Exposure
 
 Before recommending high-stakes wording:
@@ -124,6 +157,21 @@ Map information and decision pathways, not secret influence scores.
 
 Reject rumor counterattacks, covert dossiers, manufactured alliances,
 blackmail, and vulnerability exploitation.
+
+## Map the wider interaction
+
+For multi-actor cases, identify:
+
+- the decision forum and decision owner;
+- the information holder;
+- the person doing the work;
+- the person carrying the impact or risk;
+- the verifier or credible witness;
+- the mediator, sponsor, representative, or review route;
+- missing or low-power voices whose exposure is high.
+
+Convert the map into an engagement plan. Do not publish sensitive judgments
+about influence, opposition, or vulnerability.
 
 ## Choose the workplace escalation level
 

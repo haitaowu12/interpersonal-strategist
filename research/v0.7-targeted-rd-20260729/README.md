@@ -7,6 +7,9 @@ Status: recommendation only; the distributable skill is unchanged
 Inputs: current `0.6.0-alpha.1`, clean-room pattern audit of
 `goutoujunshi`, ChatGPT Pro research review, and independent source checks
 
+Additional implementation evidence:
+[vault and multilingual research pass](vault-and-multilingual-research.md).
+
 ## Executive verdict
 
 The current alpha is a sound **interpersonal decision-and-wording kernel**. It

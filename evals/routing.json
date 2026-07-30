@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "suite": "interpersonal-strategist-0.6-alpha-routing",
+  "suite": "interpersonal-strategist-0.7-alpha-routing",
   "case_count": 18,
   "cases": [
     {"id": "R01", "prompt": "Use $interpersonal-strategist: my manager keeps changing deadlines without changing scope.", "expected": "explicit-own"},

@@ -39,16 +39,51 @@ Avoid:
 
 ## Give feedback
 
-Use behavior, impact, perspective, and next agreement:
+First check:
+
+- Is the behavior specific and recent enough to discuss?
+- Is it controllable by the receiver?
+- Is the required standard or decision right legitimate and clear?
+- Is the timing suitable for learning rather than public status defense?
+- Does the speaker have authority, evidence, and support for the requested
+  change?
+
+Then use behavior, impact, perspective, and next agreement:
 
 1. name a specific recent behavior;
 2. explain the concrete impact;
 3. invite material context;
 4. state the required standard or request;
-5. agree on support, owner, timing, and warning point.
+5. agree on support, owner, timing, warning point, and review.
 
 Account for formal authority. A manager's “request” may function as a command,
 so preserve meaningful voice and avoid forced confession.
+
+Keep attention on the task, behavior, process, or agreed standard. Broad
+identity judgments can redirect attention from the change and make feedback
+less useful.
+
+## Build accountability without forced agreement
+
+Use the Behavior–Impact–Expectation–Commitment method:
+
+1. **Behavior:** What observable action or omission occurred?
+2. **Impact:** What delivery, safety, workload, trust, or coordination effect
+   followed?
+3. **Context:** What material constraint or disagreement must be heard?
+4. **Expectation:** What standard, decision, or boundary applies next?
+5. **Support:** What authority, resource, information, or coaching is needed?
+6. **Commitment:** Who will do what by when, with what warning point?
+7. **Review:** When will the result be checked, and what happens if it fails?
+
+The receiver need not agree with every interpretation to understand the
+expectation or make a commitment. Do not demand a confession, emotional
+disclosure, or personality change.
+
+Feedback is not automatically helpful. If it is vague, identity-focused,
+uncontrollable, public, overloaded, or disconnected from a usable action, it
+can impair performance. Prefer one or two decision-relevant behaviors and a
+near-term review.
 
 ## Set a boundary
 
