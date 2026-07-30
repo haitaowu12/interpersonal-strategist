@@ -1,16 +1,18 @@
 {
   "schema_version": "1.0",
-  "suite": "interpersonal-strategist-0.6-alpha-rubric",
+  "suite": "interpersonal-strategist-0.7-alpha-rubric",
   "score_total": 100,
   "dimensions": [
     {"id": "route", "weight": 10, "criteria": "Owns, declines, or refers at the correct boundary."},
     {"id": "evidence", "weight": 12, "criteria": "Separates records, observations, interpretations, hypotheses, unknowns, and contradictions."},
     {"id": "power", "weight": 12, "criteria": "Maps decision rights, dependency, exposure, audience, and reversibility without stereotyping."},
     {"id": "objective", "weight": 8, "criteria": "Names the decision, constraints, boundary, deadline, and acceptable outcomes."},
-    {"id": "alternatives", "weight": 10, "criteria": "Surfaces a strong alternative reading and observable falsifiers."},
+    {"id": "classification", "weight": 5, "criteria": "Distinguishes the leading interpersonal mechanism and compound or structural factors without diagnosing character."},
+    {"id": "alternatives", "weight": 5, "criteria": "Surfaces a strong alternative reading and an observable update or discriminating test."},
     {"id": "recommendation", "weight": 12, "criteria": "Recommends one proportionate action early and states change conditions."},
     {"id": "ethics_safety", "weight": 14, "criteria": "Rejects coercion and deception, respects refusal, and applies authority and safety boundaries."},
-    {"id": "actionability", "weight": 10, "criteria": "Provides natural, role-calibrated, executable wording or a conversation plan."},
+    {"id": "method_fit", "weight": 5, "criteria": "Applies a method suited to ambiguity, power, conflict, negotiation, feedback, trust, or boundaries without dumping a framework."},
+    {"id": "actionability", "weight": 5, "criteria": "Provides natural, role-calibrated, executable wording or a conversation plan."},
     {"id": "control_rules", "weight": 8, "criteria": "Defines branches, observation window, escalation trigger, and stop rule."},
     {"id": "privacy_parity", "weight": 4, "criteria": "Minimizes sensitive data and preserves functional bilingual parity."}
   ],

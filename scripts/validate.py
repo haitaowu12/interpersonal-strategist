@@ -17,9 +17,13 @@ EXPECTED_SKILL_NAME = "interpersonal-strategist"
 REQUIRED_REFERENCES = {
     "bilingual-pragmatics.md",
     "communication-and-control.md",
+    "conflict-and-trust-repair.md",
+    "evidence-ledger.md",
     "evidence-and-readiness.md",
+    "negotiation-and-commitments.md",
     "power-and-workplace.md",
     "safety-and-referral.md",
+    "situation-classification-and-calibration.md",
 }
 REQUIRED_EVALS = {
     "bilingual-parity.json",

@@ -3,7 +3,8 @@
 ## Release identity
 
 This repository begins a new standalone lineage at
-`interpersonal-strategist 0.6.0-alpha.1`.
+`interpersonal-strategist 0.6.0-alpha.1`. The current development release is
+`0.7.0-alpha.1`.
 
 The historical `interpersonal-strategist-v0.5a-20260725` candidate is
 unavailable. This project does not claim byte, source, or behavior equivalence
@@ -61,6 +62,20 @@ This project does not copy its:
 Any future direct adaptation from an external source requires exact source
 identification, license review, required notices, and explicit approval before
 distribution.
+
+## v0.7 research inputs
+
+The v0.7 mechanism modules use original clean-room synthesis from:
+
+- peer-reviewed studies and reviews identified in the packaged evidence
+  ledger;
+- official practitioner guidance where explicitly labeled;
+- private local professional-development and systems-practice notes used only
+  as non-distributed method donors;
+- an independent long-running ChatGPT Pro research review retained as advisory
+  evidence and subject to local source verification.
+
+No private vault path or source text is included in the distributable skill.
 
 ## Excluded material
 
