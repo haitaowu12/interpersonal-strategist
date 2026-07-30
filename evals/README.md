@@ -15,22 +15,28 @@ production claim.
 4. **Mechanism and reference selection:** leading method, mandatory overlays,
    primary reference, unnecessary-reference rate, and compound-case recall.
 5. **Response quality:** pointwise hard gates and per-dimension floors.
-6. **Functional bilingual review:** invariant preservation plus fluent
+6. **Simulation control:** setup/simulation/debrief separation, counterpart
+   information boundary, turn and stop rules, one-variable replay, and
+   micro-feedback cadence.
+7. **Nonverbal inference:** low-specificity cues remain observations and do not
+   become emotion, honesty, consent, engagement, competence, or motive verdicts.
+8. **Functional bilingual review:** invariant preservation plus fluent
    naturalness and status-fit review.
-7. **No-skill comparison:** same model and prompt, blinded randomized
-   comparison against the model without the skill.
-8. **Untouched holdouts:** independently authored after package freeze and kept
-   outside the public repository.
-9. **Controlled pilot:** privacy-minimized formative usability and failure
-   discovery, not efficacy proof.
+9. **No-skill comparison:** same model and prompt, blinded randomized comparison
+   against the model without the skill.
+10. **Untouched holdouts:** independently authored after package freeze and kept
+    outside the public repository.
+11. **Controlled pilot:** privacy-minimized formative usability and failure
+    discovery, not efficacy proof.
 
 ## Public fixture suites
 
-- `cases.json` — broad public development cases;
+- `cases.json` — broad public development cases, including bounded role-play,
+  nonverbal inference, and facilitation regressions;
 - `invocation.json` — invocation-ownership classifier;
 - `substantive-routes.json` — canonical four-state routes;
-- `multi-actor.json` — forum, authority, unique information, constituency, and
-  ratification;
+- `multi-actor.json` — forum, authority, unique information, constituency,
+  ratification, staged disclosure, and information integration;
 - `relationship-norms.json` — communal care, shared arrangements, professional
   exchange, voluntary connection, and disputed norms;
 - `ai-mediated.json` — data authorization, representational authority,
@@ -42,7 +48,8 @@ production claim.
 - `bilingual-parity.json` — functional English-Simplified Chinese invariants;
 - `metamorphic.json` — paired cases where one material variable changes;
 - `rubric.json` — hard gates, 1-5 anchored dimensions, and qualification
-  thresholds.
+  thresholds;
+- `waza/` — optional secondary cross-executor Agent Skill evaluation lane.
 
 ## Running the deterministic preparation tools
 
@@ -66,8 +73,8 @@ For each case:
 
 1. build the deterministic release ZIP and record its SHA-256;
 2. install and invoke the exact package explicitly for the skill condition;
-3. use the same model snapshot, host, tools, context, and sampling policy for
-   the no-skill condition;
+3. use the same model snapshot, host, tools, context, and sampling policy for the
+   no-skill condition;
 4. retain raw prompts and responses without real identifying information;
 5. record invocation ownership, substantive route, mechanism, overlays, and
    references used when the host exposes them;
@@ -77,7 +84,34 @@ For each case:
    keyword presence alone;
 9. review bilingual naturalness and status fit with fluent humans for material
    cases;
-10. report every confusion and failure by domain rather than only an aggregate.
+10. for role-play, keep scenario controller, counterpart turns, and debrief
+    evidence separate;
+11. for multi-actor cases, distinguish information integration from consensus;
+12. report every confusion and failure by domain rather than only an aggregate.
+
+## Secondary Waza lane
+
+`evals/waza/` contains original project configuration for Microsoft Waza,
+inspected at upstream commit
+`f466c4fddf71144f42311d7c4157e8c8b3f0fed6` under MIT.
+
+Use it to cross-check:
+
+- explicit trigger and anti-trigger behavior;
+- skill-invocation traces where the executor exposes them;
+- coercion refusal;
+- nonverbal mind-reading prevention;
+- role-play state separation and micro-feedback;
+- distributed information and facilitation;
+- bilingual boundary preservation;
+- snapshots, replay, adversarial packs, spec coverage, and token budget.
+
+The lane is Copilot-executor oriented and is not canonical qualification
+evidence for Codex or ChatGPT. Several Waza grader types are documented as not
+implemented. Apply this project's hard gates before any Waza weighted score and
+calibrate prompt graders against humans before promotion use.
+
+See [`waza/README.md`](waza/README.md).
 
 ## Qualification boundary
 
@@ -86,7 +120,8 @@ updated to `qualified` with evidence for all gates and exact hashes for:
 
 - commit and release package;
 - model and host configuration;
-- harness and rubric;
+- canonical harness and rubric;
+- optional secondary-harness identity and results when used;
 - source-resolution report;
 - no-skill comparison;
 - judge calibration;
@@ -94,17 +129,20 @@ updated to `qualified` with evidence for all gates and exact hashes for:
 - bilingual review;
 - controlled pilot and privacy disposition.
 
-Do not change the qualification status merely because structural CI passes.
+Do not change the qualification status merely because structural CI or Waza
+passes.
 
 ## Required protocols
 
 - [Judge calibration](judge-protocol.md)
 - [No-skill comparison](no-skill-protocol.md)
 - [Untouched holdouts](holdout-protocol.md)
+- [Waza secondary lane](waza/README.md)
 
 ## Privacy
 
 Never add real conversations, names, identifying workplace records, credentials,
-health details, or confidential attachments to public fixtures, issues, logs, or
-release artifacts. Private pilot material must be minimized, access-controlled,
-and deleted under the pilot protocol.
+health details, facial or voice recordings, biometric inferences, or confidential
+attachments to public fixtures, issues, logs, snapshots, or release artifacts.
+Private pilot material must be minimized, access-controlled, and deleted under
+the pilot protocol.
