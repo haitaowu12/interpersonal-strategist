@@ -113,3 +113,10 @@ dist/                            generated release artifacts
 claimed as behaviorally production-ready. Promotion requires independent
 English-Chinese review, fresh behavior tests, untouched holdouts, and a
 controlled private pilot.
+
+## Research and development
+
+The current boundary audit and proposed mechanism-driven v0.7 expansion are
+documented in
+[`research/v0.7-targeted-rd-20260729/`](research/v0.7-targeted-rd-20260729/README.md).
+This is a recommendation package; it does not change the installed alpha.
