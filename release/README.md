@@ -29,9 +29,15 @@ reviewer roles, aggregate results, and links to access-controlled artifacts.
 Do not commit real conversations, identifying workplace records, confidential
 attachments, or holdout answer structure.
 
+Every passed gate must use the versioned evidence-object contract enforced by
+`scripts/validate.py`. Evidence objects bind the subject commit and package,
+protocol version, result, artifact hash, and access-controlled location. A
+qualified manifest additionally requires the complete top-level evidence bundle
+and an empty `unresolved_hard_failures` list.
+
 ## Release sequence
 
-1. Merge and freeze the candidate.
+1. Freeze the candidate PR head without merging it.
 2. Build the deterministic ZIP and record its SHA-256.
 3. Verify source identities and registry parity.
 4. Run clean-host discovery, explicit invocation, and reference-selection tests.
@@ -41,7 +47,9 @@ attachments, or holdout answer structure.
 8. Complete fluent English-Simplified Chinese review.
 9. Run the privacy-safe controlled pilot.
 10. Obtain independent release review.
-11. Update the qualification manifest on a dedicated promotion PR.
+11. Confirm every gate passed against the unchanged candidate head and package.
+12. Merge that exact candidate PR.
+13. Update the qualification manifest on a metadata-only promotion PR.
 
 A substantive runtime fix after steps 5-9 invalidates affected evidence and
 requires a fresh qualification tranche.
