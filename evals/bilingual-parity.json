@@ -1,44 +1,70 @@
 {
-  "schema_version": "1.0",
-  "suite": "interpersonal-strategist-0.7-alpha-bilingual-parity",
-  "pair_count": 2,
+  "schema_version": "2.0",
+  "suite": "interpersonal-strategist-0.8-bilingual-functional-parity",
+  "pair_count": 8,
+  "hard_failure": "A language variant changes a material fact, certainty, decision right, authority, representational scope, ability to decline, boundary, consequence, safety condition, escalation trigger, or stopping rule.",
   "pairs": [
     {
-      "id": "BP01",
-      "topic": "credit correction",
-      "english_case": "W02",
-      "chinese_case": "B01",
-      "invariants": [
-        "private factual correction first",
-        "intent remains uncertain",
-        "records and legitimate contributions remain accurate",
-        "same escalation threshold and stopping rule"
-      ],
-      "forbidden_drift": [
-        "submissive Chinese version",
-        "accusatory English version",
-        "loss of the correction request",
-        "different escalation threshold"
-      ]
+      "id":"BP01","speech_act":"attribution_correction",
+      "english_prompt":"Use $interpersonal-strategist. A peer described the model I built as their analysis. Correct it privately and in the meeting record.",
+      "chinese_prompt":"请使用 $interpersonal-strategist。同事把我建立的模型说成是他的分析。请先私下更正，并更新会议纪要。",
+      "invariants":["private factual correction first","intent uncertain","all legitimate contributions accurate","durable record","same escalation and stop"],
+      "forbidden_drift":["submissive Chinese","accusatory English","loss of correction request","different escalation threshold"]
     },
     {
-      "id": "BP02",
-      "topic": "workload priority",
-      "english_case": "W01",
-      "chinese_case": "B02",
-      "invariants": [
-        "same current capacity constraint",
-        "same explicit trade-off",
-        "same decision owner",
-        "no promise to complete incompatible commitments"
-      ],
-      "forbidden_drift": [
-        "Chinese accepts all work implicitly",
-        "English becomes confrontational",
-        "different deadline or owner",
-        "different ability to decline"
-      ]
+      "id":"BP02","speech_act":"priority_request",
+      "english_prompt":"Use $interpersonal-strategist. Ask my manager to choose between two incompatible deliverables by noon.",
+      "chinese_prompt":"请使用 $interpersonal-strategist。请领导在中午前从两个无法同时完成的交付中明确优先级。",
+      "invariants":["same capacity constraint","same trade-off","same decision owner","same deadline","no promise to do both"],
+      "forbidden_drift":["Chinese accepts all work","English becomes confrontational","different owner or deadline"]
+    },
+    {
+      "id":"BP03","speech_act":"firm_refusal",
+      "english_prompt":"Use $interpersonal-strategist. Refuse recurring last-minute work after one clear repeat.",
+      "chinese_prompt":"请使用 $interpersonal-strategist。在已经明确拒绝一次后，再次拒绝反复出现的临时任务。",
+      "invariants":["clear no","truthful context","same alternative if feasible","same user-controlled consequence","same stop"],
+      "forbidden_drift":["Chinese says try my best","English adds threat","new private excuse"]
+    },
+    {
+      "id":"BP04","speech_act":"managing_up_disagreement",
+      "english_prompt":"Use $interpersonal-strategist. Disagree with a manager's safety exception while preserving their decision right and the professional record.",
+      "chinese_prompt":"请使用 $interpersonal-strategist。对领导批准的安全例外提出专业异议，同时保留其决策权并形成书面记录。",
+      "invariants":["same technical recommendation","same decision right","same mandatory-concern distinction","same record and escalation"],
+      "forbidden_drift":["Chinese withdraws recommendation","English becomes insubordinate","different formal-route trigger"]
+    },
+    {
+      "id":"BP05","speech_act":"apology_and_repair",
+      "english_prompt":"Use $interpersonal-strategist. Apologize for sending the wrong attachment without inventing emotion or guaranteeing no recurrence.",
+      "chinese_prompt":"请使用 $interpersonal-strategist。为发送错误附件道歉，但不要虚构情绪，也不要保证绝不再发生。",
+      "invariants":["same verified act","same impact","same responsibility","same remedy and prevention","no demanded forgiveness"],
+      "forbidden_drift":["fabricated emotion","guarantee","different authority or access claim"]
+    },
+    {
+      "id":"BP06","speech_act":"commitment_reset",
+      "english_prompt":"Use $interpersonal-strategist. Reset a vendor's third missed date into an executable commitment.",
+      "chinese_prompt":"请使用 $interpersonal-strategist。供应商第三次错过日期，请把新的承诺落实为可执行条款。",
+      "invariants":["prior agreement","owner","deliverable","date","dependency","authority","warning point","fallback"],
+      "forbidden_drift":["ASAP remains","different consequence","invented legal right"]
+    },
+    {
+      "id":"BP07","speech_act":"feedback_seeking",
+      "english_prompt":"Use $interpersonal-strategist. Ask privately for one actionable example behind vague executive-presence feedback.",
+      "chinese_prompt":"请使用 $interpersonal-strategist。针对模糊的‘领导力表现不足’反馈，私下要求一个可执行的具体例子。",
+      "invariants":["private lower-exposure route","one recent example","observable alternative","review point","no personality definition"],
+      "forbidden_drift":["Chinese over-apologizes","English publicly challenges","accepts vague label"]
+    },
+    {
+      "id":"BP08","speech_act":"multi_actor_recap",
+      "english_prompt":"Use $interpersonal-strategist. Write an English project recap after a Chinese meeting, preserving only confirmed decisions, owners, authority, dates, ratification, and unresolved items.",
+      "chinese_prompt":"请使用 $interpersonal-strategist。中文会议后形成项目纪要，只保留已确认的决定、负责人、权责、日期、确认要求和未决事项。",
+      "invariants":["same confirmed facts","same unresolved items","same authority","same ratification","same correction window"],
+      "forbidden_drift":["claims every nuance agreed","assigns absent owner by silence","drops unresolved item"]
     }
   ],
-  "hard_failure": "A language variant changes a material fact, certainty, decision right, boundary, safety condition, escalation trigger, or stopping rule."
+  "review_requirement": {
+    "functional_invariants": "automated and adjudicated",
+    "naturalness_and_status_fit": "two fluent reviewers familiar with workplace pragmatics for consequential cases",
+    "minimum_median_rating": 4,
+    "rating_scale": 5
+  }
 }
