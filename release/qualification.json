@@ -6,8 +6,10 @@
   "base_commit": "606a8fabce225240315d218b97b1375f8db7bf27",
   "implementation_branch": "agent/production-readiness-hardening",
   "release_scope": {
-    "status": "pending_owner_decision",
-    "surfaces": []
+    "status": "frozen",
+    "surfaces": [
+      "codex-desktop-personal-agent-skills"
+    ]
   },
   "qualification_commit": null,
   "qualification_tree_sha": null,
