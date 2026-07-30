@@ -463,6 +463,159 @@ influence judgments would cause harm, keep them private and action-focused.
 **Stop/escalate:** Do not manufacture alliances, triangulate gossip, publish
 opposition scores, or treat low power as low importance.
 
+## 16. Rebalancing low-promotability or invisible work
+
+**Trigger:** The user repeatedly receives coordination, note-taking,
+administrative cleanup, emotional labor, or other necessary work with limited
+visibility or development value.
+
+**Preflight:** Inventory frequency, time, opportunity cost, allocation method,
+beneficiaries, and whether the pattern appears linked to role or status. Do not
+assume every helping task is exploitative.
+
+**Sequence:**
+
+1. make the work and displaced cost visible;
+2. propose rotation, scope reduction, explicit recognition, or paired
+   developmental ownership;
+3. ask the allocation decision-maker for a rule;
+4. confirm the next allocation and review window.
+
+**Starter:**
+
+> I have handled the notes and follow-up for six of the last seven meetings.
+> I can cover this week, but after that I would like us to rotate the role or
+> connect it to ownership of the workstream. Can we agree the allocation rule?
+
+**Branches:** If accepted, record the rotation. If framed as “just helping,”
+state the accumulated time and displaced deliverable. If retaliation or a
+protected-status pattern may matter, lower exposure and seek qualified advice
+without making a formal finding.
+
+**Stop/escalate:** Escalate when the pattern persists after a clear allocation
+request or materially blocks the user's core work and development.
+
+## 17. Receiving vague or poorly delivered feedback
+
+**Trigger:** The user receives labels such as “not strategic,” “not a leader,”
+or “poor executive presence,” or useful criticism delivered publicly or
+harshly.
+
+**Preflight:** Separate feedback substance, evidence, standard, delivery,
+formal consequence, and the user's capacity to respond in the moment.
+
+**Sequence:**
+
+1. regulate or pause before rebutting;
+2. reflect the core concern without accepting an undefined label;
+3. request one recent example and the expected alternative;
+4. agree one observable test and review date;
+5. address inappropriate delivery separately from substance.
+
+**Starter:**
+
+> I hear that the update did not support the decision as you expected. Could
+> you point to one section and describe what a stronger version would have
+> done? I would like to test that standard in the next review.
+
+**Branches:** If an example appears, compile the standard. If the criticism was
+public, defer the process concern to a private follow-up. If examples and
+standards remain unavailable while consequences grow, request written
+clarification and consider an appropriate qualified route.
+
+**Stop/escalate:** End a threatening or degrading exchange. Do not dismiss
+substance solely because delivery was poor, and do not accept an identity
+judgment as an actionable performance standard.
+
+## 18. Evaluating an apology and bounded trust re-entry
+
+**Trigger:** Another person apologizes after a concrete breach and the user
+must decide whether or how to rely on them again.
+
+**Preflight:** Identify the verified behavior, affected trust dimension,
+severity, recurrence, dependency, remedy, and exposure created by re-entry.
+
+**Sequence:**
+
+1. separate apology quality from evidence of change;
+2. check acknowledgment, supported responsibility, impact, remedy, and
+   prevention;
+3. design a small, reversible re-entry trial;
+4. specify verification behavior and review date;
+5. preserve the user's right not to restore prior access.
+
+**Starter:**
+
+> I appreciate the acknowledgment. Before returning to the previous
+> arrangement, I would like the next two submissions reviewed jointly with the
+> approval recorded. We can reassess after that.
+
+**Branches:** A good apology plus action supports a bounded trial. Eloquence
+without remedy supports caution. Denial of disputed intent does not erase
+responsibility for verified impact, but responsibility should not be invented.
+
+**Stop/escalate:** Do not demand forgiveness or treat apology as proof. Stop
+re-entry when verification fails or the exposure is disproportionate.
+
+## 19. Resetting a missed commitment
+
+**Trigger:** An agreed deliverable, reply, payment, decision, or action did not
+occur.
+
+**Preflight:** Retrieve the actual agreement, owner, due date, dependencies,
+warning point, prior misses, and authority to change control or ownership.
+
+**Sequence:**
+
+1. state the prior agreement and observed miss;
+2. ask what changed;
+3. recompile owner, deliverable, date, dependency, and warning point;
+4. state the operational fallback if it misses again;
+5. verify completion rather than accepting “soon.”
+
+**Starter:**
+
+> We agreed the revised schedule would be issued Monday, and it has not been
+> received. What changed? I need either the schedule by 3 p.m. tomorrow or
+> confirmation that we should reassign the task.
+
+**Branches:** A credible constraint may justify a new plan. Vagueness calls for
+one bounded clarification. Repeated misses call for a different control,
+reassignment, escalation, or reduced dependency.
+
+**Stop/escalate:** After repeated resets without delivery, stop generating new
+informal promises. Do not add shame or make consequences the user cannot apply.
+
+## 20. Closing a meeting with executable commitments
+
+**Trigger:** A conversation produced apparent alignment but risks different
+interpretations or incomplete follow-through.
+
+**Preflight:** Identify decision authority, unresolved items, absent owners,
+dependencies, record sensitivity, and a reasonable correction window.
+
+**Sequence:**
+
+1. state the decision and unresolved issues separately;
+2. compile owner, deliverable, date, dependency, and decision authority;
+3. name the next review or warning point;
+4. circulate a neutral recap;
+5. invite factual corrections within a defined window.
+
+**Starter:**
+
+> To confirm: Mei owns the revised interface matrix by August 7; Alex provides
+> the source list by August 4; the design authority decides the open exception
+> on August 9. Please correct anything I have misstated by noon tomorrow.
+
+**Branches:** If someone disputes the recap, isolate the exact term. If an
+owner was absent, seek their confirmation rather than assigning by silence. If
+authority is unclear, mark the item unresolved.
+
+**Stop/escalate:** Do not record consensus where disagreement remains or treat
+silence as enthusiastic consent. Reopen only the disputed term, not the whole
+meeting.
+
 ## Playbook quality check
 
 Before returning an answer, verify:

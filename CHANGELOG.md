@@ -1,5 +1,23 @@
 # Changelog
 
+## 0.7.0-alpha.2
+
+- Added four-state routing, calibrated confidence bands, and the rule that
+  confidence and urgency must be assessed separately.
+- Added nine executable method contracts and an explicit action-selection
+  check from evidence through after-action learning.
+- Added conversational grounding, channel conveyance/convergence, digital-tone
+  caution, and AI-assisted wording authenticity controls.
+- Expanded scene coverage from 15 to 20 playbooks with invisible work,
+  receiving vague feedback, apology evaluation and bounded trust re-entry,
+  missed-commitment resets, and executable meeting closure.
+- Expanded the synthetic behavior suite from 26 to 36 cases.
+- Added selectively verified deception, voice, conflict, trust, invisible-work,
+  pragmatics, channel, digital-tone, and AI-communication evidence.
+- Added a practitioner-framework quarantine so branded mnemonics cannot be
+  represented as evidence authorities.
+- Saved and classified the completed long-running ChatGPT Pro review.
+
 ## 0.7.0-alpha.1
 
 - Added mechanism classification for information, coordination, resource,

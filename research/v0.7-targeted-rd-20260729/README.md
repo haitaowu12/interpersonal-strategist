@@ -2,13 +2,19 @@
 
 Date: 2026-07-29
 
-Status: recommendation only; the distributable skill is unchanged
+Status: implemented through `0.7.0-alpha.2`
 
 Inputs: current `0.6.0-alpha.1`, clean-room pattern audit of
 `goutoujunshi`, ChatGPT Pro research review, and independent source checks
 
 Additional implementation evidence:
 [vault and multilingual research pass](vault-and-multilingual-research.md).
+
+The completed long-running Pro review is retained under
+[`external-feedback/`](../../external-feedback/), together with the local
+apply/consider/reject disposition. Its accepted recommendations were compiled
+into method contracts, digital-pragmatics guidance, five additional
+playbooks, ten development cases, and a selectively verified source ledger.
 
 ## Executive verdict
 

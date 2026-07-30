@@ -4,7 +4,7 @@
 
 This repository begins a new standalone lineage at
 `interpersonal-strategist 0.6.0-alpha.1`. The current development release is
-`0.7.0-alpha.1`.
+`0.7.0-alpha.2`.
 
 The historical `interpersonal-strategist-v0.5a-20260725` candidate is
 unavailable. This project does not claim byte, source, or behavior equivalence

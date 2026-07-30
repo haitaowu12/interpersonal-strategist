@@ -21,7 +21,9 @@ REQUIRED_REFERENCES = {
     "evidence-ledger.md",
     "evidence-and-readiness.md",
     "negotiation-and-commitments.md",
+    "method-contracts.md",
     "power-and-workplace.md",
+    "pragmatics-and-digital-channels.md",
     "practice-and-after-action-learning.md",
     "reciprocity-and-relationship-maintenance.md",
     "safety-and-referral.md",
@@ -35,6 +37,20 @@ REQUIRED_EVALS = {
     "rubric.json",
 }
 REQUIRED_DISTRIBUTABLE_FILES = {"LICENSE", "NOTICE.md", "SKILL.md"}
+REQUIRED_METHOD_CONTRACTS = set("ABCDEFGHI")
+REQUIRED_EVIDENCE_IDS = {
+    "AI-COMM-01",
+    "CHANNEL-01",
+    "CONFLICT-02",
+    "DECEPTION-01",
+    "DIGITAL-02",
+    "LOWPROMOTE-01",
+    "PRAGMATICS-01",
+    "TRUST-03",
+    "VOICE-02",
+}
+MINIMUM_SCENE_PLAYBOOKS = 20
+MINIMUM_DEVELOPMENT_CASES = 36
 FORBIDDEN_PORTABILITY_PATTERNS = {
     "/Users/tony": "machine-specific user path",
     "Second Brain": "private vault dependency",
@@ -222,6 +238,94 @@ def validate_repository(project_root: Path = PROJECT_ROOT) -> list[str]:
             continue
         if not isinstance(payload, dict):
             errors.append(f"evals/{filename} must contain a JSON object")
+
+    cases_path = evals_dir / "cases.json"
+    if cases_path.is_file():
+        try:
+            cases_payload = json.loads(cases_path.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError):
+            pass
+        else:
+            cases = cases_payload.get("cases", [])
+            if cases_payload.get("case_count") != len(cases):
+                errors.append("evals/cases.json case_count does not match cases")
+            if len(cases) < MINIMUM_DEVELOPMENT_CASES:
+                errors.append(
+                    "evals/cases.json must retain at least "
+                    f"{MINIMUM_DEVELOPMENT_CASES} cases"
+                )
+            case_ids = [case.get("id") for case in cases if isinstance(case, dict)]
+            if len(case_ids) != len(set(case_ids)):
+                errors.append("evals/cases.json contains duplicate case ids")
+            required_case_fields = {
+                "id",
+                "category",
+                "language",
+                "prompt",
+                "must_include",
+                "must_not",
+                "reference_focus",
+            }
+            for index, case in enumerate(cases):
+                if not isinstance(case, dict):
+                    errors.append(f"evals/cases.json case {index} is not an object")
+                    continue
+                missing = required_case_fields - set(case)
+                if missing:
+                    errors.append(
+                        f"evals/cases.json case {case.get('id', index)!r} missing: "
+                        + ", ".join(sorted(missing))
+                    )
+
+    references_dir = (
+        project_root / "skill" / EXPECTED_SKILL_NAME / "references"
+    )
+    playbooks_path = references_dir / "scene-playbooks.md"
+    if playbooks_path.is_file():
+        playbook_numbers = re.findall(
+            r"^## (\d+)\. ", playbooks_path.read_text(encoding="utf-8"), re.MULTILINE
+        )
+        if len(playbook_numbers) < MINIMUM_SCENE_PLAYBOOKS:
+            errors.append(
+                f"scene playbooks must retain at least {MINIMUM_SCENE_PLAYBOOKS} entries"
+            )
+        if len(playbook_numbers) != len(set(playbook_numbers)):
+            errors.append("scene playbooks contain duplicate numbered entries")
+
+    contracts_path = references_dir / "method-contracts.md"
+    if contracts_path.is_file():
+        contract_ids = set(
+            re.findall(
+                r"^## ([A-I])\. ",
+                contracts_path.read_text(encoding="utf-8"),
+                re.MULTILINE,
+            )
+        )
+        missing_contracts = REQUIRED_METHOD_CONTRACTS - contract_ids
+        if missing_contracts:
+            errors.append(
+                "method contracts missing: " + ", ".join(sorted(missing_contracts))
+            )
+
+    ledger_path = references_dir / "evidence-ledger.md"
+    if ledger_path.is_file():
+        evidence_ids = set(
+            re.findall(
+                r"^\| ([A-Z]+(?:-[A-Z]+)?-\d+) \|",
+                ledger_path.read_text(encoding="utf-8"),
+                re.MULTILINE,
+            )
+        )
+        missing_evidence = REQUIRED_EVIDENCE_IDS - evidence_ids
+        if missing_evidence:
+            errors.append(
+                "evidence ledger missing promoted claims: "
+                + ", ".join(sorted(missing_evidence))
+            )
+        if "## Practitioner-framework quarantine" not in ledger_path.read_text(
+            encoding="utf-8"
+        ):
+            errors.append("evidence ledger missing practitioner-framework quarantine")
 
     manifest_path = project_root / "provenance" / "SOURCE_MANIFEST.json"
     if not manifest_path.is_file():
