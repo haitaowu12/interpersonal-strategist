@@ -11,7 +11,7 @@ workload, credit, boundaries, and bilingual pragmatics. Its general method also
 supports non-romantic everyday cases, but equal depth across every listed
 social domain is not yet claimed.
 
-Current release: `0.7.0-alpha.1`
+Current release: `0.7.0-alpha.2`
 
 This is a new standalone lineage. It does not claim to reproduce the unavailable
 historical `v0.5a` candidate.
@@ -24,8 +24,11 @@ historical `v0.5a` candidate.
 - feedback, conflict, repair, and boundaries;
 - situation classification, social-signal calibration, voice, fair process,
   negotiation, and commitment design;
-- 15 end-to-end playbooks with branches, observation windows, escalation
+- 20 end-to-end playbooks with branches, observation windows, escalation
   triggers, and stop rules;
+- method contracts for situation reading, signal classification, power,
+  conflict, negotiation, feedback, trust, boundaries, and after-action review;
+- digital-channel, conversational-repair, and AI-assisted wording controls;
 - capability-building drills for social calibration, listening, power-aware
   voice, boundaries, negotiation, bilingual parity, and after-action learning;
 - difficult friendship, family, roommate, neighbor, and networking situations;
@@ -84,9 +87,9 @@ python3 scripts/package.py
 This creates:
 
 ```text
-dist/interpersonal-strategist-0.7.0-alpha.1.zip
-dist/interpersonal-strategist-0.7.0-alpha.1.zip.sha256
-dist/interpersonal-strategist-0.7.0-alpha.1.manifest.json
+dist/interpersonal-strategist-0.7.0-alpha.2.zip
+dist/interpersonal-strategist-0.7.0-alpha.2.zip.sha256
+dist/interpersonal-strategist-0.7.0-alpha.2.manifest.json
 ```
 
 The ZIP contains one directly installable `interpersonal-strategist/`
@@ -98,7 +101,7 @@ Verify the sidecar from the directory containing the release files:
 
 ```bash
 cd dist
-shasum -a 256 -c interpersonal-strategist-0.7.0-alpha.1.zip.sha256
+shasum -a 256 -c interpersonal-strategist-0.7.0-alpha.2.zip.sha256
 ```
 
 ## Project structure
@@ -115,14 +118,15 @@ dist/                            generated release artifacts
 
 ## Release status
 
-`0.7.0-alpha.1` is suitable for explicit local evaluation. It is not yet
+`0.7.0-alpha.2` is suitable for explicit local evaluation. It is not yet
 claimed as behaviorally production-ready. Promotion requires independent
 English-Chinese review, fresh behavior tests, untouched holdouts, and a
 controlled private pilot.
 
 ## Research and development
 
-The current boundary audit and proposed mechanism-driven v0.7 expansion are
-documented in
+The current boundary audit, mechanism-driven v0.7 expansion, and completed Pro
+review disposition are documented in
 [`research/v0.7-targeted-rd-20260729/`](research/v0.7-targeted-rd-20260729/README.md).
-This is a recommendation package; it does not change the installed alpha.
+The full Pro response and local apply/consider/reject classification are
+retained under [`external-feedback/`](external-feedback/).

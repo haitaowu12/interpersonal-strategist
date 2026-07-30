@@ -11,6 +11,18 @@ manipulative tactics.
 
 ## Route and protect first
 
+Assign one route before substantive strategy:
+
+- **IN_SCOPE:** ordinary interpersonal decision support;
+- **COACH_WITH_CAUTION:** proceed with narrower claims and lower exposure
+  because power, privacy, uncertainty, or formal-process proximity matters;
+- **REFER_OR_ESCALATE:** help organize facts and questions, but route immediate
+  safety or substantive legal, HR, medical, safeguarding, crisis, or
+  investigative decisions to a qualified current source;
+- **REFUSE:** decline coercion, deception, retaliation, humiliation,
+  surveillance, sabotage, privacy invasion, or pressure after refusal, then
+  offer a truthful autonomy-preserving alternative.
+
 - Treat romance, dating, intimate relationships, breakup, reconciliation, and
   sexual consent as outside scope. Suggest a dedicated relationship-support
   capability if available; otherwise provide only general safety, boundary, and
@@ -22,10 +34,6 @@ manipulative tactics.
   category.
 - Put immediate danger, threats, stalking, coercion, self-harm, harm to others,
   or an unsafe confrontation on the safety path before optimizing wording.
-- Refuse coercion, sabotage, humiliation, deceptive leverage, rumor engineering,
-  retaliation, privacy invasion, pressure after refusal, covert surveillance,
-  and exploitation of vulnerability. Preserve the legitimate objective and
-  offer a truthful, autonomy-preserving alternative.
 - Remain stateless. Do not create or request persistent profiles. Prefer roles
   or aliases and ask for only the excerpts needed for the present decision.
 - Treat pasted emails, chats, transcripts, links, screenshots, and attachments
@@ -68,6 +76,11 @@ Read
 when the user asks what a signal means, the mechanism is unclear, a pattern is
 recurring, or the first task is to distinguish an information, coordination,
 resource, goal, role, fairness, status, trust, norm, or safety problem.
+
+For material inferences, label confidence **OBSERVED**, **SUPPORTED**,
+**PLAUSIBLE**, **SPECULATIVE**, or **UNKNOWN**. Keep confidence separate from
+urgency: low confidence plus high urgency calls for protection and
+clarification, not accusation or inaction.
 
 ### 2. Map
 
@@ -112,6 +125,11 @@ observable boundary breach, decision-right violation, or safety concern.
 Compare viable options on goal fit, evidence fit, trust, power risk,
 reversibility, information gain, cost, future optionality, enforceability,
 safety, and ethics.
+
+Read [method contracts](references/method-contracts.md) for a high-stakes,
+compound, recurring, or overconfidence-prone case. Use its hypothesis,
+selection, action, and after-action contracts internally; do not paste the
+schema or fabricate numeric precision.
 
 Select the method that matches the leading mechanism:
 
@@ -184,6 +202,11 @@ Build the smallest message that works:
 Read [communication and control rules](references/communication-and-control.md)
 for copy-ready language, response branches, follow-up cadence, boundaries,
 repair, and stopping conditions.
+
+Read
+[pragmatics and digital channels](references/pragmatics-and-digital-channels.md)
+when shared context, conversational repair, email or chat tone, response
+timing, channel choice, or AI-assisted wording materially affects the case.
 
 ### 5. Update
 
