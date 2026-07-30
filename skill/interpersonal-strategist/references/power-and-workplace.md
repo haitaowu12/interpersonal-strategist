@@ -1,191 +1,199 @@
 # Power and Workplace Dynamics
 
-Use this reference for managing up or down, workload, scope, credit,
-sponsorship, exclusion, retaliation exposure, or organizational politics.
+Use this reference for managing up or down, workload, credit, sponsorship,
+exclusion, retaliation exposure, organizational politics, or decisions involving
+more than two actors.
 
 ## Map power relationally
 
 Power is not personal worth. Identify concrete control over:
 
-- decisions and priorities;
-- workload and scheduling;
-- information and access;
-- evaluation, compensation, or promotion;
-- budget and resources;
-- reputation and audience;
-- process enforcement;
-- credible alternatives.
+- decisions, priorities, workload, schedule, budget, and resources;
+- information, access, evaluation, compensation, promotion, and reputation;
+- process enforcement, review, protection, and credible alternatives.
 
-Also identify mutual dependency, witnesses, sponsors, mediators, and people
-with formal decision rights.
+Distinguish formal title from practical veto, agenda control, implementation
+control, and the ability to impose delay or reputational cost. Also identify
+mutual dependency, witnesses, sponsors, advisers, representatives, mediators,
+and people with correction authority.
 
-## Map dependency, voice, and fair process
+## Separate voice safety from voice effectiveness
 
-Use four linked questions:
+Ask:
 
-1. **Dependency:** What resource, information, approval, access, or reputation
-   does each actor control? What credible alternatives exist?
-2. **Voice safety:** What interpersonal or material cost could follow from
-   speaking? Is the concern likely to be heard, ignored, or punished in the
-   current forum?
-3. **Voice effectiveness:** Who can actually change the decision or process?
-   Is the proposed channel connected to that person?
-4. **Fair process:** Was there a real opportunity for relevant input,
-   consistent criteria, a usable explanation, respectful treatment, and a
-   correction or review route?
+1. **Dependency:** what resource, approval, information, access, or reputation
+   does each actor control, and what alternatives exist?
+2. **Safety:** what interpersonal or material downside could follow from
+   speaking in this forum?
+3. **Effectiveness:** who can actually change the decision or process?
+4. **Fair process:** was there usable input, consistent criteria, explanation,
+   respectful treatment, and a correction route?
+5. **Feedback loop:** how will the user know the concern entered the decision?
 
-Safety and effectiveness are different. A forum may feel polite but be unable
-to change the outcome. A route may have authority but expose a lower-power
-person unnecessarily.
+A polite invitation does not establish safety or influence. A route with formal
+authority may still expose a lower-power person unnecessarily.
 
-Do not tell a user to “speak up” as if voice were only confidence. Select:
+Choose:
 
-- direct voice when risk is low and the receiver can act;
+- direct voice when exposure is low and the receiver can act;
 - buffered voice through questions, criteria, or a private channel;
 - supported voice with a witness, adviser, representative, or sponsor;
 - documented voice when technical, safety, ownership, or timing evidence
   matters;
-- qualified formal-route preparation when direct voice is unsafe, exhausted,
-  or outside the receiver's authority;
-- reduced exposure or exit when the system cannot offer a viable route.
-
-Psychological safety is a group or relational condition, not permission to
-avoid accountability. Fair process does not guarantee a favorable outcome.
+- qualified formal-route preparation when direct voice is unsafe, exhausted, or
+  outside the receiver's authority;
+- reduced exposure or exit when no viable corrective route exists.
 
 ## Run Power-Reversibility-Exposure
 
-Before recommending high-stakes wording:
+Before consequential wording:
 
-1. **Power:** Who can impose a material downside? Who can correct or review the
-   decision?
-2. **Reversibility:** Can the next move be corrected, clarified, or withdrawn?
-3. **Exposure:** What privacy, reputation, livelihood, immigration, financial,
-   or safety risk might the action create?
+1. **Power:** who can impose a material downside and who can correct it?
+2. **Reversibility:** can the next move be corrected, clarified, or withdrawn?
+3. **Exposure:** what privacy, reputation, livelihood, immigration, financial,
+   or safety risk does it create?
 
 Prefer a private, factual, reversible move when evidence is incomplete. Move
-toward documentation, third-party support, or a formal route when harm repeats,
-prior direct attempts fail, evidence matters, or retaliation exposure is
+toward documentation, support, qualified review, or reduced exposure when harm
+repeats, direct attempts fail, records matter, or retaliation exposure is
 credible.
+
+## Map multi-actor decisions with FAICR
+
+Use **Forum-Authority-Information-Constituency-Ratification**:
+
+- **Forum:** where the decision is framed, negotiated, reviewed, and formally
+  approved. These may be different places.
+- **Authority:** who recommends, decides, vetoes, funds, implements, and
+  verifies. Do not collapse these roles.
+- **Information:** what is shared, uniquely held, disputed, stale, or missing.
+- **Constituency:** who carries the impact or risk, who is absent, and whether a
+  proxy can represent them.
+- **Ratification:** whose confirmation makes the agreement executable.
+
+When several actors share the same assumptions, ask for uniquely held evidence
+before convergence. A junior specialist, supplier, operator, or verifier may
+hold decision-critical information without holding authority. Silence, absence,
+or proxy participation is not proof that the affected view was represented.
+
+Convert the map into an engagement sequence:
+
+1. bound the decision and deadline;
+2. surface missing or unique evidence;
+3. connect it to the person or forum able to act;
+4. protect high-exposure contributors;
+5. obtain ratification from implementers and absent owners;
+6. close with a neutral record of decision, unresolved items, owners, dates,
+   assumptions, and correction window.
+
+Do not publish sensitive judgments about influence, opposition, or
+vulnerability. Reject covert coalition building, rumor routes, and secret
+influence scores.
 
 ## Handle workload with Priority-Ownership-Cost
 
 When a new request conflicts with existing work:
 
-- **Priority:** Which outcome is decision-critical, and by when?
-- **Ownership:** Who has authority to choose between competing commitments?
-- **Cost:** What slips, degrades, or becomes unsafe if the new work is accepted?
+- **Priority:** which outcome is decision-critical, and by when?
+- **Ownership:** who has authority to choose among incompatible commitments?
+- **Cost:** what slips, degrades, becomes unsafe, or loses verification?
 
-Do not make refusal a personality contest. Convert it into an explicit trade:
+Convert the conflict into an explicit trade:
 
 > I can complete A by Thursday, or shift to B today and move A to Monday.
-> Which outcome should take priority?
+> Completing both by Thursday would remove the verification step. Which outcome
+> should take priority?
 
-Do not accept undefined scope, incompatible deadlines, or unverified numbers
-merely to appear cooperative.
+Do not accept undefined scope, incompatible dates, or unverified numbers merely
+to appear cooperative. If the request is not genuinely optional, identify it as
+a directive and surface implementation risk through the legitimate owner.
 
 ## Clarify managing-up expectations
 
 Use a compact expectation contract:
 
-- outcome or decision required;
-- definition of done;
-- owner and contributors;
+- outcome and definition of done;
+- decision owner and contributors;
 - priority relative to current commitments;
-- check-in or warning point;
-- delivery date;
-- escalation route when constraints change.
+- authority and required inputs;
+- check-in and warning point;
+- delivery date and time zone;
+- escalation or fallback when constraints change.
 
 The employee can improve clarity and visibility but is not solely responsible
-for producing a functional manager relationship.
+for producing a functional manager relationship or repairing structural
+capacity failure.
 
 ## Protect contribution and credit
 
-Separate contribution records from accusations about intent.
+Separate contribution records from claims about intent.
 
-1. Preserve ordinary work evidence: version history, authored analysis,
-   decision notes, or sent deliverables.
-2. Correct attribution privately first when safe and proportionate.
-3. Request a concrete record update: deck, meeting recap, owner field, or
-   follow-up message.
-4. Establish the future norm: who presents, how contributors are named, and who
-   owns follow-up.
-5. If the pattern repeats or correction is refused, surface the factual work
-   history to the appropriate manager or process owner without mass accusation.
+1. Preserve ordinary evidence: version history, authored analysis, decision
+   notes, or sent deliverables.
+2. Identify all legitimate contributors.
+3. Correct attribution privately first when safe.
+4. Request a concrete record update: deck, recap, owner field, or follow-up.
+5. Establish the future presentation and authorship norm.
+6. If correction is refused or the pattern repeats, surface the factual work
+   history to the appropriate owner without mass accusation.
 
-Credit is not zero-sum. Name the user's contribution and other legitimate
-contributions accurately.
+Credit is not zero-sum. Do not erase other legitimate contributions.
 
-## Check low-promotability work
+## Rebalance low-promotability work
 
-Repeated coordination, cleanup, note-taking, emotional labor, or rescue work
-can create opportunity cost even when it is valuable.
+Repeated coordination, cleanup, note-taking, emotional labor, or rescue work can
+create opportunity cost even when valuable.
 
-Ask:
+Check:
 
-- Is the work formally part of the role?
-- Is it distributed fairly?
-- What higher-value work is displaced?
-- Is the work visible and credited?
-- Can ownership rotate, be resourced, or be explicitly prioritized?
+- frequency and time;
+- formal role and allocation rule;
+- displaced technical, developmental, or visible work;
+- beneficiaries and decision-maker;
+- visibility, credit, and support;
+- whether ownership can rotate, be resourced, reduced, or paired with
+  developmental responsibility.
 
-Do not prescribe refusal without considering authority, livelihood, and
-retaliation risk.
+Do not prescribe abrupt refusal without considering continuity, authority,
+livelihood, and retaliation exposure.
 
-## Stage sponsorship requests
+## Stage sponsorship and access requests
 
-Do not ask for broad personal advocacy without evidence or an easy decline.
 Use a ladder:
 
-1. ask for feedback on readiness;
+1. ask for readiness feedback;
 2. ask what evidence is missing;
-3. ask for exposure to one relevant meeting or assignment;
+3. ask for one bounded assignment, review, or meeting exposure;
 4. ask for an introduction;
-5. ask for explicit advocacy only when the person has enough evidence and
-   genuine discretion.
+5. ask for explicit advocacy only when the person has evidence and discretion.
 
-Sponsorship is not an entitlement or guarantee.
+Include purpose, effort, timing, and a real decline path. Sponsorship is not an
+entitlement or guarantee.
 
-## Handle exclusion and coalition dynamics
+## Handle exclusion
 
-Map information and decision pathways, not secret influence scores.
+Map the decision, forum, invitation owner, information path, affected parties,
+proxy adequacy, and required access level. The smallest useful change may be an
+agenda slot, written input, direct verifier contact, decision record, or review
+right rather than permanent meeting attendance.
 
-- Which forum makes the decision?
-- Who holds unique information?
-- Who is absent from the forum?
-- Is exclusion accidental, structural, or repeated?
-- What low-drama process change would create access?
+Escalate the factual decision impact when a required information source,
+assurance role, implementer, or affected constituency remains structurally
+absent. Do not infer sabotage merely from exclusion.
 
-Reject rumor counterattacks, covert dossiers, manufactured alliances,
-blackmail, and vulnerability exploitation.
+## Escalation outputs
 
-## Map the wider interaction
+Possible outputs include observe, clarify, request, negotiate, document, seek an
+adviser or representative, use a current qualified process, reduce exposure, or
+exit.
 
-For multi-actor cases, identify:
+Do not decide that conduct meets a legal or HR category. Help the user preserve
+facts, options, and interim protections for a current qualified route.
 
-- the decision forum and decision owner;
-- the information holder;
-- the person doing the work;
-- the person carrying the impact or risk;
-- the verifier or credible witness;
-- the mediator, sponsor, representative, or review route;
-- missing or low-power voices whose exposure is high.
+## Evidence boundary
 
-Convert the map into an engagement plan. Do not publish sensitive judgments
-about influence, opposition, or vulnerability.
-
-## Choose the workplace escalation level
-
-Possible outputs include:
-
-- observe;
-- clarify;
-- request;
-- negotiate;
-- document;
-- seek a trusted adviser, union representative, ombudsperson, or qualified
-  professional;
-- use a current formal process;
-- reduce exposure or exit.
-
-Do not decide that conduct meets a legal or HR category. Help the user organize
-facts, preserve options, and prepare for a current qualified route.
+Psychological-safety, voice, justice, information-sharing, hidden-profile, and
+low-promotability-work research support these checks at a general level. They do
+not predict retaliation, identify motive, or establish the lawful process for a
+specific institution. See `PSYSAFE-01`, `VOICE-01`, `VOICE-02`, `JUSTICE-01`,
+`INFO-01`, `INFO-02`, and `LOWPROMOTE-01` in the evidence ledger.
