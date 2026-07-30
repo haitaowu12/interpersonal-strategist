@@ -23,6 +23,7 @@ REQUIRED_REFERENCES = {
     "negotiation-and-commitments.md",
     "power-and-workplace.md",
     "safety-and-referral.md",
+    "scene-playbooks.md",
     "situation-classification-and-calibration.md",
 }
 REQUIRED_EVALS = {

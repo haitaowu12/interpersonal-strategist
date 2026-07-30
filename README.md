@@ -24,6 +24,8 @@ historical `v0.5a` candidate.
 - feedback, conflict, repair, and boundaries;
 - situation classification, social-signal calibration, voice, fair process,
   negotiation, and commitment design;
+- 15 end-to-end playbooks with branches, observation windows, escalation
+  triggers, and stop rules;
 - difficult friendship, family, roommate, neighbor, and networking situations;
 - English and Simplified Chinese workplace communication.
 

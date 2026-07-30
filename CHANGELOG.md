@@ -16,6 +16,10 @@
   support, commitments, warning points, and review.
 - Added a portable claim ledger with evidence type, permitted use, and
   limitations, including Chinese, Japanese, and German-context research.
+- Added 15 end-to-end scene playbooks covering managing up, workload, feedback,
+  credit, exclusion, sponsorship, conflict, trust repair, boundaries, favors,
+  everyday arrangements, formal-route preparation, digital ambiguity,
+  cross-cultural mismatch, and multi-actor dynamics.
 - Expanded the synthetic behavior suite from 12 to 22 cases with method-fit,
   digital ambiguity, structural, cross-cultural, and multi-actor pressure
   cases.
