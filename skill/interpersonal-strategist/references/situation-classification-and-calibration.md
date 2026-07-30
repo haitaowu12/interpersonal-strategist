@@ -173,12 +173,13 @@ certainty.
 
 ## Evidence boundary
 
-Interpersonal-perception research supports humility about how accurately people
-know others' views of them. Research reviewing facial-expression inference also
-supports caution against treating facial movement as a reliable readout of one
-specific emotion or internal state. Neither supplies a universal correction or
-body-language dictionary. The classification table and nonverbal sequence are
-decision safeguards, not diagnostic instruments. See `PERCEPT-01`, `DIGITAL-01`,
-`DIGITAL-02`, and `CULTURE-01` in the evidence ledger. Promotion of any new
-nonverbal research claim requires a verified source-registry record before the
-runtime cites it as evidence.
+Promoted interpersonal-perception, digital-communication, deception-judgment,
+and cultural-context research supports humility about sparse cues and prohibits
+confident motive or lie verdicts from demeanor, ordinary wording, or group
+averages. It does not provide an emotion recognizer or body-language dictionary.
+The classification table and nonverbal sequence are original decision
+safeguards, not diagnostic instruments. See `PERCEPT-01`, `DECEPTION-01`,
+`DIGITAL-01`, `DIGITAL-02`, and `CULTURE-01` in the evidence ledger. A broader
+facial-movement review is recorded in the research audit as a candidate source;
+it must pass registry promotion before the runtime attributes a stronger claim
+to it.
