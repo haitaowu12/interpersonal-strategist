@@ -3,6 +3,7 @@ name: CI
 on:
   push:
   pull_request:
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -25,18 +26,45 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
 
-      - name: Validate repository
+      - name: Compile Python sources
+        run: python3 -m compileall -q scripts evals tests
+
+      - name: Validate repository and release governance
         run: python3 scripts/validate.py
 
-      - name: Run unit tests
+      - name: Validate evaluation fixtures
+        run: python3 evals/run.py validate-fixtures
+
+      - name: Run unit and mutation tests
         run: python3 -m unittest discover -s tests -v
+
+      - name: Prepare deterministic skill and no-skill manifests
+        run: |
+          mkdir -p build
+          python3 evals/run.py prepare --condition skill --output build/skill-prompts.jsonl
+          python3 evals/run.py prepare --condition no-skill --output build/no-skill-prompts.jsonl
 
       - name: Build deterministic release
         run: python3 scripts/package.py
 
-      - name: Smoke-test packaged install
+      - name: Smoke-test packaged layout
         run: python3 scripts/smoke_install.py --archive "dist/interpersonal-strategist-$(cat VERSION).zip"
 
       - name: Verify release checksum
         working-directory: dist
         run: shasum -a 256 -c "interpersonal-strategist-$(cat ../VERSION).zip.sha256"
+
+      - name: Upload qualification-candidate artifacts
+        if: matrix.python-version == '3.11'
+        uses: actions/upload-artifact@v4
+        with:
+          name: interpersonal-strategist-${{ github.sha }}
+          if-no-files-found: error
+          path: |
+            dist/interpersonal-strategist-*.zip
+            dist/interpersonal-strategist-*.zip.sha256
+            dist/interpersonal-strategist-*.manifest.json
+            build/skill-prompts.jsonl
+            build/no-skill-prompts.jsonl
+            release/qualification.json
+          retention-days: 30
