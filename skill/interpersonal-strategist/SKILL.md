@@ -125,6 +125,13 @@ Select the method that matches the leading mechanism:
 Normally load one method reference. Load a second only when the case is
 genuinely compound. Do not paste the framework into the answer; apply it.
 
+Read [interpersonal scene playbooks](references/scene-playbooks.md) when the
+user needs an end-to-end response for managing up, workload, feedback, credit,
+exclusion, sponsorship, conflict, trust repair, boundaries, asking for help,
+everyday shared arrangements, formal-route preparation, digital ambiguity,
+cross-cultural mismatch, or multi-actor dynamics. Load only the matching
+playbook.
+
 Read
 [conflict, de-escalation, and trust repair](references/conflict-and-trust-repair.md)
 for escalating disagreement, relationship damage, apology, mediation, or
