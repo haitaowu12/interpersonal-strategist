@@ -1,0 +1,12 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.DS_Store
+dist/
+.coverage
+node_modules/
+.codex/
+.openai/
+output/playwright/
+test-results/
+playwright-report/

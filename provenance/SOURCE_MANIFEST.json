@@ -1,0 +1,29 @@
+{
+  "schema_version": "1.0",
+  "release": "0.6.0-alpha.1",
+  "historical_v05a_status": "unavailable_not_reconstructed",
+  "sources": [
+    {
+      "name": "interpersonal-strategist-v0.2-candidate.zip",
+      "role": "clean_room_implementation_seed",
+      "sha256": "549a5c2810eb294d97fdffcc6005b57bc72586cc37ebbaf2815b8ab4e9fe8281"
+    },
+    {
+      "name": "interpersonal-strategist-phase1-rd-v0.2.zip",
+      "role": "phase1_research_and_validation_evidence",
+      "sha256": "3bf3ac1119b3e6741ebf9b751fa060eafcda011a3ad6fc7e44ae0f8ba1c898bf"
+    },
+    {
+      "name": "interpersonal-strategist-v05-rd-20260725.zip",
+      "role": "advisory_research_and_architecture_input",
+      "sha256": "08988d2056913a86c976e35dc5fb035de8f0120237d24e20c6dbd67d3ba622eb"
+    }
+  ],
+  "excluded": [
+    "historical v0.5a candidate bytes",
+    "sealed holdouts",
+    "personal conversations",
+    "persistent memory",
+    "third-party romance skill content"
+  ]
+}
