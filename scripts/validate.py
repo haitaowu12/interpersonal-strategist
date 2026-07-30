@@ -393,6 +393,36 @@ def load_eval_runner_errors(project_root: Path) -> list[str]:
     return [f"eval fixture: {item}" for item in result]
 
 
+def validate_rubric_version_references(project_root: Path) -> list[str]:
+    rubric_path = project_root / "evals" / "rubric.json"
+    try:
+        rubric = read_json(rubric_path)
+    except ValueError as exc:
+        return [str(exc)]
+
+    rubric_version = rubric.get("schema_version")
+    if not isinstance(rubric_version, str) or not rubric_version.strip():
+        return ["evals/rubric.json must declare a schema_version"]
+
+    errors: list[str] = []
+    pattern = re.compile(r'"rubric_version"\s*:\s*"([^"]+)"')
+    for relative in ("evals/judge-protocol.md", "evals/no-skill-protocol.md"):
+        path = project_root / relative
+        if not path.is_file():
+            continue
+        versions = pattern.findall(path.read_text(encoding="utf-8"))
+        if not versions:
+            errors.append(f"{relative} must include rubric_version metadata")
+            continue
+        stale = sorted({version for version in versions if version != rubric_version})
+        if stale:
+            errors.append(
+                f"{relative} rubric_version references {stale} "
+                f"do not match evals/rubric.json {rubric_version}"
+            )
+    return errors
+
+
 def validate_evidence(project_root: Path) -> list[str]:
     errors: list[str] = []
     registry_path = project_root / "provenance" / "evidence-sources.json"
@@ -568,6 +598,7 @@ def validate_repository(project_root: Path = PROJECT_ROOT) -> list[str]:
     for filename in sorted(REQUIRED_EVALS | REQUIRED_EVAL_DOCS):
         if not (evals_dir / filename).is_file():
             errors.append(f"missing eval file: evals/{filename}")
+    errors.extend(validate_rubric_version_references(project_root))
     if (evals_dir / "routing.json").exists():
         errors.append("evals/routing.json is retired; use invocation.json and substantive-routes.json")
 

@@ -176,6 +176,37 @@ class ProjectTests(unittest.TestCase):
         self.assertIn("simulation_control", dimension_ids)
         self.assertEqual(rubric["schema_version"], "2.1")
 
+    def test_validator_rejects_stale_rubric_version_reference(self) -> None:
+        with tempfile.TemporaryDirectory(prefix="interpersonal-project-") as raw:
+            project = copy_project(Path(raw))
+            protocol = project / "evals" / "judge-protocol.md"
+            protocol.write_text(
+                protocol.read_text(encoding="utf-8").replace(
+                    '"rubric_version": "2.1"',
+                    '"rubric_version": "2.0"',
+                ),
+                encoding="utf-8",
+            )
+            errors = validate_repository(project)
+        self.assertTrue(
+            any("rubric_version references" in item for item in errors),
+            errors,
+        )
+
+    def test_ci_uses_exact_pull_request_head_for_candidate_artifacts(self) -> None:
+        workflow = (PROJECT_ROOT / ".github" / "workflows" / "ci.yml").read_text(
+            encoding="utf-8"
+        )
+        self.assertIn(
+            "CANDIDATE_SHA: ${{ github.event.pull_request.head.sha || github.sha }}",
+            workflow,
+        )
+        self.assertIn("ref: ${{ env.CANDIDATE_SHA }}", workflow)
+        self.assertIn(
+            "name: interpersonal-strategist-${{ env.CANDIDATE_SHA }}",
+            workflow,
+        )
+
     def test_waza_lane_is_secondary_and_not_packaged(self) -> None:
         required = {
             "README.md",
