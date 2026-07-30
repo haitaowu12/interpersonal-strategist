@@ -65,6 +65,7 @@ Each judgment must contain:
 {
   "case_id": "...",
   "case_key": "...",
+  "blind_id": "...",
   "run_id": "...",
   "condition": "skill|no-skill",
   "judge_id": "pseudonymous-reviewer-id",

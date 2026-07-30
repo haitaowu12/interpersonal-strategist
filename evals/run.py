@@ -422,6 +422,7 @@ def validate_result_records(
     }
     errors: list[str] = []
     responses_by_run: dict[str, dict[str, Any]] = {}
+    blind_ids: set[str] = set()
 
     for index, response in enumerate(responses):
         label = f"response {index + 1}"
@@ -429,6 +430,7 @@ def validate_result_records(
         case_key = response.get("case_key")
         condition = response.get("condition")
         text = response.get("response")
+        blind_id = response.get("blind_id")
         if not isinstance(run_id, str) or not run_id.strip():
             errors.append(f"{label}: run_id must be a non-empty string")
             continue
@@ -442,6 +444,12 @@ def validate_result_records(
             errors.append(f"{label}: condition must be skill or no-skill")
         if not isinstance(text, str) or not text.strip():
             errors.append(f"{label}: response must be a non-empty string")
+        if not isinstance(blind_id, str) or not blind_id.strip():
+            errors.append(f"{label}: blind_id must be a non-empty string")
+        elif blind_id in blind_ids:
+            errors.append(f"{label}: duplicate blind_id {blind_id}")
+        else:
+            blind_ids.add(blind_id)
         strata = response.get("strata", [])
         if not isinstance(strata, list) or any(
             not isinstance(item, str) or not item.strip() for item in strata
@@ -464,6 +472,8 @@ def validate_result_records(
         for field in ("case_key", "condition"):
             if judgment.get(field) != response.get(field):
                 errors.append(f"{label}: {field} does not match response {run_id}")
+        if judgment.get("blind_id") != response.get("blind_id"):
+            errors.append(f"{label}: blind_id does not match response {run_id}")
         if judgment.get("rubric_version") != rubric_version:
             errors.append(
                 f"{label}: rubric_version does not match rubric {rubric_version}"
