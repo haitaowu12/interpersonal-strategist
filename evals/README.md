@@ -67,6 +67,15 @@ the exact packaged skill and retain raw responses. `summarize` validates result
 records and computes route metrics, hard-gate counts, dimension-floor failures,
 and paired wins, losses, and ties where judgments are supplied.
 
+Every response record must retain `run_id`, `case_key`, `condition`,
+non-empty `response`, and a string-list `strata`. Every judgment must bind the
+same `run_id`, `case_key`, and `condition`; declare the canonical rubric
+version; score every hard gate and dimension; and include an observable evidence
+reason. When both conditions are present, every case must be paired and must
+have exactly one pairwise judgment. Incomplete, duplicate, unpaired,
+wrong-version, or unknown records fail closed rather than appearing
+failure-free.
+
 ## Development-case execution
 
 For each case:

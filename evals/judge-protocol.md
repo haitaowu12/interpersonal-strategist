@@ -45,8 +45,8 @@ holdouts.
 
 Before using an automated judge for release evidence:
 
-- weighted kappa or Krippendorff's alpha must be at least 0.80 for routes and
-  hard-gate judgments;
+- unweighted Cohen's kappa or nominal Krippendorff's alpha must be at least
+  0.80 for routes and hard-gate judgments;
 - agreement must be at least 0.67 for naturalness and other subjective
   dimensions, followed by adjudication;
 - the automated judge's hard-gate false-negative rate must be below 5% on the
@@ -64,6 +64,8 @@ Each judgment must contain:
 ```json
 {
   "case_id": "...",
+  "case_key": "...",
+  "run_id": "...",
   "condition": "skill|no-skill",
   "judge_id": "pseudonymous-reviewer-id",
   "rubric_version": "2.1",

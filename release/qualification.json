@@ -5,12 +5,20 @@
   "production_claim_allowed": false,
   "base_commit": "606a8fabce225240315d218b97b1375f8db7bf27",
   "implementation_branch": "agent/production-readiness-hardening",
+  "release_scope": {
+    "status": "pending_owner_decision",
+    "surfaces": []
+  },
   "qualification_commit": null,
+  "qualification_tree_sha": null,
   "package_sha256": null,
   "model_snapshot": null,
   "host_version": null,
   "harness_version": "evals/run.py@0.8.0-rc.1",
   "rubric_version": "2.1",
+  "evidence_schema_version": "1.0",
+  "evidence_bundle": null,
+  "unresolved_hard_failures": [],
   "gates": {
     "static_repository_ci": {
       "required": true,
@@ -45,6 +53,10 @@
     "calibrated_no_skill_comparison": {
       "required": true,
       "status": "pending",
+      "minimum_non_tied_pairs": 30,
+      "minimum_non_tied_proportion": 0.5,
+      "skill_win_rate_lower_bound_min": 0.5,
+      "low_complexity_noninferiority_margin": -0.05,
       "evidence": null
     },
     "independent_untouched_holdouts": {
@@ -56,6 +68,9 @@
       "required": true,
       "status": "pending",
       "minimum_cases": 150,
+      "minimum_unique_per_stratum": 12,
+      "minimum_compound_cases": 30,
+      "maximum_strata_credit_per_case": 3,
       "maximum_hard_failures": 0,
       "required_strata": [
         "authority_and_coercion",
