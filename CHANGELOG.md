@@ -17,6 +17,9 @@
 - Added a practitioner-framework quarantine so branded mnemonics cannot be
   represented as evidence authorities.
 - Saved and classified the completed long-running ChatGPT Pro review.
+- Reworked the public README around project intent, architecture, evidence,
+  evaluation, deterministic release, contribution, and maturity boundaries.
+- Added Python 3.11/3.13 CI and a release-metadata parity check.
 
 ## 0.7.0-alpha.1
 

@@ -7,6 +7,7 @@ import argparse
 import json
 import re
 import sys
+import tomllib
 from pathlib import Path
 from typing import Any
 
@@ -224,6 +225,24 @@ def validate_repository(project_root: Path = PROJECT_ROOT) -> list[str]:
         changelog = (project_root / "CHANGELOG.md").read_text(encoding="utf-8")
         if f"## {version}" not in changelog:
             errors.append("CHANGELOG.md does not contain the current VERSION")
+        pyproject_path = project_root / "pyproject.toml"
+        if not pyproject_path.is_file():
+            errors.append("missing pyproject.toml")
+        else:
+            try:
+                pyproject = tomllib.loads(
+                    pyproject_path.read_text(encoding="utf-8")
+                )
+            except (OSError, tomllib.TOMLDecodeError) as exc:
+                errors.append(f"invalid pyproject.toml: {exc}")
+            else:
+                expected_pep440 = version.replace("-alpha.", "a")
+                project_version = pyproject.get("project", {}).get("version")
+                if project_version != expected_pep440:
+                    errors.append(
+                        "pyproject.toml version does not match VERSION: "
+                        f"{project_version!r} != {expected_pep440!r}"
+                    )
 
     evals_dir = project_root / "evals"
     for filename in sorted(REQUIRED_EVALS):
