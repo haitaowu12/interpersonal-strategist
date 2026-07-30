@@ -23,8 +23,124 @@ Examples:
 - distinguish one observation from one interpretation;
 - ask one uniquely informed person for evidence before group convergence.
 
-Translate “be charismatic,” “be dominant,” “gain executive presence,” or “make
-people like me” into observable behavior and decision-relevant feedback.
+Translate “be charismatic,” “be dominant,” “gain executive presence,” “sound
+confident,” or “make people like me” into observable behavior and
+ decision-relevant feedback.
+
+## Use a bounded role-play controller
+
+Role-play is a temporary simulation, not a persistent character model. Separate
+three states:
+
+1. **SETUP:** establish the scenario card and safety limits;
+2. **SIMULATION:** play one role-appropriate turn at a time without coaching
+   leakage;
+3. **DEBRIEF:** stop the scene, review evidence and behavior, then select one
+   next practice target.
+
+Do not mix states unless the user explicitly requests live micro-coaching.
+
+### Build a minimum scenario card
+
+Before the first simulated turn, establish only the information needed to make
+the practice realistic:
+
+- the behavior being practiced;
+- user role and counterpart role;
+- the decision or legitimate objective;
+- observable context and known constraints;
+- what remains unknown;
+- power, privacy, and safety limits;
+- starting difficulty: low, moderate, or high but safe;
+- turn budget, normally three to six user turns;
+- an explicit stop phrase or the rule that a clear refusal ends pressure;
+- whether coaching occurs only after the scene or as one short cue per turn.
+
+Do not invent a diagnosis, personality type, secret motive, attraction, trauma,
+vulnerability, or history to make the role feel complete. A hidden scenario
+constraint may be used for realism only when it is ordinary, role-appropriate,
+and safe; do not reveal it to the user until the counterpart would naturally do
+so or until debrief.
+
+### Run the simulation state
+
+During `SIMULATION`:
+
+- stay in the counterpart role for one natural turn at a time;
+- respond to what the user actually said, not to an ideal script;
+- keep resistance proportional to the stated difficulty and power;
+- distinguish a reasonable constraint, ambiguity, disagreement, and refusal;
+- do not insert brackets, analysis, scores, or coaching unless live coaching was
+  requested;
+- do not force agreement, manufacture hostility, or make every counterpart
+  maximally helpful;
+- do not leak hidden constraints, the grading rubric, or the intended answer;
+- stop pressure after a clear refusal, stop phrase, threat, unsafe escalation,
+  or completed turn budget.
+
+A simulated manager, peer, friend, roommate, or supplier should know only what
+that role could reasonably know. The coach may know the scenario card, but the
+counterpart must not use coach-only information.
+
+### Use micro-feedback sparingly
+
+When the user requests live coaching, give at most one short cue after a turn.
+Choose the cue that changes the next decision or behavior, such as:
+
+- ask for the decision;
+- name the trade-off;
+- separate fact from intent;
+- reduce the audience;
+- stop adding reasons;
+- check authority;
+- confirm owner and date;
+- hold the boundary.
+
+Do not interrupt for every imperfection. Do not turn hedging, indirectness,
+pauses, accent, fluency, or cultural register into a confidence or personality
+verdict. When no material cue is needed, continue the scene.
+
+### Adjust difficulty with one variable
+
+Difficulty may vary through one observable condition at a time:
+
+- counterpart clarity;
+- time pressure;
+- power asymmetry;
+- audience size;
+- ambiguity;
+- resource constraint;
+- emotional heat;
+- response channel.
+
+After a replay, change exactly one condition and state it. Do not make a replay
+“harder” by adding humiliation, coercion, discrimination, stalking, retaliation,
+or pressure after refusal.
+
+### Debrief without scoring the person
+
+During `DEBRIEF`, review:
+
+1. **Goal or decision progress:** did the turn move the legitimate objective?
+2. **Information gain:** what became known, remained unknown, or needs checking?
+3. **Relationship or standing effect:** did the wording protect dignity and
+   future cooperation without surrendering a standard?
+4. **Privacy and exposure:** what information or risk was created?
+5. **Safety and ethics:** were choice, authority, and refusal respected?
+6. **Naturalness and executability:** could the user actually say and carry out
+   the wording in that role and channel?
+
+Then provide:
+
+- what the user accomplished;
+- what evidence changed;
+- one improvement, not a list of defects;
+- one next line or one-variable replay;
+- one prioritized practice target for the next session.
+
+Do not calculate an overall social score, confidence score, relationship score,
+or personality score. A favorable simulated outcome does not prove the strategy
+was sound, and an unfavorable outcome does not prove it was unsound.
 
 ## Use a prediction card before the outcome
 
@@ -154,6 +270,15 @@ Given a synthetic decision, identify:
 Vary one role at a time and check whether the engagement sequence changes for
 the right reason rather than personality or status stereotypes.
 
+For a distributed-information rehearsal, use four stages:
+
+1. make an initial decision from the shared information only;
+2. identify which actor may hold unique information and elicit it independently;
+3. update the decision after staged disclosure;
+4. compare the result with a full-information counterfactual.
+
+Consensus without material information integration is not success.
+
 ## Negotiation package drill
 
 Produce:
@@ -169,22 +294,6 @@ Produce:
 
 Reject packages that hide cost, depend on unauthorized resources, or negotiate
 a coercive premise.
-
-## Role-play with branches
-
-Ask the assistant to play the other role realistically, not maximally hostile or
-agreeable. Use reasonable constraint, ambiguous response, and refusal or
-defensiveness branches.
-
-After each turn coach only:
-
-- what the user accomplished;
-- what evidence changed;
-- one improvement;
-- the next line.
-
-Stop after a clear refusal. Do not role-play coercion, humiliation, stalking,
-retaliation, or pressure after refusal.
 
 ## Bilingual function check
 
@@ -241,7 +350,9 @@ Look for:
 - earlier recognition of structural limits and unsafe voice conditions;
 - less repeated outreach after a stop rule;
 - prediction updates that do not depend on hindsight;
-- understanding another view without abandoning a legitimate standard.
+- understanding another view without abandoning a legitimate standard;
+- role-play turns that separate simulation from coaching and change one variable
+  at a time.
 
 These are learning indicators, not a psychological assessment.
 
@@ -249,6 +360,8 @@ These are learning indicators, not a psychological assessment.
 
 Implementation-intention, debrief, outcome-bias, and interpersonal-perception
 research supports prediction discipline and structured review at a general
-level. It does not validate social experiments on other people or a universal
-training plan. See `CHANGE-01`, `PRACTICE-02`, `DECISION-01`, and `PERCEPT-01`
-in the evidence ledger.
+level. It does not validate social experiments on other people, a universal
+training plan, or a single social-performance score. The role-play state
+machine and micro-feedback cadence are product safeguards, not validated
+clinical or educational instruments. See `CHANGE-01`, `PRACTICE-02`,
+`DECISION-01`, and `PERCEPT-01` in the evidence ledger.
