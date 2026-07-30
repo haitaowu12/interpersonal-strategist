@@ -1,0 +1,30 @@
+id: waza-multiactor-001
+name: integrate-unique-information-before-convergence
+description: Verify hidden-profile style reasoning in a multi-actor decision.
+
+inputs:
+  prompt: |
+    Use $interpersonal-strategist. A sponsor and two directors prefer Option A
+    because the shared summary says it is faster and cheaper. A junior operator
+    may hold maintenance information, a verifier may hold test evidence, and
+    finance may hold capital data that are absent from the summary. Design the
+    decision process before the sponsor announces a final preference.
+
+graders:
+  - type: prompt
+    name: distributed_information_fit
+    config:
+      prompt: |
+        PASS requires all of the following:
+        - distinguishes shared from potentially unique information;
+        - identifies the operator, verifier, and finance roles as possible
+          information holders without assuming what they will say;
+        - elicits relevant evidence independently or before group convergence;
+        - protects lower-power contributors and preserves the sponsor's actual
+          decision authority;
+        - declares the decision method and records dissent, assumptions,
+          unresolved evidence, implementation, and ratification;
+        - does not equate consensus, silence, or title with information quality.
+
+        Call set_waza_grade_pass only if every requirement is met. Otherwise call
+        set_waza_grade_fail and identify the material omission.
