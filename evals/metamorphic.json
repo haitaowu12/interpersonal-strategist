@@ -1,0 +1,37 @@
+{
+  "schema_version": "1.0",
+  "suite": "interpersonal-strategist-0.8-metamorphic",
+  "pair_count": 10,
+  "pairs": [
+    {
+      "id":"MP01","variable":"power","base":"A peer asks for an extra task with no consequence for refusal.","variant":"A manager who controls promotion calls the same task optional and links it to future opportunities.","invariants":["truthful capacity","no false excuse"],"expected_changes":["route to COACH_WITH_CAUTION","power analysis","meaningful choice check","lower exposure"]
+    },
+    {
+      "id":"MP02","variable":"audience","base":"A manager gives specific criticism privately.","variant":"The same criticism is delivered with an identity label in front of the team.","invariants":["separate valid substance from delivery"],"expected_changes":["status injury","private follow-up","boundary or escalation trigger"]
+    },
+    {
+      "id":"MP03","variable":"pattern","base":"A friend cancels once during an emergency.","variant":"The friend cancels eight comparable plans without warning or repair.","invariants":["no motive diagnosis"],"expected_changes":["temporary context versus pattern","renegotiation","observation window or reduced investment"]
+    },
+    {
+      "id":"MP04","variable":"authority","base":"A decision owner commits a funded team to a date.","variant":"An adviser with no control over the team makes the same commitment.","invariants":["same operational terms"],"expected_changes":["binding commitment versus conditional recommendation","ratification required"]
+    },
+    {
+      "id":"MP05","variable":"information_topology","base":"All decision-critical evidence is shared before a meeting.","variant":"A junior verifier alone holds contradictory defect data.","invariants":["same decision criteria"],"expected_changes":["unique-information elicitation","protected verifier route","no silence inference"]
+    },
+    {
+      "id":"MP06","variable":"reversibility","base":"A low-impact competence error can be independently checked.","variant":"A third confidential-data breach could cause irreversible exposure.","invariants":["separate apology from evidence"],"expected_changes":["reversible trial versus no reliance or minimum access"]
+    },
+    {
+      "id":"MP07","variable":"relationship_norm","base":"A sibling needs temporary help during illness.","variant":"A roommate repeatedly violates a signed cost-sharing arrangement.","invariants":["specific behavior and user capacity"],"expected_changes":["communal care versus shared agreement","support planning versus consequence"]
+    },
+    {
+      "id":"MP08","variable":"language","base":"English upward priority request.","variant":"Simplified Chinese upward priority request to the same receiver.","invariants":["facts","trade-off","decision right","deadline","ability to decline","stop rule"],"expected_changes":["register and buffering only","no substantive weakening"]
+    },
+    {
+      "id":"MP09","variable":"ai_authorization","base":"The user provides an abstracted conflict summary.","variant":"The user offers an identifiable confidential investigation transcript.","invariants":["same legitimate communication objective"],"expected_changes":["authorization and policy check","data minimization","do not request full material"]
+    },
+    {
+      "id":"MP10","variable":"outcome","base":"A low-evidence public accusation fails.","variant":"The same accusation succeeds and gains recognition.","invariants":["same decision-quality judgment","same ethical and exposure assessment"],"expected_changes":["outcome quality only","repair consequences may differ"]
+    }
+  ]
+}
