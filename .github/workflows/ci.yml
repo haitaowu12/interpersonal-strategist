@@ -4,6 +4,8 @@ on:
   push:
   pull_request:
   workflow_dispatch:
+  schedule:
+    - cron: "17 8 1 * *"
 
 permissions:
   contents: read
@@ -31,6 +33,9 @@ jobs:
 
       - name: Validate repository and release governance
         run: python3 scripts/validate.py
+
+      - name: Validate evidence registry offline
+        run: python3 scripts/check_evidence.py --offline
 
       - name: Validate evaluation fixtures
         run: python3 evals/run.py validate-fixtures
@@ -68,3 +73,28 @@ jobs:
             build/no-skill-prompts.jsonl
             release/qualification.json
           retention-days: 30
+
+  evidence-resolution:
+    name: Online evidence identity resolution
+    if: github.event_name == 'workflow_dispatch' || github.event_name == 'schedule'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Resolve promoted source identities
+        run: python3 scripts/check_evidence.py --output evidence-resolution.json
+
+      - name: Upload source-resolution report
+        uses: actions/upload-artifact@v4
+        with:
+          name: evidence-resolution-${{ github.sha }}
+          if-no-files-found: error
+          path: evidence-resolution.json
+          retention-days: 90
