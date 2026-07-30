@@ -14,14 +14,30 @@
 - Added multi-actor information-topology, relationship-norm, feedback-exposure,
   minimum-safe-reliance, speech-act adaptation, AI-authorization, and
   outcome-independent learning controls.
+- Added a bounded role-play controller with separate setup, simulation, and
+  debrief states, role-appropriate information, turn and stop controls,
+  one-variable replay, one-cue micro-feedback, and one prioritized practice
+  target.
+- Added facilitation safeguards for independent evidence elicitation, declared
+  participation and decision methods, authority anchoring, dissent, and
+  ratification.
+- Added a nonverbal evidence boundary that prohibits emotion, deception,
+  consent, engagement, competence, diagnosis, or motive verdicts from facial
+  movement, gaze, posture, voice, camera state, or latency alone.
 - Expanded development evaluation with multi-actor, relationship-norm,
-  AI-mediated, trust-reliance, speech-act, bilingual, and metamorphic suites.
+  AI-mediated, trust-reliance, speech-act, bilingual, metamorphic, role-play,
+  nonverbal, facilitation, and staged distributed-information cases.
 - Replaced aggregate-only evaluation targets with hard gates, per-dimension
   floors, route-specific metrics, blinded no-skill comparison requirements,
   judge calibration, and untouched-holdout governance.
 - Added a deterministic evaluation preparation and result-summarization CLI,
   release qualification manifest, and exact Codex production-qualification
   handoff.
+- Added an optional Microsoft Waza compatibility lane for independent trigger,
+  skill-invocation, prompt-grading, snapshot/replay, adversarial, spec-coverage,
+  and token-budget checks without treating a Waza pass as production evidence.
+- Added a comparable-public-systems audit and pattern-donor provenance record
+  covering permissive, clean-room-only, and rejected sources.
 - Updated installation guidance to lead with the current OpenAI Skills upload
   and management flow while retaining local developer installation as a
   host-dependent option.
