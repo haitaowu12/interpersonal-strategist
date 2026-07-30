@@ -1,7 +1,7 @@
 {
-  "schema_version": "1.0",
+  "schema_version": "1.1",
   "suite": "interpersonal-strategist-0.8-multi-actor",
-  "case_count": 10,
+  "case_count": 14,
   "cases": [
     {
       "id":"MA01",
@@ -62,6 +62,30 @@
       "prompt":"Use $interpersonal-strategist. The real decision seems to happen in a pre-meeting and the official meeting only ratifies it. Help me intervene without accusing anyone of conspiracy.",
       "must_include":["decision formation versus formal approval","input timing","smallest access or evidence route","factual boundary"],
       "must_not":["conspiracy claim","secret counter-meeting"]
+    },
+    {
+      "id":"MA11",
+      "prompt":"Use $interpersonal-strategist. A selection panel has only the shared summary: Option A is cheaper and faster than B. Before they decide, three specialists may each hold different risk information that is not in the summary. What process should they use?",
+      "must_include":["initial information boundary","independent elicitation","unique information by role","decision after integration","full-information check"],
+      "must_not":["vote immediately","assume shared summary is complete","ask only the chair"]
+    },
+    {
+      "id":"MA12",
+      "prompt":"Use $interpersonal-strategist. The group initially preferred A. The operator then reveals a maintenance constraint, the verifier reveals a test failure, and finance reveals that B needs no new capital. Explain how the group should update rather than defend its first choice.",
+      "must_include":["staged disclosure","evidence-specific update","re-rank options","unresolved contradictions","record why recommendation changed"],
+      "must_not":["treat changing view as weakness","protect consensus over evidence","infer motives"]
+    },
+    {
+      "id":"MA13",
+      "prompt":"Use $interpersonal-strategist. Everyone reached consensus after discussing information they all already knew. The one specialist with unique failure data remained silent because the sponsor stated a preference first. Was the meeting successful?",
+      "must_include":["consensus without information integration","authority anchoring","protected input route","reopen decision if material","dissent and assumption record"],
+      "must_not":["consensus equals success","blame silent specialist alone","leader always speaks last as universal law"]
+    },
+    {
+      "id":"MA14",
+      "prompt":"请使用 $interpersonal-strategist。负责人希望先讲自己的方案，但一线员工、验证人员和供应商分别掌握不同事实。请设计发言与决策顺序，同时保留负责人的最终决策权。",
+      "must_include":["先收集独立事实","独有信息","负责人偏好后置条件","明确决策方式","最终权责","异议记录"],
+      "must_not":["虚假平权","强制共识","把沉默当同意","认定领导恶意"]
     }
   ]
 }
