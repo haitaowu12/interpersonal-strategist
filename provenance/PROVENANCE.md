@@ -54,6 +54,39 @@ These inputs contained research, architecture, evaluation, and implementation
 recommendations. They did not contain sealed holdouts or an authoritative
 production verdict.
 
+## Comparable public systems audit
+
+A fresh public-system audit was completed on 2026-07-30 and is recorded in:
+
+- `research/comparable-public-systems-audit-20260730.md`;
+- `provenance/PATTERN_DONORS.md`;
+- `research/nonverbal-inference-source-note-20260730.md`.
+
+The audit inspected exact public commits and licenses for Agent Skill evaluation,
+role-play coaching, distributed-information benchmarks, social-agent evaluation,
+and social-simulation architecture. Applied permissive-license patterns include:
+
+- Microsoft Waza's documented Agent Skill evaluation interfaces as an optional
+  secondary compatibility lane;
+- Expression Trainer's one-cue practice cadence, re-expressed without its
+  scores or psychological assumptions;
+- HiddenBench's staged shared-versus-unique-information benchmark structure;
+- Sotopia's separation of goal, information, relationship, privacy, safety, and
+  naturalness dimensions without a single social score;
+- Concordia's separation of scenario control, actor-visible information,
+  simulation turns, and evaluation.
+
+No donor source code, task corpus, prompt prose, examples, user interface,
+persistent persona data, or creator voice is redistributed. The Waza YAML is
+original project configuration written to its public schema. Sources without a
+verified permissive license supplied comparison questions only, not copied
+material.
+
+Rejected donor mechanisms include facial-emotion or body-language verdicts,
+confidence and personality scoring, attachment typing, persistent third-party
+profiles, secret-goal optimization, romance strategy, coercive objection
+handling, and Commons-Clause or proprietary framework imports.
+
 ## Clean-room boundary
 
 A third-party romance skill licensed under PolyForm Noncommercial 1.0.0 was
@@ -101,6 +134,10 @@ product hypotheses. They are not empirical authorities. A runtime empirical
 claim must be independently sourced, or the relevant method must be identified
 as an original product safeguard or practitioner scaffold.
 
+A candidate source may remain in `research/` without runtime promotion. It must
+not be represented as a promoted claim until the source registry, runtime ledger,
+resolver report, and mutation tests agree.
+
 ## Evaluation provenance
 
 Public development fixtures are not qualification holdouts. Independent
@@ -109,12 +146,18 @@ the public repository, checked for semantic overlap, and identified in the
 qualification record only by cryptographic hash, composition, author/custodian
 roles, and protocol version.
 
+The optional Waza lane is secondary development evidence. Its binary version,
+upstream identity, executor, model, task hashes, snapshots, and results must be
+recorded when used. A Waza pass cannot replace target-host evidence, and a
+weighted score cannot compensate for a project hard-gate failure.
+
 A behavioral release attestation must bind:
 
 - exact commit and release ZIP SHA-256;
 - model snapshot and host version;
 - skill and no-skill condition definitions;
-- harness and rubric versions;
+- canonical harness and rubric versions;
+- secondary harness identities and results when used;
 - judge identities and calibration results;
 - holdout-set hash and composition;
 - bilingual review record;
@@ -131,4 +174,5 @@ This repository does not contain:
 - credentials;
 - private vault content;
 - third-party source papers or proprietary framework prose;
+- donor prompts, examples, task corpora, or persistent personas;
 - autonomous connector or sending behavior.
