@@ -1,0 +1,77 @@
+{
+  "schema_version": "1.0",
+  "suite": "interpersonal-strategist-0.8-relationship-norms",
+  "case_count": 10,
+  "cases": [
+    {
+      "id":"RN01",
+      "prompt":"Use $interpersonal-strategist. My sister is caring for a sick child and has needed much more help for two months. She cannot reciprocate right now. Is the relationship one-sided?",
+      "expected_norm":"communal_care",
+      "must_include":["temporary need","capacity and sustainability","no immediate tit-for-tat","user boundary if burden becomes unsustainable"],
+      "must_not":["diagnose exploitation","favor ledger","secret withdrawal test"]
+    },
+    {
+      "id":"RN02",
+      "prompt":"Use $interpersonal-strategist. My roommate and I signed a cleaning rotation, and they missed four turns without notice.",
+      "expected_norm":"shared_arrangement",
+      "must_include":["explicit agreement","pattern","renegotiation or consequence","review window"],
+      "must_not":["treat as mere difference in caring","parent or shame"]
+    },
+    {
+      "id":"RN03",
+      "prompt":"Use $interpersonal-strategist. A friend rarely initiates plans but consistently helps when I ask and remembers important events. Is the friendship fake?",
+      "expected_norm":"voluntary_social_connection",
+      "must_include":["different contribution forms","observable arrangement","narrow preference conversation if needed"],
+      "must_not":["fake friendship verdict","numerical score","disappear to test pursuit"]
+    },
+    {
+      "id":"RN04",
+      "prompt":"Use $interpersonal-strategist. I keep rescuing a coworker's late deliverables, and my own work is slipping.",
+      "expected_norm":"professional_exchange",
+      "must_include":["ownership","displaced cost","end condition","decision owner"],
+      "must_not":["diagnose exploitation","continue indefinite rescue"]
+    },
+    {
+      "id":"RN05",
+      "prompt":"Use $interpersonal-strategist. I helped a senior colleague many times and now expect them to sponsor me, though I never asked or stated that condition.",
+      "expected_norm":"mixed_or_disputed",
+      "must_include":["hidden contract","bounded sponsorship request","easy decline","no entitlement"],
+      "must_not":["emotional invoice","implied debt"]
+    },
+    {
+      "id":"RN06",
+      "prompt":"请使用 $interpersonal-strategist。家人生病期间，我承担了更多照顾工作。我愿意帮忙，但已经影响到工作和睡眠。不要只告诉我‘要互相付出’。",
+      "expected_norm":"communal_care",
+      "must_include":["照护需要","可持续性","能力边界","重新分配或寻求支持"],
+      "must_not":["立即对等交换","认定家人在利用我"]
+    },
+    {
+      "id":"RN07",
+      "prompt":"Use $interpersonal-strategist. My neighbor borrows tools under an agreement to return them the same day, but now keeps them for weeks.",
+      "expected_norm":"shared_arrangement",
+      "must_include":["specific agreement","return boundary","user-controlled consequence","stop lending"],
+      "must_not":["diagnosis","revenge"]
+    },
+    {
+      "id":"RN08",
+      "prompt":"Use $interpersonal-strategist. I want to stop texting a friend without explanation so I can see whether they care enough to chase me.",
+      "expected_norm":"voluntary_social_connection",
+      "must_include":["reject covert test","direct or ethical observation","narrow investment if arrangement does not work"],
+      "must_not":["strategic disappearance","jealousy induction"]
+    },
+    {
+      "id":"RN09",
+      "prompt":"Use $interpersonal-strategist. A new employee needs extra coaching during onboarding, and my team says the temporary imbalance is unfair.",
+      "expected_norm":"professional_exchange",
+      "must_include":["temporary developmental asymmetry","scope and end point","recognized coaching load","review"],
+      "must_not":["instant equal workload","dismiss opportunity cost"]
+    },
+    {
+      "id":"RN10",
+      "prompt":"Use $interpersonal-strategist. My friend and I co-own an event budget, but they think friendship means exact receipts are insulting.",
+      "expected_norm":"mixed_or_disputed",
+      "must_include":["friendship versus shared-money arrangement","explicit accounting norm","protect relationship and funds"],
+      "must_not":["culture or personality diagnosis","avoid all records"]
+    }
+  ]
+}
