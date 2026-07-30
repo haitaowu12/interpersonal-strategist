@@ -77,6 +77,7 @@ class ProjectTests(unittest.TestCase):
         self.assertNotIn("README.md", names)
         self.assertNotIn("provenance/evidence-sources.json", names)
         self.assertNotIn("release/qualification.json", names)
+        self.assertFalse(any(name.startswith("interpersonal-strategist/evals/") for name in names))
 
         result = run_smoke(archive_two)
         self.assertEqual(result["status"], "pass", result)
@@ -165,6 +166,46 @@ class ProjectTests(unittest.TestCase):
             payload = json.loads((PROJECT_ROOT / "evals" / filename).read_text())
             self.assertEqual(payload[count_field], len(payload[items_field]), filename)
 
+    def test_new_roleplay_and_nonverbal_hard_gates_are_locked(self) -> None:
+        rubric = json.loads((PROJECT_ROOT / "evals" / "rubric.json").read_text())
+        gate_ids = {gate["id"] for gate in rubric["hard_gates"]}
+        self.assertIn("nonverbal_inference", gate_ids)
+        self.assertIn("simulation_leakage", gate_ids)
+        self.assertIn("covert_test", gate_ids)
+        dimension_ids = {dimension["id"] for dimension in rubric["dimensions"]}
+        self.assertIn("simulation_control", dimension_ids)
+        self.assertEqual(rubric["schema_version"], "2.1")
+
+    def test_waza_lane_is_secondary_and_not_packaged(self) -> None:
+        required = {
+            "README.md",
+            "eval.yaml",
+            "trigger_tests.yaml",
+            "tasks/explicit-invocation.yaml",
+            "tasks/coercion-refusal.yaml",
+            "tasks/nonverbal-inference.yaml",
+            "tasks/roleplay-state.yaml",
+            "tasks/micro-feedback.yaml",
+            "tasks/distributed-information.yaml",
+            "tasks/facilitation-method.yaml",
+            "tasks/bilingual-boundary.yaml",
+        }
+        root = PROJECT_ROOT / "evals" / "waza"
+        actual = {
+            str(path.relative_to(root))
+            for path in root.rglob("*")
+            if path.is_file()
+        }
+        self.assertTrue(required.issubset(actual), required - actual)
+
+        qualification = json.loads(
+            (PROJECT_ROOT / "release" / "qualification.json").read_text()
+        )
+        self.assertNotIn("secondary_waza_cross_executor", qualification["gates"])
+        secondary = qualification["secondary_evidence"]["waza_cross_executor"]
+        self.assertEqual(secondary["status"], "optional_pending")
+        self.assertIn("cannot replace a required gate", secondary["nonclaim"])
+
     def test_eval_runner_validates_and_prepares_deterministically(self) -> None:
         runner = load_eval_runner()
         self.assertEqual(runner.validate_fixtures(), [])
@@ -175,7 +216,7 @@ class ProjectTests(unittest.TestCase):
             result_two = runner.prepare("skill", second)
             self.assertEqual(result_one["sha256"], result_two["sha256"])
             self.assertEqual(first.read_bytes(), second.read_bytes())
-            self.assertGreater(result_one["record_count"], 50)
+            self.assertGreaterEqual(result_one["record_count"], 156)
 
 
 if __name__ == "__main__":
