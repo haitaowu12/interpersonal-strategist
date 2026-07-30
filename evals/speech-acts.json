@@ -1,0 +1,43 @@
+{
+  "schema_version": "1.0",
+  "suite": "interpersonal-strategist-0.8-speech-acts",
+  "case_count": 12,
+  "cases": [
+    {
+      "id":"SA01","language":"en","speech_act":"request","power":"upward","channel":"email","prompt":"Use $interpersonal-strategist. Ask my director to choose between two incompatible priorities by noon.","must_preserve":["trade-off","decision right","deadline","no promise to do both"]
+    },
+    {
+      "id":"SA02","language":"zh-CN","speech_act":"request","power":"upward","channel":"email","prompt":"请使用 $interpersonal-strategist。请领导在今天中午前从两个互相冲突的优先事项中作出选择。","must_preserve":["取舍","决策权","截止时间","不承诺两项都完成"]
+    },
+    {
+      "id":"SA03","language":"en","speech_act":"refusal","power":"lateral","channel":"chat","prompt":"Use $interpersonal-strategist. Refuse a peer's recurring last-minute task without inventing an excuse.","must_preserve":["clear refusal","truthful context","user-controlled consequence","stop after repeat"]
+    },
+    {
+      "id":"SA04","language":"zh-CN","speech_act":"refusal","power":"upward","channel":"chat","prompt":"请使用 $interpersonal-strategist。领导要求我接手一项新增任务，但没有调整现有交付。请明确拒绝同时承担不可能完成的承诺。","must_preserve":["现有承诺","明确取舍","不含虚假借口","不把拒绝弱化为尽量"]
+    },
+    {
+      "id":"SA05","language":"en","speech_act":"disagreement","power":"upward","channel":"meeting_then_email","prompt":"Use $interpersonal-strategist. I disagree with a safety exception approved by my manager and need a professional record.","must_preserve":["recommendation","manager decision right","mandatory concern distinction","written record"]
+    },
+    {
+      "id":"SA06","language":"zh-CN","speech_act":"attribution_correction","power":"lateral","channel":"private_chat_then_record","prompt":"请使用 $interpersonal-strategist。同事在会上把我做的模型说成是他的，请先私下更正并更新会议纪要。","must_preserve":["事实与动机分开","更正要求","双方合法贡献","书面记录"]
+    },
+    {
+      "id":"SA07","language":"en","speech_act":"feedback","power":"downward","channel":"private_meeting","prompt":"Use $interpersonal-strategist. Give a direct report feedback on three calculation errors without calling them careless.","must_preserve":["specific behavior","standard","support","commitment and review","manager power awareness"]
+    },
+    {
+      "id":"SA08","language":"zh-CN","speech_act":"apology","power":"lateral","channel":"email","prompt":"请使用 $interpersonal-strategist。我发错附件暴露了内部草稿。写一封不夸大情绪、不保证永不再犯的道歉。","must_preserve":["具体行为","影响","责任","补救","预防","不要求原谅"]
+    },
+    {
+      "id":"SA09","language":"en","speech_act":"escalation","power":"upward","channel":"durable_record","prompt":"Use $interpersonal-strategist. My private safety concern was omitted from the decision record. Prepare a supported escalation without making a legal finding.","must_preserve":["technical evidence","receiver authority","interim protection","qualified route","no legal conclusion"]
+    },
+    {
+      "id":"SA10","language":"zh-CN","speech_act":"reminder","power":"lateral","channel":"chat_then_email","prompt":"请使用 $interpersonal-strategist。供应商连续三次错过承诺日期，请把‘尽快’改成可执行的跟进。","must_preserve":["原承诺","负责人","交付物","日期","预警点","后备方案"]
+    },
+    {
+      "id":"SA11","language":"en","speech_act":"invitation","power":"upward","channel":"email","prompt":"Use $interpersonal-strategist. Ask a senior leader for a 20-minute readiness review with an easy decline.","must_preserve":["bounded purpose","effort and timing","relevance","easy decline","no flattery debt"]
+    },
+    {
+      "id":"SA12","language":"mixed","speech_act":"meeting_recap","power":"multi_actor","channel":"email","prompt":"Use $interpersonal-strategist. The meeting was in Chinese, but the durable project record is English. Confirm only decisions, owners, dates, authority, and unresolved items without claiming every nuance was agreed.","must_preserve":["speaker and language source","decision versus unresolved","owner and date","authority","correction window"]
+    }
+  ]
+}
