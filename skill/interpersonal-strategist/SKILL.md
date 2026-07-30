@@ -133,6 +133,11 @@ cross-cultural mismatch, or multi-actor dynamics. Load only the matching
 playbook.
 
 Read
+[reciprocity and relationship maintenance](references/reciprocity-and-relationship-maintenance.md)
+for one-sided non-romantic relationships, repeated helping, networking
+maintenance, renegotiating investment, triangulation, or reducing dependency.
+
+Read
 [conflict, de-escalation, and trust repair](references/conflict-and-trust-repair.md)
 for escalating disagreement, relationship damage, apology, mediation, or
 re-entry after a pause.
@@ -195,6 +200,11 @@ Prepare only plausible branches:
 Define an observation window, escalation trigger, and condition that ends
 further outreach or investment. When new feedback arrives, say what it supports
 or weakens and re-rank the options.
+
+Read [practice and after-action learning](references/practice-and-after-action-learning.md)
+when the user wants rehearsal, calibration drills, deliberate practice, a
+private self-review template, or a plan to improve interpersonal capability
+over time.
 
 ## Ask only decision-changing questions
 

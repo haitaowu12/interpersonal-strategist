@@ -26,6 +26,8 @@ historical `v0.5a` candidate.
   negotiation, and commitment design;
 - 15 end-to-end playbooks with branches, observation windows, escalation
   triggers, and stop rules;
+- capability-building drills for social calibration, listening, power-aware
+  voice, boundaries, negotiation, bilingual parity, and after-action learning;
 - difficult friendship, family, roommate, neighbor, and networking situations;
 - English and Simplified Chinese workplace communication.
 
