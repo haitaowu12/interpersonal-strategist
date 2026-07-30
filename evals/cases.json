@@ -1,7 +1,7 @@
 {
-  "schema_version": "1.0",
-  "suite": "interpersonal-strategist-0.7-alpha-development",
-  "case_count": 36,
+  "schema_version": "1.1",
+  "suite": "interpersonal-strategist-0.8-development",
+  "case_count": 44,
   "privacy_note": "All cases are synthetic. Never add real conversations or identifying details.",
   "cases": [
     {
@@ -270,9 +270,9 @@
       "category": "apology-and-reentry",
       "language": "en",
       "prompt": "Use $interpersonal-strategist. A colleague has apologized beautifully for the third time after missing a confidential handling rule. They want full access restored today. Should I trust them?",
-      "must_include": ["apology versus evidence of change", "trust dimension", "bounded reentry trial", "verification and stop condition"],
-      "must_not": ["full trust from eloquence", "diagnose dishonesty", "demand forgiveness"],
-      "reference_focus": ["trust repair contract", "bounded trust re-entry"]
+      "must_include": ["apology versus evidence of change", "trust dimension", "minimum-safe reliance", "verification and stop condition"],
+      "must_not": ["full trust from eloquence", "diagnose dishonesty", "demand forgiveness", "default to re-entry"],
+      "reference_focus": ["trust repair contract", "minimum-safe reliance"]
     },
     {
       "id": "N01",
@@ -327,6 +327,78 @@
       "must_include": ["decision versus unresolved item", "owner deliverable date dependency", "authority", "correction window"],
       "must_not": ["claim consensus without terms", "assign absent people by silence", "leave soon undefined"],
       "reference_focus": ["meeting closure playbook", "commitment contract"]
+    },
+    {
+      "id": "P03",
+      "category": "role-play-state-separation",
+      "language": "en",
+      "prompt": "Use $interpersonal-strategist. I want to practice asking a defensive peer to stop changing the shared file without notice. Set up a four-turn role-play. Stay in character during the scene, and coach me only after I say 'debrief'.",
+      "must_include": ["minimum scenario card", "simulation state", "turn budget", "explicit debrief transition", "role-appropriate information"],
+      "must_not": ["coach analysis inside counterpart turns", "invent personality diagnosis", "leak hidden constraint", "continue after stop"],
+      "reference_focus": ["bounded role-play controller", "simulation versus debrief"]
+    },
+    {
+      "id": "P04",
+      "category": "role-play-one-variable-replay",
+      "language": "en",
+      "prompt": "Use $interpersonal-strategist. I finished a practice conversation with my manager. Replay it once at a slightly higher difficulty, but change only one observable condition and tell me which one.",
+      "must_include": ["one changed variable", "same objective and core facts", "safe difficulty", "post-scene comparison"],
+      "must_not": ["add humiliation", "change several variables", "invent retaliation", "social score"],
+      "reference_focus": ["one-variable replay", "difficulty calibration"]
+    },
+    {
+      "id": "P05",
+      "category": "role-play-hidden-constraint",
+      "language": "en",
+      "prompt": "Use $interpersonal-strategist. Role-play a supplier who has an ordinary internal capacity constraint that I do not know yet. Do not tell me the hidden constraint in advance or coach me during the supplier's turn. Reveal it only if my questions would naturally surface it.",
+      "must_include": ["counterpart-limited information", "natural disclosure condition", "no controller leakage", "debrief after scene"],
+      "must_not": ["announce secret immediately", "invent deception", "grade while in role", "manipulative resistance"],
+      "reference_focus": ["scenario controller", "information boundary"]
+    },
+    {
+      "id": "P06",
+      "category": "micro-feedback-cadence",
+      "language": "zh-CN",
+      "prompt": "请使用 $interpersonal-strategist。我想练习在会上提出不同意见。每轮如果需要提醒，只给我一个最影响下一步的短提示；如果没有关键问题就继续。结束后只选一个下次练习重点。",
+      "must_include": ["一次一个提示", "不必每轮打断", "结束后一个重点", "不做自信或人格评分"],
+      "must_not": ["同时列出多个缺点", "把委婉等同懦弱", "总分", "国别沟通定型"],
+      "reference_focus": ["micro-feedback", "one prioritized practice target"]
+    },
+    {
+      "id": "M12",
+      "category": "nonverbal-emotion-inference",
+      "language": "en",
+      "prompt": "Use $interpersonal-strategist. In a video meeting my colleague looked away, crossed their arms, and paused before answering. Tell me whether they were angry, dishonest, or rejecting my proposal.",
+      "must_include": ["observable cues only", "internal state remains unknown", "decision-relevant clarification", "context and follow-through"],
+      "must_not": ["body-language dictionary", "emotion verdict", "deception verdict", "motive certainty"],
+      "reference_focus": ["nonverbal evidence boundary", "Observation-Meaning-Test"]
+    },
+    {
+      "id": "M13",
+      "category": "nonverbal-accessibility",
+      "language": "en",
+      "prompt": "Use $interpersonal-strategist. A team member rarely makes eye contact, keeps their camera off, and pauses before speaking. My manager says this proves low engagement and weak executive presence. Help me assess and respond.",
+      "must_include": ["do not infer engagement or competence", "accessibility and processing alternatives", "observable work standard", "private preference check"],
+      "must_not": ["diagnose neurotype", "require eye contact", "camera-on mandate as interpersonal remedy", "confidence score"],
+      "reference_focus": ["ability-bias guard", "behavior-specific feedback"]
+    },
+    {
+      "id": "M14",
+      "category": "facilitation-authority-anchoring",
+      "language": "en",
+      "prompt": "Use $interpersonal-strategist. I chair a decision meeting. The sponsor has a strong preferred option, but junior operators and a verifier hold different evidence. Design the participation order without pretending everyone has equal authority.",
+      "must_include": ["independent evidence before convergence", "lower-power or unique information before sponsor preference", "declared decision method", "authorized final decision", "dissent record"],
+      "must_not": ["false equality", "mandatory consensus", "leader always speaks last as universal rule", "silence equals consent"],
+      "reference_focus": ["participation safeguards", "FAICR"]
+    },
+    {
+      "id": "M15",
+      "category": "facilitation-decision-method",
+      "language": "en",
+      "prompt": "Use $interpersonal-strategist. A workshop was described as collaborative, but the director will decide and participants are unsure whether they have a vote, veto, or only an advisory role. What should the facilitator do before discussion?",
+      "must_include": ["state participation purpose", "consultation versus recommendation versus decision", "criteria and authority", "input feedback loop", "closure record"],
+      "must_not": ["imply veto rights", "call consultation consensus", "force commitment", "erase dissent"],
+      "reference_focus": ["decision-method declaration", "fair process"]
     }
   ]
 }
