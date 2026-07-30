@@ -1,157 +1,190 @@
-# Conflict, De-escalation, and Trust Repair
+# Conflict, Containment, and Trust Repair
 
 Use this reference for disagreement, escalating tone, repeated friction,
-relationship damage, broken commitments, apology, mediation, or re-entry after
-a pause.
+relationship damage, broken commitments, apology, mediation, containment, or a
+decision about future reliance.
 
-## Diagnose conflict on two axes
+## Diagnose issue and heat
 
-First identify the dominant issue:
+First separate the active lanes:
 
 - **task/content:** what is true, desirable, or technically correct;
-- **process/resource:** how work, time, money, access, or decisions are
-  allocated;
+- **process/resource:** how work, time, money, access, or decisions are allocated;
 - **role/authority:** who may decide, direct, review, or represent;
 - **relationship/status:** disrespect, humiliation, exclusion, credit, or
   threatened standing;
-- **values/identity:** incompatible principles or identity-relevant meaning;
+- **values/identity:** principles or identity-relevant meaning that may not be
+  fully reconcilable;
 - **safety/formal route:** coercion, threat, retaliation exposure, or a matter
   requiring qualified review.
 
 Then assess heat:
 
-- **low:** disagreement remains specific; both parties can exchange reasons;
-- **medium:** repetition, defensiveness, avoidance, audience effects, or
-  attribution of intent appear;
-- **high:** contempt, threat, coercion, public humiliation, retaliation risk,
-  loss of behavioral control, or material harm.
+- **low:** claims remain specific and reasons can be exchanged;
+- **medium:** repetition, defensiveness, avoidance, audience effects, or intent
+  attribution appear;
+- **high:** contempt, threat, coercion, humiliation, retaliation risk, loss of
+  behavioral control, or material harm.
 
-Task disagreement can become relationship conflict when competence, loyalty,
-or character is attacked. Do not assume task conflict is inherently useful.
+Do not label possible coercion or abuse as mutual conflict. Do not assume task
+conflict is useful merely because the topic is substantive.
 
-## Choose the intervention by type and heat
+## Select the objective before the conversation
+
+Not every conflict should aim at agreement or trust repair. Choose among:
+
+- solve a bounded task or process question;
+- clarify authority or decision procedure;
+- contain escalation and protect work;
+- establish workable coexistence or non-interference;
+- repair a specific relationship injury;
+- obtain neutral review or mediation;
+- reduce dependency or exit.
+
+For enduring values or identity disagreement, use role clarity, bounded
+coexistence, decision rules, non-interference, or exit rather than forced
+consensus, compulsory empathy, or repeated “clear the air” sessions.
+
+## Choose the intervention by lane and heat
 
 | Situation | Preferred move | Avoid |
 |---|---|---|
-| Low-heat task conflict | Agree on decision question, evidence, criteria, and owner | Debating status or personality |
-| Process/resource conflict | Make trade-offs and decision rights explicit | Asking people to “communicate better” without changing the process |
-| Role conflict | Define mandate, interfaces, and escalation route | Private power contests |
-| Status injury | Reduce the audience, correct the record, restore dignity | Public forced apology by default |
-| Medium heat | Slow pace, summarize each view, narrow the issue, set re-entry conditions | Solving every historical grievance at once |
-| High heat or unsafe case | Pause, create distance, preserve records, seek support or a qualified route | Joint confrontation, clever provocation, or symmetry claims |
+| Low-heat task conflict | Define decision question, evidence, criteria, and owner | Status or personality debate |
+| Process/resource conflict | Surface trade-offs, authority, and allocation rule | “Communicate better” without process change |
+| Role conflict | Define mandate, interfaces, ratification, and escalation | Private power contest |
+| Status injury | Reduce audience, correct record, restore factual standing | Public forced apology by default |
+| Medium heat | Slow pace, separate lanes, narrow issue, set re-entry conditions | Solving all history at once |
+| High heat or unsafe | Pause, create distance, preserve records, seek support or qualified route | Joint confrontation or symmetry claims |
+| Enduring values conflict | Bound interaction, define decision procedure or non-interference | Forced agreement or identity debate |
 
-## Run the Pause–Separate–Structure–Re-enter method
+## Pause-Separate-Structure-Re-enter
 
-1. **Pause:** Stop the interaction when arousal or audience dynamics make
-   learning unlikely. State when and how it will resume; do not use silence as
-   punishment.
-2. **Separate:** Distinguish content, process, relationship impact, and
-   authority. Move each claim to the correct lane.
-3. **Structure:** Set one decision question, evidence or criteria, participants,
-   owner, timebox, and record.
-4. **Re-enter:** Begin with the shared decision or required standard, summarize
+1. **Pause:** stop when heat or audience dynamics make learning unlikely. State
+   when and how work will resume; do not use silence as punishment.
+2. **Separate:** divide content, process, relationship impact, authority, and
+   safety claims.
+3. **Structure:** choose one decision question, evidence or criteria,
+   participants, owner, timebox, and record.
+4. **Re-enter:** begin with the shared decision or required standard, summarize
    the unresolved difference, and use the agreed process.
-5. **Escalate or exit:** If threats, repeated breaches, authority failure, or
-   non-participation make the process non-viable, use the chosen route or stop
-   rule.
+5. **Contain, escalate, or exit:** if threat, repeated breach, authority failure,
+   or non-participation makes the process non-viable, use the selected route or
+   stop rule.
 
 Example:
 
-> We are now debating both the design decision and each other's competence. I
-> suggest we pause this discussion. Tomorrow, let's compare the two options
-> against the approved safety, cost, and schedule criteria, with Jordan making
-> the decision. I will circulate a neutral record of the open points first.
+> We have moved from the design decision into claims about each other's
+> competence. Let's pause. Tomorrow we will compare the two options against the
+> approved safety, cost, and schedule criteria, with the design authority
+> deciding. I will circulate the open points first.
 
-## Distinguish understanding from agreement
+## Understanding is not agreement
 
-Use reflective listening to confirm the other person's stated position,
-constraints, and impact:
+Reflect the other person's stated objective, constraint, and risk:
 
 > My understanding is that you need ___ because ___, and the main risk you see
-> is ___. What did I miss?
+> is ___. We still disagree about ___. What did I miss?
 
-This is a comprehension check, not agreement, confession, or surrender of a
-boundary. Do not ask a lower-power or harmed person to perform empathy before
-remedy or protection.
+This is a comprehension check, not a confession or surrender of a boundary. Do
+not require a lower-power or harmed person to perform empathy before protection
+or remedy.
 
-## Repair trust through observable evidence
+## Repair a verified breach
 
-Trust repair is not a wording problem alone. Use:
+Words are not enough. Check:
 
-1. **Verified breach:** Name the behavior or commitment that failed.
-2. **Impact:** State the concrete consequence without arguing motive.
-3. **Responsibility:** Own only what the evidence supports.
-4. **Remedy:** Restore the deliverable, record, access, money, time, or other
-   loss where feasible.
-5. **Prevention:** Change the process, authority, checkpoint, or support.
-6. **Proof window:** Define what reliable behavior will be observable and for
-   how long.
-7. **Choice:** Do not require immediate forgiveness or renewed dependence.
+1. verified behavior or failed commitment;
+2. concrete impact;
+3. supported responsibility, separated from disputed intent;
+4. restitution or remedy;
+5. prevention and control changes;
+6. observable verification behavior;
+7. a reliance decision and review window;
+8. the other person's freedom not to reconcile.
 
 Example:
 
 > I missed the agreed handoff and you lost a review day. I should have raised
 > the risk on Tuesday. I will deliver the corrected package by 3 p.m. tomorrow
-> and add a two-day warning checkpoint to future handoffs. You do not need to
-> rely on the new process until the next two deliveries demonstrate it.
+> and add a two-day warning checkpoint. Future reliance should depend on the
+> next two deliveries, not this apology.
+
+## Use the minimum-safe-reliance gate
+
+Before recommending renewed access or dependence, assess:
+
+- severity and recurrence;
+- whether additional harm would be reversible;
+- exposure created by renewed access;
+- dependency and alternatives;
+- remedy completion;
+- available monitoring, dual control, or independent verification;
+- whether trust is required at all.
+
+Select one:
+
+1. **No renewed reliance:** exposure is severe, repeated, irreversible, or no
+   adequate control exists.
+2. **Minimum necessary access:** limit scope, duration, data, authority, or
+   dependency.
+3. **Verified or dual-control access:** require an independent reviewer,
+   approval, or record.
+4. **Small reversible trial:** define task, exposure cap, proof behavior, review
+   date, and stop condition.
+5. **Normal reliance:** only after remedy and a sufficient pattern of reliable
+   behavior.
+
+A polished apology does not justify re-entry. A bounded trial is not mandatory.
+The harmed person may choose distance even when the repair attempt is credible.
 
 ## Handle disputed responsibility
 
-Do not pressure an unsupported admission. Separate:
+Separate:
 
 - facts both sides accept;
-- facts one side disputes;
+- facts or intent one side disputes;
 - impact that can be acknowledged without conceding an unverified claim;
-- immediate remedy that is useful while review continues;
+- immediate remedy useful while review continues;
 - qualified process for resolving the disputed part.
 
-An empathy statement can acknowledge experience without manufacturing
-certainty:
-
 > I understand why the missing record reduced your confidence. I do not agree
-> that I removed it intentionally. I can restore the record now and support a
-> neutral review of how the version changed.
+> that I removed it intentionally. I can restore it now and support a neutral
+> review of how the version changed.
+
+Do not pressure an unsupported admission. Denial of disputed intent does not
+erase responsibility for verified behavior or impact.
 
 ## Mediation readiness
 
 Consider a neutral third party when:
 
-- the parties remain interdependent;
+- parties remain interdependent;
 - direct attempts have stalled;
 - a bounded issue and desired outcome can be named;
 - both can participate without coercion;
-- the mediator has sufficient neutrality and authority.
+- the mediator is sufficiently neutral and connected to the needed authority.
 
-Do not recommend mediation as a substitute for protection, investigation, or a
-formal route in unsafe or severe cases.
+Do not use mediation instead of protection, investigation, or a formal route in
+unsafe or severe cases.
 
 ## Failure modes
 
-- treating all conflict as a communication-style mismatch;
-- forcing dialogue during acute threat or retaliation exposure;
+- treating all conflict as communication style;
+- forcing dialogue during threat or retaliation exposure;
 - apologizing strategically without remedy;
-- explaining intent before acknowledging impact;
-- demanding forgiveness or “closure”;
-- using a cooling-off period as indefinite avoidance;
+- explaining intent before acknowledging verified impact;
+- demanding forgiveness, closure, or renewed dependence;
+- defaulting to a re-entry trial after repeated confidentiality or integrity
+  breaches;
 - converting structural resource or authority conflict into personality work;
-- assuming an agreement is durable without owner, date, warning point, and
-  review.
-
-## Practice drills
-
-**Conflict decomposition:** Rewrite one conflict as four separate statements:
-task, process, relationship impact, and authority. Choose a different action
-for each.
-
-**Repair design:** For one verified miss, draft the acknowledgment, remedy,
-prevention change, and proof window. Remove promises about how the other person
-will feel.
+- using a cooling-off period as indefinite avoidance;
+- assuming agreement is durable without owner, authority, date, dependency,
+  warning point, and review.
 
 ## Evidence boundary
 
-Team-conflict evidence shows that relationship conflict is generally harmful
-and that task conflict is not reliably beneficial across contexts. Trust-repair
-experiments suggest that violation type, available evidence, response, and
-empathy can matter, but they do not provide a universal apology-versus-denial
-algorithm. See `CONFLICT-01`, `TRUST-01`, and `TRUST-02` in
-[the evidence ledger](evidence-ledger.md).
+Conflict evidence supports caution about relationship and process conflict and
+does not establish that task conflict is beneficial. Trust-repair evidence
+supports attention to violation type, empathy, deeds, remedy, monitoring, and
+context, but not a universal apology or re-entry sequence. See `CONFLICT-01`,
+`CONFLICT-02`, and `TRUST-01` through `TRUST-05` in the evidence ledger.
