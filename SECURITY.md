@@ -31,7 +31,9 @@ material is accidentally supplied:
 
 ## Reporting
 
-Until a public repository issue tracker is established, report security or
-privacy concerns privately to the repository owner. Do not include real
-conversations, credentials, direct identifiers, or exploitative reproduction
-details in a public report.
+Use GitHub private vulnerability reporting when it is available for this
+repository. If that channel is unavailable, open a minimal issue asking the
+maintainer to establish a private reporting channel.
+
+Do not include real conversations, credentials, direct identifiers, sensitive
+workplace material, or exploitative reproduction details in a public issue.
