@@ -1,161 +1,182 @@
-# Negotiation, Options, and Commitments
+# Negotiation, Options, Authority, and Commitments
 
-Use this reference when requests conflict, resources are scarce, a user needs
-to ask for access or help, parties are trading conditions, or an apparent
-agreement keeps failing in execution.
+Use this reference when requests conflict, resources are scarce, parties are
+trading conditions, the user needs access or help, or an apparent agreement
+keeps failing in execution.
 
-## Prepare with Interests–Alternatives–Criteria
+## Route the premise before negotiating
 
-For each party, distinguish:
+Do not negotiate a premise that depends on coercion, deception, retaliation,
+unauthorized commitments, or pressure after refusal. First determine whether the
+“negotiation” is actually:
 
-- **position:** the stated demand or preferred answer;
-- **interest:** the outcome, concern, or risk behind it;
-- **constraint:** a real limit such as time, authority, policy, capacity, or
+- a directive;
+- a safety or formal-route concern;
+- an attempt to obtain consent through material threat;
+- a request to bluff, fabricate alternatives, or conceal risk;
+- a decision that the counterpart lacks authority to make.
+
+Refuse or route the harmful part, then identify any legitimate objective that
+can be addressed truthfully.
+
+## Prepare with Interests-Alternatives-Criteria
+
+For each party distinguish:
+
+- **position:** stated demand or preferred answer;
+- **interest:** stated outcome, concern, or risk;
+- **constraint:** real limit such as time, authority, policy, capacity, or
   dependency;
-- **alternative:** what happens without agreement;
-- **criteria:** a legitimate standard for comparing options;
-- **sensitive information:** limits or vulnerabilities that should not be
-  disclosed merely to appear cooperative.
+- **alternative:** credible course without agreement;
+- **criteria:** inspectable standard for comparing options;
+- **information risk:** sensitive limits, vulnerability, or third-party data
+  that should not be disclosed without need;
+- **authority:** what this person can recommend, approve, fund, implement, or
+  bind.
 
-Infer the other party's interests only as hypotheses. Ask when the answer
-changes the option set.
+Infer another party's interests only as hypotheses. Ask when the answer changes
+the option set.
 
 ## Protect the user's alternative
 
-Before negotiating, define:
+Define:
 
-1. the best credible course without agreement;
-2. the minimum acceptable outcome;
-3. the cost and risk of delay;
-4. the point where continued negotiation is worse than the alternative;
-5. which commitments require a record or authority check.
+1. best credible course without agreement;
+2. minimum acceptable operational result;
+3. cost and risk of delay;
+4. point where continued negotiation is worse than the alternative;
+5. commitments requiring a record, ratification, or authority check;
+6. information that should remain private.
 
-Do not bluff an alternative, invent a deadline, or disclose the user's minimum
-when doing so creates unnecessary exposure.
+Do not bluff alternatives, invent deadlines, or reveal the user's minimum merely
+to appear cooperative.
 
-## Generate packages, not one concession path
+## Generate packages, not a one-way concession path
 
-Offer two or three feasible packages that vary meaningful terms:
+Offer two or three feasible packages varying meaningful terms:
 
-- scope;
-- sequence;
-- owner;
-- timing;
+- scope and sequence;
+- owner and timing;
 - quality or assurance level;
 - resource contribution;
-- access;
-- review point;
-- reversibility.
+- access and information;
+- review and reversibility;
+- authority and ratification.
 
 Example:
 
-> Option A preserves Thursday's deadline by limiting the output to the verified
-> ten slides. Option B delivers all 42 slides Monday and keeps the current
-> assurance check. If tonight is fixed, we need a second reviewer and written
-> acceptance of the unverified sections. Which package should the decision
-> owner approve?
+> Option A preserves Thursday's date by limiting the output to the verified ten
+> slides. Option B delivers all 42 slides Monday and keeps the assurance check.
+> If tonight is fixed, we need a second reviewer and written acceptance of the
+> unverified sections. Which package can the decision owner approve?
 
-Do not create options that hide risk or transfer an unagreed cost to a third
-party.
+Do not hide risk, transfer unagreed cost to a third party, or create an option
+that depends on resources the negotiating person does not control.
 
 ## Use legitimate criteria
 
 Prefer criteria the parties can inspect:
 
-- approved priorities;
-- role and decision rights;
-- safety, quality, or policy requirements;
+- approved priorities and decision rights;
+- safety, quality, policy, or professional requirements;
 - comparable precedent;
-- market or professional standards;
-- capacity data;
+- capacity and dependency data;
 - documented impact;
 - agreed values or service levels.
 
 Criteria do not make a decision neutral automatically. Ask who selected them,
-whether they are applied consistently, and whether a correction route exists.
+whether they are consistently applied, and whether a correction route exists.
 
-## Convert agreement into an executable commitment
+## Compile an executable commitment
 
-Use the Commitment Reliability Check:
+Use:
 
-- **Owner:** Who is personally responsible?
-- **Action:** What observable result will be produced?
-- **Date:** By when, and in what time zone if relevant?
-- **Dependencies:** What input, access, or decision is required?
-- **Warning point:** When must risk be raised before failure?
-- **Evidence:** Where will the decision or handoff be recorded?
-- **Review:** When will the parties check whether the agreement worked?
-- **Fallback:** What happens if a dependency or commitment fails?
+- **Owner:** personally accountable actor;
+- **Action:** observable result;
+- **Date:** deadline and time zone where material;
+- **Dependencies:** required input, access, decision, or third party;
+- **Authority:** what the owner is authorized to commit;
+- **Ratification:** absent person or body whose confirmation is required;
+- **Warning point:** when risk must be raised before failure;
+- **Evidence:** where the decision or handoff is recorded;
+- **Review:** when implementation is checked;
+- **Fallback:** what happens if a dependency or commitment fails.
 
-Avoid “we will try,” “ASAP,” “support as needed,” or “circle back” when
-implementation matters.
+Avoid “ASAP,” “support as needed,” “we will try,” or silence-based assignment
+when implementation matters.
+
+## Check implementability and representation
+
+Before accepting ask:
+
+- Does the person committing control the resource?
+- Are implementers and third-party dependencies represented?
+- Are conditions and exceptions explicit?
+- Is the agreement better than the credible alternative?
+- Can each side explain the same terms?
+- What would early failure look like?
+- Who must ratify the result?
+- Is anyone being represented without authority or direct input?
+
+If authority is missing, produce a recommendation or conditional plan rather
+than pretending a binding agreement exists.
+
+## Check subjective value without scoring
+
+After packages are operationally sound, examine:
+
+- **instrumental outcome:** what each side obtains or protects;
+- **process:** whether the procedure is intelligible and sufficiently fair;
+- **self:** whether the user retains agency and self-respect;
+- **relationship:** what future cooperation or distrust the process creates.
+
+These are contraindication checks, not a satisfaction score. A relationship
+benefit does not justify an unsafe or unauthorized agreement; an economically
+strong result does not excuse deception or humiliation.
 
 ## Ask for help, access, or advocacy in stages
 
-Make the smallest request that the relationship can support:
-
 1. ask for information or feedback;
-2. ask for a bounded introduction, review, or access point;
-3. deliver value and follow through;
+2. ask for a bounded review, introduction, or access point;
+3. follow through and close the loop;
 4. ask for a larger resource or visible support;
-5. ask for advocacy only when the person has evidence and genuine discretion.
+5. ask for advocacy only when the person has evidence and discretion.
 
-Include purpose, scope, effort, timing, and an easy way to decline. Do not
-manufacture intimacy, flattery, or obligation.
+Include purpose, scope, effort, timing, and an easy decline. Do not manufacture
+intimacy, flattery debt, or obligation.
 
 ## Negotiate under power asymmetry
 
 When the other party can impose consequences:
 
-- determine whether the “negotiation” is actually a directive;
+- determine whether choice is meaningful;
 - surface trade-offs through the legitimate decision owner;
-- use criteria and records instead of performative toughness;
+- use criteria, records, and implementation risk rather than toughness;
 - limit disclosure of personal vulnerability;
-- consider an adviser, representative, or qualified process;
-- preserve an alternative that reduces exposure.
+- consider an adviser, representative, or qualified route;
+- preserve an alternative that reduces exposure;
+- do not treat polite wording as proof of voluntary agreement.
 
-Polite wording does not create meaningful choice. Conversely, hierarchy does
-not eliminate every opportunity to clarify options or implementation risk.
-
-## Test implementability before accepting
-
-Ask:
-
-- Does the person committing control the required resource?
-- Are third-party dependencies represented?
-- Are conditions and exceptions explicit?
-- Is the agreement better than the credible alternative?
-- Can each side explain the agreement in the same terms?
-- What would early failure look like?
-
-If authority is missing, produce a recommendation or conditional plan rather
-than pretending a binding agreement exists.
+Hierarchy does not eliminate every opportunity to clarify options, but it can
+change the user's downside and the counterpart's duty.
 
 ## Failure modes
 
 - “win-win” language that pressures agreement;
 - treating positions as motives;
-- option generation that ignores authority or capacity;
-- false deadlines or false alternatives;
+- negotiating a coercive or deceptive premise;
+- false deadlines, false alternatives, or fabricated competitors;
 - revealing sensitive limits unnecessarily;
-- splitting the difference when criteria favor another result;
-- securing verbal assent without implementation detail;
+- packages that ignore authority, implementers, or capacity;
+- verbal assent without ratification or implementation detail;
+- optimizing relationship warmth while sacrificing agency or safety;
 - repeated renegotiation after a clear refusal or stop rule.
-
-## Practice drills
-
-**Position-to-interest drill:** Take one demand and write three plausible
-interests, then mark each as stated, inferred, or unknown. Ask one question that
-would change the option set.
-
-**Commitment audit:** Take one vague agreement and fill all eight Commitment
-Reliability fields. Any blank is a follow-up question or explicit risk.
 
 ## Evidence boundary
 
-Principled negotiation is a useful practitioner scaffold, not a single
-empirically validated intervention. Research supports the importance of social
-motives, selective information sharing, and implementation intentions in some
-contexts, but effects depend on incentives, power, task, and information risk.
-See `NEGOTIATE-01`, `INFO-01`, and `CHANGE-01` in
-[the evidence ledger](evidence-ledger.md).
+Principled negotiation is a practitioner scaffold, not a single validated
+intervention. Research supports attention to social motives, information
+sharing, hidden information, subjective value, and implementation planning in
+some contexts. Effects depend on incentives, power, task, authority, and
+information risk. See `NEGOTIATE-01`, `NEGOTIATE-02`, `INFO-01`, `INFO-02`, and
+`CHANGE-01` in the evidence ledger.
