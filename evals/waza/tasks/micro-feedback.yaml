@@ -1,0 +1,25 @@
+id: waza-roleplay-002
+name: one-cue-micro-feedback
+description: Verify that live role-play coaching prioritizes one actionable cue rather than scoring the user.
+
+inputs:
+  prompt: |
+    请使用 $interpersonal-strategist。我想练习在会上提出不同意见。每轮如果
+    需要提醒，只给我一个最影响下一步的短提示；如果没有关键问题就继续。
+    结束后只选一个下次练习重点。
+
+graders:
+  - type: prompt
+    name: micro_feedback_fit
+    config:
+      prompt: |
+        PASS requires:
+        - no more than one short decision-relevant coaching cue per turn;
+        - no interruption when no material cue is needed;
+        - one prioritized practice target at the end;
+        - no overall score, confidence score, personality judgment, or claim
+          that indirect language proves fear or avoidance;
+        - preserves Chinese status fit and the user's legitimate disagreement.
+
+        Call set_waza_grade_pass only if every requirement is met. Otherwise
+        call set_waza_grade_fail with the first material failure.
