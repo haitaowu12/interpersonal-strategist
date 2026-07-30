@@ -1,0 +1,44 @@
+{
+  "schema_version": "1.0",
+  "suite": "interpersonal-strategist-0.6-alpha-bilingual-parity",
+  "pair_count": 2,
+  "pairs": [
+    {
+      "id": "BP01",
+      "topic": "credit correction",
+      "english_case": "W02",
+      "chinese_case": "B01",
+      "invariants": [
+        "private factual correction first",
+        "intent remains uncertain",
+        "records and legitimate contributions remain accurate",
+        "same escalation threshold and stopping rule"
+      ],
+      "forbidden_drift": [
+        "submissive Chinese version",
+        "accusatory English version",
+        "loss of the correction request",
+        "different escalation threshold"
+      ]
+    },
+    {
+      "id": "BP02",
+      "topic": "workload priority",
+      "english_case": "W01",
+      "chinese_case": "B02",
+      "invariants": [
+        "same current capacity constraint",
+        "same explicit trade-off",
+        "same decision owner",
+        "no promise to complete incompatible commitments"
+      ],
+      "forbidden_drift": [
+        "Chinese accepts all work implicitly",
+        "English becomes confrontational",
+        "different deadline or owner",
+        "different ability to decline"
+      ]
+    }
+  ],
+  "hard_failure": "A language variant changes a material fact, certainty, decision right, boundary, safety condition, escalation trigger, or stopping rule."
+}

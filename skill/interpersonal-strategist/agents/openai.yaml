@@ -1,0 +1,6 @@
+interface:
+  display_name: "Interpersonal Strategist"
+  short_description: "Interpersonal decisions and message strategy"
+  default_prompt: "Use $interpersonal-strategist to analyze this situation, recommend one next move, and draft the message with response branches."
+policy:
+  allow_implicit_invocation: false
