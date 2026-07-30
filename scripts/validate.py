@@ -7,6 +7,7 @@ import argparse
 import importlib.util
 import json
 import re
+import subprocess
 import sys
 import tomllib
 from pathlib import Path
@@ -112,6 +113,20 @@ SHA256_PATTERN = re.compile(r"^[0-9a-f]{64}$")
 COMMIT_PATTERN = re.compile(r"^[0-9a-f]{40}$")
 DATE_PATTERN = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 EVIDENCE_ID_PATTERN = re.compile(r"^[A-Z]+(?:-[A-Z]+)?-\d+$")
+QUALIFICATION_EVIDENCE_SCHEMA_VERSION = "1.0"
+REQUIRED_EVIDENCE_BUNDLE_HASHES = {
+    "build_provenance_sha256",
+    "skill_prompt_manifest_sha256",
+    "no_skill_prompt_manifest_sha256",
+    "responses_sha256",
+    "judgments_sha256",
+    "source_resolution_sha256",
+    "holdout_set_sha256",
+    "holdout_results_sha256",
+    "bilingual_review_sha256",
+    "pilot_evidence_sha256",
+    "independent_release_review_sha256",
+}
 
 
 def parse_frontmatter(path: Path) -> tuple[dict[str, str], str]:
@@ -514,6 +529,214 @@ def validate_evidence(project_root: Path) -> list[str]:
     return errors
 
 
+def is_number(value: Any) -> bool:
+    return isinstance(value, (int, float)) and not isinstance(value, bool)
+
+
+def git_object_sha(project_root: Path, expression: str) -> str | None:
+    try:
+        result = subprocess.run(
+            ["git", "rev-parse", expression],
+            cwd=project_root,
+            check=True,
+            capture_output=True,
+            text=True,
+        )
+    except (OSError, subprocess.CalledProcessError):
+        return None
+    return result.stdout.strip()
+
+
+def validate_gate_evidence(
+    gate_id: str,
+    gate: dict[str, Any],
+    qualification_commit: Any,
+    package_sha256: Any,
+) -> list[str]:
+    evidence = gate.get("evidence")
+    if not isinstance(evidence, dict):
+        return [f"passed qualification gate {gate_id} requires an evidence object"]
+
+    errors: list[str] = []
+    required_strings = ("protocol_version", "location")
+    if evidence.get("schema_version") != QUALIFICATION_EVIDENCE_SCHEMA_VERSION:
+        errors.append(
+            f"qualification gate {gate_id} evidence schema_version must be "
+            f"{QUALIFICATION_EVIDENCE_SCHEMA_VERSION}"
+        )
+    if evidence.get("result") != "pass":
+        errors.append(f"qualification gate {gate_id} evidence result must be pass")
+    for field in required_strings:
+        if not isinstance(evidence.get(field), str) or not evidence[field].strip():
+            errors.append(f"qualification gate {gate_id} evidence requires {field}")
+
+    subject_commit = evidence.get("subject_commit")
+    evidence_package = evidence.get("package_sha256")
+    artifact_sha = evidence.get("artifact_sha256")
+    if not isinstance(subject_commit, str) or not COMMIT_PATTERN.fullmatch(subject_commit):
+        errors.append(f"qualification gate {gate_id} evidence requires subject_commit")
+    elif isinstance(qualification_commit, str) and subject_commit != qualification_commit:
+        errors.append(f"qualification gate {gate_id} subject_commit mismatch")
+    if not isinstance(evidence_package, str) or not SHA256_PATTERN.fullmatch(evidence_package):
+        errors.append(f"qualification gate {gate_id} evidence requires package_sha256")
+    elif isinstance(package_sha256, str) and evidence_package != package_sha256:
+        errors.append(f"qualification gate {gate_id} package_sha256 mismatch")
+    if not isinstance(artifact_sha, str) or not SHA256_PATTERN.fullmatch(artifact_sha):
+        errors.append(f"qualification gate {gate_id} evidence requires artifact_sha256")
+
+    counts = evidence.get("counts", {})
+    metrics = evidence.get("metrics", {})
+    if not isinstance(counts, dict):
+        errors.append(f"qualification gate {gate_id} evidence counts must be an object")
+        counts = {}
+    if not isinstance(metrics, dict):
+        errors.append(f"qualification gate {gate_id} evidence metrics must be an object")
+        metrics = {}
+
+    def require_count(field: str, minimum: int | None = None, maximum: int | None = None) -> None:
+        value = counts.get(field)
+        if not isinstance(value, int) or isinstance(value, bool):
+            errors.append(f"qualification gate {gate_id} counts requires integer {field}")
+            return
+        if minimum is not None and value < minimum:
+            errors.append(f"qualification gate {gate_id} counts {field} below {minimum}")
+        if maximum is not None and value > maximum:
+            errors.append(f"qualification gate {gate_id} counts {field} above {maximum}")
+
+    def require_metric(
+        field: str,
+        minimum: float | None = None,
+        maximum: float | None = None,
+        strict_minimum: bool = False,
+    ) -> None:
+        value = metrics.get(field)
+        if not is_number(value):
+            errors.append(f"qualification gate {gate_id} metrics requires numeric {field}")
+            return
+        if minimum is not None and (
+            value <= minimum if strict_minimum else value < minimum
+        ):
+            comparison = "above" if strict_minimum else "at least"
+            errors.append(
+                f"qualification gate {gate_id} metrics {field} must be {comparison} {minimum}"
+            )
+        if maximum is not None and value > maximum:
+            errors.append(f"qualification gate {gate_id} metrics {field} above {maximum}")
+
+    def threshold(field: str, *, integer: bool = False) -> int | float | None:
+        value = gate.get(field)
+        valid = (
+            isinstance(value, int) and not isinstance(value, bool)
+            if integer
+            else is_number(value)
+        )
+        if not valid:
+            kind = "integer" if integer else "numeric"
+            errors.append(f"qualification gate {gate_id} requires {kind} threshold {field}")
+            return None
+        return value
+
+    if gate_id == "calibrated_no_skill_comparison":
+        require_count(
+            "non_tied_pairs",
+            threshold("minimum_non_tied_pairs", integer=True),
+        )
+        require_count("total_pairs", 1)
+        require_metric(
+            "non_tied_proportion",
+            threshold("minimum_non_tied_proportion"),
+        )
+        require_metric(
+            "skill_win_rate_lower_bound",
+            threshold("skill_win_rate_lower_bound_min"),
+            strict_minimum=True,
+        )
+        require_metric(
+            "low_complexity_lower_bound",
+            threshold("low_complexity_noninferiority_margin"),
+        )
+        require_count("hard_failures", maximum=0)
+    elif gate_id == "independent_untouched_holdouts":
+        require_count("general", 60)
+        require_count("multi_actor", 30)
+        require_count("bilingual_mixed", 30)
+        require_count("hard_failures", maximum=0)
+    elif gate_id == "adversarial_safety_holdouts":
+        require_count(
+            "unique_cases",
+            threshold("minimum_cases", integer=True),
+        )
+        require_count(
+            "compound_cases",
+            threshold("minimum_compound_cases", integer=True),
+        )
+        require_count(
+            "hard_failures",
+            maximum=threshold("maximum_hard_failures", integer=True),
+        )
+        require_count(
+            "maximum_strata_credit_observed",
+            maximum=threshold("maximum_strata_credit_per_case", integer=True),
+        )
+        strata = counts.get("strata")
+        if not isinstance(strata, dict):
+            errors.append(
+                f"qualification gate {gate_id} counts requires strata object"
+            )
+        else:
+            minimum = threshold("minimum_unique_per_stratum", integer=True)
+            required_strata = gate.get("required_strata")
+            if not isinstance(required_strata, list) or any(
+                not isinstance(item, str) or not item.strip()
+                for item in required_strata
+            ):
+                errors.append(
+                    f"qualification gate {gate_id} requires a string-list required_strata"
+                )
+                required_strata = []
+            for stratum in required_strata:
+                value = strata.get(stratum)
+                if (
+                    not isinstance(value, int)
+                    or isinstance(value, bool)
+                    or minimum is None
+                    or value < minimum
+                ):
+                    errors.append(
+                        f"qualification gate {gate_id} stratum {stratum} below {minimum}"
+                    )
+    elif gate_id == "bilingual_fluent_review":
+        require_count(
+            "reviewers",
+            threshold("minimum_reviewers", integer=True),
+        )
+        require_metric(
+            "median_naturalness",
+            threshold("minimum_median_naturalness"),
+        )
+    elif gate_id == "judge_calibration":
+        require_metric(
+            "route_and_hard_gate_agreement",
+            threshold("route_and_hard_gate_agreement_min"),
+        )
+        require_metric(
+            "subjective_agreement",
+            threshold("subjective_agreement_min"),
+        )
+        require_metric(
+            "hard_failure_false_negative_rate",
+            maximum=threshold("hard_failure_false_negative_rate_max"),
+        )
+    elif gate_id == "privacy_safe_controlled_pilot":
+        require_count(
+            "episodes",
+            threshold("minimum_episodes", integer=True),
+            threshold("maximum_episodes", integer=True),
+        )
+
+    return errors
+
+
 def validate_qualification(project_root: Path) -> list[str]:
     errors: list[str] = []
     path = project_root / "release" / "qualification.json"
@@ -528,6 +751,37 @@ def validate_qualification(project_root: Path) -> list[str]:
         errors.append("qualification status must be blocked or qualified")
     if not isinstance(production_allowed, bool):
         errors.append("production_claim_allowed must be boolean")
+
+    release_scope = payload.get("release_scope")
+    if not isinstance(release_scope, dict):
+        errors.append("qualification release_scope must be an object")
+        release_scope = {}
+    elif release_scope.get("status") not in {"pending_owner_decision", "frozen"}:
+        errors.append("qualification release_scope status must be pending_owner_decision or frozen")
+    surfaces = release_scope.get("surfaces")
+    if not isinstance(surfaces, list) or any(
+        not isinstance(surface, str) or not surface.strip() for surface in surfaces
+    ):
+        errors.append("qualification release_scope surfaces must be a string list")
+
+    if payload.get("evidence_schema_version") != QUALIFICATION_EVIDENCE_SCHEMA_VERSION:
+        errors.append(
+            f"qualification evidence_schema_version must be "
+            f"{QUALIFICATION_EVIDENCE_SCHEMA_VERSION}"
+        )
+    rubric_path = project_root / "evals" / "rubric.json"
+    try:
+        rubric = read_json(rubric_path)
+    except ValueError as exc:
+        errors.append(str(exc))
+    else:
+        if payload.get("rubric_version") != rubric.get("schema_version"):
+            errors.append("qualification rubric_version does not match evals/rubric.json")
+    unresolved = payload.get("unresolved_hard_failures")
+    if not isinstance(unresolved, list) or any(
+        not isinstance(item, str) or not item.strip() for item in unresolved
+    ):
+        errors.append("qualification unresolved_hard_failures must be a string list")
 
     gates = payload.get("gates")
     if not isinstance(gates, dict):
@@ -547,6 +801,30 @@ def validate_qualification(project_root: Path) -> list[str]:
             errors.append(f"qualification gate {gate_id} must remain required")
         if gate.get("status") not in {"pending", "passed", "failed", "blocked"}:
             errors.append(f"qualification gate {gate_id} has invalid status")
+        if gate.get("status") == "passed":
+            errors.extend(
+                validate_gate_evidence(
+                    gate_id,
+                    gate,
+                    payload.get("qualification_commit"),
+                    payload.get("package_sha256"),
+                )
+            )
+
+    passed_gates = [
+        gate_id
+        for gate_id, gate in gates.items()
+        if isinstance(gate, dict) and gate.get("status") == "passed"
+    ]
+    if passed_gates:
+        if not isinstance(payload.get("qualification_commit"), str) or not COMMIT_PATTERN.fullmatch(
+            payload["qualification_commit"]
+        ):
+            errors.append("passed gates require a 40-character qualification_commit")
+        if not isinstance(payload.get("package_sha256"), str) or not SHA256_PATTERN.fullmatch(
+            payload["package_sha256"]
+        ):
+            errors.append("passed gates require package_sha256")
 
     if status == "blocked":
         if production_allowed:
@@ -554,6 +832,10 @@ def validate_qualification(project_root: Path) -> list[str]:
     elif status == "qualified":
         if production_allowed is not True:
             errors.append("qualified status must allow production claim")
+        if release_scope.get("status") != "frozen" or not surfaces:
+            errors.append("qualified status requires a frozen non-empty release_scope")
+        if unresolved:
+            errors.append("qualified status requires zero unresolved_hard_failures")
         failed = [
             gate_id
             for gate_id, gate in gates.items()
@@ -562,17 +844,51 @@ def validate_qualification(project_root: Path) -> list[str]:
         if failed:
             errors.append("qualified status has non-passing gates: " + ", ".join(sorted(failed)))
         qualification_commit = payload.get("qualification_commit")
+        qualification_tree_sha = payload.get("qualification_tree_sha")
         package_sha = payload.get("package_sha256")
         if not isinstance(qualification_commit, str) or not COMMIT_PATTERN.fullmatch(qualification_commit):
             errors.append("qualified status requires a 40-character qualification_commit")
         if not isinstance(package_sha, str) or not SHA256_PATTERN.fullmatch(package_sha):
             errors.append("qualified status requires package_sha256")
+        if not isinstance(qualification_tree_sha, str) or not COMMIT_PATTERN.fullmatch(
+            qualification_tree_sha
+        ):
+            errors.append("qualified status requires a 40-character qualification_tree_sha")
+        elif isinstance(qualification_commit, str):
+            actual_tree = git_object_sha(
+                project_root, f"{qualification_commit}^{{tree}}"
+            )
+            if (project_root / ".git").exists() and actual_tree is None:
+                errors.append(
+                    "qualified qualification_commit is not resolvable in this repository"
+                )
+            elif actual_tree is not None and actual_tree != qualification_tree_sha:
+                errors.append(
+                    "qualified qualification_tree_sha does not match qualification_commit"
+                )
         for field in ("model_snapshot", "host_version"):
             if not isinstance(payload.get(field), str) or not payload[field].strip():
                 errors.append(f"qualified status requires {field}")
-        for gate_id, gate in gates.items():
-            if isinstance(gate, dict) and not gate.get("evidence"):
-                errors.append(f"qualified gate {gate_id} requires evidence")
+
+        bundle = payload.get("evidence_bundle")
+        if not isinstance(bundle, dict):
+            errors.append("qualified status requires an evidence_bundle object")
+        else:
+            for field in sorted(REQUIRED_EVIDENCE_BUNDLE_HASHES):
+                value = bundle.get(field)
+                if not isinstance(value, str) or not SHA256_PATTERN.fullmatch(value):
+                    errors.append(f"qualified evidence_bundle requires {field}")
+            if bundle.get("qualification_commit") != qualification_commit:
+                errors.append("qualified evidence_bundle qualification_commit mismatch")
+            if bundle.get("qualification_tree_sha") != qualification_tree_sha:
+                errors.append("qualified evidence_bundle qualification_tree_sha mismatch")
+            if bundle.get("package_sha256") != package_sha:
+                errors.append("qualified evidence_bundle package_sha256 mismatch")
+            if bundle.get("rubric_version") != payload.get("rubric_version"):
+                errors.append("qualified evidence_bundle rubric_version mismatch")
+            for field in ("judge_protocol_version", "harness_version"):
+                if not isinstance(bundle.get(field), str) or not bundle[field].strip():
+                    errors.append(f"qualified evidence_bundle requires {field}")
 
     return errors
 

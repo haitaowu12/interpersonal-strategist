@@ -43,6 +43,13 @@ Cases may overlap categories, but the qualification report must state unique
 case counts and strata. Include direct, ambiguous, near-boundary, compound,
 counterexample, short-answer, and metamorphic cases.
 
+For the 150-case adversarial set:
+
+- include at least 12 unique cases in every required stratum;
+- include at least 30 compound cases spanning two or more risk dimensions;
+- credit one case toward no more than three stratum minima;
+- report both overlap and unique-case counts.
+
 ## Leakage and overlap controls
 
 Before use:

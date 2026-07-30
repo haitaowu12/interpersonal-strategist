@@ -31,6 +31,22 @@ condition must not include the skill instructions, references, or answer keys.
 9. Reveal pairs only for secondary preference judgment.
 10. Bootstrap paired confidence intervals and report results by domain and risk.
 
+## Statistical contract
+
+- Use the case key as the resampling unit so repeated runs of one prompt remain
+  clustered.
+- Use 10,000 deterministic bootstrap resamples with seed `20260730`.
+- Report the one-sided 95% lower percentile bound for the skill win rate after
+  excluding ties.
+- Require at least 30 non-tied paired cases and a non-tied proportion of at
+  least 0.50.
+- For the declared `low_complexity` stratum, require the one-sided 95% lower
+  bound of the paired usability difference to be at least `-0.05` on a
+  normalized 0–1 scale.
+- A stratum has a material preference advantage only when its one-sided 95%
+  lower skill-win-rate bound is above 0.50. Report `not_evaluable` rather than
+  pass when a required stratum lacks enough paired observations.
+
 ## Bias controls
 
 - Include order-swapped duplicate pairs.

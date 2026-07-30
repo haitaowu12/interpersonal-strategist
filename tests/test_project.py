@@ -4,6 +4,7 @@ import hashlib
 import importlib.util
 import json
 import shutil
+import subprocess
 import sys
 import tempfile
 import unittest
@@ -15,8 +16,14 @@ SCRIPTS_DIR = PROJECT_ROOT / "scripts"
 sys.path.insert(0, str(SCRIPTS_DIR))
 
 from package import build_archive
+from build_provenance import build_provenance
 from smoke_install import run_smoke
-from validate import validate_repository, validate_skill_dir, version_to_pep440
+from validate import (
+    REQUIRED_EVIDENCE_BUNDLE_HASHES,
+    validate_repository,
+    validate_skill_dir,
+    version_to_pep440,
+)
 
 
 def load_eval_runner():
@@ -37,6 +44,98 @@ def copy_project(target: Path) -> Path:
         ignore=shutil.ignore_patterns(".git", "dist", "__pycache__", "*.pyc"),
     )
     return destination
+
+
+def make_qualified_manifest(project: Path) -> dict:
+    path = project / "release" / "qualification.json"
+    qualification = json.loads(path.read_text(encoding="utf-8"))
+    commit = "a" * 40
+    package_sha = "b" * 64
+    qualification.update(
+        {
+            "status": "qualified",
+            "production_claim_allowed": True,
+            "release_scope": {
+                "status": "frozen",
+                "surfaces": ["codex-desktop-personal-agent-skills"],
+            },
+            "qualification_commit": commit,
+            "qualification_tree_sha": "e" * 40,
+            "package_sha256": package_sha,
+            "model_snapshot": "test-model",
+            "host_version": "test-host",
+            "unresolved_hard_failures": [],
+            "evidence_bundle": {
+                **{field: "c" * 64 for field in REQUIRED_EVIDENCE_BUNDLE_HASHES},
+                "qualification_commit": commit,
+                "qualification_tree_sha": "e" * 40,
+                "package_sha256": package_sha,
+                "rubric_version": "2.1",
+                "judge_protocol_version": "1.0",
+                "harness_version": "evals/run.py@0.8.0-rc.1",
+            },
+        }
+    )
+    common_evidence = {
+        "schema_version": "1.0",
+        "subject_commit": commit,
+        "package_sha256": package_sha,
+        "artifact_sha256": "d" * 64,
+        "protocol_version": "1.0",
+        "result": "pass",
+        "location": "access-controlled://qualification/test",
+        "counts": {},
+        "metrics": {},
+    }
+    for gate_id, gate in qualification["gates"].items():
+        gate["status"] = "passed"
+        gate["evidence"] = json.loads(json.dumps(common_evidence))
+        counts = gate["evidence"]["counts"]
+        metrics = gate["evidence"]["metrics"]
+        if gate_id == "calibrated_no_skill_comparison":
+            counts.update({"non_tied_pairs": 60, "total_pairs": 100, "hard_failures": 0})
+            metrics.update(
+                {
+                    "non_tied_proportion": 0.6,
+                    "skill_win_rate_lower_bound": 0.55,
+                    "low_complexity_lower_bound": -0.02,
+                }
+            )
+        elif gate_id == "independent_untouched_holdouts":
+            counts.update(
+                {
+                    "general": 60,
+                    "multi_actor": 30,
+                    "bilingual_mixed": 30,
+                    "hard_failures": 0,
+                }
+            )
+        elif gate_id == "adversarial_safety_holdouts":
+            counts.update(
+                {
+                    "unique_cases": 150,
+                    "compound_cases": 30,
+                    "hard_failures": 0,
+                    "maximum_strata_credit_observed": 3,
+                    "strata": {
+                        stratum: 12 for stratum in gate["required_strata"]
+                    },
+                }
+            )
+        elif gate_id == "bilingual_fluent_review":
+            counts["reviewers"] = 2
+            metrics["median_naturalness"] = 4
+        elif gate_id == "judge_calibration":
+            metrics.update(
+                {
+                    "route_and_hard_gate_agreement": 0.8,
+                    "subjective_agreement": 0.67,
+                    "hard_failure_false_negative_rate": 0.04,
+                }
+            )
+        elif gate_id == "privacy_safe_controlled_pilot":
+            counts["episodes"] = 10
+    return qualification
 
 
 class ProjectTests(unittest.TestCase):
@@ -81,6 +180,34 @@ class ProjectTests(unittest.TestCase):
 
         result = run_smoke(archive_two)
         self.assertEqual(result["status"], "pass", result)
+
+    def test_build_provenance_binds_checkout_tree_and_package(self) -> None:
+        archive, _, manifest = build_archive()
+        checkout_sha = subprocess.run(
+            ["git", "rev-parse", "HEAD"],
+            cwd=PROJECT_ROOT,
+            check=True,
+            capture_output=True,
+            text=True,
+        ).stdout.strip()
+        with tempfile.TemporaryDirectory(prefix="interpersonal-provenance-") as raw:
+            output = Path(raw) / "build-provenance.json"
+            payload = build_provenance(
+                output,
+                environment={
+                    "CANDIDATE_SHA": checkout_sha,
+                    "GITHUB_SHA": "f" * 40,
+                    "GITHUB_EVENT_NAME": "pull_request",
+                    "GITHUB_RUN_ID": "123",
+                },
+            )
+        self.assertEqual(payload["candidate_sha"], checkout_sha)
+        self.assertEqual(payload["checkout_sha"], checkout_sha)
+        self.assertEqual(payload["release_zip_sha256"], hashlib.sha256(archive.read_bytes()).hexdigest())
+        self.assertEqual(
+            payload["release_manifest_sha256"],
+            hashlib.sha256(manifest.read_bytes()).hexdigest(),
+        )
 
     def test_validator_rejects_machine_specific_path(self) -> None:
         source = PROJECT_ROOT / "skill" / "interpersonal-strategist"
@@ -149,6 +276,47 @@ class ProjectTests(unittest.TestCase):
             any("non-passing gates" in item for item in errors), errors
         )
 
+    def test_complete_qualified_manifest_satisfies_evidence_schema(self) -> None:
+        with tempfile.TemporaryDirectory(prefix="interpersonal-project-") as raw:
+            project = copy_project(Path(raw))
+            path = project / "release" / "qualification.json"
+            qualification = make_qualified_manifest(project)
+            path.write_text(
+                json.dumps(qualification, ensure_ascii=False, indent=2) + "\n",
+                encoding="utf-8",
+            )
+            errors = validate_repository(project)
+        self.assertEqual(errors, [])
+
+    def test_validator_rejects_truthy_untyped_gate_evidence(self) -> None:
+        with tempfile.TemporaryDirectory(prefix="interpersonal-project-") as raw:
+            project = copy_project(Path(raw))
+            path = project / "release" / "qualification.json"
+            qualification = make_qualified_manifest(project)
+            qualification["gates"]["static_repository_ci"]["evidence"] = "looks good"
+            path.write_text(
+                json.dumps(qualification, ensure_ascii=False, indent=2) + "\n",
+                encoding="utf-8",
+            )
+            errors = validate_repository(project)
+        self.assertTrue(any("requires an evidence object" in item for item in errors), errors)
+
+    def test_validator_rejects_missing_qualification_bundle_hash(self) -> None:
+        with tempfile.TemporaryDirectory(prefix="interpersonal-project-") as raw:
+            project = copy_project(Path(raw))
+            path = project / "release" / "qualification.json"
+            qualification = make_qualified_manifest(project)
+            del qualification["evidence_bundle"]["responses_sha256"]
+            path.write_text(
+                json.dumps(qualification, ensure_ascii=False, indent=2) + "\n",
+                encoding="utf-8",
+            )
+            errors = validate_repository(project)
+        self.assertTrue(
+            any("evidence_bundle requires responses_sha256" in item for item in errors),
+            errors,
+        )
+
     def test_eval_fixture_counts_match(self) -> None:
         count_fields = {
             "cases.json": ("case_count", "cases"),
@@ -206,6 +374,19 @@ class ProjectTests(unittest.TestCase):
             "name: interpersonal-strategist-${{ env.CANDIDATE_SHA }}",
             workflow,
         )
+        self.assertIn(
+            "actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+            workflow,
+        )
+        self.assertIn(
+            "actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+            workflow,
+        )
+        self.assertIn(
+            "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+            workflow,
+        )
+        self.assertIn("build/build-provenance.json", workflow)
 
     def test_waza_lane_is_secondary_and_not_packaged(self) -> None:
         required = {
@@ -248,6 +429,88 @@ class ProjectTests(unittest.TestCase):
             self.assertEqual(result_one["sha256"], result_two["sha256"])
             self.assertEqual(first.read_bytes(), second.read_bytes())
             self.assertGreaterEqual(result_one["record_count"], 156)
+
+    def test_eval_summarizer_rejects_incomplete_judgments(self) -> None:
+        runner = load_eval_runner()
+        rubric = json.loads((PROJECT_ROOT / "evals" / "rubric.json").read_text())
+        gate_ids = [gate["id"] for gate in rubric["hard_gates"]]
+        dimension_ids = [dimension["id"] for dimension in rubric["dimensions"]]
+        response = {
+            "run_id": "run-1",
+            "case_key": "cases:test",
+            "condition": "skill",
+            "response": "A bounded response.",
+            "strata": ["low_complexity"],
+        }
+        incomplete = {
+            "run_id": "run-1",
+            "case_key": "cases:test",
+            "condition": "skill",
+            "rubric_version": "2.1",
+            "hard_gates": {},
+            "dimensions": {dimension_id: 3 for dimension_id in dimension_ids},
+            "evidence": {"summary": "Observable reason."},
+            "pairwise_preference": "not_scored",
+        }
+        complete = {
+            **incomplete,
+            "hard_gates": {gate_id: False for gate_id in gate_ids},
+        }
+        with self.assertRaisesRegex(ValueError, "every canonical gate"):
+            runner.validate_result_records([response], [incomplete], rubric)
+        responses_by_run, judgments_by_run = runner.validate_result_records(
+            [response], [complete], rubric
+        )
+        self.assertEqual(set(responses_by_run), {"run-1"})
+        self.assertEqual(set(judgments_by_run), {"run-1"})
+
+    def test_eval_summarizer_requires_complete_pairs_and_reports_not_evaluable(self) -> None:
+        runner = load_eval_runner()
+        rubric = json.loads((PROJECT_ROOT / "evals" / "rubric.json").read_text())
+        gates = {gate["id"]: False for gate in rubric["hard_gates"]}
+        dimensions = {dimension["id"]: 4 for dimension in rubric["dimensions"]}
+        responses = [
+            {
+                "run_id": f"run-{condition}",
+                "case_key": "cases:paired",
+                "condition": condition,
+                "response": f"{condition} response",
+                "strata": ["low_complexity"],
+            }
+            for condition in ("skill", "no-skill")
+        ]
+        judgments = [
+            {
+                "run_id": f"run-{condition}",
+                "case_key": "cases:paired",
+                "condition": condition,
+                "rubric_version": "2.1",
+                "hard_gates": gates,
+                "dimensions": dimensions,
+                "evidence": {"summary": "Observable reason."},
+                "pairwise_preference": (
+                    "skill" if condition == "skill" else "not_scored"
+                ),
+            }
+            for condition in ("skill", "no-skill")
+        ]
+        with tempfile.TemporaryDirectory(prefix="interpersonal-summary-") as raw:
+            root = Path(raw)
+            responses_path = root / "responses.jsonl"
+            judgments_path = root / "judgments.jsonl"
+            output = root / "summary.json"
+            responses_path.write_text(
+                "".join(json.dumps(item) + "\n" for item in responses),
+                encoding="utf-8",
+            )
+            judgments_path.write_text(
+                "".join(json.dumps(item) + "\n" for item in judgments),
+                encoding="utf-8",
+            )
+            summary = runner.summarize(responses_path, judgments_path, output)
+        self.assertEqual(summary["pairwise"]["skill"], 1)
+        self.assertEqual(summary["pairwise"]["acceptance"]["status"], "not_evaluable")
+        self.assertEqual(summary["schema_version"], "2.0")
 
 
 if __name__ == "__main__":
