@@ -1,8 +1,8 @@
 # Power and Workplace Dynamics
 
 Use this reference for managing up or down, workload, credit, sponsorship,
-exclusion, retaliation exposure, organizational politics, or decisions involving
-more than two actors.
+exclusion, retaliation exposure, organizational politics, facilitation, or
+decisions involving more than two actors.
 
 ## Map power relationally
 
@@ -89,6 +89,75 @@ Convert the map into an engagement sequence:
 Do not publish sensitive judgments about influence, opposition, or
 vulnerability. Reject covert coalition building, rumor routes, and secret
 influence scores.
+
+## Structure participation before convergence
+
+When information, status, fluency, or authority is uneven, “open discussion” may
+not expose the missing evidence. Design participation around the decision rather
+than treating airtime as fairness.
+
+### 1. State the participation purpose
+
+Distinguish:
+
+- **inform:** explain a decision already made;
+- **consult:** gather input before an authorized decision;
+- **recommend:** develop an option for another owner to approve;
+- **vote:** use a stated voting rule;
+- **consent:** proceed unless a defined material objection remains;
+- **consensus:** require broad agreement under a stated threshold;
+- **unilateral decision:** one authorized owner decides after defined input.
+
+Do not call a process collaborative when participants can speak but their input
+cannot affect the decision. Do not imply veto, consent, or consensus rights that
+do not exist.
+
+### 2. Elicit evidence before positions harden
+
+Use one or more of:
+
+- independent written input before the meeting;
+- a silent evidence-gathering pass before discussion;
+- a structured round in which each relevant role contributes evidence or risk;
+- private or supported input for high-exposure contributors;
+- direct questions to uniquely informed specialists, implementers, or affected
+  constituencies;
+- an explicit request for disconfirming evidence and unresolved assumptions.
+
+When an early view from a chair, manager, sponsor, or technical authority would
+anchor the room, gather relevant lower-power or uniquely held evidence before
+that authority states a preferred conclusion. This is a process safeguard, not a
+claim that leaders must always speak last.
+
+### 3. Separate evidence, preference, and authority
+
+Record:
+
+- what evidence each option relies on;
+- which claims remain disputed or unverified;
+- each participant's recommendation or concern;
+- who owns the final decision and under what criteria;
+- which objection is advisory, blocking, or routed elsewhere;
+- what implementation or ratification remains outstanding.
+
+A participant can be heard without the decision owner agreeing. Conversely,
+inviting input is not meaningful if the record erases it or the criteria change
+without explanation.
+
+### 4. Close the loop
+
+The closure record should distinguish:
+
+- decision;
+- rationale and criteria;
+- dissent or residual concern;
+- assumptions and missing evidence;
+- owner, implementer, verifier, and ratifier;
+- dates, dependencies, warning points, and fallback;
+- correction or review window.
+
+Do not manufacture unanimity, assign absent people by silence, or use a meeting
+record to convert consultation into consent.
 
 ## Handle workload with Priority-Ownership-Cost
 
@@ -195,5 +264,7 @@ facts, options, and interim protections for a current qualified route.
 Psychological-safety, voice, justice, information-sharing, hidden-profile, and
 low-promotability-work research support these checks at a general level. They do
 not predict retaliation, identify motive, or establish the lawful process for a
-specific institution. See `PSYSAFE-01`, `VOICE-01`, `VOICE-02`, `JUSTICE-01`,
+specific institution. Participation order, independent elicitation, and explicit
+decision-method statements are product safeguards; they are not a universal
+meeting protocol. See `PSYSAFE-01`, `VOICE-01`, `VOICE-02`, `JUSTICE-01`,
 `INFO-01`, `INFO-02`, and `LOWPROMOTE-01` in the evidence ledger.
