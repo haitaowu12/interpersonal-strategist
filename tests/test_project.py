@@ -440,12 +440,14 @@ class ProjectTests(unittest.TestCase):
             "case_key": "cases:test",
             "condition": "skill",
             "response": "A bounded response.",
+            "blind_id": "blind-1",
             "strata": ["low_complexity"],
         }
         incomplete = {
             "run_id": "run-1",
             "case_key": "cases:test",
             "condition": "skill",
+            "blind_id": "blind-1",
             "rubric_version": "2.1",
             "hard_gates": {},
             "dimensions": {dimension_id: 3 for dimension_id in dimension_ids},
@@ -475,6 +477,7 @@ class ProjectTests(unittest.TestCase):
                 "case_key": "cases:paired",
                 "condition": condition,
                 "response": f"{condition} response",
+                "blind_id": f"blind-{condition}",
                 "strata": ["low_complexity"],
             }
             for condition in ("skill", "no-skill")
@@ -484,6 +487,7 @@ class ProjectTests(unittest.TestCase):
                 "run_id": f"run-{condition}",
                 "case_key": "cases:paired",
                 "condition": condition,
+                "blind_id": f"blind-{condition}",
                 "rubric_version": "2.1",
                 "hard_gates": gates,
                 "dimensions": dimensions,

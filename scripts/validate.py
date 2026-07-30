@@ -118,6 +118,7 @@ REQUIRED_EVIDENCE_BUNDLE_HASHES = {
     "build_provenance_sha256",
     "skill_prompt_manifest_sha256",
     "no_skill_prompt_manifest_sha256",
+    "blinding_manifest_sha256",
     "responses_sha256",
     "judgments_sha256",
     "source_resolution_sha256",

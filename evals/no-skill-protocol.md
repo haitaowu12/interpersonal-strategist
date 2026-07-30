@@ -84,6 +84,7 @@ standards.
   "host_version": "...",
   "sampling_policy": "...",
   "prompt_manifest_sha256": "...",
+  "blinding_manifest_sha256": "...",
   "responses_sha256": "...",
   "judgments_sha256": "...",
   "judge_protocol_version": "1.0",
