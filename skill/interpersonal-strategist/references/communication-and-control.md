@@ -1,21 +1,34 @@
-# Communication and Control Rules
+# Communication, Feedback, and Control Rules
 
 Use this reference when the user needs wording, channel selection, a difficult
 conversation, a refusal, feedback, repair, follow-up, or response branches.
 
-## Select the channel
+## Use the lightest sufficient structure
 
-Use asynchronous communication when precision, dates, ownership, or a record
-matters. Use synchronous communication when ambiguity, negotiation, emotion,
-or repair benefits from rapid exchange.
+Do not turn every interaction into a formal contract. Match output to stakes:
 
-Use a hybrid sequence for many material cases:
+- low stakes: one line and a stop condition if needed;
+- material coordination: request, owner, date, and record;
+- negotiation or repair: written frame, bounded conversation, recap;
+- high power or exposure: protection, evidence, authority, and qualified route
+  before eloquence.
 
-1. send a short written frame;
-2. hold a bounded conversation;
-3. send a neutral recap of decisions, owners, and dates.
+Every displayed section must change the decision or execution. Do not add a
+framework explanation merely to look thorough.
 
-Do not move a matter offline when losing the record increases risk.
+## Select the channel by function
+
+Use asynchronous communication for inspection, dates, ownership, language
+processing, accessibility, or a record. Use synchronous exchange for bounded
+convergence, negotiation, or repair. Use a hybrid sequence when both are needed:
+
+1. short written frame or materials;
+2. time-bounded conversation with one agenda;
+3. neutral recap of decisions, owners, authority, dates, and unresolved items;
+4. defined factual-correction window.
+
+Do not move offline when loss of record, live pressure, language disadvantage,
+or safety risk increases exposure.
 
 ## Build the smallest effective message
 
@@ -23,152 +36,179 @@ Use:
 
 1. observable context;
 2. impact, constraint, or trade-off;
-3. one request, proposal, decision, or boundary;
+3. one request, proposal, decision, remedy, or boundary;
 4. owner and timing;
-5. a feasible contingency only when necessary.
+5. feasible contingency only when necessary.
 
-Avoid:
+Avoid motive claims, long case histories, character labels, performative
+harshness, fake urgency, excessive apology, pseudo-legal language, and several
+requests hidden in one paragraph.
 
-- motive claims;
-- long case histories;
-- character labels;
-- performative harshness;
-- fake urgency;
-- excessive apology;
-- several requests hidden in one paragraph.
+## Select the feedback route before the script
 
-## Give feedback
+Clarify the purpose: learning, correction, recognition, documentation,
+consequence, or formal preparation.
 
-First check:
+Before giving feedback check:
 
-- Is the behavior specific and recent enough to discuss?
-- Is it controllable by the receiver?
-- Is the required standard or decision right legitimate and clear?
-- Is the timing suitable for learning rather than public status defense?
-- Does the speaker have authority, evidence, and support for the requested
-  change?
+- recency and specificity;
+- controllability by the receiver;
+- legitimacy and clarity of the standard;
+- authority and support for the requested change;
+- timing and audience;
+- whether public delivery creates avoidable status defense;
+- whether the behavior is individual or produced by role, resource, or process
+  failure.
 
-Then use behavior, impact, perspective, and next agreement:
+Before seeking feedback check:
 
-1. name a specific recent behavior;
-2. explain the concrete impact;
-3. invite material context;
-4. state the required standard or request;
-5. agree on support, owner, timing, warning point, and review.
+- what decision or behavior the feedback should inform;
+- who has direct knowledge and who has decision authority;
+- whether the target is likely to be candid;
+- image, retaliation, and public exposure costs;
+- whether direct inquiry, private inquiry, monitoring, document review, or a
+  trusted intermediary is the better source.
 
-Account for formal authority. A manager's “request” may function as a command,
-so preserve meaningful voice and avoid forced confession.
+Do not default to “ask for feedback.” Select the source, forum, and method that
+produce useful information at proportionate exposure.
 
-Keep attention on the task, behavior, process, or agreed standard. Broad
-identity judgments can redirect attention from the change and make feedback
-less useful.
+## Give behavior-specific accountability
 
-## Build accountability without forced agreement
+Use Behavior-Impact-Expectation-Commitment:
 
-Use the Behavior–Impact–Expectation–Commitment method:
+1. **Behavior:** observable action or omission;
+2. **Impact:** delivery, safety, workload, trust, or coordination effect;
+3. **Context:** material constraint or disagreement that must be heard;
+4. **Expectation:** standard, decision, or boundary for the next event;
+5. **Support:** authority, resource, information, or coaching needed;
+6. **Commitment:** owner, action, date, and warning point;
+7. **Review:** how the result will be verified and what follows if it fails.
 
-1. **Behavior:** What observable action or omission occurred?
-2. **Impact:** What delivery, safety, workload, trust, or coordination effect
-   followed?
-3. **Context:** What material constraint or disagreement must be heard?
-4. **Expectation:** What standard, decision, or boundary applies next?
-5. **Support:** What authority, resource, information, or coaching is needed?
-6. **Commitment:** Who will do what by when, with what warning point?
-7. **Review:** When will the result be checked, and what happens if it fails?
+A receiver need not agree with every interpretation to understand an authorized
+expectation. Do not demand confession, emotional disclosure, or personality
+change.
 
-The receiver need not agree with every interpretation to understand the
-expectation or make a commitment. Do not demand a confession, emotional
-disclosure, or personality change.
-
-Feedback is not automatically helpful. If it is vague, identity-focused,
-uncontrollable, public, overloaded, or disconnected from a usable action, it
-can impair performance. Prefer one or two decision-relevant behaviors and a
-near-term review.
+Feedback can impair performance when vague, identity-focused, uncontrollable,
+public, overloaded, or disconnected from action. Prefer one or two
+change-relevant behaviors and a near-term review.
 
 ## Set a boundary
 
 A workable boundary states:
 
 - what the user will or will not do;
-- the condition or scope;
+- condition or scope;
+- allowed alternative if genuine;
 - the next action the user controls;
-- a consequence the user can actually carry out.
+- a consequence the user can carry out;
+- one repetition rule and a stop.
 
 Do not disguise punishment, humiliation, or control of another person's choices
 as a boundary.
 
-## Refuse without false excuses
-
-Use:
+## Refuse without a false excuse
 
 > I can't commit to X. I can offer Y by Z.
 
-When the alternative is not feasible:
+When no alternative is feasible:
 
-> I can't take this on. You'll need another owner.
+> I can't take this on. Another owner is required.
 
-Do not disclose private details merely to make a refusal seem legitimate.
+Do not disclose private details merely to make a refusal seem legitimate. Under
+power asymmetry, clarify whether the “request” is actually a directive and
+surface the implementation trade-off rather than pretend choice exists.
 
 ## Repair after harm
 
-A material apology contains:
+A material repair includes:
 
-1. acknowledgment of the specific behavior;
-2. impact without arguing intent;
-3. responsibility without a disguised excuse;
-4. concrete remedy where possible;
-5. prevention or changed process;
-6. room for the other person not to reconcile immediately.
+1. specific behavior;
+2. verified impact without arguing motive;
+3. supported responsibility;
+4. remedy or restitution;
+5. prevention and control change;
+6. verification behavior and reliance decision;
+7. room for the other person not to reconcile.
 
-Do not demand forgiveness or make the harmed person manage the apology.
+Do not demand forgiveness, fabricate emotion, guarantee non-recurrence, or use
+an apology to secure silence or restored access.
 
-## Prepare response branches
+## Prepare only decision-relevant branches
 
-Prepare only likely branches:
+- **Positive:** confirm actual terms, authority, owner, date, and record.
+- **Ambiguous:** ask one question that converts vagueness into a choice or
+  decision.
+- **Negative:** distinguish constraint, disagreement, authority failure,
+  hostility, or safety risk; then revise, document, escalate, reduce reliance,
+  or exit.
+- **No response:** follow up once when a deadline or norm supports it, then use
+  the stated assumption, escalation, or stop.
 
-- **Positive:** confirm the agreement, owner, date, and record.
-- **Ambiguous:** ask one narrow question that converts vagueness into a choice
-  or decision.
-- **Negative:** distinguish a real constraint from hostility; revise,
-  document, escalate, or exit.
-- **No response:** follow up once if a deadline or norm supports it, then use
-  the selected escalation or stop rule.
+A branch is useful only when it changes the next action. Do not enumerate remote
+possibilities.
 
 ## Define observation and control
 
 Every material recommendation should have:
 
-- an observation window;
-- the event that triggers escalation;
-- the condition that ends further outreach or investment;
-- the evidence that would change the strategy.
+- a date or observable review event;
+- evidence that changes the strategy;
+- escalation or reduction trigger;
+- condition ending further outreach or investment;
+- a consequence within the user's authority.
 
-Avoid “wait and see” without a date or observable event. Avoid repeated messages
-after a refusal or after the stop rule has been reached.
+Avoid “wait and see” without an event. Avoid repeated messages after refusal or
+once the stop rule has been reached.
 
 ## Script patterns
 
-### Clarify a vague request
+### Clarify a priority
 
-> To make sure I solve the right problem: is the priority A by Thursday, or the
-> full B package by Monday? I can commit to one of those with the current
-> inputs.
+> To solve the right problem: is the priority A by Thursday, or the full B
+> package by Monday? I can commit to one with the current inputs. Completing
+> both by Thursday would remove the verification step.
+
+### Seek actionable feedback privately
+
+> The review says I need stronger executive presence. To act on that, could you
+> identify one recent decision where my behavior fell short and describe the
+> observable alternative? I would like to test that in the next review and
+> check back on ___ .
 
 ### Correct attribution
 
 > In today's discussion, the analysis was described as your model. I built the
 > model and you incorporated it into the deck. Please update the deck and recap
-> to reflect both contributions. For future meetings, let's agree in advance
-> who presents each section and how authorship is named.
+> to reflect both contributions. Before the next meeting, let's agree how each
+> section will be presented and credited.
 
 ### Set a recurring boundary
 
-> I can help with this once today. I won't be available for the same request
-> after Friday. If ongoing support is needed, we should agree on an owner and
-> schedule.
+> I can help recover this once today. I will not remain the fallback owner. If
+> ongoing support is required, the decision owner needs to assign scope and a
+> schedule before the next deadline.
 
 ### Repair a miss
 
-> I missed the agreed handoff and that delayed your review. I should have
-> flagged the risk earlier. I will send the corrected version by 3 p.m. and add
-> a check-in one day before future handoffs so you are not surprised again.
+> I missed the agreed handoff and that delayed your review. I should have raised
+> the risk earlier. I will send the corrected version by 3 p.m. and add a
+> warning checkpoint one day before future handoffs. We should review whether
+> that control works after the next two deliveries.
+
+## Failure modes
+
+- over-formalizing a low-stakes social interaction;
+- asking an unsafe or uninformed person for feedback;
+- public correction when a private route would work;
+- identity labels instead of observable behavior;
+- branches that add length but do not change action;
+- consequences beyond the user's authority;
+- apology without remedy;
+- indefinite follow-up or negotiation after refusal.
+
+## Evidence boundary
+
+Feedback, feedback-seeking, channel, implementation-intention, and practitioner
+guidance support these controls at a general level. They do not validate one
+script or guarantee compliance. See `FEEDBACK-01`, `FEEDBACK-02`, `CHANNEL-01`,
+`CHANGE-01`, and `PRACTICE-01` in the evidence ledger.
