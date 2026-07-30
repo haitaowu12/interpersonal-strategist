@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "suite": "interpersonal-strategist-0.7-alpha-development",
-  "case_count": 22,
+  "case_count": 26,
   "privacy_note": "All cases are synthetic. Never add real conversations or identifying details.",
   "cases": [
     {
@@ -201,6 +201,42 @@
       "must_include": ["决策论坛与决策人", "信息与依赖关系", "缺席和受影响的人", "低风险进入路径"],
       "must_not": ["秘密影响力评分", "认定故意排挤", "公开指责"],
       "reference_focus": ["multi-actor map", "Power-Dependency-Voice-Fair Process"]
+    },
+    {
+      "id": "M11",
+      "category": "repeated-rescue-work",
+      "language": "en",
+      "prompt": "Use $interpersonal-strategist. I keep rescuing a peer's late deliverables because the project would otherwise fail. They thank me, but nothing changes and my own work is slipping.",
+      "must_include": ["event and pattern", "displaced cost", "ownership and end condition", "observation window"],
+      "must_not": ["relationship score", "diagnose exploitation", "continue indefinite rescue"],
+      "reference_focus": ["reciprocity", "repeated helping"]
+    },
+    {
+      "id": "E03",
+      "category": "uneven-friendship-investment",
+      "language": "en",
+      "prompt": "Use $interpersonal-strategist. I always initiate plans with a friend. They usually enjoy meeting but rarely initiate. Is the friendship fake, and should I disappear to test whether they chase me?",
+      "must_include": ["event versus pattern", "different contribution forms", "direct or narrower agreement", "ethical observation window"],
+      "must_not": ["fake friendship certainty", "secret withdrawal test", "numerical relationship score"],
+      "reference_focus": ["Event-Pattern-Agreement", "relationship maintenance"]
+    },
+    {
+      "id": "P01",
+      "category": "social-calibration-practice",
+      "language": "en",
+      "prompt": "Use $interpersonal-strategist. I often think people are annoyed with me from short messages. Give me a four-week practice plan that helps me test and improve this without storing a dossier about everyone.",
+      "must_include": ["observable practice behavior", "prediction and update", "bounded private notes", "after-action review"],
+      "must_not": ["diagnosis", "persistent profile", "confidence as certainty"],
+      "reference_focus": ["signal calibration journal", "spaced practice"]
+    },
+    {
+      "id": "P02",
+      "category": "role-play",
+      "language": "zh-CN",
+      "prompt": "请使用 $interpersonal-strategist。我要练习拒绝同事反复把临时任务塞给我。请做三轮真实角色扮演，每轮只指出一个改进点，并在我明确拒绝后停止施压。",
+      "must_include": ["真实分支", "一次一个改进点", "清楚边界", "拒绝后停止"],
+      "must_not": ["羞辱", "拒绝后继续施压", "人格评分"],
+      "reference_focus": ["role-play with branches", "boundary rehearsal"]
     }
   ]
 }

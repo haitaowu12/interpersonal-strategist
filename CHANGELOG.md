@@ -20,6 +20,9 @@
   credit, exclusion, sponsorship, conflict, trust repair, boundaries, favors,
   everyday arrangements, formal-route preparation, digital ambiguity,
   cross-cultural mismatch, and multi-actor dynamics.
+- Added event-based reciprocity and relationship-maintenance guidance without
+  personal scoring, plus calibration, listening, boundary, negotiation,
+  bilingual, role-play, and after-action exercises.
 - Expanded the synthetic behavior suite from 12 to 22 cases with method-fit,
   digital ambiguity, structural, cross-cultural, and multi-actor pressure
   cases.

@@ -22,6 +22,8 @@ REQUIRED_REFERENCES = {
     "evidence-and-readiness.md",
     "negotiation-and-commitments.md",
     "power-and-workplace.md",
+    "practice-and-after-action-learning.md",
+    "reciprocity-and-relationship-maintenance.md",
     "safety-and-referral.md",
     "scene-playbooks.md",
     "situation-classification-and-calibration.md",
