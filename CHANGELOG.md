@@ -33,6 +33,10 @@
 - Added a deterministic evaluation preparation and result-summarization CLI,
   release qualification manifest, and exact Codex production-qualification
   handoff.
+- Hardened qualification evidence with exact-head and tree provenance,
+  immutable CI action pins, typed gate evidence, strict response-to-judgment
+  linkage, fail-closed completeness checks, deterministic paired confidence
+  bounds, and mutation tests for forged or incomplete records.
 - Added an optional Microsoft Waza compatibility lane for independent trigger,
   skill-invocation, prompt-grading, snapshot/replay, adversarial, spec-coverage,
   and token-budget checks without treating a Waza pass as production evidence.

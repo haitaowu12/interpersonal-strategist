@@ -152,7 +152,11 @@ attribute a stronger empirical claim at runtime.
 
 ### 3. Perform clean-host discovery and invocation
 
-Using a supported current Codex/Skills environment:
+First freeze the release scope in `release/qualification.json`: name every
+surface covered by the production claim. A directory-level or generic
+“supported Skills host” claim is not sufficient.
+
+Using each named current Codex/Skills environment:
 
 1. build the exact release ZIP;
 2. install or upload it through the supported skill-management flow;
@@ -164,6 +168,8 @@ Using a supported current Codex/Skills environment:
 6. confirm the skill performs no connector use, file writes, automatic sending,
    persistent profiling, biometric classification, or cross-task memory;
 7. retain model snapshot, host version, package SHA, raw outputs, and run logs.
+8. retain model-visible discovery evidence and the exact personal or
+   repository-scoped installation path used by that surface.
 
 Do not treat `scripts/smoke_install.py` as host-discovery evidence; it verifies
 package layout only.
@@ -361,7 +367,7 @@ Use 10-20 consented episodes for usability and failure discovery only.
 
 Create an access-controlled bundle containing:
 
-- exact commit and ZIP SHA-256;
+- exact commit, tree SHA, build-provenance SHA, and ZIP SHA-256;
 - static CI and package reports;
 - source-resolution report;
 - host discovery and invocation evidence;
@@ -374,6 +380,10 @@ Create an access-controlled bundle containing:
 - pilot protocol, aggregate findings, and privacy disposition;
 - independent release review;
 - optional Waza identity, task hashes, snapshots, and result report.
+
+Each passed gate must use the typed evidence-object schema enforced by
+`scripts/validate.py`; a truthy note or unstructured link is not release
+evidence.
 
 Do not add private holdout prompts, real conversations, recordings, biometric
 features, or identifying pilot material to this repository.
