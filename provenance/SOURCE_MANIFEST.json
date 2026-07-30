@@ -1,8 +1,9 @@
 {
-  "schema_version": "1.0",
-  "release": "0.7.0-alpha.2",
+  "schema_version": "2.0",
+  "release": "0.8.0-rc.1",
+  "release_state": "production_qualification_candidate",
   "historical_v05a_status": "unavailable_not_reconstructed",
-  "sources": [
+  "implementation_sources": [
     {
       "name": "interpersonal-strategist-v0.2-candidate.zip",
       "role": "clean_room_implementation_seed",
@@ -17,13 +18,37 @@
       "name": "interpersonal-strategist-v05-rd-20260725.zip",
       "role": "advisory_research_and_architecture_input",
       "sha256": "08988d2056913a86c976e35dc5fb035de8f0120237d24e20c6dbd67d3ba622eb"
+    },
+    {
+      "name": "interpersonal-strategist-pro-followup-20260729.md",
+      "role": "independent_adversarial_review_and_rnd_input",
+      "sha256": "c104e9da2617e0ef6d7a8f4134519f69a3a14cb2fb340b6cbac997274425d37d"
     }
   ],
+  "evidence_registry": {
+    "path": "provenance/evidence-sources.json",
+    "status": "release_governed",
+    "required_fields": [
+      "stable_identity",
+      "evidence_type",
+      "permitted_claim",
+      "limitation",
+      "runtime_rule",
+      "last_verified",
+      "license_note"
+    ]
+  },
+  "qualification_record": {
+    "path": "release/qualification.json",
+    "production_claim_requires_status": "qualified"
+  },
   "excluded": [
     "historical v0.5a candidate bytes",
-    "sealed holdouts",
-    "personal conversations",
-    "persistent memory",
-    "third-party romance skill content"
+    "sealed or reconstructed holdouts",
+    "real personal conversations",
+    "persistent memory or third-party profiles",
+    "private vault content",
+    "third-party romance skill expressive content",
+    "automatic sending or connector behavior"
   ]
 }
