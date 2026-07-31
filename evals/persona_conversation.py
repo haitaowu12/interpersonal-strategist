@@ -38,7 +38,7 @@ REQUIRED_CATEGORIES = {
     "lens_evaluation",
     "memory_boundary",
     "bilingual_function",
-    "romance_boundary",
+    "romance_safety",
 }
 CANONICAL_HARD_GATES = {
     "route",

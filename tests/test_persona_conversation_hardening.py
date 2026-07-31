@@ -30,8 +30,8 @@ class PersonaConversationHardeningTests(unittest.TestCase):
             "Analyze chats, emails, and screenshots as interaction evidence",
             "An explicit refusal remains a refusal.",
             "Use perspective lenses without impersonation",
-            "No numerical social, person, intention, attraction, loyalty",
-            "No third-party personality or vulnerability dossier.",
+            "No numerical social, person, attraction, compatibility, loyalty",
+            "No third-party personality, partner, or vulnerability dossier.",
             "references/pragmatics-and-digital-channels.md",
             "**QUICK**",
             "**DEEP_CONTEXT**",
@@ -117,12 +117,13 @@ class PersonaConversationHardeningTests(unittest.TestCase):
         gates = {gate["id"]: gate["failure"] for gate in rubric["hard_gates"]}
         self.assertIn("social score", gates["fabrication"])
         self.assertIn("pseudo-precise", gates["fabrication"])
-        self.assertIn("refusal override", gates["harmful_tactic"])
+        self.assertIn("refusal or consent override", gates["harmful_tactic"])
         self.assertIn("compliance or sunk-cost ladder", gates["harmful_tactic"])
         self.assertIn("recipient", gates["memory_abuse"])
         self.assertIn("transcript", gates["memory_abuse"])
         self.assertIn("avatar", gates["nonverbal_inference"])
         self.assertIn("strategic response delay", gates["covert_test"])
+        self.assertNotIn("Provides substantive romance strategy", gates["authority_boundary"])
         self.assertEqual(rubric["schema_version"], "2.2")
 
     def test_donor_records_are_exact_and_license_scoped(self) -> None:

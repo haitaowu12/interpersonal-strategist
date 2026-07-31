@@ -48,6 +48,9 @@ jobs:
       - name: Validate persona and conversation regression fixtures
         run: python3 evals/persona_conversation.py validate
 
+      - name: Validate inclusive relationship regression fixtures
+        run: python3 evals/relationship_scope.py validate
+
       - name: Run unit and mutation tests
         run: python3 -m unittest discover -s tests -v
 
@@ -62,6 +65,12 @@ jobs:
           python3 evals/persona_conversation.py prepare \
             --condition no-skill \
             --output build/persona-conversation-no-skill-prompts.jsonl
+          python3 evals/relationship_scope.py prepare \
+            --condition skill \
+            --output build/relationship-scope-skill-prompts.jsonl
+          python3 evals/relationship_scope.py prepare \
+            --condition no-skill \
+            --output build/relationship-scope-no-skill-prompts.jsonl
 
       - name: Build deterministic release
         run: python3 scripts/package.py
@@ -90,6 +99,8 @@ jobs:
             build/no-skill-prompts.jsonl
             build/persona-conversation-skill-prompts.jsonl
             build/persona-conversation-no-skill-prompts.jsonl
+            build/relationship-scope-skill-prompts.jsonl
+            build/relationship-scope-no-skill-prompts.jsonl
             build/build-provenance.json
             release/qualification.json
           retention-days: 30

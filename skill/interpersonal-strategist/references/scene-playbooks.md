@@ -259,7 +259,7 @@ Use the alternative after a decline.
 
 ## 11. Friend, family, roommate, or neighbor pattern
 
-**Trigger:** A repeated non-romantic everyday behavior affects shared money,
+**Trigger:** A repeated everyday or relationship behavior affects shared money,
 space, time, care, commitments, privacy, or respect.
 
 **Preflight:** Relationship norm—communal care, shared arrangement, voluntary
@@ -517,19 +517,202 @@ the disputed item.
 **Stop/escalate:** Do not record consensus where disagreement remains or treat
 silence as consent.
 
+## 21. Expressing romantic interest or asking for a date
+
+**Trigger:** The user wants to ask someone out or disclose romantic interest.
+
+**Preflight:** Existing relationship, prior refusal, workplace or professional
+power, privacy, activity and timing, safety, and whether declining is materially
+safe.
+
+**Action:** Make one truthful, bounded invitation; name the romantic intent when
+ambiguity would mislead; provide an easy decline; accept the answer without
+bargaining or repeated pursuit.
+
+**Starter:**
+
+> I have enjoyed spending time with you. Would you like to get coffee next week
+> as a date? No pressure if you would rather keep this as friendship.
+
+**Branches:** If accepted, confirm a simple plan. If ambiguous, ask once whether
+they want to choose a date or prefer not to. If declined, acknowledge and stop.
+If power or policy makes the invitation non-voluntary, do not proceed through a
+private workaround.
+
+**Stop/escalate:** A refusal, non-response after one appropriate follow-up, or a
+request for distance ends pursuit. Route adult-minor, grooming, stalking,
+coercion, or retaliation concerns.
+
+## 22. Early dating and ambiguous interest
+
+**Trigger:** The user is deciding whether mutual interest or follow-through
+supports another date or more investment.
+
+**Preflight:** Exact words, plans made and kept, initiative over a meaningful
+window, known constraints, pace, expectations, and whether the user can tolerate
+an uncertain or negative answer.
+
+**Action:** Separate explicit interest and follow-through from noisy digital
+cues; identify the actual decision; make one direct invitation or intention
+question rather than compute attraction.
+
+**Starter:**
+
+> I have enjoyed our two dates and would like to see you again. Are you
+> interested in continuing to date? It is okay if your answer is no.
+
+**Branches:** A specific yes supports planning. A vague answer gets one bounded
+clarification. A decline, repeated non-commitment, or repeated broken plans
+supports reducing investment or closing.
+
+**Stop/escalate:** No avatar, latency, emoji, “chemistry,” or social-power score;
+no strategic delay, jealousy, scarcity, or secret test.
+
+## 23. Defining exclusivity or relationship expectations
+
+**Trigger:** The relationship has progressed but exclusivity, labels, sex,
+privacy, public visibility, or future direction is unclear.
+
+**Preflight:** Each person's stated intention, existing agreements, other
+partners, sexual-health questions requiring current qualified sources, power,
+and practical consequences of disagreement.
+
+**Action:** Ask directly what relationship each person wants; define the
+specific agreement, start point, disclosure expectations, review point, and how
+either person may change or end it.
+
+**Starter:**
+
+> I want to discuss what we are doing rather than assume. I would like an
+> exclusive relationship. Is that what you want? If not, I need to decide
+> whether continuing in the current form works for me.
+
+**Branches:** If aligned, record the actual terms. If different, negotiate only
+where both choices remain voluntary. If one person avoids definition while
+expecting exclusivity or access, name the contradiction and choose a boundary.
+
+**Stop/escalate:** Do not treat sex, gifts, time, family introductions, travel,
+or social media as automatic exclusivity.
+
+## 24. Intimacy boundary or consent check
+
+**Trigger:** The user needs to ask, pause, decline, renegotiate, or respond to a
+boundary around physical or sexual intimacy.
+
+**Preflight:** Voluntariness, specificity, current willingness, sobriety and
+capacity, power or dependency, privacy, and the user's ability to stop without
+punishment.
+
+**Action:** Ask or state the boundary directly; pause on ambiguity; stop on no,
+withdrawal, freezing, incapacity, or a stop request; discuss alternatives only
+without pressure.
+
+**Starter:**
+
+> I want to check rather than assume: do you want to keep going? We can stop or
+> change course, and either answer is okay.
+
+**Branches:** An affirmative answer applies only to the stated act and may
+change. Uncertainty means pause and check. A no or stop ends the activity. A
+post-event concern moves first to safety, health, support, and qualified advice,
+not amateur legal adjudication.
+
+**Stop/escalate:** No intoxication-based pressure, token-resistance assumption,
+relationship entitlement, stealthing, recording, image sharing, adult-minor
+sexual content, or activity with a person unable to consent.
+
+## 25. Jealousy, third parties, or exclusivity breach
+
+**Trigger:** The user feels threatened by another relationship or believes an
+agreement may have been breached.
+
+**Preflight:** Observable event, actual agreement, missing information, privacy,
+known alternatives, safety, and whether surveillance or control is being
+proposed.
+
+**Action:** State the event and agreement; ask for the missing fact; name the
+boundary or reliance decision; avoid motive certainty and invasive evidence
+collection.
+
+**Starter:**
+
+> We agreed to tell each other before dating someone else. I learned about
+> Friday afterward. I need to understand what happened and decide whether our
+> agreement still exists.
+
+**Branches:** A supported explanation may lead to clarification or repair. A
+verified breach requires remedy and changed controls before reliance. Continued
+ambiguity may justify reducing dependence or ending the arrangement.
+
+**Stop/escalate:** No password demands, location tracking, fake accounts,
+triangulation, public exposure, isolation, or jealousy induction.
+
+## 26. Ending a romantic relationship and setting contact
+
+**Trigger:** The user has decided to end, pause, or restructure a romantic
+relationship.
+
+**Preflight:** Safety, housing, money, children, pets, work, travel, shared
+accounts, belongings, intimate material, support, and the minimum necessary
+contact after the decision.
+
+**Action:** State the decision without false hope; give the minimum useful
+reason; define logistics, contact channel, exceptions, and end date; use a safer
+route when direct contact creates risk.
+
+**Starter:**
+
+> I am ending our romantic relationship. I will coordinate the apartment and
+> belongings by email. I am not available for further relationship discussion
+> after Sunday.
+
+**Branches:** Respect practical questions within scope. Repeat the decision once
+without reopening persuasion. Block, document, seek support, or use a qualified
+route if contact becomes coercive or threatening.
+
+**Stop/escalate:** No punitive silence disguised as a test, forced closure,
+public humiliation, or unsafe face-to-face meeting.
+
+## 27. Evaluating reconciliation
+
+**Trigger:** An ex-partner proposes renewed contact or the user is considering
+reconciliation.
+
+**Preflight:** Reason for separation, accepted and disputed facts, changed
+conditions, remedy, current goals, boundaries, dependency, safety, and
+alternatives.
+
+**Action:** Separate missing the person from evidence that the prior failure
+changed; select no contact, practical contact, friendship, limited dating, a
+small reversible trial, or renewed partnership after demonstrated change.
+
+**Starter:**
+
+> I am open to one conversation about what has changed. I am not agreeing to
+> resume the relationship. Before any trial, I need clarity on ___, evidence of
+> ___, and a stop if ___ happens again.
+
+**Branches:** Concrete change may support a bounded trial. Apology without
+remedy supports caution. Repeated severe, coercive, or irreversible harm supports
+no re-entry and protection.
+
+**Stop/escalate:** Reconciliation is not owed. Do not use children, money,
+housing, social pressure, or threatened self-harm to compel reunion; route acute
+risk appropriately.
+
 ## Playbook quality check
 
 Before answering verify:
 
 1. leading mechanism and overlays match the case;
 2. the recommendation remains useful if motive is wrong;
-3. power, structure, information topology, and relationship norm are not reduced
+3. power, consent, structure, information topology, and relationship norm are not reduced
    to tone;
 4. the wording contains one visible act;
 5. branches are plausible and action-changing;
 6. observation, escalation, reliance, and stop are executable;
 7. authority and representation are accurate;
-8. the user retains agency and the other person retains meaningful choice where
-   choice is legitimate;
+8. the user retains agency and the other person retains meaningful choice,
+   including a real ability to decline or stop;
 9. current formal or safety claims use a qualified authoritative route;
 10. the answer is no longer than needed to execute the decision.
