@@ -15,24 +15,28 @@ production claim.
 4. **Mechanism and reference selection:** leading method, mandatory overlays,
    primary reference, unnecessary-reference rate, and compound-case recall.
 5. **Response quality:** pointwise hard gates and per-dimension floors.
-6. **Simulation control:** setup/simulation/debrief separation, counterpart
+6. **Adaptive depth and memory:** automatic versus user-selected depth,
+   bounded questioning, memory consent, minimization, correction, and deletion.
+7. **Simulation control:** setup/simulation/debrief separation, counterpart
    information boundary, turn and stop rules, one-variable replay, and
    micro-feedback cadence.
-7. **Nonverbal inference:** low-specificity cues remain observations and do not
+8. **Nonverbal inference:** low-specificity cues remain observations and do not
    become emotion, honesty, consent, engagement, competence, or motive verdicts.
-8. **Functional bilingual review:** invariant preservation plus fluent
+9. **Functional bilingual review:** invariant preservation plus fluent
    naturalness and status-fit review.
-9. **No-skill comparison:** same model and prompt, blinded randomized comparison
+10. **No-skill comparison:** same model and prompt, blinded randomized comparison
    against the model without the skill.
-10. **Untouched holdouts:** independently authored after package freeze and kept
+11. **Untouched holdouts:** independently authored after package freeze and kept
     outside the public repository.
-11. **Controlled pilot:** privacy-minimized formative usability and failure
+12. **Controlled pilot:** privacy-minimized formative usability and failure
     discovery, not efficacy proof.
 
 ## Public fixture suites
 
 - `cases.json` — broad public development cases, including bounded role-play,
   nonverbal inference, and facilitation regressions;
+- `deep-context-memory.json` — depth selection, bounded elicitation, revisable
+  actor models, and governed memory retrieval, update, correction, and deletion;
 - `invocation.json` — invocation-ownership classifier;
 - `substantive-routes.json` — canonical four-state routes;
 - `multi-actor.json` — forum, authority, unique information, constituency,

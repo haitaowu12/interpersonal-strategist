@@ -4,9 +4,9 @@
 
 This repository begins a new standalone lineage at
 `interpersonal-strategist 0.6.0-alpha.1`. The current release candidate is
-`0.8.0-rc.1`.
+`0.9.0-rc.1`.
 
-`0.8.0-rc.1` is a production-qualification candidate, not a production claim.
+`0.9.0-rc.1` is a production-qualification candidate, not a production claim.
 Promotion is permitted only when `release/qualification.json` records every
 required gate as passed and binds the evidence to an exact commit, package,
 model and host configuration, evaluation harness, and independent holdout set.
@@ -32,7 +32,7 @@ interpersonal-strategist-phase1-rd-v0.2.zip
 SHA-256 3bf3ac1119b3e6741ebf9b751fa060eafcda011a3ad6fc7e44ae0f8ba1c898bf
 ```
 
-## v0.5 and v0.8 advisory inputs
+## v0.5, v0.8, and v0.9 advisory inputs
 
 The exact recovered v0.5 R&D package was used as advisory research and design
 input:
@@ -168,8 +168,8 @@ A behavioral release attestation must bind:
 This repository does not contain:
 
 - real personal conversations;
-- persistent personal memory;
-- persistent third-party personality, vulnerability, or influence profiles;
+- uncontrolled or undisclosed personal memory;
+- third-party personality, vulnerability, influence, or pressure-point dossiers;
 - sealed or reconstructed holdout answers;
 - credentials;
 - private vault content;
