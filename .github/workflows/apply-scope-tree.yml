@@ -1,4 +1,5 @@
 name: Apply validated relationship scope tree
+# trigger: second push after workflow registration
 
 on:
   push:
