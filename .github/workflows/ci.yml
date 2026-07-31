@@ -45,6 +45,9 @@ jobs:
       - name: Validate evaluation fixtures
         run: python3 evals/run.py validate-fixtures
 
+      - name: Validate persona and conversation regression fixtures
+        run: python3 evals/persona_conversation.py validate
+
       - name: Run unit and mutation tests
         run: python3 -m unittest discover -s tests -v
 
@@ -53,6 +56,12 @@ jobs:
           mkdir -p build
           python3 evals/run.py prepare --condition skill --output build/skill-prompts.jsonl
           python3 evals/run.py prepare --condition no-skill --output build/no-skill-prompts.jsonl
+          python3 evals/persona_conversation.py prepare \
+            --condition skill \
+            --output build/persona-conversation-skill-prompts.jsonl
+          python3 evals/persona_conversation.py prepare \
+            --condition no-skill \
+            --output build/persona-conversation-no-skill-prompts.jsonl
 
       - name: Build deterministic release
         run: python3 scripts/package.py
@@ -79,6 +88,8 @@ jobs:
             dist/interpersonal-strategist-*.manifest.json
             build/skill-prompts.jsonl
             build/no-skill-prompts.jsonl
+            build/persona-conversation-skill-prompts.jsonl
+            build/persona-conversation-no-skill-prompts.jsonl
             build/build-provenance.json
             release/qualification.json
           retention-days: 30
