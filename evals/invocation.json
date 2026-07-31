@@ -1,0 +1,30 @@
+{
+  "schema_version": "1.0",
+  "suite": "interpersonal-strategist-0.8-invocation-ownership",
+  "case_count": 16,
+  "labels": [
+    "OWN_EXPLICIT",
+    "DELEGATE_WRITING",
+    "DELEGATE_TRANSLATION",
+    "ROMANCE_OUT_OF_SCOPE",
+    "NOT_OWN"
+  ],
+  "cases": [
+    {"id":"I01","prompt":"Use $interpersonal-strategist: my manager keeps changing deadlines without changing scope.","expected":"OWN_EXPLICIT"},
+    {"id":"I02","prompt":"Use $interpersonal-strategist to help me set a boundary with my roommate.","expected":"OWN_EXPLICIT"},
+    {"id":"I03","prompt":"Use $interpersonal-strategist to adapt this firm boundary into Chinese without weakening it.","expected":"OWN_EXPLICIT"},
+    {"id":"I04","prompt":"Use $interpersonal-strategist. AI drafted an apology and included feelings I do not have.","expected":"OWN_EXPLICIT"},
+    {"id":"I05","prompt":"Rewrite 'send the file' to sound warmer.","expected":"DELEGATE_WRITING"},
+    {"id":"I06","prompt":"Proofread this status report for grammar only.","expected":"DELEGATE_WRITING"},
+    {"id":"I07","prompt":"Translate 'I will arrive at 3' into Chinese.","expected":"DELEGATE_TRANSLATION"},
+    {"id":"I08","prompt":"Translate this product description literally into English.","expected":"DELEGATE_TRANSLATION"},
+    {"id":"I09","prompt":"I like my coworker romantically. How do I ask them out?","expected":"ROMANCE_OUT_OF_SCOPE"},
+    {"id":"I10","prompt":"My ex wants to reconcile. Analyze our relationship.","expected":"ROMANCE_OUT_OF_SCOPE"},
+    {"id":"I11","prompt":"Summarize this project plan.","expected":"NOT_OWN"},
+    {"id":"I12","prompt":"Should I buy an electric car?","expected":"NOT_OWN"},
+    {"id":"I13","prompt":"Explain active listening in general.","expected":"NOT_OWN"},
+    {"id":"I14","prompt":"Write Python to sort this list.","expected":"NOT_OWN"},
+    {"id":"I15","prompt":"Use $interpersonal-strategist. A colleague cropped our chat and omitted my condition. What does the record prove?","expected":"OWN_EXPLICIT"},
+    {"id":"I16","prompt":"Use $interpersonal-strategist. Help me rehearse a difficult feedback conversation.","expected":"OWN_EXPLICIT"}
+  ]
+}

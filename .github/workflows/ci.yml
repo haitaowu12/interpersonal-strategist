@@ -3,9 +3,15 @@ name: CI
 on:
   push:
   pull_request:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 8 1 * *"
 
 permissions:
   contents: read
+
+env:
+  CANDIDATE_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
 
 jobs:
   verify:
@@ -18,25 +24,86 @@ jobs:
 
     steps:
       - name: Check out repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          ref: ${{ env.CANDIDATE_SHA }}
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
         with:
           python-version: ${{ matrix.python-version }}
 
-      - name: Validate repository
+      - name: Compile Python sources
+        run: python3 -m compileall -q scripts evals tests
+
+      - name: Validate repository and release governance
         run: python3 scripts/validate.py
 
-      - name: Run unit tests
+      - name: Validate evidence registry offline
+        run: python3 scripts/check_evidence.py --offline
+
+      - name: Validate evaluation fixtures
+        run: python3 evals/run.py validate-fixtures
+
+      - name: Run unit and mutation tests
         run: python3 -m unittest discover -s tests -v
+
+      - name: Prepare deterministic skill and no-skill manifests
+        run: |
+          mkdir -p build
+          python3 evals/run.py prepare --condition skill --output build/skill-prompts.jsonl
+          python3 evals/run.py prepare --condition no-skill --output build/no-skill-prompts.jsonl
 
       - name: Build deterministic release
         run: python3 scripts/package.py
 
-      - name: Smoke-test packaged install
+      - name: Record exact-subject build provenance
+        run: python3 scripts/build_provenance.py --output build/build-provenance.json
+
+      - name: Smoke-test packaged layout
         run: python3 scripts/smoke_install.py --archive "dist/interpersonal-strategist-$(cat VERSION).zip"
 
       - name: Verify release checksum
         working-directory: dist
         run: shasum -a 256 -c "interpersonal-strategist-$(cat ../VERSION).zip.sha256"
+
+      - name: Upload qualification-candidate artifacts
+        if: matrix.python-version == '3.11'
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: interpersonal-strategist-${{ env.CANDIDATE_SHA }}
+          if-no-files-found: error
+          path: |
+            dist/interpersonal-strategist-*.zip
+            dist/interpersonal-strategist-*.zip.sha256
+            dist/interpersonal-strategist-*.manifest.json
+            build/skill-prompts.jsonl
+            build/no-skill-prompts.jsonl
+            build/build-provenance.json
+            release/qualification.json
+          retention-days: 30
+
+  evidence-resolution:
+    name: Online evidence identity resolution
+    if: github.event_name == 'workflow_dispatch' || github.event_name == 'schedule'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+
+      - name: Set up Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: "3.11"
+
+      - name: Resolve promoted source identities
+        run: python3 scripts/check_evidence.py --output evidence-resolution.json
+
+      - name: Upload source-resolution report
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: evidence-resolution-${{ github.sha }}
+          if-no-files-found: error
+          path: evidence-resolution.json
+          retention-days: 90

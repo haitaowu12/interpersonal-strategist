@@ -1,0 +1,43 @@
+skill: interpersonal-strategist
+
+should_trigger_prompts:
+  - prompt: "Use $interpersonal-strategist. My manager added urgent work that conflicts with two existing deadlines. Help me surface the trade-off."
+    reason: "Explicit invocation and in-scope workplace decision support."
+    confidence: high
+
+  - prompt: "Please use $interpersonal-strategist. Help me set a repeated boundary with my roommate and define when to stop arguing."
+    reason: "Explicit invocation and non-romantic everyday boundary."
+    confidence: high
+
+  - prompt: "请使用 $interpersonal-strategist。领导的临时任务会导致现有承诺延期，请帮我明确优先级。"
+    reason: "Explicit Chinese invocation and in-scope priority conflict."
+    confidence: high
+
+  - prompt: "Use $interpersonal-strategist. Role-play a defensive peer for three turns and debrief only after I say stop."
+    reason: "Explicit invocation for bounded interpersonal rehearsal."
+    confidence: high
+
+should_not_trigger_prompts:
+  - prompt: "My manager added urgent work that conflicts with two deadlines. What should I do?"
+    reason: "The product is explicit-only even when the content is otherwise in scope."
+    confidence: high
+
+  - prompt: "Rewrite 'send the file' to sound warmer."
+    reason: "Pure rewriting belongs to the general writing capability."
+    confidence: high
+
+  - prompt: "Translate 'I will arrive at 3' into Chinese."
+    reason: "Literal translation belongs to the general translation capability."
+    confidence: high
+
+  - prompt: "I like my coworker romantically. How do I ask them out?"
+    reason: "Romance and intimacy are outside scope."
+    confidence: high
+
+  - prompt: "Summarize this project plan."
+    reason: "Unrelated document summarization is not owned by this skill."
+    confidence: high
+
+  - prompt: "Explain active listening in general."
+    reason: "General knowledge without an interpersonal decision does not require the skill."
+    confidence: medium

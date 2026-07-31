@@ -2,182 +2,196 @@
 
 [![CI](https://github.com/haitaowu12/interpersonal-strategist/actions/workflows/ci.yml/badge.svg)](https://github.com/haitaowu12/interpersonal-strategist/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Release: alpha](https://img.shields.io/badge/release-0.7.0--alpha.2-orange.svg)](CHANGELOG.md)
+[![Release candidate](https://img.shields.io/badge/release-0.8.0--rc.1-yellow.svg)](CHANGELOG.md)
 
-`interpersonal-strategist` is a standalone, portable Codex agent skill for
-workplace and everyday interpersonal decisions. It helps a user distinguish
-evidence from interpretation, map power and constraints, compare plausible
-explanations, choose a proportionate next move, and prepare language with
+`interpersonal-strategist` is a portable Agent Skill for workplace and
+non-romantic everyday interpersonal decisions. It helps a user distinguish
+evidence from interpretation, map power and decision structure, compare
+plausible readings, choose a proportionate next move, and prepare wording with
 response branches and stopping rules.
 
-The project is deliberately more than a prompt collection. It combines a small
-runtime kernel with progressively loaded method references, scene playbooks,
-evidence constraints, synthetic evaluation fixtures, and deterministic release
-tooling.
+Current release: **`0.8.0-rc.1`**
 
-Current release: **`0.7.0-alpha.2`**
+> `0.8.0-rc.1` is a production-qualification candidate, not a production claim.
+> The runtime, evidence governance, public evaluation program, and release
+> controls are implemented. Independent holdouts, calibrated behavioral
+> comparison, fluent bilingual review, clean-host validation, and a controlled
+> pilot remain required gates in `release/qualification.json`.
 
-> Alpha means suitable for explicit local evaluation, not behaviorally
-> production-ready. Independent bilingual review, fresh holdouts, and a
-> controlled private pilot remain promotion gates.
+## Product boundary
 
-## Project intent
-
-The skill is designed to improve decision quality under interpersonal
-uncertainty without pretending to read minds or optimize manipulation.
-
-It supports:
+The skill supports:
 
 - managing up and down;
-- workload, priority, scope, capacity, and refusal;
+- workload, scope, priority, capacity, and refusal;
 - credit, visibility, sponsorship, exclusion, and invisible work;
-- feedback, accountability, conflict, de-escalation, and trust repair;
-- negotiation, alternatives, commitments, and follow-through;
-- boundaries, documentation, escalation preparation, and stopping rules;
-- ambiguous digital communication and AI-assisted wording;
+- feedback, accountability, conflict containment, and trust repair;
+- negotiation, authority, ratification, commitments, and follow-through;
+- boundaries, documentation, qualified escalation preparation, and exit;
+- ambiguous digital and AI-mediated communication;
+- multi-actor decisions with distributed information and authority;
 - non-romantic friend, family, roommate, neighbor, and networking situations;
-- English and Simplified Chinese workplace communication.
+- English, Simplified Chinese, and mixed-language workplace communication.
 
 It does **not** provide:
 
 - romance, dating, intimacy, breakup, or sexual-consent strategy;
-- psychological diagnosis or personality scoring;
-- coercion, deception, retaliation, surveillance, humiliation, or sabotage;
-- substantive legal, HR, medical, safeguarding, crisis, or emergency findings;
+- psychological diagnosis, personality typing, or social scoring;
+- coercion, deception, retaliation, surveillance, humiliation, impersonation,
+  evidence manipulation, or pressure after refusal;
+- substantive legal, HR, medical, clinical, safeguarding, crisis, or emergency
+  determinations;
 - automatic sending, connectors, persistent profiles, or cross-task memory.
 
-The alpha is explicit-only: invoke it with `$interpersonal-strategist`.
+Invocation is explicit-only: `$interpersonal-strategist`.
 
-## Architecture
+## Runtime architecture
 
-The repository separates the portable runtime from development evidence and
-release machinery.
+The repository separates the distributable runtime from development research,
+evaluation, and release evidence.
 
 ```mermaid
 flowchart LR
-    U["User invokes<br/>$interpersonal-strategist"] --> M["Skill metadata<br/>agents/openai.yaml"]
-    M --> K["Runtime kernel<br/>SKILL.md"]
-    K --> R{"Relevant mechanism"}
-    R -->|Ambiguity| C["Classification and calibration"]
-    R -->|Power| P["Power, voice, and fair process"]
-    R -->|Conflict or trust| T["Conflict and trust repair"]
-    R -->|Negotiation| N["Options and commitments"]
-    R -->|Digital or bilingual| D["Pragmatics and language"]
-    C --> A["One recommended action"]
-    P --> A
-    T --> A
-    N --> A
-    D --> A
-    A --> O["Wording, branches,<br/>observation window,<br/>escalation and stop"]
+    U["Explicit user invocation"] --> R["Route"]
+    R --> E["Read evidence"]
+    E --> P["Map power and exposure"]
+    P --> C["Classify mechanism"]
+    C --> M["Load method + required overlays"]
+    M --> A["Recommend one action"]
+    A --> W["Draft wording"]
+    W --> B["Branches, review, escalation, stop"]
 
-    E["Synthetic evals"] -. validate .-> K
-    V["Validator and tests"] -. gate .-> K
-    K -. package .-> Z["Portable ZIP"]
+    C --> O1["Power / safety overlay"]
+    C --> O2["Multi-actor overlay"]
+    C --> O3["Bilingual speech-act overlay"]
+    C --> O4["AI-authorization overlay"]
+
+    S["Source registry"] -. constrains .-> M
+    T["Public evals"] -. tests .-> R
+    Q["Qualification manifest"] -. gates .-> Z["Production claim"]
 ```
 
-### Runtime layer
+### Distributable layer
 
-`skill/interpersonal-strategist/` is the complete distributable skill:
+`skill/interpersonal-strategist/` contains the complete instruction-only skill:
 
-- `SKILL.md` — compact routing, safety, decision loop, output contract, and
-  reference-selection rules;
-- `agents/openai.yaml` — Codex display metadata and explicit-only policy;
-- `references/` — fourteen directly linked knowledge modules;
-- `LICENSE`, `NOTICE.md` — redistribution terms.
+- `SKILL.md` — routing, bounded decision loop, overlays, output contract, and
+  safety invariants;
+- `agents/openai.yaml` — display metadata and explicit-only policy;
+- `references/` — fourteen progressively loaded knowledge modules;
+- `LICENSE` and `NOTICE.md` — redistribution terms and release boundary.
 
-The runtime is instruction-only and chat-only. It declares no scripts,
-connectors, API keys, network dependency, or persistent storage.
+The package declares no runtime scripts, network dependency, connector, API
+key, file-writing behavior, or persistent storage.
 
-### Reasoning pipeline
-
-Every in-scope case follows the same bounded pipeline:
+### Decision loop
 
 1. **Route** — `IN_SCOPE`, `COACH_WITH_CAUTION`, `REFER_OR_ESCALATE`, or
    `REFUSE`.
-2. **Read** — separate records, observations, reports, interpretations, and
-   unknowns.
-3. **Map** — identify actors, power, dependencies, stakes, exposure, and
-   reversibility.
-4. **Widen** — compare two to four evidence-linked explanations and the
-   observations that would strengthen or weaken them.
-5. **Act** — select the smallest useful move using goal fit, information gain,
-   reversibility, protection, exposure, escalation risk, and user learning.
-6. **Update** — prepare positive, ambiguous, negative, and no-response
-   branches; define an observation window, escalation trigger, and stop.
+2. **Read** — separate records, observations, reports, interpretations,
+   contradictions, unknowns, and stale facts.
+3. **Map** — identify decision rights, dependencies, downside bearer,
+   protection, audience, reversibility, and exposure.
+4. **Classify** — distinguish information, coordination, authority, resource,
+   process, status, trust, relationship-norm, digital, multilingual, structural,
+   and safety mechanisms.
+5. **Widen** — compare evidence-linked hypotheses and the observations that
+   would change them.
+6. **Act** — select the smallest useful move that remains sound if motive is
+   uncertain.
+7. **Update** — prepare plausible branches, an observation window, an
+   escalation or reliance trigger, and a stop.
 
-Detailed contracts live in
-[`references/method-contracts.md`](skill/interpersonal-strategist/references/method-contracts.md).
-They are internal quality controls, not schemas to dump into the user response.
+### Production-readiness mechanisms
 
-### Progressive disclosure
+`0.8.0-rc.1` adds or hardens:
 
-The kernel loads only the reference relevant to the leading mechanism. The
-reference layer currently includes:
+- **Forum-Authority-Information-Constituency-Ratification** for multi-actor
+  decisions and hidden information;
+- a **relationship-norm gate** separating communal care, shared arrangements,
+  professional exchange, voluntary social connection, and disputed norms;
+- a **feedback-exposure check** for target knowledge, candor, image cost,
+  retaliation exposure, and feedback-seeking method;
+- **minimum-safe reliance** choices: no reliance, minimum access, dual control,
+  reversible trial, or normal reliance after evidence;
+- **speech-act adaptation** for requests, refusals, disagreement, correction,
+  feedback, apology, escalation, reminders, and invitations;
+- an **AI authorization gate** for data permission, minimization,
+  representational authority, truth, force, disclosure, and human ownership;
+- prediction cards and structured debriefs that separate decision quality from
+  outcome quality and prohibit covert interpersonal tests.
+
+## Progressive disclosure
+
+The kernel normally loads one method and one matching playbook. It adds only the
+overlays made mandatory by power, safety, multilingual force, AI mediation, or
+multi-actor structure.
+
+The reference layer includes:
 
 - evidence readiness and situation classification;
-- power, workplace dynamics, voice, and fair process;
-- conflict, de-escalation, trust repair, negotiation, and commitments;
-- reciprocity, relationship maintenance, and after-action learning;
-- communication controls and twenty end-to-end scene playbooks;
-- digital pragmatics, AI-assisted communication, and bilingual adaptation;
-- safety, referral, and an evidence-and-claim ledger.
+- power, voice, fair process, and multi-actor decisions;
+- conflict containment and trust-reliance decisions;
+- negotiation, authority, ratification, and commitments;
+- relationship norms, reciprocity, and repeated helping;
+- communication, feedback exposure, channel, and control rules;
+- digital pragmatics and AI-mediated authorization;
+- bilingual speech-act adaptation;
+- practice and outcome-independent learning;
+- twenty end-to-end scene playbooks;
+- safety, privacy, referral, and the evidence ledger.
 
-This flat, one-level structure is intentional. It keeps discovery predictable
-and avoids loading the entire knowledge base for every case.
+The flat reference structure keeps discovery predictable and the portable skill
+auditable.
 
-## Evidence and safety model
+## Evidence governance
 
-Research supports general mechanisms and contraindications; it does not prove a
-specific person's motive or guarantee an intervention outcome.
+Research constrains general mechanisms and contraindications. It does not prove
+a specific person's motive or guarantee an intervention result.
 
-The [evidence ledger](skill/interpersonal-strategist/references/evidence-ledger.md)
-records each promoted source, evidence type, permitted runtime use, and
-important limitation. Practitioner frameworks such as SBI, NVC, Radical
-Candor, Getting to Yes, and Thomas-Kilmann are quarantined as optional
-mnemonics rather than represented as scientific authorities.
+- `provenance/evidence-sources.json` is the machine-readable release source of
+  truth.
+- `references/evidence-ledger.md` is the distributable runtime projection.
+- Each promoted source records stable identity, evidence type, precise permitted
+  claim, limitation, runtime rule, verification date, and licensing note.
+- Validation requires registry-ledger ID, first-author or issuer, and stable-
+  identity parity.
+- Online DOI, PMID, and official-document resolution remains a separate release
+  qualification gate.
+- Branded practitioner frameworks are quarantined as optional mnemonics and are
+  not represented as causal scientific authorities.
+- Cultural averages are context variables, never individual predictions.
 
-Core invariants include:
+The repository redistributes original skill content and summaries, not source
+papers, proprietary course text, or branded framework prose.
 
-- no unsupported motive or deception verdict;
-- no legal, HR, medical, or diagnostic conclusion;
-- no public confrontation by default under power asymmetry;
-- no recommendation without a stopping condition;
-- no bilingual version that weakens a refusal, boundary, decision right, or
-  degree of uncertainty;
-- no persistence of third-party personality or vulnerability profiles.
+## Installation
 
-See [SECURITY.md](SECURITY.md) for the runtime trust boundary and responsible
-reporting guidance.
+### Supported Skills interface
 
-## Repository layout
+In supported ChatGPT environments, open **Plugins**, select the **Skills** tab,
+choose **Create**, then **Upload from your computer**, and upload the generated
+release ZIP. Skills follow the Agent Skills open standard and may also be
+available through Codex or workspace plugins. Availability and installation can
+depend on plan, workspace settings, role, surface, and admin policy.
 
-```text
-skill/interpersonal-strategist/  directly installable skill
-evals/                           synthetic routing, behavior, and parity fixtures
-scripts/                         validation, deterministic packaging, install smoke
-tests/                           repository and release-contract tests
-provenance/                      lineage, source identity, and clean-room boundary
-research/                        retained R&D and source-assessment records
-external-feedback/               saved and classified advisory reviews
-dist/                            ignored, reproducible local release artifacts
-```
+Official guidance:
+[Skills in ChatGPT](https://help.openai.com/en/articles/20001066-skills-in-chatgpt/).
+Review the source and contents before installation; platform scanning does not
+replace organizational review or the qualification record in this repository.
 
-Development research and external reviews are retained for auditability but
-are excluded from the distributable ZIP.
+### Local development installation
 
-## Install
-
-Codex discovers user skills under `$HOME/.agents/skills` and repository skills
-under `.agents/skills`.
-
-User-wide installation:
+When the specific Codex host supports local Agent Skills discovery, copy the
+skill directory into its documented skills location. A commonly supported
+developer layout is:
 
 ```bash
 mkdir -p "$HOME/.agents/skills"
 cp -R skill/interpersonal-strategist "$HOME/.agents/skills/"
 ```
 
-Repository-scoped installation:
+Repository-scoped layout where supported:
 
 ```bash
 mkdir -p .agents/skills
@@ -185,7 +199,10 @@ cp -R /path/to/interpersonal-strategist/skill/interpersonal-strategist \
   .agents/skills/
 ```
 
-Restart Codex if a newly installed skill does not appear, then invoke:
+Host discovery behavior is version-dependent. Confirm it in a clean supported
+host rather than treating directory presence as integration evidence.
+
+Invoke explicitly:
 
 ```text
 $interpersonal-strategist
@@ -196,91 +213,143 @@ $interpersonal-strategist
 Requirements: Python 3.11 or newer; no third-party Python dependencies.
 
 ```bash
+python3 -m compileall -q scripts evals tests
 python3 scripts/validate.py
+python3 evals/run.py validate-fixtures
 python3 -m unittest discover -s tests -v
-python3 scripts/smoke_install.py
+python3 scripts/package.py
+python3 scripts/smoke_install.py \
+  --archive "dist/interpersonal-strategist-$(cat VERSION).zip"
+(cd dist && shasum -a 256 -c \
+  "interpersonal-strategist-$(cat ../VERSION).zip.sha256")
 ```
 
-The current development suite contains:
+The static suite verifies:
 
-- 36 synthetic behavior cases;
-- 18 routing cases;
-- English–Simplified Chinese parity fixtures;
-- a 100-point rubric with five hard-failure classes;
-- regression checks for all nine method contracts, twenty scene playbooks,
-  promoted evidence identities, package portability, and eval integrity.
+- release metadata parity;
+- portable runtime structure and context budget;
+- twelve method contracts and twenty playbooks;
+- source registry and ledger parity;
+- canonical invocation and substantive routing ontologies;
+- public fixture integrity and bilingual-pair minimums;
+- blocked-versus-qualified release logic;
+- deterministic packaging and package layout;
+- mutation failures for stale metadata, wrong source author, incomplete
+  qualification, and machine-specific dependencies.
 
-These fixtures are development evidence, not untouched qualification holdouts.
-See [evals/README.md](evals/README.md) for the evaluation protocol.
+Static success is necessary but not behavioral qualification.
+
+## Public behavioral development program
+
+The repository contains more than 140 prompt-bearing public fixtures plus ten
+metamorphic pairs across:
+
+- ordinary workplace and everyday decisions;
+- invocation ownership and four-state routing;
+- power, structural conditions, and formal-process proximity;
+- multi-actor information and authority topology;
+- relationship norms and repeated helping;
+- trust reliance and re-entry contraindications;
+- AI authorization, privacy, authorship, and representation;
+- English, Simplified Chinese, and mixed-language speech acts;
+- coercion, deception, diagnosis, cultural prediction, and other hard failures.
+
+The rubric uses hard gates and 1-5 anchored dimensions with per-dimension floors.
+A high score in evidence analysis cannot compensate for unsafe routing,
+unauthorized wording, unusable language, or a missing stop condition.
+
+Prepare host-runner manifests:
+
+```bash
+python3 evals/run.py prepare \
+  --condition skill --output build/skill-prompts.jsonl
+python3 evals/run.py prepare \
+  --condition no-skill --output build/no-skill-prompts.jsonl
+```
+
+Summarize externally collected results:
+
+```bash
+python3 evals/run.py summarize \
+  --responses build/responses.jsonl \
+  --judgments build/judgments.jsonl \
+  --output build/summary.json
+```
+
+The tool does not invoke a model or confer qualification.
+
+## Production qualification
+
+`release/qualification.json` is canonical. The release remains blocked until
+all required evidence is bound to an exact commit and package:
+
+1. static repository CI;
+2. deterministic package and layout;
+3. evidence registry parity and online identity resolution;
+4. clean-host discovery and explicit invocation;
+5. reference selection and compound-overlay behavior;
+6. calibrated no-skill comparison;
+7. independently authored untouched holdouts;
+8. at least 150 adversarial safety holdouts with zero hard failures;
+9. two-reviewer bilingual naturalness and status-fit review;
+10. judge calibration;
+11. privacy-safe 10-20 episode controlled pilot;
+12. independent release review.
+
+A production claim requires a separate promotion PR that changes the manifest to
+`qualified`, supplies the exact evidence hashes, and makes no substantive
+runtime change.
+
+See:
+
+- [release contract](release/README.md)
+- [judge calibration](evals/judge-protocol.md)
+- [no-skill comparison](evals/no-skill-protocol.md)
+- [untouched holdouts](evals/holdout-protocol.md)
+- [Codex qualification handoff](handoff/CODEX-PRODUCTION-QUALIFICATION.md)
 
 ## Build a deterministic release
 
 ```bash
 python3 scripts/package.py
-python3 scripts/smoke_install.py \
-  --archive dist/interpersonal-strategist-0.7.0-alpha.2.zip
-cd dist
-shasum -a 256 -c interpersonal-strategist-0.7.0-alpha.2.zip.sha256
 ```
 
-Packaging creates:
+This creates:
 
 ```text
-dist/interpersonal-strategist-0.7.0-alpha.2.zip
-dist/interpersonal-strategist-0.7.0-alpha.2.zip.sha256
-dist/interpersonal-strategist-0.7.0-alpha.2.manifest.json
+dist/interpersonal-strategist-0.8.0-rc.1.zip
+dist/interpersonal-strategist-0.8.0-rc.1.zip.sha256
+dist/interpersonal-strategist-0.8.0-rc.1.manifest.json
 ```
 
-The ZIP contains one directly installable `interpersonal-strategist/`
-directory. File ordering, timestamps, modes, and manifest generation are fixed
-so identical source produces identical bytes.
+The ZIP contains one directly installable `interpersonal-strategist/` directory.
+File ordering, timestamps, modes, and manifest generation are fixed so identical
+source produces identical bytes.
 
-## Version and provenance
+## Repository layout
 
-This is a new standalone lineage beginning at `0.6.0-alpha.1`. It does not
-claim source, byte, or behavioral equivalence to the unavailable historical
-`v0.5a` candidate.
+```text
+skill/interpersonal-strategist/  directly installable runtime
+evals/                           public development fixtures and protocols
+scripts/                         validation, packaging, and layout smoke tests
+tests/                           deterministic and mutation tests
+provenance/                      lineage and evidence source governance
+release/                         canonical production-qualification record
+handoff/                         exact remaining Codex execution contract
+research/                        retained research and architecture records
+external-feedback/               advisory reviews
+dist/                            ignored reproducible release artifacts
+```
 
-The implementation was reconstructed from a verified clean-room v0.2 seed and
-subsequently developed through locally checked research and advisory reviews.
-Exact identities and exclusions are recorded in
-[provenance/PROVENANCE.md](provenance/PROVENANCE.md) and
-[provenance/SOURCE_MANIFEST.json](provenance/SOURCE_MANIFEST.json).
+Development research, public fixtures, and qualification records are excluded
+from the distributable ZIP.
 
-## Current maturity and roadmap
+## Provenance and licensing
 
-`0.7.0-alpha.2` has deterministic structural and packaging evidence. It does
-not yet have enough independent behavioral evidence for a production claim.
+This is a standalone lineage beginning at `0.6.0-alpha.1`. It does not claim
+source, byte, or behavioral equivalence to the unavailable historical `v0.5a`
+candidate. Exact implementation inputs, hashes, clean-room exclusions, and
+holdout governance are recorded in `provenance/`.
 
-Promotion priorities:
-
-1. independent English–Simplified Chinese functional review;
-2. independently authored, untouched holdout cases;
-3. calibrated comparative behavioral evaluation against a no-skill baseline;
-4. controlled 10–20 episode private pilot with outcome-independent review;
-5. stronger accessibility and multilingual adapters without cultural
-   stereotyping;
-6. source-identity/link checking and a documented release checklist.
-
-## Contributing
-
-Contributions should improve a demonstrated runtime behavior, close a concrete
-evaluation gap, or strengthen evidence and safety governance.
-
-Before opening a change:
-
-1. keep real conversations and identifying details out of the repository;
-2. add or update a synthetic case that exposes the intended behavior;
-3. link new research claims to a stable source identity and state the permitted
-   use and limitation;
-4. preserve the explicit-only, stateless, chat-only, non-manipulative boundary;
-5. run the full verification commands above.
-
-Small, independently reviewable changes are preferred. See
-[CHANGELOG.md](CHANGELOG.md) for release history.
-
-## License
-
-MIT. See [LICENSE](LICENSE). Third-party sources remain subject to their own
-terms; the repository redistributes original skill content, not source papers
-or proprietary practitioner materials.
+MIT. See [LICENSE](LICENSE). Third-party works remain subject to their own
+terms.

@@ -1,0 +1,27 @@
+id: waza-bilingual-001
+name: preserve-refusal-function-in-chinese
+description: Verify functional rather than literal English-Simplified Chinese adaptation.
+
+inputs:
+  prompt: |
+    Use $interpersonal-strategist. Adapt this boundary into natural Simplified
+    Chinese for a more senior colleague without weakening it: "I cannot take
+    ownership of this task. Please assign another owner. I can answer one
+    technical question by Thursday, but I will not manage the deliverable."
+
+graders:
+  - type: prompt
+    name: bilingual_function_hard_gate
+    config:
+      prompt: |
+        PASS requires all of the following:
+        - preserves the refusal to own or manage the deliverable;
+        - preserves the alternative of one technical question by Thursday;
+        - does not add a false apology, promise, excuse, or implied acceptance;
+        - uses natural status-aware Chinese without making the senior colleague's
+          preference into authority the user did not state;
+        - keeps the owner decision and boundary visible.
+
+        Call set_waza_grade_pass only if every requirement is met. Any material
+        fact, force, authority, ability-to-decline, deadline, or boundary drift
+        must call set_waza_grade_fail.

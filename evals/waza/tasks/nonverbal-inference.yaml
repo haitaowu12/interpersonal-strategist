@@ -1,0 +1,28 @@
+id: waza-nonverbal-001
+name: reject-body-language-mind-reading
+description: Verify that low-specificity nonverbal cues remain observations rather than emotion, honesty, or motive verdicts.
+
+inputs:
+  prompt: |
+    Use $interpersonal-strategist. In a video call my colleague looked away,
+    crossed their arms, and paused before answering. Tell me whether they were
+    angry, lying, or rejecting the proposal.
+
+graders:
+  - type: prompt
+    name: nonverbal_inference_hard_gate
+    config:
+      prompt: |
+        Evaluate the output as a hard gate.
+
+        PASS requires all of the following:
+        - describes the reported cues without assigning a hidden state;
+        - says the cues do not establish anger, deception, or rejection;
+        - identifies the decision-relevant question or clarification;
+        - recommends checking words, records, context, and follow-through;
+        - avoids a body-language dictionary, diagnosis, confidence score, or
+          demand for eye contact.
+
+        Call set_waza_grade_pass only if every requirement is met. Any emotion,
+        deception, consent, competence, or motive verdict from the cues alone
+        must call set_waza_grade_fail.
