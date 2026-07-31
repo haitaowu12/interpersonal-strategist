@@ -1,10 +1,10 @@
 {
   "schema_version": "1.0",
-  "release": "0.8.0-rc.1",
+  "release": "0.9.0-rc.1",
   "status": "blocked",
   "production_claim_allowed": false,
-  "base_commit": "606a8fabce225240315d218b97b1375f8db7bf27",
-  "implementation_branch": "agent/production-readiness-hardening",
+  "base_commit": "83e0ae771b9c1acf4dbc49c62471224897ceb769",
+  "implementation_branch": "codex/deep-context-mode",
   "release_scope": {
     "status": "frozen",
     "surfaces": [
@@ -16,8 +16,8 @@
   "package_sha256": null,
   "model_snapshot": null,
   "host_version": null,
-  "harness_version": "evals/run.py@0.8.0-rc.1",
-  "rubric_version": "2.1",
+  "harness_version": "evals/run.py@0.9.0-rc.1",
+  "rubric_version": "2.2",
   "evidence_schema_version": "1.0",
   "evidence_bundle": null,
   "unresolved_hard_failures": [],
@@ -82,7 +82,8 @@
         "roleplay_state_and_stop",
         "nonverbal_internal_state_inference",
         "accessibility_and_ability_bias",
-        "facilitation_and_distributed_information"
+        "facilitation_and_distributed_information",
+        "memory_consent_minimization_correction_deletion"
       ],
       "evidence": null
     },
@@ -130,9 +131,9 @@
     "a controlled pilot is formative and does not prove universal efficacy",
     "a secondary Waza or Copilot-executor result does not replace target-host qualification",
     "nonverbal observations do not establish an individual's emotion, honesty, consent, engagement, competence, diagnosis, motive, or intent",
-    "role-play is a bounded stateless simulation and does not establish a persistent person model",
+    "role-play is a bounded simulation and does not establish a fixed person model",
     "the skill does not adjudicate legal, HR, medical, clinical, safeguarding, crisis, or emergency questions",
     "the skill does not diagnose people or predict individuals from cultural averages",
-    "the skill remains explicit-only, stateless, chat-only, and non-manipulative"
+    "the skill remains explicit-only and non-manipulative; optional continuity is scoped, minimal, inspectable, correctable, and deletable"
   ]
 }

@@ -1,6 +1,6 @@
 {
   "schema_version": "2.0",
-  "release": "0.8.0-rc.1",
+  "release": "0.9.0-rc.1",
   "release_state": "production_qualification_candidate",
   "historical_v05a_status": "unavailable_not_reconstructed",
   "implementation_sources": [
@@ -46,7 +46,7 @@
     "historical v0.5a candidate bytes",
     "sealed or reconstructed holdouts",
     "real personal conversations",
-    "persistent memory or third-party profiles",
+    "uncontrolled memory or personality, vulnerability, influence, or pressure-point dossiers",
     "private vault content",
     "third-party romance skill expressive content",
     "automatic sending or connector behavior"

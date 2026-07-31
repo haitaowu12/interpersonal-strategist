@@ -88,7 +88,7 @@ standards.
   "responses_sha256": "...",
   "judgments_sha256": "...",
   "judge_protocol_version": "1.0",
-  "rubric_version": "2.1",
+  "rubric_version": "2.2",
   "results_by_domain": {},
   "hard_failures": []
 }

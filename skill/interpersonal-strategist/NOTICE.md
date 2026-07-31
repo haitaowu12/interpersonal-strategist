@@ -1,6 +1,6 @@
 # Notice
 
-Interpersonal Strategist `0.8.0-rc.1`
+Interpersonal Strategist `0.9.0-rc.1`
 
 Copyright 2026 Tony Wu. Distributed under the MIT License.
 
@@ -21,10 +21,13 @@ papers, books, courses, standards, and proprietary framework text are not
 redistributed and remain subject to their own terms.
 
 This skill is instruction-level guidance. It does not enforce host permissions,
-automatically send messages, create persistent third-party profiles, or replace
-qualified legal, HR, medical, safeguarding, crisis, or emergency advice.
+automatically send messages or create personality, vulnerability, influence,
+loyalty, pressure-point, or social-status dossiers. Optional case memory is
+scoped, minimal, inspectable, correctable, and deletable through a host adapter.
+It does not replace qualified legal, HR, medical, safeguarding, crisis, or
+emergency advice.
 
-`0.8.0-rc.1` is a production-qualification candidate. A production claim is not
+`0.9.0-rc.1` is a production-qualification candidate. A production claim is not
 permitted until the repository qualification manifest records passing evidence
 for source resolution, host integration, comparative behavioral evaluation,
 independent untouched holdouts, bilingual review, and the controlled pilot gate.

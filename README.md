@@ -2,7 +2,7 @@
 
 [![CI](https://github.com/haitaowu12/interpersonal-strategist/actions/workflows/ci.yml/badge.svg)](https://github.com/haitaowu12/interpersonal-strategist/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Release candidate](https://img.shields.io/badge/release-0.8.0--rc.1-yellow.svg)](CHANGELOG.md)
+[![Release candidate](https://img.shields.io/badge/release-0.9.0--rc.1-yellow.svg)](CHANGELOG.md)
 
 `interpersonal-strategist` is a portable Agent Skill for workplace and
 non-romantic everyday interpersonal decisions. It helps a user distinguish
@@ -10,9 +10,9 @@ evidence from interpretation, map power and decision structure, compare
 plausible readings, choose a proportionate next move, and prepare wording with
 response branches and stopping rules.
 
-Current release: **`0.8.0-rc.1`**
+Current release: **`0.9.0-rc.1`**
 
-> `0.8.0-rc.1` is a production-qualification candidate, not a production claim.
+> `0.9.0-rc.1` is a production-qualification candidate, not a production claim.
 > The runtime, evidence governance, public evaluation program, and release
 > controls are implemented. Independent holdouts, calibrated behavioral
 > comparison, fluent bilingual review, clean-host validation, and a controlled
@@ -30,6 +30,8 @@ The skill supports:
 - boundaries, documentation, qualified escalation preparation, and exit;
 - ambiguous digital and AI-mediated communication;
 - multi-actor decisions with distributed information and authority;
+- adaptive quick, standard, and bounded deep-context interaction;
+- optional governed case memory using a host adapter or portable card;
 - non-romantic friend, family, roommate, neighbor, and networking situations;
 - English, Simplified Chinese, and mixed-language workplace communication.
 
@@ -41,7 +43,8 @@ It does **not** provide:
   evidence manipulation, or pressure after refusal;
 - substantive legal, HR, medical, clinical, safeguarding, crisis, or emergency
   determinations;
-- automatic sending, connectors, persistent profiles, or cross-task memory.
+- automatic sending, uncontrolled connectors, or personality, vulnerability,
+  influence, loyalty, pressure-point, or social-status dossiers.
 
 Invocation is explicit-only: `$interpersonal-strategist`.
 
@@ -54,7 +57,8 @@ evaluation, and release evidence.
 flowchart LR
     U["Explicit user invocation"] --> R["Route"]
     R --> E["Read evidence"]
-    E --> P["Map power and exposure"]
+    E --> D["Select quick / standard / deep context"]
+    D --> P["Map power and exposure"]
     P --> C["Classify mechanism"]
     C --> M["Load method + required overlays"]
     M --> A["Recommend one action"]
@@ -78,11 +82,12 @@ flowchart LR
 - `SKILL.md` — routing, bounded decision loop, overlays, output contract, and
   safety invariants;
 - `agents/openai.yaml` — display metadata and explicit-only policy;
-- `references/` — fourteen progressively loaded knowledge modules;
+- `references/` — sixteen progressively loaded knowledge modules;
 - `LICENSE` and `NOTICE.md` — redistribution terms and release boundary.
 
 The package declares no runtime scripts, network dependency, connector, API
-key, file-writing behavior, or persistent storage.
+key, or bundled database. Optional continuity uses only a host-provided memory
+adapter under the memory contract, with a portable card fallback.
 
 ### Decision loop
 
@@ -104,8 +109,13 @@ key, file-writing behavior, or persistent storage.
 
 ### Production-readiness mechanisms
 
-`0.8.0-rc.1` adds or hardens:
+`0.9.0-rc.1` adds or hardens:
 
+- **adaptive conversation depth** with automatic readiness checks, explicit
+  “grill me,” user-controlled quick mode, bounded rounds, and stop controls;
+- **governed continuity memory** with scoped consent, minimal case cards,
+  stale-fact verification, inspect/correct/forget controls, and no hidden
+  personality or vulnerability profiling;
 - **Forum-Authority-Information-Constituency-Ratification** for multi-actor
   decisions and hidden information;
 - a **relationship-norm gate** separating communal care, shared arrangements,
@@ -138,6 +148,7 @@ The reference layer includes:
 - digital pragmatics and AI-mediated authorization;
 - bilingual speech-act adaptation;
 - practice and outcome-independent learning;
+- deep-context elicitation, situational models, memory, and continuity;
 - twenty end-to-end scene playbooks;
 - safety, privacy, referral, and the evidence ledger.
 
@@ -317,9 +328,9 @@ python3 scripts/package.py
 This creates:
 
 ```text
-dist/interpersonal-strategist-0.8.0-rc.1.zip
-dist/interpersonal-strategist-0.8.0-rc.1.zip.sha256
-dist/interpersonal-strategist-0.8.0-rc.1.manifest.json
+dist/interpersonal-strategist-0.9.0-rc.1.zip
+dist/interpersonal-strategist-0.9.0-rc.1.zip.sha256
+dist/interpersonal-strategist-0.9.0-rc.1.manifest.json
 ```
 
 The ZIP contains one directly installable `interpersonal-strategist/` directory.
