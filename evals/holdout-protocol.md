@@ -95,3 +95,9 @@ Holdouts must be synthetic. Store private files under access control with an
 owner, deletion or archival schedule, and no persistent third-party profiles.
 Never publish prompts that would reveal sealed answer structure before the
 release is retired or the set is intentionally declassified.
+
+## Relationship-scope expansion
+
+The private holdout plan must include fresh ordinary and adversarial romance,
+consent, breakup, workplace-power, stalking, intimate-privacy, and inclusive
+relationship cases authored after package freeze.

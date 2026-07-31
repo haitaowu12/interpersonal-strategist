@@ -1,9 +1,11 @@
 # Relationship Norms, Reciprocity, and Maintenance
 
-Use this reference when the user asks whether a non-romantic relationship is
-one-sided, how much to invest, how to maintain a professional or social
-connection, whether to keep helping, or how to respond to repeated unmet
-commitments.
+Use this reference when the user asks whether a friendship, family, romantic,
+professional, household, or other ongoing relationship is one-sided; how much
+to invest; how to maintain connection; whether to keep helping; or how to
+respond to repeated unmet commitments. Add the romance and intimacy reference
+when attraction, exclusivity, sexual boundaries, breakup, or reconciliation is
+material.
 
 ## Classify the legitimate relationship norm first
 
@@ -16,13 +18,13 @@ supported norm:
   caregiving, or recurring work;
 - **professional exchange:** expectations follow role, deliverable, access,
   credit, or development;
-- **voluntary social connection:** obligation is low and contribution forms may
-  differ;
+- **voluntary social or romantic connection:** obligation follows the actual
+  agreement; contribution forms may differ;
 - **mixed or disputed norm:** participants appear to expect different types of
   relationship.
 
 Ask what obligation is explicit, reasonably shared, voluntary where choice
-exists, sustainable, and revisable. Do not turn friendship or temporary care
+exists, sustainable, and revisable. Do not turn friendship, romance, or temporary care
 into a ledger. Do not use communal language to hide chronic unagreed burden.
 
 ## Review events, not personal worth

@@ -2,13 +2,13 @@
 
 [![CI](https://github.com/haitaowu12/interpersonal-strategist/actions/workflows/ci.yml/badge.svg)](https://github.com/haitaowu12/interpersonal-strategist/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Release candidate](https://img.shields.io/badge/release-0.9.0--rc.1-yellow.svg)](CHANGELOG.md)
+[![Release candidate](https://img.shields.io/badge/release-0.10.0--rc.1-yellow.svg)](CHANGELOG.md)
 
 `interpersonal-strategist` is a portable Agent Skill for everyday interpersonal decisions. It helps a user distinguish evidence from interpretation, map power and decision structure, compare plausible readings, choose a proportionate next move, and prepare wording with response branches and stopping rules.
 
-Current release: **`0.9.0-rc.1`**
+Current release: **`0.10.0-rc.1`**
 
-> `0.9.0-rc.1` is a production-qualification candidate, not a production claim.
+> `0.10.0-rc.1` is a production-qualification candidate, not a production claim.
 > The runtime, evidence governance, public evaluation program, and release
 > controls are implemented. Independent holdouts, calibrated behavioral
 > comparison, fluent bilingual review, clean-host validation, and a controlled
@@ -18,29 +18,37 @@ Current release: **`0.9.0-rc.1`**
 
 The skill supports:
 
-- managing up and down;
-- workload, scope, priority, capacity, and refusal;
-- credit, visibility, sponsorship, exclusion, and invisible work;
-- feedback, accountability, conflict containment, and trust repair;
-- negotiation, authority, ratification, commitments, and follow-through;
-- boundaries, documentation, qualified escalation preparation, and exit;
-- ambiguous digital and AI-mediated communication;
-- multi-actor decisions with distributed information and authority;
+- workplace leadership, managing up and down, workload, credit, exclusion,
+  feedback, conflict, negotiation, and commitments;
+- friendship, family, roommates, neighbors, caregiving, networking, and shared
+  arrangements;
+- attraction, asking someone out, early dating, relationship definition,
+  exclusivity, partnership, jealousy, intimacy boundaries, breakup, distance,
+  and reconciliation;
+- consent-aware intimate communication and relationship decisions without
+  pretending to make a legal determination;
+- ambiguous chat, email, screenshot, digital, and AI-mediated communication;
+- multi-actor decisions, power, dependency, retaliation exposure, and workplace
+  romance;
 - adaptive quick, standard, and bounded deep-context interaction;
 - optional governed case memory using a host adapter or portable card;
-- non-romantic friend, family, roommate, neighbor, and networking situations;
-- English, Simplified Chinese, and mixed-language workplace communication.
+- English, Simplified Chinese, and mixed-language communication across these
+  settings.
 
-It does **not** provide:
+The remaining exclusions are tied to harm or authority, not to relationship
+category. The skill does **not** facilitate:
 
-- romance, dating, intimacy, breakup, or sexual-consent strategy;
-- psychological diagnosis, personality typing, or social scoring;
-- coercion, deception, retaliation, surveillance, humiliation, impersonation,
-  evidence manipulation, or pressure after refusal;
-- substantive legal, HR, medical, clinical, safeguarding, crisis, or emergency
-  determinations;
-- automatic sending, uncontrolled connectors, or personality, vulnerability,
-  influence, loyalty, pressure-point, or social-status dossiers.
+- coercion, sexual pressure, grooming, stalking, retaliation, surveillance,
+  humiliation, impersonation, evidence manipulation, or pressure after refusal
+  or withdrawal of consent;
+- sexual conduct involving minors, an adult-minor pursuit, or a person unable to
+  consent;
+- psychological diagnosis, unsupported person typing, or pseudo-precise social,
+  attraction, compatibility, loyalty, intimacy, or relationship scoring;
+- substantive legal, HR, medical, clinical, safeguarding, abuse, crisis, or
+  emergency determinations;
+- automatic sending, uncontrolled connectors, or personality, partner,
+  vulnerability, influence, loyalty, pressure-point, or social-status dossiers.
 
 Invocation is explicit-only: `$interpersonal-strategist`.
 
@@ -55,7 +63,8 @@ flowchart LR
     R --> E["Read evidence"]
     E --> D["Select quick / standard / deep context"]
     D --> P["Map power and exposure"]
-    P --> C["Classify mechanism"]
+    P --> V["Check authority / consent / voluntariness"]
+    V --> C["Classify mechanism"]
     C --> M["Load method + required overlays"]
     M --> A["Recommend one action"]
     A --> W["Draft wording"]
@@ -65,6 +74,7 @@ flowchart LR
     C --> O2["Multi-actor overlay"]
     C --> O3["Bilingual speech-act overlay"]
     C --> O4["AI-authorization overlay"]
+    C --> O5["Romance / consent overlay"]
 
     S["Source registry"] -. constrains .-> M
     T["Public evals"] -. tests .-> R
@@ -78,7 +88,7 @@ flowchart LR
 - `SKILL.md` — routing, bounded decision loop, overlays, output contract, and
   safety invariants;
 - `agents/openai.yaml` — display metadata and explicit-only policy;
-- `references/` — sixteen progressively loaded knowledge modules;
+- `references/` — seventeen progressively loaded knowledge modules;
 - `LICENSE` and `NOTICE.md` — redistribution terms and release boundary.
 
 The package declares no runtime scripts, network dependency, connector, API
@@ -94,8 +104,8 @@ adapter under the memory contract, with a portable card fallback.
 3. **Map** — identify decision rights, dependencies, downside bearer,
    protection, audience, reversibility, and exposure.
 4. **Classify** — distinguish information, coordination, authority, resource,
-   process, status, trust, relationship-norm, digital, multilingual, structural,
-   and safety mechanisms.
+   process, status, trust, relationship-norm, attraction, dating, intimacy,
+   separation, digital, multilingual, structural, consent, and safety mechanisms.
 5. **Widen** — compare evidence-linked hypotheses and the observations that
    would change them.
 6. **Act** — select the smallest useful move that remains sound if motive is
@@ -105,7 +115,7 @@ adapter under the memory contract, with a portable card fallback.
 
 ### Production-readiness mechanisms
 
-`0.9.0-rc.1` adds or hardens:
+`0.10.0-rc.1` adds or hardens:
 
 - **adaptive conversation depth** with automatic readiness checks, explicit
   “grill me,” user-controlled quick mode, bounded rounds, and stop controls;
@@ -114,8 +124,11 @@ adapter under the memory contract, with a portable card fallback.
   personality or vulnerability profiling;
 - **Forum-Authority-Information-Constituency-Ratification** for multi-actor
   decisions and hidden information;
-- a **relationship-norm gate** separating communal care, shared arrangements,
-  professional exchange, voluntary social connection, and disputed norms;
+- a **relationship-scope gate** covering communal care, shared arrangements,
+  professional exchange, friendship, dating, partnership, intimacy, separation,
+  reconciliation, and disputed norms;
+- **Voluntariness-Specificity-Reversibility** checks for romantic and intimate
+  decisions, including workplace and dependency overlays;
 - a **feedback-exposure check** for target knowledge, candor, image cost,
   retaliation exposure, and feedback-seeking method;
 - **minimum-safe reliance** choices: no reliance, minimum access, dual control,
@@ -139,13 +152,14 @@ The reference layer includes:
 - power, voice, fair process, and multi-actor decisions;
 - conflict containment and trust-reliance decisions;
 - negotiation, authority, ratification, and commitments;
-- relationship norms, reciprocity, and repeated helping;
+- relationship norms, reciprocity, repeated helping, dating, partnership,
+  intimacy, breakup, and reconciliation;
 - communication, feedback exposure, channel, and control rules;
 - digital pragmatics and AI-mediated authorization;
 - bilingual speech-act adaptation;
 - practice and outcome-independent learning;
 - deep-context elicitation, situational models, memory, and continuity;
-- twenty end-to-end scene playbooks;
+- twenty-seven end-to-end scene playbooks;
 - safety, privacy, referral, and the evidence ledger.
 
 The flat reference structure keeps discovery predictable and the portable skill
@@ -223,6 +237,8 @@ Requirements: Python 3.11 or newer; no third-party Python dependencies.
 python3 -m compileall -q scripts evals tests
 python3 scripts/validate.py
 python3 evals/run.py validate-fixtures
+python3 evals/persona_conversation.py validate
+python3 evals/relationship_scope.py validate
 python3 -m unittest discover -s tests -v
 python3 scripts/package.py
 python3 scripts/smoke_install.py \
@@ -235,7 +251,7 @@ The static suite verifies:
 
 - release metadata parity;
 - portable runtime structure and context budget;
-- twelve method contracts and twenty playbooks;
+- twelve method contracts and twenty-seven playbooks;
 - source registry and ledger parity;
 - canonical invocation and substantive routing ontologies;
 - public fixture integrity and bilingual-pair minimums;
@@ -248,18 +264,20 @@ Static success is necessary but not behavioral qualification.
 
 ## Public behavioral development program
 
-The repository contains more than 140 prompt-bearing public fixtures plus ten
+The repository contains more than 200 prompt-bearing public fixtures plus ten
 metamorphic pairs across:
 
 - ordinary workplace and everyday decisions;
 - invocation ownership and four-state routing;
 - power, structural conditions, and formal-process proximity;
 - multi-actor information and authority topology;
-- relationship norms and repeated helping;
+- relationship norms, dating, romance, intimacy, separation, reconciliation,
+  and repeated helping;
 - trust reliance and re-entry contraindications;
 - AI authorization, privacy, authorship, and representation;
 - English, Simplified Chinese, and mixed-language speech acts;
-- coercion, deception, diagnosis, cultural prediction, and other hard failures.
+- consent, coercion, refusal, stalking, manipulation, diagnosis, cultural
+  prediction, and other hard failures.
 
 The rubric uses hard gates and 1-5 anchored dimensions with per-dimension floors.
 A high score in evidence analysis cannot compensate for unsafe routing,
@@ -272,6 +290,10 @@ python3 evals/run.py prepare \
   --condition skill --output build/skill-prompts.jsonl
 python3 evals/run.py prepare \
   --condition no-skill --output build/no-skill-prompts.jsonl
+python3 evals/relationship_scope.py prepare \
+  --condition skill --output build/relationship-scope-skill-prompts.jsonl
+python3 evals/relationship_scope.py prepare \
+  --condition no-skill --output build/relationship-scope-no-skill-prompts.jsonl
 ```
 
 Summarize externally collected results:
@@ -297,7 +319,9 @@ all required evidence is bound to an exact commit and package:
 5. reference selection and compound-overlay behavior;
 6. calibrated no-skill comparison;
 7. independently authored untouched holdouts;
-8. at least 150 adversarial safety holdouts with zero hard failures;
+8. at least 150 adversarial safety holdouts with zero hard failures, including
+   romance, consent, breakup, stalking, workplace-romance, and intimate-privacy
+   strata;
 9. two-reviewer bilingual naturalness and status-fit review;
 10. judge calibration;
 11. privacy-safe 10-20 episode controlled pilot;
@@ -324,9 +348,9 @@ python3 scripts/package.py
 This creates:
 
 ```text
-dist/interpersonal-strategist-0.9.0-rc.1.zip
-dist/interpersonal-strategist-0.9.0-rc.1.zip.sha256
-dist/interpersonal-strategist-0.9.0-rc.1.manifest.json
+dist/interpersonal-strategist-0.10.0-rc.1.zip
+dist/interpersonal-strategist-0.10.0-rc.1.zip.sha256
+dist/interpersonal-strategist-0.10.0-rc.1.manifest.json
 ```
 
 The ZIP contains one directly installable `interpersonal-strategist/` directory.

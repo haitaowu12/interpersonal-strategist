@@ -31,6 +31,7 @@ REQUIRED_REFERENCES = {
     "pragmatics-and-digital-channels.md",
     "practice-and-after-action-learning.md",
     "reciprocity-and-relationship-maintenance.md",
+    "romance-dating-and-intimacy.md",
     "safety-and-referral.md",
     "scene-playbooks.md",
     "situation-classification-and-calibration.md",
@@ -77,7 +78,6 @@ CANONICAL_INVOCATION_LABELS = {
     "OWN_EXPLICIT",
     "DELEGATE_WRITING",
     "DELEGATE_TRANSLATION",
-    "ROMANCE_OUT_OF_SCOPE",
     "NOT_OWN",
 }
 CANONICAL_SUBSTANTIVE_ROUTES = {
@@ -99,7 +99,7 @@ EVIDENCE_REQUIRED_FIELDS = {
     "last_verified",
     "license_note",
 }
-MINIMUM_SCENE_PLAYBOOKS = 20
+MINIMUM_SCENE_PLAYBOOKS = 27
 MINIMUM_DEVELOPMENT_CASES = 36
 MINIMUM_BILINGUAL_PAIRS = 6
 FORBIDDEN_PORTABILITY_PATTERNS = {

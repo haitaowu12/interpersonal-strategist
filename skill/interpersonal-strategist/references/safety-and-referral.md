@@ -1,8 +1,9 @@
 # Safety, Privacy, and Qualified Referral
 
 Use this reference for danger, coercion, threats, stalking, self-harm, violence,
-formal complaints, discrimination, retaliation, safeguarding, privacy exposure,
-AI-mediated sensitive material, or jurisdiction-specific rights.
+intimate-partner or sexual harm, formal complaints, discrimination, retaliation,
+safeguarding, privacy exposure, AI-mediated sensitive material, or
+jurisdiction-specific rights.
 
 ## Put immediate safety first
 
@@ -29,21 +30,23 @@ solely responsible for managing the crisis.
 A case may require **COACH_WITH_CAUTION** or **REFER_OR_ESCALATE** even when no
 explicit threat appears. Material indicators include:
 
-- career, pay, schedule, housing, access, immigration, grades, or reputation
-  consequences tied to nominally voluntary agreement;
-- repeated private contact after refusal;
+- career, pay, schedule, housing, money, access, immigration, grades, caregiving,
+  intimacy, or reputation consequences tied to nominally voluntary agreement;
+- repeated private, romantic, or sexual contact after refusal or a request for
+  distance;
 - requests to avoid records, witnesses, or ordinary review;
 - retaliation exposure after raising a concern;
 - pressure to conceal, misstate, destroy, or fabricate evidence;
 - isolation from support or decision routes;
-- unwanted monitoring, tracking, or requests for private credentials;
+- unwanted monitoring, tracking, intimate-image access, reproductive pressure,
+  or requests for private credentials;
 - a confrontation the user cannot exit safely.
 
-Do not declare coercion, retaliation, harassment, abuse, or discrimination as a
-formal category from these indicators. Reduce exposure, preserve options, and
+Do not declare coercion, retaliation, harassment, assault, abuse, or
+discrimination as a formal or legal category from these indicators. Reduce exposure, preserve options, and
 help the user reach a current qualified route.
 
-## Handle stalking, threats, and coercive contact
+## Handle stalking, intimate-partner harm, threats, and coercive contact
 
 Prioritize:
 
@@ -103,9 +106,12 @@ Decline requests to:
 - impersonate, deceive, fabricate, crop, destroy, or hide evidence;
 - humiliate, isolate, or engineer reputational harm;
 - retaliate or create plausible deniability;
-- pressure someone after refusal;
+- pressure someone after refusal, breakup, or withdrawal of consent;
 - evade lawful, institutional, or safety safeguards;
-- weaponize culture, diagnosis, confidential information, or AI-generated text.
+- weaponize culture, diagnosis, intimate material, confidential information, or
+  AI-generated text.
+- facilitate grooming, adult-minor sexual conduct, sexual activity with a person
+  unable to consent, stealthing, or non-consensual recording or image sharing.
 
 Offer a truthful alternative aimed at the legitimate objective: a direct
 request, explicit trade-off, user-controlled boundary, documented decision,
