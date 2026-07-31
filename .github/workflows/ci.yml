@@ -69,6 +69,10 @@ jobs:
       - name: Record exact-subject build provenance
         run: python3 scripts/build_provenance.py --output build/build-provenance.json
 
+      - name: Snapshot exact source tree
+        if: matrix.python-version == '3.11'
+        run: git archive --format=zip --output=build/source-snapshot.zip HEAD
+
       - name: Smoke-test packaged layout
         run: python3 scripts/smoke_install.py --archive "dist/interpersonal-strategist-$(cat VERSION).zip"
 
@@ -91,6 +95,7 @@ jobs:
             build/persona-conversation-skill-prompts.jsonl
             build/persona-conversation-no-skill-prompts.jsonl
             build/build-provenance.json
+            build/source-snapshot.zip
             release/qualification.json
           retention-days: 30
 
