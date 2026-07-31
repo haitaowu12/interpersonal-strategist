@@ -1,14 +1,26 @@
 {
   "schema_version": "1.0",
-  "release": "0.9.0-rc.1",
+  "release": "0.10.0-rc.1",
   "status": "blocked",
   "production_claim_allowed": false,
-  "base_commit": "1a79694b38964002790a181cb864c84b9122f349",
-  "implementation_branch": "codex/deep-context-mode",
+  "base_commit": "d3008e2b1bc14ca1e74a8a6964dde8d4919d4954",
+  "implementation_branch": "agent/broaden-relationship-scope",
   "release_scope": {
     "status": "frozen",
     "surfaces": [
       "codex-desktop-personal-agent-skills"
+    ],
+    "covered_relationship_domains": [
+      "workplace",
+      "friendship",
+      "family",
+      "household",
+      "dating",
+      "romance",
+      "partnership",
+      "intimacy",
+      "breakup",
+      "reconciliation"
     ]
   },
   "qualification_commit": null,
@@ -16,7 +28,7 @@
   "package_sha256": null,
   "model_snapshot": null,
   "host_version": null,
-  "harness_version": "evals/run.py@0.9.0-rc.1",
+  "harness_version": "evals/run.py@0.10.0-rc.1",
   "rubric_version": "2.2",
   "evidence_schema_version": "1.0",
   "evidence_bundle": null,
@@ -83,7 +95,13 @@
         "nonverbal_internal_state_inference",
         "accessibility_and_ability_bias",
         "facilitation_and_distributed_information",
-        "memory_consent_minimization_correction_deletion"
+        "memory_consent_minimization_correction_deletion",
+        "romance_invitation_and_refusal",
+        "consent_withdrawal_and_incapacity",
+        "workplace_romance_and_power",
+        "breakup_stalking_and_contact_boundaries",
+        "intimate_privacy_and_media",
+        "inclusive_relationship_structures"
       ],
       "evidence": null
     },
@@ -130,10 +148,12 @@
     "public development fixtures are not untouched holdouts",
     "a controlled pilot is formative and does not prove universal efficacy",
     "a secondary Waza or Copilot-executor result does not replace target-host qualification",
-    "nonverbal observations do not establish an individual's emotion, honesty, consent, engagement, competence, diagnosis, motive, or intent",
+    "nonverbal and digital cues do not establish emotion, honesty, attraction, consent, relationship status, competence, diagnosis, motive, or intent",
     "role-play is a bounded simulation and does not establish a fixed person model",
-    "the skill does not adjudicate legal, HR, medical, clinical, safeguarding, crisis, or emergency questions",
-    "the skill does not diagnose people or predict individuals from cultural averages",
-    "the skill remains explicit-only and non-manipulative; optional continuity is scoped, minimal, inspectable, correctable, and deletable"
+    "the skill does not adjudicate legal, HR, medical, clinical, safeguarding, crisis, emergency, or legal-consent questions",
+    "the skill does not diagnose people or predict individuals from cultural, gender, typology, or symbolic averages",
+    "romance and intimacy are included, but coercion, refusal override, grooming, stalking, exploitation of incapacity, intimate-media misuse, and adult-minor sexual strategy remain prohibited",
+    "the skill remains explicit-only and non-manipulative; optional continuity is scoped, minimal, inspectable, correctable, and deletable",
+    "all earlier behavioral evidence must be reassessed for the expanded relationship scope before promotion"
   ]
 }

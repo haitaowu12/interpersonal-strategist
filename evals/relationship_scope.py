@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-"""Validate and prepare the public persona/conversation regression lane.
+"""Validate and prepare the public inclusive-relationship regression lane.
 
-This deterministic tool does not invoke a model, create a qualification
-holdout, or alter release/qualification.json.
+This deterministic adapter does not invoke a model, create untouched holdouts,
+or authorize a production claim.
 """
 
 from __future__ import annotations
@@ -17,28 +17,26 @@ from pathlib import Path
 from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
-FIXTURE = ROOT / "evals" / "persona-conversation-regressions.json"
+FIXTURE = ROOT / "evals" / "relationship-scope.json"
 SKILL_PREFIX = "Use $interpersonal-strategist. "
 LANGUAGES = {"en", "zh-CN", "mixed"}
+ROUTES = {"IN_SCOPE", "COACH_WITH_CAUTION", "REFER_OR_ESCALATE", "REFUSE"}
 REQUIRED_CATEGORIES = {
-    "source_integrity",
-    "avatar_inference",
-    "latency_inference",
-    "punctuation_inference",
-    "refusal_override",
-    "pseudo_precision",
-    "covert_test",
-    "face_truth",
-    "chinese_speech_act",
-    "group_attribution",
-    "accessibility",
-    "public_lens",
-    "role_lens",
-    "lens_correction",
-    "lens_evaluation",
-    "memory_boundary",
+    "invitation",
+    "ambiguous_interest",
+    "relationship_definition",
+    "consent_and_intimacy",
+    "jealousy_and_third_parties",
+    "breakup_and_contact",
+    "reconciliation",
+    "workplace_romance",
+    "inclusive_relationship_structure",
+    "typology_lens",
+    "safety_referral",
+    "privacy_and_intimate_media",
+    "minors_incapacity",
+    "refusal_and_manipulation",
     "bilingual_function",
-    "romance_safety",
 }
 CANONICAL_HARD_GATES = {
     "route",
@@ -55,7 +53,7 @@ CANONICAL_HARD_GATES = {
     "simulation_leakage",
     "control_failure",
 }
-ID_PATTERN = re.compile(r"^PC\d{2}$")
+ID_PATTERN = re.compile(r"^RS\d{2}$")
 
 
 def stable_json(value: Any) -> str:
@@ -98,13 +96,14 @@ def validate_fixture() -> list[str]:
     if payload.get("case_count") != len(cases):
         errors.append("case_count does not match cases")
     if len(cases) < 30:
-        errors.append("at least 30 persona/conversation cases are required")
+        errors.append("at least 30 relationship-scope cases are required")
 
     ids: list[str] = []
     prompts: list[str] = []
     categories: set[str] = set()
     languages: set[str] = set()
-    gate_counts: Counter[str] = Counter()
+    routes: Counter[str] = Counter()
+    gates: Counter[str] = Counter()
 
     for index, case in enumerate(cases, 1):
         label = f"case {index}"
@@ -113,7 +112,7 @@ def validate_fixture() -> list[str]:
             continue
         case_id = case.get("id")
         if not isinstance(case_id, str) or not ID_PATTERN.fullmatch(case_id):
-            errors.append(f"{label}: id must match PC##")
+            errors.append(f"{label}: id must match RS##")
         else:
             ids.append(case_id)
             label = case_id
@@ -127,6 +126,11 @@ def validate_fixture() -> list[str]:
             errors.append(f"{label}: category must be a non-empty string")
         else:
             categories.add(category)
+        route = case.get("expected_route")
+        if route not in ROUTES:
+            errors.append(f"{label}: invalid expected_route {route!r}")
+        else:
+            routes[route] += 1
         prompt = case.get("prompt")
         if not isinstance(prompt, str) or not prompt.strip():
             errors.append(f"{label}: prompt must be a non-empty string")
@@ -143,7 +147,7 @@ def validate_fixture() -> list[str]:
             unknown = sorted(set(hard_gates) - CANONICAL_HARD_GATES)
             if unknown:
                 errors.append(f"{label}: unknown hard gates: {', '.join(unknown)}")
-            gate_counts.update(hard_gates)
+            gates.update(hard_gates)
 
     duplicates = sorted(item for item, count in Counter(ids).items() if count > 1)
     if duplicates:
@@ -155,15 +159,12 @@ def validate_fixture() -> list[str]:
     missing = sorted(REQUIRED_CATEGORIES - categories)
     if missing:
         errors.append("missing required categories: " + ", ".join(missing))
-    for gate in (
-        "fabrication",
-        "harmful_tactic",
-        "memory_abuse",
-        "nonverbal_inference",
-        "bilingual_drift",
-    ):
-        if gate_counts[gate] < 2:
-            errors.append(f"hard gate {gate} requires at least two regression cases")
+    for route in ROUTES:
+        if routes[route] < 2:
+            errors.append(f"route {route} requires at least two cases")
+    for gate in ("harmful_tactic", "authority_boundary", "bilingual_drift"):
+        if gates[gate] < 2:
+            errors.append(f"hard gate {gate} requires at least two cases")
     return errors
 
 
@@ -197,7 +198,7 @@ def prepare(condition: str, output: Path) -> dict[str, Any]:
             if condition == "skill"
             else strip_explicit_invocation(case["prompt"])
         )
-        case_key = f"persona-conversation-regressions:{case['id']}"
+        case_key = f"relationship-scope:{case['id']}"
         run_id = hashlib.sha256(
             stable_json(
                 {"case_key": case_key, "condition": condition, "prompt": prompt}
@@ -214,12 +215,15 @@ def prepare(condition: str, output: Path) -> dict[str, Any]:
                 "source_file": FIXTURE.name,
                 "source_id": case["id"],
                 "expected_invocation": None,
-                "expected_substantive_route": None,
+                "expected_substantive_route": case["expected_route"],
                 "strata": sorted(
                     {
-                        "persona_conversation",
+                        "relationship_scope",
+                        "romance",
                         case["language"],
                         case["category"],
+                        case["expected_route"].lower(),
+                        *("consent" for _ in [0] if case["category"] in {"consent_and_intimacy", "minors_incapacity"}),
                         *case["hard_gates"],
                     }
                 ),

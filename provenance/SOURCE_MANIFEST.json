@@ -1,6 +1,6 @@
 {
   "schema_version": "2.0",
-  "release": "0.9.0-rc.1",
+  "release": "0.10.0-rc.1",
   "release_state": "production_qualification_candidate",
   "historical_v05a_status": "unavailable_not_reconstructed",
   "implementation_sources": [
@@ -23,6 +23,11 @@
       "name": "interpersonal-strategist-pro-followup-20260729.md",
       "role": "independent_adversarial_review_and_rnd_input",
       "sha256": "c104e9da2617e0ef6d7a8f4134519f69a3a14cb2fb340b6cbac997274425d37d"
+    },
+    {
+      "name": "relationship-scope-expansion-audit-20260730.md",
+      "role": "inclusive_relationship_scope_and_safety_architecture",
+      "sha256": "9076dab4b49c86a53c9742e808fc3f1865cc4ef893d9845d6362dcc9c00230ff"
     }
   ],
   "evidence_registry": {
@@ -48,7 +53,8 @@
     "real personal conversations",
     "uncontrolled memory or personality, vulnerability, influence, or pressure-point dossiers",
     "private vault content",
-    "third-party romance skill expressive content",
+    "restricted, unlicensed, or incompatible donor expressive content, including romance-skill prose and scripts",
+    "coercive dating or sexual tactics, refusal override, stalking, intimate-media misuse, and adult-minor or incapacity exploitation",
     "automatic sending or connector behavior"
   ]
 }

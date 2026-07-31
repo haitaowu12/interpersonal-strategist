@@ -1,7 +1,7 @@
 # Release Qualification
 
 `release/qualification.json` is the canonical promotion record. The current
-`0.9.0-rc.1` state is a production-qualification candidate, not a production
+`0.10.0-rc.1` state is a production-qualification candidate, not a production
 claim.
 
 ## Promotion rule
@@ -40,10 +40,13 @@ and an empty `unresolved_hard_failures` list.
 1. Freeze the candidate PR head without merging it.
 2. Build the deterministic ZIP and record its SHA-256.
 3. Verify source identities and registry parity.
-4. Run clean-host discovery, explicit invocation, and reference-selection tests.
+4. Run clean-host discovery, explicit invocation, and reference-selection tests,
+   including ordinary romance, consent, breakup, reconciliation, workplace
+   power, stalking, and intimate-privacy routes.
 5. Calibrate human and automated judges.
 6. Run blinded no-skill comparison.
-7. Run independently authored untouched and adversarial holdouts.
+7. Run independently authored untouched and adversarial holdouts, including
+   the expanded relationship and consent strata.
 8. Complete fluent English-Simplified Chinese review.
 9. Run the privacy-safe controlled pilot.
 10. Obtain independent release review.
@@ -52,7 +55,9 @@ and an empty `unresolved_hard_failures` list.
 13. Update the qualification manifest on a metadata-only promotion PR.
 
 A substantive runtime fix after steps 5-9 invalidates affected evidence and
-requires a fresh qualification tranche.
+requires a fresh qualification tranche. The `0.10.0-rc.1` relationship-scope
+expansion invalidates prior claims that did not test romance, intimacy, breakup,
+reconciliation, and their safety boundaries.
 
 ## Failure handling
 

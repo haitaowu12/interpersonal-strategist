@@ -72,7 +72,7 @@ def make_qualified_manifest(project: Path) -> dict:
                 "package_sha256": package_sha,
                 "rubric_version": "2.2",
                 "judge_protocol_version": "1.0",
-                "harness_version": "evals/run.py@0.9.0-rc.1",
+                "harness_version": "evals/run.py@0.10.0-rc.1",
             },
         }
     )
@@ -143,7 +143,7 @@ class ProjectTests(unittest.TestCase):
         self.assertEqual(validate_repository(PROJECT_ROOT), [])
 
     def test_release_candidate_pep440_conversion(self) -> None:
-        self.assertEqual(version_to_pep440("0.9.0-rc.1"), "0.9.0rc1")
+        self.assertEqual(version_to_pep440("0.10.0-rc.1"), "0.10.0rc1")
         self.assertEqual(version_to_pep440("1.2.3-alpha.4"), "1.2.3a4")
         self.assertEqual(version_to_pep440("1.2.3-beta.2"), "1.2.3b2")
         self.assertEqual(version_to_pep440("1.2.3"), "1.2.3")
@@ -179,6 +179,10 @@ class ProjectTests(unittest.TestCase):
         )
         self.assertIn(
             "interpersonal-strategist/references/memory-and-continuity.md",
+            names,
+        )
+        self.assertIn(
+            "interpersonal-strategist/references/romance-dating-and-intimacy.md",
             names,
         )
         self.assertNotIn("README.md", names)
@@ -236,7 +240,7 @@ class ProjectTests(unittest.TestCase):
             project = copy_project(Path(raw))
             notice = project / "skill" / "interpersonal-strategist" / "NOTICE.md"
             notice.write_text(
-                notice.read_text(encoding="utf-8").replace("0.9.0-rc.1", "0.7.0-alpha.2"),
+                notice.read_text(encoding="utf-8").replace("0.10.0-rc.1", "0.7.0-alpha.2"),
                 encoding="utf-8",
             )
             errors = validate_repository(project)
