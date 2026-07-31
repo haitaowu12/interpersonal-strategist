@@ -3,7 +3,7 @@
   "release": "0.9.0-rc.1",
   "status": "blocked",
   "production_claim_allowed": false,
-  "base_commit": "83e0ae771b9c1acf4dbc49c62471224897ceb769",
+  "base_commit": "1a79694b38964002790a181cb864c84b9122f349",
   "implementation_branch": "codex/deep-context-mode",
   "release_scope": {
     "status": "frozen",
