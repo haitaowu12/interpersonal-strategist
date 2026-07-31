@@ -4,11 +4,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Release candidate](https://img.shields.io/badge/release-0.9.0--rc.1-yellow.svg)](CHANGELOG.md)
 
-`interpersonal-strategist` is a portable Agent Skill for workplace and
-non-romantic everyday interpersonal decisions. It helps a user distinguish
-evidence from interpretation, map power and decision structure, compare
-plausible readings, choose a proportionate next move, and prepare wording with
-response branches and stopping rules.
+`interpersonal-strategist` is a portable Agent Skill for everyday interpersonal decisions. It helps a user distinguish evidence from interpretation, map power and decision structure, compare plausible readings, choose a proportionate next move, and prepare wording with response branches and stopping rules.
 
 Current release: **`0.9.0-rc.1`**
 
