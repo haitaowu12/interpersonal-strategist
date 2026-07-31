@@ -1,181 +1,397 @@
-# Pragmatics, Digital Channels, and AI-Mediated Communication
+# Pragmatics, Conversation Evidence, and Digital Channels
 
-Use this reference when meaning depends on shared context, conversational
-repair, email or chat tone, response timing, channel choice, mixed media, or
-AI-assisted wording.
+Use this reference when meaning depends on wording, sequence, channel, timing,
+audience, multilingual force, screenshots, chat logs, email threads, or a
+request to apply a named person's perspective.
 
-## Treat understanding as coordinated work
+The purpose is not to decode hidden psychology. It is to reconstruct the
+observable interaction, locate the unresolved decision, and choose the smallest
+clarification or action that remains sound under uncertainty.
 
-A message being sent does not prove that the same meaning was received. Before
-inferring motive, check:
+## Start with permission and source integrity
 
-- what each person could reasonably know;
-- whether the referent, decision, standard, owner, or deadline was explicit;
-- whether the receiver showed understanding through a relevant next action,
-  acknowledgment, paraphrase, or correction;
-- whether apparent disagreement is a different definition, timeline, audience,
-  authority assumption, or decision rule;
-- which smallest repair would restore enough common ground for the next action.
+Before analyzing a conversation:
 
-Useful repairs:
+- confirm that the user is authorized to share it;
+- minimize names, identifiers, health details, secrets, and unrelated third-
+  party content;
+- ask whether the material is complete, cropped, edited, OCR-transcribed,
+  translated, forwarded, or summarized;
+- distinguish original text from the user's recollection or paraphrase;
+- identify speakers, sequence, timestamps and time zone when timing matters;
+- note missing turns, deleted messages, attachments, reactions, thread forks,
+  and channel changes;
+- do not request more content than the decision requires.
 
-- “When you say ___, do you mean ___ or ___?”
-- “Let me check that I understood the decision: ___.”
-- “I think we are using ___ differently. My working definition is ___.”
-- “Which part of this recap is inaccurate or still unresolved?”
+If speaker attribution, wording, or sequence is uncertain, carry that
+uncertainty into the interpretation. Do not silently repair OCR or translation
+errors into a stronger claim.
 
-Ground only what is needed for the decision or relationship function. Do not
-demand exhaustive mutual understanding.
+## Build a Conversation Evidence Table
 
-## Separate conveyance from convergence
+Use a compact table only when it changes the decision:
 
-**Conveyance** supports inspection and processing of information. It often
-benefits from asynchronous text, records, diagrams, or material sent in advance.
+| Turn | Source and speaker | Observable speech act | Operational effect | Uncertainty |
+|---|---|---|---|---|
+| Exact or bounded excerpt | Original, forwarded, OCR, report | Request, question, refusal, acceptance, commitment, correction, repair, closure, reopening | What changed in ownership, scope, authority, decision, deadline, boundary, or next action | Missing context, attribution, translation, edit, ambiguity |
 
-**Convergence** develops shared meaning, trades conditions, resolves ambiguity,
-or repairs. It often benefits from timely back-and-forth.
+Do not reproduce unnecessary private material. Paraphrase when exact wording is
+not needed; preserve exact force when a refusal, commitment, boundary,
+authorization, or disputed record is material.
 
-A material hybrid sequence is:
+## Weight evidence without inventing precision
 
-1. send facts, agenda, options, or disputed terms in writing;
-2. hold a bounded conversation for questions and convergence;
-3. confirm decisions, owners, dates, authority, and unresolved items in writing;
-4. allow a defined factual-correction window.
+Prefer, in order:
 
-Do not move automatically to a call. Stay asynchronous when live exchange would
-increase coercion, accessibility barriers, language disadvantage, privacy risk,
-or loss of an important record.
+1. explicit words, records, decisions, and boundaries;
+2. observable action and follow-through;
+3. repeated local comparisons under similar conditions;
+4. channel and sequence context;
+5. weak metadata such as delay, message length, punctuation, emoji, reactions,
+   camera state, or style shifts.
 
-## Read digital signals conservatively
+Avatar, profile picture, appearance, accent, gaze, posture, and facial movement
+are not evidence of personality, honesty, attraction, consent, competence, or
+motive.
 
-Short wording, punctuation, delayed replies, read receipts, missing emoji, and
-channel changes can carry relational meaning but are noisy.
+Do not convert any of these inputs into a numerical intent, attraction, social-
+power, compliance, loyalty, manipulability, deception, intimacy, or
+relationship score. Decimal precision does not make an unsupported construct
+valid.
 
-1. quote the exact cue;
-2. compare it with an established local norm only if the user knows that norm;
-3. generate mundane, structural, and relational explanations;
-4. identify the operational decision hidden behind the tone question;
-5. ask one low-cost question or state a time-bounded operating assumption;
-6. update from follow-through and pattern, not punctuation alone.
+## Classify the observable interaction state
 
-Do not convert silence, latency, formality, or a terse message into rejection,
-hostility, dishonesty, or a status verdict.
+Use states as descriptions of the exchange, not psychological stages:
 
-Text can create overconfidence that intended tone is obvious. For loaded
-messages remove sarcasm, ambiguous humor, mind-reading, rhetorical questions,
-and claims about how the receiver “must” feel. Make the purpose and request
-explicit.
+- **OPEN** — a topic or request has been introduced without disposition;
+- **CLARIFY** — a referent, condition, authority, or meaning is being repaired;
+- **PROPOSE** — an option, request, or term is on the table;
+- **ACCEPT** — the stated proposal is accepted within a defined scope;
+- **DECLINE** — the stated proposal is refused;
+- **COMMIT** — owner, action, and timing are sufficiently specified;
+- **REPAIR** — an error, injury, misunderstanding, or failed commitment is being
+  addressed;
+- **CLOSE** — the issue is ended, deferred under a stated condition, or moved to
+  a new forum;
+- **REOPEN** — a participant explicitly reintroduces the issue or proposes a new
+  term.
 
-## Switch channels by failure mode
+A normal reply, friendly tone, later conversation, or continued relationship
+does not automatically move a declined proposal back to OPEN or PROPOSE.
 
-Move toward a bounded live conversation when:
+Identify:
 
-- a text exchange lengthens without reducing ambiguity;
-- each reply creates a new interpretation;
-- several issues must be traded together;
-- repair depends on interaction rather than a record alone.
+- the latest unambiguous state;
+- the turning point that produced it;
+- the unresolved operational question;
+- the one clarification that would change action;
+- the stop condition if clarification is not obtained.
 
-Move toward written form when:
+## Refusal and consent invariant
 
-- ownership, dates, commitments, authority, or evidence matter;
-- live conversation produces pressure or memory disputes;
-- accessibility or language processing benefits from time;
-- the user needs a neutral recap;
-- uniquely held information should be collected before group convergence.
+An explicit refusal remains controlling for the refused request unless the
+person later reopens that request through clear, voluntary words or action.
 
-Name the reason and agenda:
+Never override a refusal because:
 
-> We are interpreting the sequence differently, and more email is not resolving
-> it. Could we use 20 minutes tomorrow for the three disputed steps? I will
-> confirm the decisions and open items afterward.
+- the person is polite afterward;
+- they continue another conversation;
+- the refusal may preserve face;
+- they previously invested time, money, attention, or emotion;
+- response timing, emoji, message length, or body language appears favorable;
+- a formula assigns more weight to inferred behavior than explicit language;
+- the user believes the person is “testing” them.
 
-## Apply the AI authorization gate before drafting
+Do not recommend repeated asks, strategic delay, jealousy, silence, social
+pressure, sunk-cost escalation, or a “compliance ladder.” When the user still
+needs an operational answer, ask one bounded clarification only if the original
+message is genuinely ambiguous and the exposure is proportionate.
 
-AI-assisted wording is a draft under the user's responsibility, not a substitute
-speaker. Check in this order:
+## Ground the minimum needed meaning
 
-1. **Data authorization:** may the user provide this source material to an AI
-   system under law, contract, policy, confidentiality, and relationship norms?
-2. **Minimization:** which identifiers, private details, attachments, or history
-   can be removed without changing the decision?
-3. **Representational authority:** may the user speak for every named team,
-   manager, client, witness, or institution?
-4. **Truth:** are all facts, feelings, consensus claims, firsthand claims,
-   promises, and authority statements accurate?
-5. **Voice:** would the user say this and understand its implications?
-6. **Force:** did the draft become more coercive, submissive, certain,
-   accusatory, or pseudo-legal?
-7. **Specificity:** is there one real request, decision, boundary, remedy, or
-   next step?
-8. **Disclosure and policy:** do material stakes, institutional rules, or trust
-   norms require disclosure or human review?
-9. **Ownership:** can the user defend and carry out every sentence?
+Grounding is mutual evidence that the parties understand enough for the next
+action. Ground only the decision-relevant element:
 
-If authorization is absent or uncertain, do not request the material. Ask for a
-minimal abstracted description or advise the user to use an approved internal
-process. Do not paste confidential investigation notes, identifiable personnel
-records, private health information, client secrets, or unrelated third-party
-messages merely to improve prose.
+- referent;
+- owner;
+- scope;
+- standard;
+- authority;
+- deadline;
+- boundary;
+- remedy;
+- next forum.
 
-## Prevent representational overreach
+Examples:
 
-Do not draft:
+> When you say “the revised version,” do you mean the ten-slide verified deck or
+> the full deck?
 
-- “we all agree” without evidence and authority;
-- a manager's, witness's, client's, or institution's position in their voice;
-- firsthand knowledge the user does not possess;
-- emotional claims the user does not endorse;
-- a promise the user lacks authority or capacity to perform;
-- an apparently voluntary request that conceals career, financial, or access
-  consequences.
+> I want to confirm the decision: are you approving option B, or asking us to
+> prepare it for the director's approval?
 
-Replace overreach with bounded attribution:
+Do not ask for motive when a decision, constraint, or authority clarification
+will resolve the problem.
 
-> My understanding from the meeting is ___. I am confirming only my team's
-> position. The decision owner still needs to confirm ___.
+## Separate receipt, understanding, agreement, and commitment
 
-## Check authenticity and disclosure stakes
+These are different states:
 
-AI assistance is not automatically harmful or automatically disclosure-worthy.
-Consider:
+1. **receipt** — the message was seen or acknowledged;
+2. **understanding** — the recipient can restate the meaning;
+3. **agreement** — the recipient accepts the proposition or request;
+4. **commitment** — an authorized owner accepts an observable action and timing;
+5. **completion** — the agreed result was delivered and verified.
 
-- whether the draft changes substantive authorship or only edits language;
-- whether the relationship expects personal expression;
-- whether automation would materially affect trust;
-- whether policy, professional duty, or publication rules apply;
-- whether the user has substantially reviewed and rewritten the content.
+Read receipts, reactions, `收到`, “got it,” “noted,” or “OK” may establish only
+receipt. Context may make them stronger, but do not assume that without a
+decision-relevant basis.
 
-When disclosure is material, use a factual statement rather than a defensive
-explanation. Do not claim a universal disclosure threshold.
+`可以` or “that works” may express permission, feasibility, or agreement. When
+implementation matters, confirm what is allowed or accepted, by whom, for what
+scope, and by when.
+
+`回头看`, `有空再说`, `再看看`, “later,” or “let's revisit” do not create an
+executable commitment unless a review condition, owner, or date is supplied.
+
+`没事`, “it's fine,” or a quick return to normal conversation does not prove
+emotional resolution, waive a boundary, restore trust, or close a disputed
+operational issue. Check the observable remedy or decision instead of assigning
+an internal state.
+
+These examples are context-sensitive speech-act cautions, not national or
+language-based personality rules.
+
+## Use truthful face-preserving communication
+
+Face, dignity, and status can affect how a message is received. Preserve them
+through:
+
+- private rather than public correction when the record permits;
+- a real choice or bounded decline;
+- specific behavior and impact rather than character judgment;
+- a factual bridge to the next step;
+- acknowledgement of authority, contribution, or constraint when supported;
+- an opportunity for self-correction;
+- a record that does not humiliate.
+
+Do not preserve face by inventing a false excuse, fake deadline, fabricated
+third-party constraint, false consensus, or pretend consent. A face-preserving
+path must remain truthful and must not conceal a material consequence.
+
+Examples:
+
+> I may be missing context. The current note assigns the decision to me, but the
+> charter assigns it to the design authority. Could we correct the record before
+> circulation?
+
+> I cannot take the full task this week. I can review the risk section by
+> Thursday, or we can move the full review to Monday.
+
+## Treat latency and digital tone conservatively
+
+Response time depends on workload, channel use, time zone, accessibility,
+language proficiency, notification settings, relationship norms, and many
+unobserved constraints.
+
+Use latency only as:
+
+- an operational constraint if the user needs a response by a real deadline;
+- a repeated local comparison when comparable conditions are known;
+- a trigger to change channel or clarify ownership after a defined window.
+
+Do not use latency to infer attraction, status, power, avoidance, deception,
+commitment, or emotion.
+
+Punctuation, emoji, capitalization, short replies, and reaction icons can alter
+tone but are low-specificity evidence. Ask what decision they change. If none,
+do not analyze them.
+
+## Choose channel by communication task
+
+Use the distinction:
+
+- **conveyance** — transmitting information that can be reviewed;
+- **convergence** — reaching shared meaning or resolving ambiguity.
+
+Prefer asynchronous text for:
+
+- records, proposals, options, criteria, boundaries, and commitments;
+- information that benefits from reflection or translation;
+- situations where audience and wording control exposure.
+
+Prefer synchronous exchange for:
+
+- rapid repair of a bounded misunderstanding;
+- emotionally heated exchanges where text is compounding ambiguity;
+- several interdependent questions that cannot be resolved turn by turn.
+
+Use a hybrid sequence when both matter:
+
+1. send a brief agenda or factual record;
+2. hold a bounded call with named decision questions;
+3. circulate decisions, owners, open items, and review points.
+
+Channel switching is not escalation by itself. State the purpose and preserve an
+accessible alternative.
+
+## Handle group chats and forwarded messages
+
+Check:
+
+- who is in the audience and who is missing;
+- whether the message represents one person or a group;
+- whether an apparent consensus was explicitly obtained;
+- whether a forwarded excerpt changed context;
+- whether lower-power participants can correct the record safely;
+- who has authority to decide, commit, or speak for others;
+- whether a private clarification should precede a public correction.
+
+Do not infer agreement from silence, reaction counts, or an authority figure's
+summary. Do not attribute a group message to every member.
+
+## Apply source-bounded perspective lenses
+
+A public-person, mentor, manager, customer, or recipient lens is a bounded
+decision aid, not an identity simulation.
+
+Use the lightest lens:
+
+### Role or recipient lens
+
+Ask what the role must consider:
+
+- objective and decision rights;
+- information needed;
+- implementation burden;
+- risk and downside;
+- criteria and constraints;
+- likely objections that follow from the role, not guessed personality.
+
+### Source-bounded public perspective lens
+
+Create a Lens Card:
+
+- **scope:** the decision and use case;
+- **source window:** exact public materials and dates inspected;
+- **supported rule:** a documented priority or decision heuristic;
+- **basis:** direct decision, dated writing, full interview, or other source;
+- **tension:** contradiction, exception, or change over time;
+- **application:** how the rule changes the user's option set;
+- **limit:** what cannot be inferred;
+- **alternative:** another reasonable lens;
+- **update:** evidence that would change the application.
+
+Distill rules as:
+
+> When [context], prioritize [criterion], avoid [failure], choose [action],
+> unless [exception].
+
+Prefer:
+
+1. documented decisions and contemporaneous records;
+2. dated first-party writing or complete interviews;
+3. repeated source-backed explanations;
+4. reputable third-party reporting;
+5. summaries and quotations with traceable context;
+6. style cues and fan interpretation only as low-value comparison material.
+
+Do not:
+
+- write in a named person's first-person voice as if they are present;
+- claim current endorsement, private thoughts, hidden motives, or a fixed
+  personality;
+- turn MBTI, attachment style, astrology, archetype, nationality, avatar, or
+  appearance into evidence;
+- let catchphrase fidelity substitute for judgment quality;
+- treat correction as proof that the original lens was right;
+- persist a third-party lens or transcript-derived dossier;
+- present a donor repository as scientific evidence.
+
+When evidence is insufficient, state the boundary and use a role lens or a
+general mechanism instead.
+
+## Prediction and correction
+
+A lens or interpretation should be corrigible.
+
+Before an observable outcome, record only when useful:
+
+- prediction;
+- confidence band;
+- evidence basis;
+- credible alternative;
+- what would falsify or update it;
+- decision that depends on it.
+
+Afterward, compare the prediction with the result without converting one
+successful outcome into a personality truth. Use held-out decisions when
+evaluating a public perspective lens; do not train on every case and then score
+the same cases.
+
+A user correction changes the record. Do not reinterpret the correction as
+resistance, defensiveness, or hidden confirmation.
+
+## AI-mediated wording and authorization
+
+Before drafting or transforming a message, check:
+
+- authorization to use the source material;
+- data minimization;
+- representational authority;
+- factual truth;
+- intended force;
+- voice and authorship;
+- disclosure stakes;
+- human ownership and review.
+
+Do not fabricate authorship or consensus, impersonate another person, or draft a
+message that claims a decision the user cannot make.
 
 ## Response branches
 
-- **Positive:** confirm actual understanding, authority, owner, date, and record.
-- **Ambiguous:** ask one forced-choice or bounded clarification.
-- **Negative:** separate substance, authority, channel, and tone objections.
-- **No response:** use one deadline-supported follow-up or stated operating
-  assumption, then apply the stop rule.
+Create branches only when the reply changes action.
 
-The success criterion is not a warm reply. It is enough shared understanding and
-authorized commitment to make the next decision safely and honestly.
+- **clear agreement with authority:** compile owner, action, date, dependency,
+  warning point, record, and review;
+- **agreement without authority:** seek ratification rather than treating it as
+  binding;
+- **acknowledgment only:** ask the smallest commitment question if needed;
+- **constraint:** adjust scope, timing, resources, or alternative;
+- **ambiguous deferral:** define a review condition or close the loop;
+- **decline:** respect it and use the user's alternative;
+- **hostility or retaliation:** reduce exposure and use the appropriate support
+  or formal route;
+- **no response:** act after the preselected window; do not chase indefinitely.
 
 ## Failure modes
 
-- requesting unnecessary confidential material;
-- treating an AI draft as evidence about another person's motive;
-- fabricating consensus, feeling, authorship, or authority;
-- using polish to launder coercion, deception, retaliation, or pseudo-legal
-  threats;
-- moving to a call when loss of record or live pressure increases exposure;
-- interpreting digital latency as hostility;
-- treating disclosure as always required or never required;
-- sending text the user cannot explain or implement.
+- reconstructing missing turns as facts;
+- converting a screenshot into a personality assessment;
+- reading avatar, latency, punctuation, or emoji as internal-state proof;
+- assigning decimal scores to invented social constructs;
+- overriding explicit refusal with inferred behavior;
+- describing sunk cost or repeated compliance as consent;
+- using a fake excuse to preserve face;
+- translating sentence shape while changing authority or force;
+- treating `收到` as approval or a vague future phrase as a commitment;
+- forcing synchronous contact when a record, accessibility, or safety need
+  favors text;
+- first-person imitation of a named person;
+- retaining a third-party transcript or lens as a dossier;
+- using one successful prediction to validate a fixed person model.
 
 ## Evidence boundary
 
-Grounding, media-synchronicity, digital-tone, telework-norm, AI-mediated
-communication, and NIST risk-management sources support these checks at a
-general level. They do not establish motive, mandate a channel, or set one
-universal AI-disclosure policy. See `DIGITAL-01`, `DIGITAL-02`,
-`PRAGMATICS-01`, `CHANNEL-01`, `AI-COMM-01`, `AI-COMM-02`, and `AI-GOV-01` in
-the evidence ledger.
+Grounding and channel selection are practitioner applications of communication
+theory, not mind-reading tools. Cross-cultural pragmatics supports preserving
+speech-act function and attending to role, imposition, forum, proficiency, and
+local history; it does not support national scripts or person-level prediction.
+Digital-tone and latency evidence support caution, not a decoding algorithm.
+Conversation-analysis concepts such as sequence, repair, and turn organization
+are used here as descriptive aids and are not promoted as a diagnostic or
+behavioral-scoring instrument.
+
+See `DIGITAL-01`, `DIGITAL-02`, `PRAGMATICS-01`, `PRAGMATICS-02`,
+`PRAGMATICS-03`, `CHANNEL-01`, `AI-COMM-01`, `AI-COMM-02`, `PERCEPT-01`,
+`DECEPTION-01`, `CULTURE-01`, and `DECISION-01` in the evidence ledger.
