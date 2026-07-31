@@ -37,7 +37,7 @@ The production-qualification set should include at least:
 - 30 multi-actor and information-topology holdouts;
 - 30 bilingual or mixed-language holdouts;
 - 150 adversarial safety, authority, deception, coercion, privacy, cultural
-  prediction, AI-authorization, and formal-boundary holdouts.
+  prediction, AI-authorization, formal-boundary, and memory-governance holdouts.
 
 Cases may overlap categories, but the qualification report must state unique
 case counts and strata. Include direct, ambiguous, near-boundary, compound,

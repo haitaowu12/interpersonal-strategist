@@ -70,9 +70,9 @@ def make_qualified_manifest(project: Path) -> dict:
                 "qualification_commit": commit,
                 "qualification_tree_sha": "e" * 40,
                 "package_sha256": package_sha,
-                "rubric_version": "2.1",
+                "rubric_version": "2.2",
                 "judge_protocol_version": "1.0",
-                "harness_version": "evals/run.py@0.8.0-rc.1",
+                "harness_version": "evals/run.py@0.9.0-rc.1",
             },
         }
     )
@@ -143,7 +143,7 @@ class ProjectTests(unittest.TestCase):
         self.assertEqual(validate_repository(PROJECT_ROOT), [])
 
     def test_release_candidate_pep440_conversion(self) -> None:
-        self.assertEqual(version_to_pep440("0.8.0-rc.1"), "0.8.0rc1")
+        self.assertEqual(version_to_pep440("0.9.0-rc.1"), "0.9.0rc1")
         self.assertEqual(version_to_pep440("1.2.3-alpha.4"), "1.2.3a4")
         self.assertEqual(version_to_pep440("1.2.3-beta.2"), "1.2.3b2")
         self.assertEqual(version_to_pep440("1.2.3"), "1.2.3")
@@ -173,6 +173,14 @@ class ProjectTests(unittest.TestCase):
         self.assertIn("interpersonal-strategist/PACKAGE_MANIFEST.json", names)
         self.assertIn("interpersonal-strategist/LICENSE", names)
         self.assertIn("interpersonal-strategist/NOTICE.md", names)
+        self.assertIn(
+            "interpersonal-strategist/references/deep-context-elicitation.md",
+            names,
+        )
+        self.assertIn(
+            "interpersonal-strategist/references/memory-and-continuity.md",
+            names,
+        )
         self.assertNotIn("README.md", names)
         self.assertNotIn("provenance/evidence-sources.json", names)
         self.assertNotIn("release/qualification.json", names)
@@ -228,7 +236,7 @@ class ProjectTests(unittest.TestCase):
             project = copy_project(Path(raw))
             notice = project / "skill" / "interpersonal-strategist" / "NOTICE.md"
             notice.write_text(
-                notice.read_text(encoding="utf-8").replace("0.8.0-rc.1", "0.7.0-alpha.2"),
+                notice.read_text(encoding="utf-8").replace("0.9.0-rc.1", "0.7.0-alpha.2"),
                 encoding="utf-8",
             )
             errors = validate_repository(project)
@@ -320,6 +328,7 @@ class ProjectTests(unittest.TestCase):
     def test_eval_fixture_counts_match(self) -> None:
         count_fields = {
             "cases.json": ("case_count", "cases"),
+            "deep-context-memory.json": ("case_count", "cases"),
             "invocation.json": ("case_count", "cases"),
             "substantive-routes.json": ("case_count", "cases"),
             "multi-actor.json": ("case_count", "cases"),
@@ -334,15 +343,39 @@ class ProjectTests(unittest.TestCase):
             payload = json.loads((PROJECT_ROOT / "evals" / filename).read_text())
             self.assertEqual(payload[count_field], len(payload[items_field]), filename)
 
-    def test_new_roleplay_and_nonverbal_hard_gates_are_locked(self) -> None:
+    def test_adaptive_depth_and_memory_contract_is_locked(self) -> None:
+        skill = (
+            PROJECT_ROOT / "skill" / "interpersonal-strategist" / "SKILL.md"
+        ).read_text(encoding="utf-8")
+        for required in (
+            "**QUICK**",
+            "**DEEP_CONTEXT**",
+            "**AUTO**",
+            "**CONFIRM_EACH**",
+            "memory off",
+            "Situation Memory Card",
+            "references/deep-context-elicitation.md",
+            "references/memory-and-continuity.md",
+        ):
+            self.assertIn(required, skill)
+
+        payload = json.loads(
+            (PROJECT_ROOT / "evals" / "deep-context-memory.json").read_text()
+        )
+        self.assertGreaterEqual(payload["case_count"], 20)
+        ids = {case["id"] for case in payload["cases"]}
+        self.assertTrue({"DM03", "DM04", "DM06", "DM10", "DM14", "DM20"} <= ids)
+
+    def test_new_roleplay_nonverbal_and_memory_hard_gates_are_locked(self) -> None:
         rubric = json.loads((PROJECT_ROOT / "evals" / "rubric.json").read_text())
         gate_ids = {gate["id"] for gate in rubric["hard_gates"]}
         self.assertIn("nonverbal_inference", gate_ids)
         self.assertIn("simulation_leakage", gate_ids)
         self.assertIn("covert_test", gate_ids)
+        self.assertIn("memory_abuse", gate_ids)
         dimension_ids = {dimension["id"] for dimension in rubric["dimensions"]}
         self.assertIn("simulation_control", dimension_ids)
-        self.assertEqual(rubric["schema_version"], "2.1")
+        self.assertEqual(rubric["schema_version"], "2.2")
 
     def test_validator_rejects_stale_rubric_version_reference(self) -> None:
         with tempfile.TemporaryDirectory(prefix="interpersonal-project-") as raw:
@@ -350,7 +383,7 @@ class ProjectTests(unittest.TestCase):
             protocol = project / "evals" / "judge-protocol.md"
             protocol.write_text(
                 protocol.read_text(encoding="utf-8").replace(
-                    '"rubric_version": "2.1"',
+                    '"rubric_version": "2.2"',
                     '"rubric_version": "2.0"',
                 ),
                 encoding="utf-8",
@@ -448,7 +481,7 @@ class ProjectTests(unittest.TestCase):
             "case_key": "cases:test",
             "condition": "skill",
             "blind_id": "blind-1",
-            "rubric_version": "2.1",
+            "rubric_version": "2.2",
             "hard_gates": {},
             "dimensions": {dimension_id: 3 for dimension_id in dimension_ids},
             "evidence": {"summary": "Observable reason."},
@@ -488,7 +521,7 @@ class ProjectTests(unittest.TestCase):
                 "case_key": "cases:paired",
                 "condition": condition,
                 "blind_id": f"blind-{condition}",
-                "rubric_version": "2.1",
+                "rubric_version": "2.2",
                 "hard_gates": gates,
                 "dimensions": dimensions,
                 "evidence": {"summary": "Observable reason."},

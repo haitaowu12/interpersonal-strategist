@@ -24,7 +24,7 @@ from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
 REGISTRY = ROOT / "provenance" / "evidence-sources.json"
-USER_AGENT = "interpersonal-strategist-evidence-check/0.8.0-rc.1"
+USER_AGENT = "interpersonal-strategist-evidence-check/0.9.0-rc.1"
 PMID_PATTERN = re.compile(r"PMID (\d+)")
 DOI_PATTERN = re.compile(r"DOI ([^;]+)")
 OFFICIAL_URLS = {

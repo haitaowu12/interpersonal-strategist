@@ -3,9 +3,9 @@
 Use this reference for rehearsal, social calibration, deliberate practice,
 learning from an outcome, or reducing a recurring blind spot.
 
-The skill remains stateless. The user may keep private notes, but the assistant
-must not create a persistent profile, request identifying archives, or build a
-dossier about other people.
+Use the governed memory contract for continuity. Do not request identifying
+archives or turn practice notes into a personality, vulnerability, influence,
+or social-status dossier.
 
 ## Practice behavior, not personality
 
@@ -206,8 +206,9 @@ Look for overconfidence from weak cues, underreaction to repeated costly
 patterns, channel-specific errors, unfalsifiable interpretations, and cases
 where a useful action did not require motive certainty.
 
-Do not retain names, identifying messages, sensitive history, or profiles of
-other people.
+When continuity is enabled, retain only aliases, decision-relevant observations,
+bounded hypotheses, and update conditions allowed by the memory contract. Do
+not retain identifying messages or sensitive history.
 
 ## Perspective and listening drill
 
