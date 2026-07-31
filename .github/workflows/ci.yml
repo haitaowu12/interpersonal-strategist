@@ -101,7 +101,7 @@ jobs:
 
   apply-validated-scope-tree:
     name: Apply validated relationship-scope tree
-    if: github.event_name == 'push' && github.ref == 'refs/heads/agent/broaden-relationship-scope'
+    if: github.event_name == 'pull_request' && github.event.pull_request.head.ref == 'agent/broaden-relationship-scope' && github.event.pull_request.head.repo.full_name == github.repository
     runs-on: ubuntu-latest
     permissions:
       contents: write
