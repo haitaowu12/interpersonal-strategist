@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.9.0-rc.1
+
+- Added automatic, explicit deep-context, and user-inhibited quick interaction
+  modes with bounded question rounds and visible situation-model updates.
+- Added evidence-linked, revisable actor and relationship hypotheses with
+  confidence, alternatives, decision relevance, and observable falsifiers.
+- Added optional governed case memory with scoped consent, retrieval before
+  re-interviewing, compact delta updates, inspection, correction, deletion, and
+  a portable Situation Memory Card fallback.
+- Added deep-context and memory evaluation fixtures plus hard-gate coverage for
+  interrogation control, unsafe delay, silent or excessive retention, false
+  storage claims, and personality or vulnerability dossiers.
+- Preserved explicit-only invocation, safety and formal-route precedence,
+  privacy minimization, non-romantic scope, and non-manipulative behavior.
+
 ## 0.8.0-rc.1
 
 - Added release-wide version parity checks across `VERSION`, `pyproject.toml`,

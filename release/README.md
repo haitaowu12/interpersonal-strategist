@@ -1,7 +1,7 @@
 # Release Qualification
 
 `release/qualification.json` is the canonical promotion record. The current
-`0.8.0-rc.1` state is a production-qualification candidate, not a production
+`0.9.0-rc.1` state is a production-qualification candidate, not a production
 claim.
 
 ## Promotion rule

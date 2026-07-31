@@ -23,6 +23,7 @@ EVALS = ROOT / "evals"
 
 CASE_SUITES = {
     "cases.json": "case_count",
+    "deep-context-memory.json": "case_count",
     "invocation.json": "case_count",
     "substantive-routes.json": "case_count",
     "multi-actor.json": "case_count",
