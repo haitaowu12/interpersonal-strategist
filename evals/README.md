@@ -9,7 +9,8 @@ production claim.
 1. **Static integrity:** repository structure, release metadata, evidence
    registry, portability, and deterministic packaging.
 2. **Invocation ownership:** whether the explicit skill should own the request,
-   delegate writing or translation, route romance elsewhere, or not own it.
+   delegate pure writing or translation, or not own it. Relationship category
+   does not create a route-out.
 3. **Substantive routing:** `IN_SCOPE`, `COACH_WITH_CAUTION`,
    `REFER_OR_ESCALATE`, or `REFUSE`.
 4. **Mechanism and reference selection:** leading method, mandatory overlays,
@@ -20,15 +21,19 @@ production claim.
 7. **Simulation control:** setup/simulation/debrief separation, counterpart
    information boundary, turn and stop rules, one-variable replay, and
    micro-feedback cadence.
-8. **Nonverbal inference:** low-specificity cues remain observations and do not
-   become emotion, honesty, consent, engagement, competence, or motive verdicts.
-9. **Functional bilingual review:** invariant preservation plus fluent
+8. **Relationship scope and consent:** ordinary romance, dating, intimacy,
+   breakup, and reconciliation remain in scope while power, refusal, consent,
+   stalking, intimate privacy, minors, and incapacity change the route.
+9. **Nonverbal inference:** low-specificity cues remain observations and do not
+   become emotion, attraction, relationship-status, honesty, consent,
+   engagement, competence, or motive verdicts.
+10. **Functional bilingual review:** invariant preservation plus fluent
    naturalness and status-fit review.
-10. **No-skill comparison:** same model and prompt, blinded randomized comparison
+11. **No-skill comparison:** same model and prompt, blinded randomized comparison
    against the model without the skill.
-11. **Untouched holdouts:** independently authored after package freeze and kept
+12. **Untouched holdouts:** independently authored after package freeze and kept
     outside the public repository.
-12. **Controlled pilot:** privacy-minimized formative usability and failure
+13. **Controlled pilot:** privacy-minimized formative usability and failure
     discovery, not efficacy proof.
 
 ## Public fixture suites
@@ -43,6 +48,9 @@ production claim.
   ratification, staged disclosure, and information integration;
 - `relationship-norms.json` — communal care, shared arrangements, professional
   exchange, voluntary connection, and disputed norms;
+- `relationship-scope.json` plus `relationship_scope.py` — inclusive romance,
+  dating, consent, breakup, reconciliation, workplace power, intimate privacy,
+  and risk-based routing;
 - `ai-mediated.json` — data authorization, representational authority,
   authorship, force, and privacy;
 - `trust-reliance.json` — no reliance, minimum access, dual control, reversible
@@ -50,6 +58,9 @@ production claim.
 - `speech-acts.json` — requests, refusals, disagreement, correction, feedback,
   apology, escalation, reminders, and mixed-language recaps;
 - `bilingual-parity.json` — functional English-Simplified Chinese invariants;
+- `persona-conversation-regressions.json` plus `persona_conversation.py` —
+  transcript integrity, digital-cue caution, refusal precedence, and bounded
+  perspective lenses;
 - `metamorphic.json` — paired cases where one material variable changes;
 - `rubric.json` — hard gates, 1-5 anchored dimensions, and qualification
   thresholds;
@@ -61,8 +72,14 @@ These commands do not call a model or claim behavioral success:
 
 ```bash
 python3 evals/run.py validate-fixtures
+python3 evals/persona_conversation.py validate
+python3 evals/relationship_scope.py validate
 python3 evals/run.py prepare --condition skill --output build/skill-prompts.jsonl
 python3 evals/run.py prepare --condition no-skill --output build/no-skill-prompts.jsonl
+python3 evals/persona_conversation.py prepare --condition skill --output build/persona-conversation-skill-prompts.jsonl
+python3 evals/persona_conversation.py prepare --condition no-skill --output build/persona-conversation-no-skill-prompts.jsonl
+python3 evals/relationship_scope.py prepare --condition skill --output build/relationship-scope-skill-prompts.jsonl
+python3 evals/relationship_scope.py prepare --condition no-skill --output build/relationship-scope-no-skill-prompts.jsonl
 python3 evals/run.py summarize --responses build/responses.jsonl --judgments build/judgments.jsonl --output build/summary.json
 ```
 
@@ -142,6 +159,7 @@ updated to `qualified` with evidence for all gates and exact hashes for:
 - judge calibration;
 - independent holdouts;
 - bilingual review;
+- relationship-scope and consent review;
 - controlled pilot and privacy disposition.
 
 Do not change the qualification status merely because structural CI or Waza

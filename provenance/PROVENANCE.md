@@ -4,9 +4,9 @@
 
 This repository begins a new standalone lineage at
 `interpersonal-strategist 0.6.0-alpha.1`. The current release candidate is
-`0.9.0-rc.1`.
+`0.10.0-rc.1`.
 
-`0.9.0-rc.1` is a production-qualification candidate, not a production claim.
+`0.10.0-rc.1` is a production-qualification candidate, not a production claim.
 Promotion is permitted only when `release/qualification.json` records every
 required gate as passed and binds the evidence to an exact commit, package,
 model and host configuration, evaluation harness, and independent holdout set.
@@ -32,7 +32,7 @@ interpersonal-strategist-phase1-rd-v0.2.zip
 SHA-256 3bf3ac1119b3e6741ebf9b751fa060eafcda011a3ad6fc7e44ae0f8ba1c898bf
 ```
 
-## v0.5, v0.8, and v0.9 advisory inputs
+## v0.5 through v0.10 advisory inputs
 
 The exact recovered v0.5 R&D package was used as advisory research and design
 input:
@@ -83,31 +83,43 @@ verified permissive license supplied comparison questions only, not copied
 material.
 
 Rejected donor mechanisms include facial-emotion or body-language verdicts,
-confidence and personality scoring, attachment typing, persistent third-party
-profiles, secret-goal optimization, romance strategy, coercive objection
-handling, and Commons-Clause or proprietary framework imports.
+confidence and personality scoring, diagnostic attachment typing, persistent
+third-party profiles, secret-goal optimization, attraction or compliance
+scoring, refusal override, coercive sexual or dating tactics, and Commons-Clause
+or proprietary framework imports. Romance is not excluded as a category.
+
+## Relationship-scope expansion
+
+The `0.10.0-rc.1` scope expansion is recorded in:
+
+- `research/relationship-scope-expansion-audit-20260730.md`;
+- `provenance/RELATIONSHIP_SCOPE_EXPANSION.md`.
+
+It supersedes the earlier product decision to route romance, dating, intimacy,
+breakup, and reconciliation out of scope. Those situations now use the same
+evidence, power, voluntariness, consent, privacy, action, and stopping controls
+as other interpersonal decisions. Category inclusion does not authorize
+coercion, refusal override, stalking, covert tests, intimate-media misuse,
+sexual conduct involving minors or incapacity, diagnosis, or formal legal and
+clinical determinations.
 
 ## Clean-room boundary
 
 A third-party romance skill licensed under PolyForm Noncommercial 1.0.0 was
-reviewed historically to establish the romance specialization boundary and
-compare high-level workflow patterns.
+reviewed historically, and permissively licensed Chinese relationship skills
+were reviewed for source organization and conversational workflow. The project
+may independently implement compatible ideas, but it does not copy donor:
 
-This project does not copy its:
-
-- prose;
-- reference corpus;
-- questionnaires;
-- examples;
-- romantic tactics;
-- MBTI intake;
-- subjective scoring;
-- scripts;
-- creator voice.
+- prose or creator voice;
+- reference corpora or transcripts;
+- examples, questionnaires, or scripts;
+- attraction, compliance, or relationship scores;
+- MBTI or attachment diagnoses;
+- deceptive, coercive, or refusal-overriding tactics.
 
 Any future direct adaptation from an external source requires exact source
 identification, license review, required notices, and explicit approval before
-distribution.
+distribution. Inclusion in an index or public availability is not a license.
 
 ## Evidence governance
 

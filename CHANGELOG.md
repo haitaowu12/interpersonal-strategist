@@ -1,5 +1,25 @@
 # Changelog
 
+## 0.10.0-rc.1
+
+- Expanded the skill from a non-romantic boundary to general interpersonal
+  decision support across workplace, friendship, family, dating, romance,
+  partnership, intimacy, breakup, distance, and reconciliation.
+- Added Voluntariness-Specificity-Reversibility checks for romantic and intimate
+  decisions, including workplace, dependency, privacy, and consent overlays.
+- Added a dedicated romance, dating, partnership, and intimacy reference with
+  inclusive stages, invitations, relationship definition, consent checks,
+  jealousy, conflict, separation, reconciliation, and bilingual examples.
+- Expanded the scene library from 20 to 27 playbooks and added public English,
+  Simplified Chinese, and mixed-language relationship-scope regressions.
+- Replaced category-wide romance exclusions with harm- and authority-based
+  boundaries for coercion, refusal override, stalking, grooming, incapacity,
+  adult-minor sexual conduct, intimate-media abuse, diagnosis, and formal
+  determinations.
+- Preserved explicit-only invocation, evidence calibration, no social scoring,
+  anti-manipulation controls, privacy minimization, and blocked production
+  qualification pending fresh scope-wide evidence.
+
 ## 0.9.0-rc.1
 
 - Added automatic, explicit deep-context, and user-inhibited quick interaction

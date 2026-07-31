@@ -3,8 +3,8 @@
 ## Objective
 
 Complete the remaining executable qualification work for
-`interpersonal-strategist 0.9.0-rc.1` without weakening its explicit-only,
-non-romantic, non-manipulative, privacy-minimizing, memory-governance, and
+`interpersonal-strategist 0.10.0-rc.1` without weakening its explicit-only, inclusive-relationship,
+consent-preserving, non-manipulative, privacy-minimizing, memory-governance, and
 formal-authority boundaries.
 
 This handoff includes the 2026-07-30 comparable-public-systems audit. Do not
@@ -19,7 +19,7 @@ into a hidden social-profile system.
 - Resolve exact candidate head at pickup with `git rev-parse HEAD`.
 - Independent handoff identity:
   `c104e9da2617e0ef6d7a8f4134519f69a3a14cb2fb340b6cbac997274425d37d`
-- Candidate version: `0.9.0-rc.1`
+- Candidate version: `0.10.0-rc.1`
 - Canonical promotion record: `release/qualification.json`
 - Public-system audit:
   `research/comparable-public-systems-audit-20260730.md`
@@ -91,9 +91,33 @@ The additional public-system review implemented:
 
 Do not import attachment typing, MBTI, personality/confidence/loyalty scoring,
 facial-emotion detection, body-language dictionaries, persistent third-party
-profiles, romance or attraction strategy, secret-goal optimization, coercive
-objection handling, donor corpora, creator voice, Commons-Clause material, or
-proprietary framework prose.
+profiles, attraction or relationship scoring, refusal or consent override,
+grooming, adult-minor sexual strategy, exploitation of incapacity, stalking,
+intimate-media misuse, secret-goal optimization, coercive objection handling,
+donor corpora, creator voice, Commons-Clause material, or proprietary framework
+prose. Ordinary consent-aware dating, romance, intimacy, breakup, and
+reconciliation support is in scope.
+
+## Expanded relationship-scope qualification delta
+
+`0.10.0-rc.1` changes substantive runtime behavior. Prior behavioral evidence
+must not be carried forward merely because workplace and non-romantic cases
+passed. The exact candidate requires fresh target-host testing for:
+
+- one clear romantic invitation and a decline;
+- ambiguous interest without digital-cue or attraction scoring;
+- exclusivity and relationship-definition discussion;
+- adult consent, refusal, and withdrawal wording;
+- breakup, contact boundaries, and reconciliation decisions;
+- workplace romance with power and retaliation exposure;
+- LGBTQ+ and nontraditional relationship structures without stereotyping;
+- stalking, intimate-media abuse, minors, incapacity, and legal-determination
+  route boundaries;
+- English, Simplified Chinese, and mixed-language functional parity.
+
+Use `evals/relationship-scope.json` and `evals/relationship_scope.py` as public
+development evidence only. Independent relationship holdouts must be authored
+after package freeze.
 
 ## Required Codex work
 
@@ -165,9 +189,9 @@ Using each named current Codex/Skills environment:
 2. install or upload it through the supported skill-management flow;
 3. start a clean session;
 4. confirm explicit discovery and invocation;
-5. run one ordinary case, one compound multi-actor case, one refusal, one
-   safety referral, one bilingual case, one role-play setup, and one nonverbal
-   ambiguity case;
+5. run one ordinary workplace case, one ordinary romance case, one consent or
+   breakup case, one compound multi-actor case, one refusal, one safety referral,
+   one bilingual case, one role-play setup, and one nonverbal ambiguity case;
 6. confirm the skill performs no automatic sending, unauthorized connector or
    file use, biometric classification, or personality/vulnerability profiling;
    separately verify memory scope, minimization, correction, and deletion;
@@ -261,7 +285,7 @@ condition identity. Use pointwise scoring first and pairwise preference second.
 Run order-swap and verbosity-bias probes. Report strata, not only aggregate
 results.
 
-Required new strata:
+Required new and retained strata:
 
 - setup/simulation/debrief role-play separation;
 - hidden-constraint non-leakage;
@@ -270,7 +294,13 @@ Required new strata:
 - accessibility and ability bias;
 - declared facilitation and decision methods;
 - staged distributed-information update;
-- consensus without information integration.
+- consensus without information integration;
+- romantic invitation and explicit decline;
+- consent withdrawal and incapacity;
+- workplace romance and power;
+- breakup, stalking, and contact boundaries;
+- intimate privacy and media;
+- inclusive relationship structures.
 
 ### 7. Commission independent untouched holdouts
 

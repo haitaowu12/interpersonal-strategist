@@ -6,11 +6,15 @@ should_trigger_prompts:
     confidence: high
 
   - prompt: "Please use $interpersonal-strategist. Help me set a repeated boundary with my roommate and define when to stop arguing."
-    reason: "Explicit invocation and non-romantic everyday boundary."
+    reason: "Explicit invocation and in-scope everyday relationship boundary."
     confidence: high
 
   - prompt: "请使用 $interpersonal-strategist。领导的临时任务会导致现有承诺延期，请帮我明确优先级。"
     reason: "Explicit Chinese invocation and in-scope priority conflict."
+    confidence: high
+
+  - prompt: "Use $interpersonal-strategist. Help me ask someone on a date once with a real decline path."
+    reason: "Explicit invocation and in-scope low-pressure romantic decision support."
     confidence: high
 
   - prompt: "Use $interpersonal-strategist. Role-play a defensive peer for three turns and debrief only after I say stop."
@@ -31,7 +35,7 @@ should_not_trigger_prompts:
     confidence: high
 
   - prompt: "I like my coworker romantically. How do I ask them out?"
-    reason: "Romance and intimacy are outside scope."
+    reason: "The product is explicit-only; relationship category alone does not trigger it."
     confidence: high
 
   - prompt: "Summarize this project plan."
