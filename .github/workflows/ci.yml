@@ -105,7 +105,6 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
-      actions: write
 
     steps:
       - name: Check out transfer branch
@@ -137,7 +136,7 @@ jobs:
           git index-pack --fix-thin --stdin < /tmp/scope.pack
           git cat-file -e "${TREE_SHA}^{tree}"
 
-      - name: Publish exact validated tree
+      - name: Publish validated tree while preserving registered workflows
         env:
           BRANCH: agent/broaden-relationship-scope
           TREE_SHA: 0e3ea035f954485c6e34e67a567254316c9bd37b
@@ -146,19 +145,25 @@ jobs:
           git config user.name "OpenAI Agent"
           git config user.email "noreply@openai.com"
           parent="$(git rev-parse HEAD)"
+          git read-tree "${TREE_SHA}"
+          for path in \
+            .github/workflows/ci.yml \
+            .github/workflows/apply-scope-tree.yml
+          do
+            entry="$(git ls-tree "${parent}" -- "${path}")"
+            mode="$(printf '%s\n' "${entry}" | awk '{print $1}')"
+            blob="$(printf '%s\n' "${entry}" | awk '{print $3}')"
+            test -n "${mode}" && test -n "${blob}"
+            git update-index --add --cacheinfo "${mode},${blob},${path}"
+          done
+          intermediate_tree="$(git write-tree)"
           commit="$(printf '%s\n\n%s\n' \
             'Expand interpersonal scope across relationships' \
-            'Include dating, romance, intimacy, breakups, reconciliation, and diverse relationship structures while retaining consent, safety, privacy, and authority safeguards.' \
-            | git commit-tree "${TREE_SHA}" -p "${parent}")"
+            'Publish the validated non-workflow tree; the connected GitHub app will make the two permission-controlled workflow edits.' \
+            | git commit-tree "${intermediate_tree}" -p "${parent}")"
           git reset --hard "${commit}"
           git push origin "${commit}:refs/heads/${BRANCH}"
-          echo "Published ${commit} with tree ${TREE_SHA}"
-
-      - name: Dispatch canonical exact-head CI
-        env:
-          GH_TOKEN: ${{ github.token }}
-          BRANCH: agent/broaden-relationship-scope
-        run: gh workflow run ci.yml --ref "${BRANCH}"
+          echo "Published ${commit} with intermediate tree ${intermediate_tree}"
 
   evidence-resolution:
     name: Online evidence identity resolution
