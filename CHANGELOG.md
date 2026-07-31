@@ -1,5 +1,54 @@
 # Changelog
 
+## 0.8.0-rc.1
+
+- Added release-wide version parity checks across `VERSION`, `pyproject.toml`,
+  README, changelog, notice, provenance, source manifest, and qualification
+  records.
+- Replaced the flat routing fixture with separate invocation-ownership and
+  four-state substantive-routing suites.
+- Added structured evidence provenance with stable identities, permitted
+  claims, limitations, runtime rules, verification dates, and licensing notes.
+- Corrected source identities for trust repair, guanxi HRM, Japanese workplace
+  communication, and telework social-norm research.
+- Added multi-actor information-topology, relationship-norm, feedback-exposure,
+  minimum-safe-reliance, speech-act adaptation, AI-authorization, and
+  outcome-independent learning controls.
+- Added a bounded role-play controller with separate setup, simulation, and
+  debrief states, role-appropriate information, turn and stop controls,
+  one-variable replay, one-cue micro-feedback, and one prioritized practice
+  target.
+- Added facilitation safeguards for independent evidence elicitation, declared
+  participation and decision methods, authority anchoring, dissent, and
+  ratification.
+- Added a nonverbal evidence boundary that prohibits emotion, deception,
+  consent, engagement, competence, diagnosis, or motive verdicts from facial
+  movement, gaze, posture, voice, camera state, or latency alone.
+- Expanded development evaluation with multi-actor, relationship-norm,
+  AI-mediated, trust-reliance, speech-act, bilingual, metamorphic, role-play,
+  nonverbal, facilitation, and staged distributed-information cases.
+- Replaced aggregate-only evaluation targets with hard gates, per-dimension
+  floors, route-specific metrics, blinded no-skill comparison requirements,
+  judge calibration, and untouched-holdout governance.
+- Added a deterministic evaluation preparation and result-summarization CLI,
+  release qualification manifest, and exact Codex production-qualification
+  handoff.
+- Hardened qualification evidence with exact-head and tree provenance,
+  immutable CI action pins, typed gate evidence, strict response-to-judgment
+  linkage, fail-closed completeness checks, deterministic paired confidence
+  bounds, and mutation tests for forged or incomplete records.
+- Added an optional Microsoft Waza compatibility lane for independent trigger,
+  skill-invocation, prompt-grading, snapshot/replay, adversarial, spec-coverage,
+  and token-budget checks without treating a Waza pass as production evidence.
+- Added a comparable-public-systems audit and pattern-donor provenance record
+  covering permissive, clean-room-only, and rejected sources.
+- Updated installation guidance to lead with the current OpenAI Skills upload
+  and management flow while retaining local developer installation as a
+  host-dependent option.
+- Preserved explicit-only invocation, stateless and chat-only operation,
+  anti-manipulation constraints, non-romantic scope, and formal-authority
+  boundaries.
+
 ## 0.7.0-alpha.2
 
 - Added four-state routing, calibrated confidence bands, and the rule that

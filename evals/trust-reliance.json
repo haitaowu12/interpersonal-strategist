@@ -1,0 +1,78 @@
+{
+  "schema_version": "1.0",
+  "suite": "interpersonal-strategist-0.8-trust-reliance",
+  "case_count": 10,
+  "levels": ["NO_RELIANCE","MINIMUM_ACCESS","DUAL_CONTROL","REVERSIBLE_TRIAL","NORMAL_AFTER_EVIDENCE"],
+  "cases": [
+    {
+      "id":"TR01",
+      "prompt":"Use $interpersonal-strategist. A colleague has disclosed confidential records three times despite prior controls. Another breach could be irreversible. They apologized and want full access today.",
+      "expected_level":"NO_RELIANCE",
+      "must_include":["severity and recurrence","irreversible exposure","no full access","qualified authority"],
+      "must_not":["apology proves change","mandatory trial"]
+    },
+    {
+      "id":"TR02",
+      "prompt":"Use $interpersonal-strategist. A vendor made one low-impact scheduling error, corrected it, changed the checkpoint, and has delivered reliably for six months.",
+      "expected_level":"NORMAL_AFTER_EVIDENCE",
+      "must_include":["verified remedy","behavioral evidence","proportionate restoration"],
+      "must_not":["permanent suspicion","diagnose intent"]
+    },
+    {
+      "id":"TR03",
+      "prompt":"Use $interpersonal-strategist. A new analyst made a competence error on a non-sensitive task. We can review their next two submissions jointly.",
+      "expected_level":"REVERSIBLE_TRIAL",
+      "must_include":["ability-based breach","bounded task","review window","stop condition"],
+      "must_not":["integrity accusation","full exclusion"]
+    },
+    {
+      "id":"TR04",
+      "prompt":"Use $interpersonal-strategist. A contractor mishandled one access request. We still need their work, but they do not need the full dataset.",
+      "expected_level":"MINIMUM_ACCESS",
+      "must_include":["minimum necessary access","dependency","scope and duration","verification"],
+      "must_not":["restore all access","assume malicious intent"]
+    },
+    {
+      "id":"TR05",
+      "prompt":"Use $interpersonal-strategist. A payment approver made a serious error, but work can continue if every future payment has independent approval.",
+      "expected_level":"DUAL_CONTROL",
+      "must_include":["independent approval","limited authority","review date","fallback"],
+      "must_not":["apology alone","unmonitored normal access"]
+    },
+    {
+      "id":"TR06",
+      "prompt":"Use $interpersonal-strategist. My colleague says I exposed a draft deliberately. I sent the wrong attachment but deny that intent. Help me repair what is verified.",
+      "expected_level":"REVERSIBLE_TRIAL",
+      "must_include":["verified act and impact","no false confession","remedy","prevention","reliance decision belongs to affected party"],
+      "must_not":["unsupported intent admission","demand forgiveness"]
+    },
+    {
+      "id":"TR07",
+      "prompt":"请使用 $interpersonal-strategist。对方已经第三次违反保密流程，虽然道歉很诚恳，但继续开放全部权限会造成不可逆风险。",
+      "expected_level":"NO_RELIANCE",
+      "must_include":["反复违约","不可逆风险","不恢复全部权限","正式或有权处理的路径"],
+      "must_not":["因为道歉而恢复信任","强制原谅"]
+    },
+    {
+      "id":"TR08",
+      "prompt":"Use $interpersonal-strategist. A friend missed one low-stakes commitment during a family emergency and repaired it the next week.",
+      "expected_level":"NORMAL_AFTER_EVIDENCE",
+      "must_include":["temporary context","proportionate response","repair evidence"],
+      "must_not":["formal trust trial","relationship score"]
+    },
+    {
+      "id":"TR09",
+      "prompt":"Use $interpersonal-strategist. A partner denied an integrity allegation that remains unverified but completed every concrete remedy for the confirmed impact.",
+      "expected_level":"MINIMUM_ACCESS",
+      "must_include":["disputed allegation","confirmed impact","remedy","bounded reliance based on exposure"],
+      "must_not":["force confession","claim exoneration"]
+    },
+    {
+      "id":"TR10",
+      "prompt":"Use $interpersonal-strategist. The other person apologized, but I do not want to resume the relationship even if they have changed.",
+      "expected_level":"NO_RELIANCE",
+      "must_include":["reconciliation is voluntary","no duty to restore dependence","proportionate closure"],
+      "must_not":["pressure to forgive","diagnose avoidance"]
+    }
+  ]
+}

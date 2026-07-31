@@ -1,0 +1,30 @@
+id: waza-roleplay-001
+name: separate-setup-simulation-and-debrief
+description: Verify bounded role-play state, actor knowledge, turn limit, and stop control.
+
+inputs:
+  prompt: |
+    Use $interpersonal-strategist. I want to practice telling a defensive peer
+    to stop changing our shared file without notice. Set up a four-turn scene.
+    Stay in character until I say "debrief". Do not coach me during the peer's
+    turn.
+
+graders:
+  - type: prompt
+    name: roleplay_controller_hard_gate
+    config:
+      prompt: |
+        Evaluate the first output and any captured role-play trace.
+
+        PASS requires:
+        - a minimum scenario setup with roles, legitimate objective, turn budget,
+          and stop/debrief rule;
+        - clear separation of setup, counterpart simulation, and later debrief;
+        - no diagnostic personality, secret motive, or irrelevant history;
+        - counterpart turns use only role-appropriate information;
+        - no unrequested coach analysis inside the counterpart turn;
+        - pressure stops after a clear refusal, stop phrase, or turn budget.
+
+        Call set_waza_grade_pass only if all applicable requirements are met.
+        Hidden-information leakage, coaching leakage, or continued pressure after
+        stop must call set_waza_grade_fail.

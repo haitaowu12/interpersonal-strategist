@@ -2,12 +2,12 @@
 
 Use this reference when the user is unsure what kind of interpersonal problem
 they are facing, asks what a signal means, reports a recurring pattern, or may
-be reacting to a socially ambiguous cue.
+be reacting to an ambiguous verbal, digital, or nonverbal cue.
 
 ## Classify before choosing a script
 
-Classify the leading mechanism, not the other person's character. More than
-one class may be active.
+Classify the leading mechanism, not the other person's character. More than one
+class may be active.
 
 | Class | Typical evidence | Useful first move | Common misread |
 |---|---|---|---|
@@ -26,19 +26,18 @@ Do not force one label when the evidence supports a compound problem. State
 which class is leading, which is secondary, and what new evidence would change
 the classification.
 
-## Use the Observation–Meaning–Test method
+## Use the Observation-Meaning-Test method
 
-1. **Observation:** State the smallest behavior that could be independently
+1. **Observation:** state the smallest behavior that could be independently
    described. Include timing, channel, audience, and repetition.
-2. **Meaning candidates:** Name the leading interpretation and the strongest
-   evidence-linked alternative. Do not invent benign alternatives when the
-   pattern is documented.
-3. **Decision relevance:** Identify what the user must decide even if motive
+2. **Meaning candidates:** name the leading interpretation and strongest
+   evidence-linked alternative. Do not invent a benign alternative when a
+   documented pattern exists.
+3. **Decision relevance:** identify what the user must decide even if motive
    remains unknown.
-4. **Test:** Select one low-cost action or observation that separates the
-   plausible readings or works under both.
-5. **Update rule:** Say what result supports, weakens, or replaces each
-   interpretation.
+4. **Test:** select one low-cost ethical action or natural observation that
+   separates the plausible readings or remains useful under both.
+5. **Update rule:** say what result supports, weakens, or replaces each reading.
 
 Output:
 
@@ -50,13 +49,13 @@ Output:
 
 Assess a social signal on five dimensions:
 
-- **Specificity:** Could the cue plausibly mean many things?
-- **Consistency:** Does it recur across time and situations?
-- **Convergence:** Do words, actions, follow-through, and independent records
+- **Specificity:** could the cue plausibly mean many things?
+- **Consistency:** does it recur across time and situations?
+- **Convergence:** do words, actions, follow-through, and independent records
   point in the same direction?
-- **Cost:** Did the actor incur time, effort, reputation, or opportunity cost?
-- **Comparison:** Is the behavior different from their normal treatment of
-  similar people or situations?
+- **Cost:** did the actor incur time, effort, reputation, or opportunity cost?
+- **Comparison:** is the behavior different from their established local norm or
+  treatment of comparable situations?
 
 A single low-cost, low-specificity cue is weak evidence. Repeated, costly,
 convergent behavior is stronger evidence of a pattern, but still may not prove
@@ -72,7 +71,48 @@ Use confidence words rather than numerical pseudo-precision:
 Confidence applies to the described pattern, not to a diagnosis or hidden
 intent.
 
-## Check the user's own contribution without false blame
+## Treat nonverbal cues as observations, not internal-state verdicts
+
+Facial movement, gaze, posture, fidgeting, silence, camera state, response
+latency, vocal affect, speech rate, volume, pauses, or apparent eye contact may
+be described when they are decision-relevant. They do not by themselves
+establish:
+
+- emotion or emotional intensity;
+- honesty or deception;
+- consent, willingness, or agreement;
+- attention, interest, respect, or engagement;
+- confidence, competence, or social skill;
+- diagnosis, neurotype, trauma, impairment, or personality;
+- intent, motive, hostility, attraction, or future action.
+
+The same observable cue can result from language processing, disability,
+neurodivergence, culture, environment, technology, fatigue, privacy, divided
+attention, role pressure, habit, or many other unknown conditions. Do not select
+one explanation from appearance or voice alone.
+
+Use this sequence:
+
+1. describe only the observable cue and context;
+2. identify the operational decision hidden behind the interpretation;
+3. check records, words, follow-through, and local history;
+4. ask a content-focused question or offer an accessible response format;
+5. update from explicit behavior and outcomes, not a purported emotion reading.
+
+Example:
+
+> They looked away and paused before answering. That does not establish
+> discomfort, dishonesty, or disagreement. The decision-relevant question is
+> whether they approve the proposal, need more processing time, or have a
+> concern. Offer a private or written response option and confirm the decision.
+
+Do not use facial-emotion recognition, sentiment labels, confidence scores, or
+body-language dictionaries as evidence authorities for an individual case.
+Do not ask a user to perform eye contact, suppress movement, remove an accent,
+or imitate a dominant posture merely to appear credible. Translate a legitimate
+communication goal into observable content, timing, channel, and follow-through.
+
+## Check the user's contribution without false blame
 
 Ask:
 
@@ -84,7 +124,7 @@ Ask:
 
 This is a controllability check, not a requirement to split blame evenly.
 
-## Use the Left-Hand/Right-Hand reflection
+## Use Left-Hand/Right-Hand reflection
 
 For a difficult conversation, write:
 
@@ -93,7 +133,7 @@ For a difficult conversation, write:
   concerns.
 
 Mark each left-hand item as observation, interpretation, emotion, need,
-prediction, or unsaid request. Decide which item should be:
+prediction, or unsaid request. Decide whether it should be:
 
 - tested with a question;
 - converted into a factual statement;
@@ -105,25 +145,27 @@ decision-relevant, proportionate, and safe.
 
 ## Avoid calibration traps
 
-- **Mind reading:** treating tone, silence, delay, or facial expression as a
-  motive.
-- **Single-cue certainty:** deciding from one message, one meeting, or one
+- **Mind reading:** treating tone, silence, delay, facial movement, gaze, posture,
+  or voice as motive or internal state.
+- **Single-cue certainty:** deciding from one message, meeting, camera frame, or
   cultural convention.
 - **Pattern erasure:** demanding motive proof before acting on repeated impact.
 - **False symmetry:** inventing an equal counter-story to documented conduct.
-- **Cultural determinism:** using nationality as a personality diagnosis.
+- **Cultural determinism:** using nationality or language as a personality
+  diagnosis.
+- **Ability bias:** treating eye contact, movement, fluency, accent, camera use,
+  or response speed as credibility or competence.
 - **Self-sealing theory:** interpreting every response as confirmation.
-- **Endless testing:** continuing experiments after a boundary or stop rule is
-  reached.
+- **Endless testing:** continuing experiments after a boundary or stop rule.
 
 ## Practice drill
 
 Take one recent interaction and produce:
 
-1. three direct observations;
+1. three direct observations, including any nonverbal cue without interpretation;
 2. two interpretations;
 3. one contradiction or missing fact;
-4. one action that works under both interpretations;
+4. one action useful under both interpretations;
 5. one result that would cause a strategy change.
 
 Repeat after feedback arrives. The aim is calibrated updating, not perfect
@@ -131,8 +173,13 @@ certainty.
 
 ## Evidence boundary
 
-Interpersonal-perception research supports humility about how accurately people
-know others' views of them. It does not supply a universal correction formula.
-The classification table is a decision scaffold synthesized for this skill,
-not a validated diagnostic instrument. See `PERCEPT-01`, `DIGITAL-01`, and
-`CULTURE-01` in [the evidence ledger](evidence-ledger.md).
+Promoted interpersonal-perception, digital-communication, deception-judgment,
+and cultural-context research supports humility about sparse cues and prohibits
+confident motive or lie verdicts from demeanor, ordinary wording, or group
+averages. It does not provide an emotion recognizer or body-language dictionary.
+The classification table and nonverbal sequence are original decision
+safeguards, not diagnostic instruments. See `PERCEPT-01`, `DECEPTION-01`,
+`DIGITAL-01`, `DIGITAL-02`, and `CULTURE-01` in the evidence ledger. A broader
+facial-movement review is recorded in the research audit as a candidate source;
+it must pass registry promotion before the runtime attributes a stronger claim
+to it.
