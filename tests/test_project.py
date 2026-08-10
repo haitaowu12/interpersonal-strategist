@@ -15,7 +15,7 @@ PROJECT_ROOT = Path(__file__).resolve().parents[1]
 SCRIPTS_DIR = PROJECT_ROOT / "scripts"
 sys.path.insert(0, str(SCRIPTS_DIR))
 
-from package import build_archive
+from package import build_archive, distributable_files
 from build_provenance import build_provenance
 from smoke_install import run_smoke
 from validate import (
@@ -173,6 +173,8 @@ class ProjectTests(unittest.TestCase):
         self.assertIn("interpersonal-strategist/PACKAGE_MANIFEST.json", names)
         self.assertIn("interpersonal-strategist/LICENSE", names)
         self.assertIn("interpersonal-strategist/NOTICE.md", names)
+        self.assertFalse(any("__pycache__" in name for name in names))
+        self.assertFalse(any(name.endswith((".pyc", ".pyo")) for name in names))
         self.assertIn(
             "interpersonal-strategist/references/deep-context-elicitation.md",
             names,
@@ -181,6 +183,7 @@ class ProjectTests(unittest.TestCase):
             "interpersonal-strategist/references/memory-and-continuity.md",
             names,
         )
+
         self.assertIn(
             "interpersonal-strategist/references/romance-dating-and-intimacy.md",
             names,
@@ -204,6 +207,23 @@ class ProjectTests(unittest.TestCase):
 
         result = run_smoke(archive_two)
         self.assertEqual(result["status"], "pass", result)
+
+    def test_generated_python_cache_is_not_validated_or_packaged(self) -> None:
+        source = PROJECT_ROOT / "skill" / "interpersonal-strategist"
+        with tempfile.TemporaryDirectory(prefix="interpersonal-cache-") as raw:
+            target = Path(raw) / "interpersonal-strategist"
+            shutil.copytree(source, target)
+            cache = target / "scripts" / "__pycache__"
+            cache.mkdir(parents=True, exist_ok=True)
+            artifact = cache / "profile_score.cpython-313.pyc"
+            artifact.write_bytes(b"\x00\r\n\xffgenerated")
+            self.assertEqual(validate_skill_dir(target), [])
+            included = {
+                path.relative_to(target) for path in distributable_files(target)
+            }
+        self.assertNotIn(
+            Path("scripts/__pycache__/profile_score.cpython-313.pyc"), included
+        )
 
     def test_build_provenance_binds_checkout_tree_and_package(self) -> None:
         archive, _, manifest = build_archive()
