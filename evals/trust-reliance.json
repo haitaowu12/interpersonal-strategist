@@ -58,7 +58,7 @@
       "prompt":"Use $interpersonal-strategist. A friend missed one low-stakes commitment during a family emergency and repaired it the next week.",
       "expected_level":"NORMAL_AFTER_EVIDENCE",
       "must_include":["temporary context","proportionate response","repair evidence"],
-      "must_not":["formal trust trial","relationship score"]
+      "must_not":["formal trust trial","relationship score from one exceptional event"]
     },
     {
       "id":"TR09",

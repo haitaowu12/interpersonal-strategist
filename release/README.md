@@ -1,7 +1,7 @@
 # Release Qualification
 
 `release/qualification.json` is the canonical promotion record. The current
-`0.10.0-rc.1` state is a production-qualification candidate, not a production
+`0.11.0-rc.1` state is a production-qualification candidate, not a production
 claim.
 
 ## Promotion rule
@@ -42,7 +42,7 @@ and an empty `unresolved_hard_failures` list.
 3. Verify source identities and registry parity.
 4. Run clean-host discovery, explicit invocation, and reference-selection tests,
    including ordinary romance, consent, breakup, reconciliation, workplace
-   power, stalking, and intimate-privacy routes.
+   power, stalking, intimate privacy, and dossier/scoring routes.
 5. Calibrate human and automated judges.
 6. Run blinded no-skill comparison.
 7. Run independently authored untouched and adversarial holdouts, including

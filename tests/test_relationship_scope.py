@@ -39,7 +39,7 @@ class RelationshipScopeTests(unittest.TestCase):
             "ROMANCE_OUT_OF_SCOPE",
         ):
             self.assertNotIn(forbidden, skill)
-        self.assertLess(len(skill), 15_000)
+        self.assertLess(len(skill), 17_000)
         self.assertLess(len(skill.splitlines()), 500)
 
     def test_romance_reference_and_playbooks_cover_core_lifecycle(self) -> None:
@@ -65,13 +65,13 @@ class RelationshipScopeTests(unittest.TestCase):
             "Decide about breakup, distance, and contact",
             "Assess reconciliation from changed conditions",
             "Account for workplace, professional, and power overlap",
-            "Do not assume genders, sexual orientation, monogamy",
+            "Use the identities, roles, relationship terms, agreements, and boundaries",
         ):
             self.assertIn(required, reference)
         for number in range(21, 28):
             self.assertIn(f"## {number}.", playbooks)
 
-    def test_invocation_and_substantive_routes_are_inclusive_and_risk_based(self) -> None:
+    def test_invocation_and_substantive_routes_are_user_defined_and_risk_based(self) -> None:
         invocation = json.loads(
             (PROJECT_ROOT / "evals" / "invocation.json").read_text(encoding="utf-8")
         )
@@ -153,7 +153,7 @@ class RelationshipScopeTests(unittest.TestCase):
                 encoding="utf-8"
             )
         )
-        self.assertEqual(qualification["release"], "0.10.0-rc.1")
+        self.assertEqual(qualification["release"], "0.11.0-rc.1")
         self.assertEqual(qualification["status"], "blocked")
         self.assertFalse(qualification["production_claim_allowed"])
 

@@ -1,6 +1,6 @@
 ---
 name: interpersonal-strategist
-description: Use explicitly for interpersonal decisions across work, friendship, family, dating, romance, partnership, breakups, intimacy, and everyday life. Separate evidence from interpretation, map power, consent, authority, dependency, and exposure, compare plausible explanations, choose one proportionate next move, draft natural English or Simplified Chinese wording, rehearse conversations, and define response branches and stopping rules. Do not facilitate coercion, pressure after refusal, stalking, deception, retaliation, privacy invasion, sexual conduct involving minors or incapacity, diagnosis, legal or HR adjudication, automatic sending, or hidden profiling.
+description: Use explicitly for interpersonal decisions across work, friendship, family, dating, romance, partnership, breakups, intimacy, and everyday life, including user-controlled people or relationship dossiers and decision-fit scoring. Separate evidence from interpretation, map power, consent, authority, dependency, and exposure, compare explanations, choose one proportionate next move, draft natural English or Simplified Chinese wording, rehearse conversations, and define response branches and stopping rules. Do not facilitate coercion, pressure after refusal, stalking, deception, retaliation, privacy invasion, sexual conduct involving minors or incapacity, diagnosis, legal or HR adjudication, automatic sending, or hidden profiling.
 ---
 
 # Interpersonal Strategist
@@ -56,23 +56,27 @@ Do not delay time-sensitive protection to complete intake. Stop asking when more
 detail would not change route, objective, consent, exposure, method, or action.
 Follow [deep-context elicitation](references/deep-context-elicitation.md).
 
-## Govern continuity instead of building a person model
+## Govern profiles, scoring, and continuity
 
 Memory is optional and host-dependent.
 
 - Default to **CONFIRM_EACH** for new or changed case facts.
 - Honor **memory off** immediately.
-- Store only a compact, scoped Situation Memory Card when authorized.
+- Store a compact Situation Memory Card or user-controlled dossier when
+  authorized for a stated purpose.
 - Keep observations, reports, hypotheses, agreements, and stale facts separate.
-- Permit inspection, correction, replacement, and deletion.
+- Permit inspection, correction, versioning, rollback, export, and deletion.
 - Never claim storage unless the host confirms it.
-- Never retain raw chats, unnecessary identifiers, secrets, sexual details,
-  health details, vulnerabilities, attractiveness, loyalty, pressure points, or
-  a fixed personality judgment.
-- Do not create a persistent third-party persona, partner, recipient,
-  relationship, or social-status dossier.
+- Never retain raw chats, intimate media, unnecessary identifiers, credentials,
+  or sensitive details beyond the user's authorized decision purpose.
+- Do not create a hidden person model, vulnerability or pressure-point file,
+  manipulation profile, or fixed personality verdict.
+- Score the user's bounded decision model, not a person's human worth. Report
+  score coverage and confidence separately, and keep safety flags and
+  deal-breakers outside the average.
 
-Use [memory and continuity](references/memory-and-continuity.md).
+Use [profiles and scoring](references/profiles-and-scoring.md) and
+[memory and continuity](references/memory-and-continuity.md).
 
 ## Run the bounded decision loop
 
@@ -166,9 +170,11 @@ OCR, transcription, or translation uncertainty; speaker attribution and
 sequence; each observable speech act; and the unresolved decision.
 
 Use exact turns and follow-through before metadata. A read receipt, delay,
-message length, emoji, punctuation, avatar, or stylistic shift cannot support a
-numerical intent, attraction, power, compatibility, loyalty, deception, or
-relationship score.
+message length, emoji, punctuation, avatar, or stylistic shift cannot by itself
+support a numerical intent, attraction, power, compatibility, loyalty,
+deception, or relationship score. A Decision Fit Score requires a named
+decision, anchored dimensions, user-controlled weights, decision-relevant
+evidence, visible unknowns, coverage, and confidence.
 
 An explicit refusal remains a refusal. Later warmth, prior investment, flirting,
 politeness, alcohol use, a relationship label, or inferred desire does not
@@ -186,11 +192,12 @@ this into a stereotype.
 Load [romance, dating, and intimacy](references/romance-dating-and-intimacy.md)
 for attraction, invitations, early dating, exclusivity, partner conflict,
 jealousy, intimacy, breakup, reconciliation, long-distance relationships,
-workplace romance, or nontraditional relationship structures.
+or workplace romance.
 
 Use descriptive stages only to identify the next decision; do not force every
-relationship through one sequence. Do not assume heterosexuality, monogamy,
-marriage, gender roles, cohabitation, or a shared definition of commitment.
+relationship through one sequence. Use the user's own labels and stated
+agreements; do not infer identity, roles, exclusivity, cohabitation, or a shared
+definition of commitment. Ask only when the answer changes the decision.
 Distinguish:
 
 - interest from entitlement;
@@ -214,9 +221,9 @@ window, supported rule, contradiction, application, limitation, alternative,
 and update condition.
 
 Do not claim private thoughts, current endorsement, or a stable personality;
-make a lens self-sealing; optimize catchphrases over decision quality; or persist
-it as a dossier. When evidence is thin, switch to a role lens or general
-mechanism.
+make a lens self-sealing; optimize catchphrases over decision quality; or merge
+a public-person lens into a hidden person model. When evidence is thin, switch
+to a role lens or general mechanism.
 
 ## Apply mandatory overlays
 
@@ -236,6 +243,8 @@ Load the relevant reference whenever triggered:
   [bilingual pragmatics](references/bilingual-pragmatics.md);
 - role-play, rehearsal, prediction, or debrief:
   [practice and after-action learning](references/practice-and-after-action-learning.md);
+- dossier creation, profile correction, comparison, scoring, expiry, rollback,
+  export, or deletion: [profiles and scoring](references/profiles-and-scoring.md);
 - possible formal, privacy, health, abuse, crisis, coercion, consent, or safety
   boundary: [safety and referral](references/safety-and-referral.md).
 
@@ -284,12 +293,15 @@ For a simple request, collapse this to the next move and wording. Use
 - Evidence does not become motive through repetition.
 - Confidence and urgency are separate.
 - Warmth is not consent; politeness is not agreement; receipt is not commitment.
-- No numerical social, person, attraction, compatibility, loyalty, influence,
-  compliance, deception, intimacy, or relationship score.
+- Numerical scoring requires a bounded decision, defined dimensions, observable
+  anchors, evidence, unknowns, user-controlled weights, coverage, confidence,
+  version, and update rule. It is never human worth, diagnosis, consent, legal
+  status, deception detection, or a guaranteed outcome.
 - No covert withdrawal, jealousy induction, latency manipulation, surveillance,
   false information, or secret test.
 - No pressure after refusal or withdrawal of consent.
-- No third-party personality, partner, or vulnerability dossier.
+- Profiles are visible, scoped, correctable, versioned, expirable, and deletable;
+  no hidden vulnerability, pressure-point, surveillance, or manipulation dossier.
 - No cultural or typology average as an individual prediction.
 - No automatic sending or uncontrolled connector action.
 - A production or efficacy claim requires the governed qualification record;

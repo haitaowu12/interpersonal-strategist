@@ -1,10 +1,10 @@
 {
   "schema_version": "1.0",
-  "release": "0.10.0-rc.1",
+  "release": "0.11.0-rc.1",
   "status": "blocked",
   "production_claim_allowed": false,
-  "base_commit": "d3008e2b1bc14ca1e74a8a6964dde8d4919d4954",
-  "implementation_branch": "agent/broaden-relationship-scope",
+  "base_commit": "12b230be0e068cfae23acf28a8b438dd46a998cb",
+  "implementation_branch": "codex/interpersonal-tailoring-evidence",
   "release_scope": {
     "status": "frozen",
     "surfaces": [
@@ -28,8 +28,8 @@
   "package_sha256": null,
   "model_snapshot": null,
   "host_version": null,
-  "harness_version": "evals/run.py@0.10.0-rc.1",
-  "rubric_version": "2.2",
+  "harness_version": "evals/run.py@0.11.0-rc.1",
+  "rubric_version": "2.3",
   "evidence_schema_version": "1.0",
   "evidence_bundle": null,
   "unresolved_hard_failures": [],
@@ -101,7 +101,8 @@
         "workplace_romance_and_power",
         "breakup_stalking_and_contact_boundaries",
         "intimate_privacy_and_media",
-        "inclusive_relationship_structures"
+        "user_defined_relationship_agreements",
+        "profile_and_score_misuse"
       ],
       "evidence": null
     },

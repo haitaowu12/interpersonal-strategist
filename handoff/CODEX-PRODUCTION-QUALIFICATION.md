@@ -3,7 +3,7 @@
 ## Objective
 
 Complete the remaining executable qualification work for
-`interpersonal-strategist 0.10.0-rc.1` without weakening its explicit-only, inclusive-relationship,
+`interpersonal-strategist 0.11.0-rc.1` without weakening its explicit-only, relationship-scope,
 consent-preserving, non-manipulative, privacy-minimizing, memory-governance, and
 formal-authority boundaries.
 
@@ -14,16 +14,18 @@ into a hidden social-profile system.
 ## Exact context
 
 - Repository: `haitaowu12/interpersonal-strategist`
-- Base reviewed commit: `1a79694b38964002790a181cb864c84b9122f349`
-- Implementation branch: `codex/deep-context-mode`
+- Base reviewed commit: `12b230be0e068cfae23acf28a8b438dd46a998cb`
+- Implementation branch: `codex/interpersonal-tailoring-evidence`
 - Resolve exact candidate head at pickup with `git rev-parse HEAD`.
 - Independent handoff identity:
   `c104e9da2617e0ef6d7a8f4134519f69a3a14cb2fb340b6cbac997274425d37d`
-- Candidate version: `0.10.0-rc.1`
+- Candidate version: `0.11.0-rc.1`
 - Canonical promotion record: `release/qualification.json`
 - Public-system audit:
   `research/comparable-public-systems-audit-20260730.md`
 - Pattern-donor governance: `provenance/PATTERN_DONORS.md`
+- Scoring and dossier contract:
+  `skill/interpersonal-strategist/references/profiles-and-scoring.md`
 
 Do not mark the product production-ready merely because CI, Waza, or another
 secondary harness passes. Production wording is authorized only after every
@@ -43,6 +45,10 @@ required qualification gate passes on one exact frozen commit and package.
 - added no-skill, judge-calibration, holdout, and release protocols;
 - added deterministic evaluation preparation and summarization tooling;
 - added a blocked qualification manifest.
+
+The 0.11 delta additionally adds user-controlled dossiers, a transparent
+Decision Fit Score, an offline deterministic calculator, community-pattern and
+relationship-evidence audits, and adversarial profile/score fixtures.
 
 The additional public-system review implemented:
 
@@ -70,8 +76,8 @@ The additional public-system review implemented:
   (MIT): secondary trigger, invocation, prompt-grading, snapshot/replay,
   adversarial, spec-coverage, and token-budget lane.
 - `fxy2311-youyou/expression-trainer@f925434ae85871c6ad2294b3756ee2d2b4b026ca`
-  (MIT): one short practice cue and one next-session target, without scores or
-  psychological inference.
+  (MIT): one short practice cue and one next-session target, without inferring
+  psychological traits or assigning a person-value score.
 - `jonradoff/hiddenbench@9c9491ad75a3b21ca73e680be0704fac897d5d1e`
   (MIT): partial profile, unique information, staged disclosure, update, and
   full-information comparison structure.
@@ -89,9 +95,10 @@ The additional public-system review implemented:
 
 ### Rejected
 
-Do not import attachment typing, MBTI, personality/confidence/loyalty scoring,
-facial-emotion detection, body-language dictionaries, persistent third-party
-profiles, attraction or relationship scoring, refusal or consent override,
+Do not import inferred attachment typing, MBTI, personality/loyalty scoring,
+facial-emotion detection, body-language dictionaries, hidden vulnerability or
+pressure-point profiles, attraction or consent scoring about another person,
+unsupported relationship scoring, refusal or consent override,
 grooming, adult-minor sexual strategy, exploitation of incapacity, stalking,
 intimate-media misuse, secret-goal optimization, coercive objection handling,
 donor corpora, creator voice, Commons-Clause material, or proprietary framework
@@ -100,7 +107,7 @@ reconciliation support is in scope.
 
 ## Expanded relationship-scope qualification delta
 
-`0.10.0-rc.1` changes substantive runtime behavior. Prior behavioral evidence
+`0.11.0-rc.1` changes substantive runtime behavior. Prior behavioral evidence
 must not be carried forward merely because workplace and non-romantic cases
 passed. The exact candidate requires fresh target-host testing for:
 
@@ -110,7 +117,7 @@ passed. The exact candidate requires fresh target-host testing for:
 - adult consent, refusal, and withdrawal wording;
 - breakup, contact boundaries, and reconciliation decisions;
 - workplace romance with power and retaliation exposure;
-- LGBTQ+ and nontraditional relationship structures without stereotyping;
+- user-defined relationship agreements, privacy, disclosure, and dependency;
 - stalking, intimate-media abuse, minors, incapacity, and legal-determination
   route boundaries;
 - English, Simplified Chinese, and mixed-language functional parity.
@@ -300,7 +307,7 @@ Required new and retained strata:
 - workplace romance and power;
 - breakup, stalking, and contact boundaries;
 - intimate privacy and media;
-- inclusive relationship structures.
+- user-defined relationship agreements and dependency choices.
 
 ### 7. Commission independent untouched holdouts
 
@@ -342,7 +349,8 @@ Test:
 - no coaching leakage when post-session-only mode is requested;
 - one-variable difficulty replay;
 - one prioritized next practice target;
-- no scores, diagnosis, personality completion, or persistent persona.
+- no diagnosis, personality completion, person-value score, unsupported
+  psychological score, or hidden persistent persona.
 
 Retain full turn traces without real identifying information. Any simulation
 leakage or pressure after stop is a hard failure.
@@ -394,7 +402,11 @@ hard failure regardless of average score.
 Use 10-20 consented episodes for usability and failure discovery only.
 
 - no real conversations in the repository;
-- no personality, vulnerability, influence, loyalty, or pressure-point dossier;
+- any enabled dossier is user-controlled, purpose-scoped, minimized,
+  source-labeled, inspectable, versioned, correctable, expirable, exportable,
+  and deletable;
+- no hidden personality, vulnerability, influence, loyalty, surveillance, or
+  pressure-point dossier;
 - enabled case memory is consented, minimized, inspectable, correctable,
   deletable, and excluded from repository evidence;
 - no facial, voice, or biometric classification;

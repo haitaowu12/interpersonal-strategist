@@ -1,6 +1,6 @@
 [project]
 name = "interpersonal-strategist-skill"
-version = "0.10.0rc1"
+version = "0.11.0rc1"
 description = "Validation and packaging tools for the Interpersonal Strategist Codex skill"
 requires-python = ">=3.11"
 license = { text = "MIT" }

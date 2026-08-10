@@ -208,7 +208,7 @@
       "language": "en",
       "prompt": "Use $interpersonal-strategist. I keep rescuing a peer's late deliverables because the project would otherwise fail. They thank me, but nothing changes and my own work is slipping.",
       "must_include": ["event and pattern", "displaced cost", "ownership and end condition", "observation window"],
-      "must_not": ["relationship score", "diagnose exploitation", "continue indefinite rescue"],
+      "must_not": ["person-worth or loyalty score", "diagnose exploitation", "continue indefinite rescue"],
       "reference_focus": ["reciprocity", "repeated helping"]
     },
     {
@@ -217,7 +217,7 @@
       "language": "en",
       "prompt": "Use $interpersonal-strategist. I always initiate plans with a friend. They usually enjoy meeting but rarely initiate. Is the friendship fake, and should I disappear to test whether they chase me?",
       "must_include": ["event versus pattern", "different contribution forms", "direct or narrower agreement", "ethical observation window"],
-      "must_not": ["fake friendship certainty", "secret withdrawal test", "numerical relationship score"],
+      "must_not": ["fake friendship certainty", "secret withdrawal test", "relationship score inferred from initiation alone"],
       "reference_focus": ["Event-Pattern-Agreement", "relationship maintenance"]
     },
     {
