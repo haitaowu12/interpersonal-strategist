@@ -7,6 +7,12 @@
 **Review type:** fresh content, knowledge, safety, bilingual-function, donor, and
 implementation audit
 
+> **2026-08-10 policy revision:** this historical audit's categorical rejection
+> of all relationship scores and all third-party dossiers is superseded by the
+> governed contract in `references/profiles-and-scoring.md`. Unsupported hidden
+> profiles, sparse-cue scores, person-value scores, and coercive use remain
+> rejected.
+
 ## Decision
 
 ### Content sufficiency
@@ -35,7 +41,7 @@ layer was an explicit method for:
 2. distinguishing receipt, understanding, agreement, commitment, completion,
    refusal, closure, and reopening;
 3. preventing low-specificity digital cues from becoming pseudo-precise social
-   scores;
+   scores while allowing a transparent, user-controlled decision-fit model;
 4. preserving explicit refusal against “behavior outweighs words,” sunk-cost,
    compliance-ladder, or face-saving overrides;
 5. applying public-person or mentor material as a source-bounded perspective
@@ -276,7 +282,7 @@ The existing ledger remains the runtime authority for:
 | Memory correction and deletion | Strong | Persona donors were weaker or broader | Do not import |
 | Persona voice fidelity | Out of scope | Could displace decision quality | Reject |
 | Romance and physical escalation | Out of scope | Donors would expand scope | Reject |
-| Social formulas and scores | Prohibited in principle | Needed named regression coverage | Add tests |
+| Social formulas and scores | Unsupported formulas prohibited | Needed a governed decision-score contract plus misuse regressions | Superseded by 2026-08-10 contract |
 | Public development evaluation | Broad | No focused persona/conversation lane | Add 31-case lane |
 
 ## Implemented changes
@@ -289,13 +295,13 @@ The existing ledger remains the runtime authority for:
 - requires source completeness, attribution, sequence, and OCR uncertainty
   checks;
 - states that explicit refusal remains controlling;
-- prohibits numerical social/person/intent/attraction/loyalty/compliance/
-  deception/relationship scores;
+- prohibits unsupported social/person-value/intent/attraction/loyalty/
+  compliance/deception scores and governs bounded decision-fit scoring;
 - distinguishes role lenses, source-bounded public perspective lenses, and
   current-case hypotheses;
 - prohibits named-person first-person impersonation, private-state claims,
-  self-sealing models, style-fidelity substitution, and persistent third-party
-  dossiers;
+  self-sealing models, style-fidelity substitution, and hidden vulnerability or
+  pressure-point dossiers;
 - adds Chinese receipt, approval, commitment, and vague-deferral cautions;
 - preserves all existing routing, power, bilingual, memory, role-play, and
   release-governance controls.
@@ -317,7 +323,7 @@ now includes:
 - latency, punctuation, emoji, avatar, camera, and appearance boundaries;
 - group-chat attribution and authority;
 - role and source-bounded Lens Cards;
-- correction, held-out prediction, and no-dossier controls.
+- correction, held-out prediction, and governed-dossier controls.
 
 ### Evaluation and CI
 
@@ -329,9 +335,9 @@ The change adds:
   prompt preparation;
 - `tests/test_persona_conversation_hardening.py`;
 - CI validation and exported prompt manifests;
-- hard-gate wording for invented social scores, refusal override,
+- hard-gate wording for invented or misused social scores, refusal override,
   compliance/sunk-cost ladders, avatar and latency inference, third-party
-  transcript/persona dossiers, and strategic-response-delay tests.
+  raw-transcript or hidden-persona dossiers, and strategic-response-delay tests.
 
 Public regression cases are not untouched holdouts and cannot satisfy the
 release holdout gate.

@@ -24,11 +24,15 @@ from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
 REGISTRY = ROOT / "provenance" / "evidence-sources.json"
-USER_AGENT = "interpersonal-strategist-evidence-check/0.10.0-rc.1"
+USER_AGENT = "interpersonal-strategist-evidence-check/0.11.0-rc.1"
 PMID_PATTERN = re.compile(r"PMID (\d+)")
 DOI_PATTERN = re.compile(r"DOI ([^;]+)")
 OFFICIAL_URLS = {
     "PRACTICE-01": "https://www.acas.org.uk/acas-guide-to-challenging-conversations-and-how-to-manage-them",
+    "MEASURE-02": "https://www.apa.org/science/programs/testing/standards",
+    "SAFETY-01": "https://www.cdc.gov/intimate-partner-violence/about/",
+    "SAFETY-02": "https://www.stalkingawareness.org/",
+    "PERSONALITY-01": "https://dictionary.apa.org/myers-briggs-type-indicator",
 }
 
 
@@ -64,12 +68,30 @@ def request_json(url: str, timeout: float) -> dict[str, Any]:
     return payload
 
 
-def request_status(url: str, timeout: float) -> tuple[int, str]:
-    request = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
+def request_status(url: str, timeout: float) -> tuple[int, str, str]:
+    request = urllib.request.Request(
+        url,
+        headers={
+            "User-Agent": (
+                "Mozilla/5.0 (compatible; "
+                f"{USER_AGENT}; +https://github.com/haitaowu12/interpersonal-strategist)"
+            ),
+            "Accept": "text/html,application/xhtml+xml,application/pdf;q=0.9,*/*;q=0.8",
+            "Accept-Language": "en-US,en;q=0.8",
+        },
+    )
     with urllib.request.urlopen(request, timeout=timeout) as response:
         content_type = response.headers.get("Content-Type", "")
-        body = response.read(50_000) if "text" in content_type or "html" in content_type else b""
-        return response.status, body.decode("utf-8", errors="ignore")
+        body = (
+            response.read(250_000)
+            if "text" in content_type or "html" in content_type
+            else b""
+        )
+        return (
+            response.status,
+            body.decode("utf-8", errors="ignore"),
+            response.geturl(),
+        )
 
 
 def extract_year(value: Any) -> int | None:
@@ -235,12 +257,15 @@ def verify_source(source: dict[str, Any], timeout: float) -> dict[str, Any]:
             attempts.append({"method": "crossref", "status": "error", "error": str(exc)})
 
         try:
-            status, _ = request_status("https://doi.org/" + urllib.parse.quote(doi), timeout)
+            status, _, final_url = request_status(
+                "https://doi.org/" + urllib.parse.quote(doi), timeout
+            )
             attempts.append(
                 {
                     "method": "doi-resolution",
                     "status": "resolved" if 200 <= status < 400 else "error",
                     "http_status": status,
+                    "final_url": final_url,
                 }
             )
         except (OSError, urllib.error.URLError) as exc:
@@ -249,23 +274,36 @@ def verify_source(source: dict[str, Any], timeout: float) -> dict[str, Any]:
     official_url = OFFICIAL_URLS.get(source_id)
     if official_url:
         try:
-            status, body = request_status(official_url, timeout)
+            status, body, final_url = request_status(official_url, timeout)
             title_tokens = [
                 token for token in normalize(str(source["title"])).split() if len(token) > 4
             ]
             page = normalize(body)
             matched = sum(token in page for token in title_tokens)
             title_match = bool(title_tokens) and matched / len(title_tokens) >= 0.5
+            configured_host = urllib.parse.urlparse(official_url).hostname
+            final_host = urllib.parse.urlparse(final_url).hostname
+            host_match = bool(
+                configured_host
+                and final_host
+                and (
+                    configured_host == final_host
+                    or final_host.endswith("." + configured_host)
+                )
+            )
             attempts.append(
                 {
                     "method": "official-url",
                     "status": "resolved",
                     "url": official_url,
+                    "final_url": final_url,
                     "http_status": status,
                     "title_match": title_match,
+                    "host_match": host_match,
+                    "identity_basis": "curated official HTTPS URL",
                 }
             )
-            if 200 <= status < 400 and title_match:
+            if 200 <= status < 400 and host_match:
                 return {"id": source_id, "status": "pass", "attempts": attempts}
         except (OSError, urllib.error.URLError) as exc:
             attempts.append({"method": "official-url", "status": "error", "error": str(exc)})

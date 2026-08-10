@@ -2,13 +2,13 @@
 
 [![CI](https://github.com/haitaowu12/interpersonal-strategist/actions/workflows/ci.yml/badge.svg)](https://github.com/haitaowu12/interpersonal-strategist/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Release candidate](https://img.shields.io/badge/release-0.10.0--rc.1-yellow.svg)](CHANGELOG.md)
+[![Release candidate](https://img.shields.io/badge/release-0.11.0--rc.1-yellow.svg)](CHANGELOG.md)
 
 `interpersonal-strategist` is a portable Agent Skill for everyday interpersonal decisions. It helps a user distinguish evidence from interpretation, map power and decision structure, compare plausible readings, choose a proportionate next move, and prepare wording with response branches and stopping rules.
 
-Current release: **`0.10.0-rc.1`**
+Current release: **`0.11.0-rc.1`**
 
-> `0.10.0-rc.1` is a production-qualification candidate, not a production claim.
+> `0.11.0-rc.1` is a production-qualification candidate, not a production claim.
 > The runtime, evidence governance, public evaluation program, and release
 > controls are implemented. Independent holdouts, calibrated behavioral
 > comparison, fluent bilingual review, clean-host validation, and a controlled
@@ -31,7 +31,11 @@ The skill supports:
 - multi-actor decisions, power, dependency, retaliation exposure, and workplace
   romance;
 - adaptive quick, standard, and bounded deep-context interaction;
-- optional governed case memory using a host adapter or portable card;
+- optional governed user and relationship dossiers using a host adapter,
+  portable card, or session-only mode;
+- a transparent Decision Fit Score for a named user decision, with
+  user-configurable dimensions, weights, evidence, counterevidence, unknowns,
+  coverage, confidence, versioning, and correction;
 - English, Simplified Chinese, and mixed-language communication across these
   settings.
 
@@ -43,12 +47,14 @@ category. The skill does **not** facilitate:
   or withdrawal of consent;
 - sexual conduct involving minors, an adult-minor pursuit, or a person unable to
   consent;
-- psychological diagnosis, unsupported person typing, or pseudo-precise social,
-  attraction, compatibility, loyalty, intimacy, or relationship scoring;
+- psychological diagnosis, unsupported person typing, human-worth scoring, or
+  scores that claim to infer another person's attraction, consent, loyalty,
+  deception, or private state;
 - substantive legal, HR, medical, clinical, safeguarding, abuse, crisis, or
   emergency determinations;
-- automatic sending, uncontrolled connectors, or personality, partner,
-  vulnerability, influence, loyalty, pressure-point, or social-status dossiers.
+- automatic sending, uncontrolled connectors, or hidden personality,
+  vulnerability, influence, loyalty, pressure-point, surveillance, or
+  social-status dossiers.
 
 Invocation is explicit-only: `$interpersonal-strategist`.
 
@@ -83,17 +89,22 @@ flowchart LR
 
 ### Distributable layer
 
-`skill/interpersonal-strategist/` contains the complete instruction-only skill:
+`skill/interpersonal-strategist/` contains the complete portable skill:
 
 - `SKILL.md` — routing, bounded decision loop, overlays, output contract, and
   safety invariants;
 - `agents/openai.yaml` — display metadata and explicit-only policy;
-- `references/` — seventeen progressively loaded knowledge modules;
+- `references/` — progressively loaded knowledge modules, including the
+  governed dossier and scoring contract;
+- `assets/` — a user-editable scoring template;
+- `scripts/` — a deterministic, offline score calculator with no persistence;
 - `LICENSE` and `NOTICE.md` — redistribution terms and release boundary.
 
-The package declares no runtime scripts, network dependency, connector, API
-key, or bundled database. Optional continuity uses only a host-provided memory
-adapter under the memory contract, with a portable card fallback.
+The package declares no network dependency, connector, API key, or bundled
+database. Its optional scoring helper is deterministic and offline; it neither
+infers ratings nor writes memory. Optional continuity uses only a host-provided
+memory adapter under the memory contract, with portable-card and session-only
+fallbacks.
 
 ### Decision loop
 
@@ -115,7 +126,19 @@ adapter under the memory contract, with a portable card fallback.
 
 ### Production-readiness mechanisms
 
-`0.10.0-rc.1` adds or hardens:
+`0.11.0-rc.1` adds or hardens:
+
+- **user-controlled dossiers** that separate user, counterpart, and
+  relationship records; label evidence and counterevidence; preserve unknowns;
+  and support inspection, correction, versioning, expiry, export, and deletion;
+- a **Decision Fit Score** for bounded choices rather than people, with explicit
+  dimensions, anchors, weights, coverage, confidence, dealbreakers, and safety
+  gates outside the average;
+- an **offline deterministic calculator** and public adversarial fixtures for
+  missing data, conflict, correction, expiry, deletion, multi-actor comparison,
+  misuse, and score challenges;
+- expanded relationship evidence and exact-commit community pattern audits,
+  while preserving clean-room implementation and evidence limitations;
 
 - **adaptive conversation depth** with automatic readiness checks, explicit
   “grill me,” user-controlled quick mode, bounded rounds, and stop controls;
@@ -348,9 +371,9 @@ python3 scripts/package.py
 This creates:
 
 ```text
-dist/interpersonal-strategist-0.10.0-rc.1.zip
-dist/interpersonal-strategist-0.10.0-rc.1.zip.sha256
-dist/interpersonal-strategist-0.10.0-rc.1.manifest.json
+dist/interpersonal-strategist-0.11.0-rc.1.zip
+dist/interpersonal-strategist-0.11.0-rc.1.zip.sha256
+dist/interpersonal-strategist-0.11.0-rc.1.manifest.json
 ```
 
 The ZIP contains one directly installable `interpersonal-strategist/` directory.

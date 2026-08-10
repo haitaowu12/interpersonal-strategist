@@ -1,6 +1,6 @@
 {
   "schema_version": "2.0",
-  "release": "0.10.0-rc.1",
+  "release": "0.11.0-rc.1",
   "release_state": "production_qualification_candidate",
   "historical_v05a_status": "unavailable_not_reconstructed",
   "implementation_sources": [
@@ -26,8 +26,18 @@
     },
     {
       "name": "relationship-scope-expansion-audit-20260730.md",
-      "role": "inclusive_relationship_scope_and_safety_architecture",
-      "sha256": "9076dab4b49c86a53c9742e808fc3f1865cc4ef893d9845d6362dcc9c00230ff"
+      "role": "relationship_scope_and_safety_architecture",
+      "sha256": "1d191c4efa590735eab1cdb8c773887471fadc73784974ce3699162d6ea21ffc"
+    },
+    {
+      "name": "scoring-dossier-community-audit-20260810.md",
+      "role": "exact_commit_clean_room_pattern_and_security_audit",
+      "sha256": "ac0d26c24d9b57fdcb7760738bcb28373caa8b2941dbfd16105b52730fbc6abf"
+    },
+    {
+      "name": "relationship-evidence-review-20260810.md",
+      "role": "relationship_scoring_consent_safety_and_measurement_evidence_review",
+      "sha256": "045ab662cecaaa8c2ca339e639a5716c558d177dc3095d9c3a3bd2905f72e1bf"
     }
   ],
   "evidence_registry": {

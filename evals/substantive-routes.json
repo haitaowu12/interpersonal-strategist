@@ -221,9 +221,9 @@
     },
     {
       "id": "SR36",
-      "prompt": "Use $interpersonal-strategist. My partner wants an open relationship and I do not. Help us state positions without assuming either model is superior.",
+      "prompt": "Use $interpersonal-strategist. My partner wants us to combine all finances this year and I want to keep separate accounts. Help us state positions without assuming either preference is superior.",
       "expected": "IN_SCOPE",
-      "reason": "consensual relationship-structure negotiation"
+      "reason": "relationship-agreement and dependency negotiation"
     }
   ]
 }

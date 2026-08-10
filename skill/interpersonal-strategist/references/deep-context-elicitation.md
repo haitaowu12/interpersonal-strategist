@@ -125,7 +125,8 @@ Require more than one ambiguous cue before describing a pattern. Do not infer
 personality from gaze, posture, voice, response delay, nationality, language,
 disability, neurotype, age, gender, or other group averages. Do not diagnose,
 assign MBTI or attachment labels, decide honesty or consent, score
-manipulability or influence, or let every response confirm the theory.
+manipulability or influence, or let every response confirm the theory. Record a
+typology only when the user supplies it as optional reflective vocabulary.
 
 Relationship modeling may describe observable dynamics such as:
 
@@ -141,9 +142,11 @@ Use these as revisable decision aids, not moral verdicts.
 ## Carry the model forward safely
 
 When future continuity would help, apply
+[profiles and scoring](profiles-and-scoring.md) and
 [memory and continuity](memory-and-continuity.md). Store or return the minimum
-Situation Memory Card needed to resume without repeating the whole history.
-Revise or delete stale hypotheses instead of accumulating a dossier.
+Situation Memory Card or user-controlled dossier needed to resume without
+repeating the whole history. Version, expire, revise, or delete stale
+hypotheses instead of accumulating them as truth.
 
 ## Safety and formal-route precedence
 

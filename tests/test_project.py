@@ -70,9 +70,9 @@ def make_qualified_manifest(project: Path) -> dict:
                 "qualification_commit": commit,
                 "qualification_tree_sha": "e" * 40,
                 "package_sha256": package_sha,
-                "rubric_version": "2.2",
+                "rubric_version": "2.3",
                 "judge_protocol_version": "1.0",
-                "harness_version": "evals/run.py@0.10.0-rc.1",
+                "harness_version": "evals/run.py@0.11.0-rc.1",
             },
         }
     )
@@ -143,7 +143,7 @@ class ProjectTests(unittest.TestCase):
         self.assertEqual(validate_repository(PROJECT_ROOT), [])
 
     def test_release_candidate_pep440_conversion(self) -> None:
-        self.assertEqual(version_to_pep440("0.10.0-rc.1"), "0.10.0rc1")
+        self.assertEqual(version_to_pep440("0.11.0-rc.1"), "0.11.0rc1")
         self.assertEqual(version_to_pep440("1.2.3-alpha.4"), "1.2.3a4")
         self.assertEqual(version_to_pep440("1.2.3-beta.2"), "1.2.3b2")
         self.assertEqual(version_to_pep440("1.2.3"), "1.2.3")
@@ -183,6 +183,18 @@ class ProjectTests(unittest.TestCase):
         )
         self.assertIn(
             "interpersonal-strategist/references/romance-dating-and-intimacy.md",
+            names,
+        )
+        self.assertIn(
+            "interpersonal-strategist/references/profiles-and-scoring.md",
+            names,
+        )
+        self.assertIn(
+            "interpersonal-strategist/scripts/profile_score.py",
+            names,
+        )
+        self.assertIn(
+            "interpersonal-strategist/assets/profile-score-template.json",
             names,
         )
         self.assertNotIn("README.md", names)
@@ -240,7 +252,7 @@ class ProjectTests(unittest.TestCase):
             project = copy_project(Path(raw))
             notice = project / "skill" / "interpersonal-strategist" / "NOTICE.md"
             notice.write_text(
-                notice.read_text(encoding="utf-8").replace("0.10.0-rc.1", "0.7.0-alpha.2"),
+                notice.read_text(encoding="utf-8").replace("0.11.0-rc.1", "0.7.0-alpha.2"),
                 encoding="utf-8",
             )
             errors = validate_repository(project)
@@ -340,6 +352,7 @@ class ProjectTests(unittest.TestCase):
             "ai-mediated.json": ("case_count", "cases"),
             "trust-reliance.json": ("case_count", "cases"),
             "speech-acts.json": ("case_count", "cases"),
+            "profile-scoring.json": ("case_count", "cases"),
             "bilingual-parity.json": ("pair_count", "pairs"),
             "metamorphic.json": ("pair_count", "pairs"),
         }
@@ -377,9 +390,11 @@ class ProjectTests(unittest.TestCase):
         self.assertIn("simulation_leakage", gate_ids)
         self.assertIn("covert_test", gate_ids)
         self.assertIn("memory_abuse", gate_ids)
+        self.assertIn("score_abuse", gate_ids)
         dimension_ids = {dimension["id"] for dimension in rubric["dimensions"]}
         self.assertIn("simulation_control", dimension_ids)
-        self.assertEqual(rubric["schema_version"], "2.2")
+        self.assertIn("profile_scoring", dimension_ids)
+        self.assertEqual(rubric["schema_version"], "2.3")
 
     def test_validator_rejects_stale_rubric_version_reference(self) -> None:
         with tempfile.TemporaryDirectory(prefix="interpersonal-project-") as raw:
@@ -387,7 +402,7 @@ class ProjectTests(unittest.TestCase):
             protocol = project / "evals" / "judge-protocol.md"
             protocol.write_text(
                 protocol.read_text(encoding="utf-8").replace(
-                    '"rubric_version": "2.2"',
+                    '"rubric_version": "2.3"',
                     '"rubric_version": "2.0"',
                 ),
                 encoding="utf-8",
@@ -485,7 +500,7 @@ class ProjectTests(unittest.TestCase):
             "case_key": "cases:test",
             "condition": "skill",
             "blind_id": "blind-1",
-            "rubric_version": "2.2",
+            "rubric_version": "2.3",
             "hard_gates": {},
             "dimensions": {dimension_id: 3 for dimension_id in dimension_ids},
             "evidence": {"summary": "Observable reason."},
@@ -525,7 +540,7 @@ class ProjectTests(unittest.TestCase):
                 "case_key": "cases:paired",
                 "condition": condition,
                 "blind_id": f"blind-{condition}",
-                "rubric_version": "2.2",
+                "rubric_version": "2.3",
                 "hard_gates": gates,
                 "dimensions": dimensions,
                 "evidence": {"summary": "Observable reason."},

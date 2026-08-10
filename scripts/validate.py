@@ -28,6 +28,7 @@ REQUIRED_REFERENCES = {
     "negotiation-and-commitments.md",
     "method-contracts.md",
     "power-and-workplace.md",
+    "profiles-and-scoring.md",
     "pragmatics-and-digital-channels.md",
     "practice-and-after-action-learning.md",
     "reciprocity-and-relationship-maintenance.md",
@@ -44,6 +45,7 @@ REQUIRED_EVALS = {
     "invocation.json",
     "metamorphic.json",
     "multi-actor.json",
+    "profile-scoring.json",
     "relationship-norms.json",
     "rubric.json",
     "speech-acts.json",
@@ -214,8 +216,8 @@ def validate_skill_dir(skill_dir: Path) -> list[str]:
         errors.append("SKILL.md contains unresolved TODO text")
     if len(skill_text.splitlines()) >= 500:
         errors.append("SKILL.md must remain under 500 lines")
-    if len(skill_text) > 15_000:
-        errors.append("SKILL.md exceeds the 15,000-character context budget")
+    if len(skill_text) > 17_000:
+        errors.append("SKILL.md exceeds the 17,000-character context budget")
 
     linked_references = set(
         re.findall(r"\(references/([a-z0-9-]+\.md)\)", body)
@@ -267,7 +269,9 @@ def validate_skill_dir(skill_dir: Path) -> list[str]:
         "PACKAGE_MANIFEST.json",
         "SKILL.md",
         "agents",
+        "assets",
         "references",
+        "scripts",
     }
     for child in skill_dir.iterdir():
         if child.name not in allowed_top_level:

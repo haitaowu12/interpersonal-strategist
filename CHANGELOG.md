@@ -1,5 +1,26 @@
 # Changelog
 
+## 0.11.0-rc.1
+
+- Replaced the categorical no-score/no-dossier policy with a governed,
+  user-controlled profile and Decision Fit Score contract for bounded choices.
+- Added separate user, counterpart, and relationship records with evidence
+  labels, counterevidence, unknowns, confidence, versioning, correction,
+  rollback, expiry, export, and deletion controls.
+- Added a deterministic offline score calculator, editable template, and public
+  regressions for missing data, conflict, multi-actor comparison, safety gates,
+  misuse, score challenges, correction, expiry, and deletion.
+- Qualified twelve exact community-repository snapshots for clean-room product
+  patterns and rejection criteria; no donor code, prompts, or corpora are
+  redistributed.
+- Promoted fourteen primary or authoritative relationship, consent, safety,
+  measurement, and personality-limitation sources with registry-ledger parity.
+- Kept explicit-only invocation and separate-product boundaries, and retained
+  identity-neutral consent, safety, privacy, and authority controls without
+  dedicated relationship-identity content.
+- Kept production qualification blocked pending fresh host, comparative,
+  holdout, bilingual, pilot, and independent-review evidence for this behavior.
+
 ## 0.10.0-rc.1
 
 - Expanded the skill from a non-romantic boundary to general interpersonal
@@ -16,7 +37,7 @@
   boundaries for coercion, refusal override, stalking, grooming, incapacity,
   adult-minor sexual conduct, intimate-media abuse, diagnosis, and formal
   determinations.
-- Preserved explicit-only invocation, evidence calibration, no social scoring,
+- Preserved explicit-only invocation, evidence calibration, the then-current no-social-scoring policy,
   anti-manipulation controls, privacy minimization, and blocked production
   qualification pending fresh scope-wide evidence.
 

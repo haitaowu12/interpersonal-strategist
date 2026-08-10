@@ -4,9 +4,9 @@
 
 This repository begins a new standalone lineage at
 `interpersonal-strategist 0.6.0-alpha.1`. The current release candidate is
-`0.10.0-rc.1`.
+`0.11.0-rc.1`.
 
-`0.10.0-rc.1` is a production-qualification candidate, not a production claim.
+`0.11.0-rc.1` is a production-qualification candidate, not a production claim.
 Promotion is permitted only when `release/qualification.json` records every
 required gate as passed and binds the evidence to an exact commit, package,
 model and host configuration, evaluation harness, and independent holdout set.
@@ -32,7 +32,7 @@ interpersonal-strategist-phase1-rd-v0.2.zip
 SHA-256 3bf3ac1119b3e6741ebf9b751fa060eafcda011a3ad6fc7e44ae0f8ba1c898bf
 ```
 
-## v0.5 through v0.10 advisory inputs
+## v0.5 through v0.11 advisory inputs
 
 The exact recovered v0.5 R&D package was used as advisory research and design
 input:
@@ -83,10 +83,13 @@ verified permissive license supplied comparison questions only, not copied
 material.
 
 Rejected donor mechanisms include facial-emotion or body-language verdicts,
-confidence and personality scoring, diagnostic attachment typing, persistent
-third-party profiles, secret-goal optimization, attraction or compliance
-scoring, refusal override, coercive sexual or dating tactics, and Commons-Clause
-or proprietary framework imports. Romance is not excluded as a category.
+diagnostic personality or attachment typing, hidden vulnerability or
+pressure-point profiling, unsupported scores inferred from sparse cues,
+secret-goal optimization, attraction or compliance scoring, refusal override,
+coercive sexual or dating tactics, and Commons-Clause or proprietary framework
+imports. A user-controlled, evidence-labeled dossier and bounded Decision Fit
+Score are permitted under the current runtime contract. Romance is not excluded
+as a category.
 
 ## Relationship-scope expansion
 
@@ -113,7 +116,9 @@ may independently implement compatible ideas, but it does not copy donor:
 - prose or creator voice;
 - reference corpora or transcripts;
 - examples, questionnaires, or scripts;
-- attraction, compliance, or relationship scores;
+- attraction or consent claims about another person, compliance scores, or
+  relationship scores that omit their construct, anchors, evidence,
+  counterevidence, unknowns, coverage, confidence, version, or correction path;
 - MBTI or attachment diagnoses;
 - deceptive, coercive, or refusal-overriding tactics.
 
@@ -181,7 +186,10 @@ This repository does not contain:
 
 - real personal conversations;
 - uncontrolled or undisclosed personal memory;
-- third-party personality, vulnerability, influence, or pressure-point dossiers;
+- hidden personality, vulnerability, influence, surveillance, or pressure-point
+  dossiers; governed user-controlled dossiers are limited to decision-relevant,
+  source-labeled records with inspection, correction, expiry, export, and
+  deletion controls;
 - sealed or reconstructed holdout answers;
 - credentials;
 - private vault content;
