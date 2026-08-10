@@ -181,6 +181,11 @@ def version_to_pep440(version: str) -> str:
     return f"{base}{marker}{match['num']}"
 
 
+def is_generated_python_cache(path: Path) -> bool:
+    """Return true for interpreter artifacts that are never distributable."""
+    return "__pycache__" in path.parts or path.suffix.casefold() in {".pyc", ".pyo"}
+
+
 def validate_skill_dir(skill_dir: Path) -> list[str]:
     errors: list[str] = []
     skill_dir = skill_dir.resolve()
@@ -280,7 +285,9 @@ def validate_skill_dir(skill_dir: Path) -> list[str]:
     skill_files = [
         path
         for path in skill_dir.rglob("*")
-        if path.is_file() and path.name.lower() == "skill.md"
+        if path.is_file()
+        and not is_generated_python_cache(path.relative_to(skill_dir))
+        and path.name.lower() == "skill.md"
     ]
     if len(skill_files) != 1:
         errors.append(
@@ -290,6 +297,8 @@ def validate_skill_dir(skill_dir: Path) -> list[str]:
 
     for path in sorted(skill_dir.rglob("*")):
         relative = path.relative_to(skill_dir)
+        if is_generated_python_cache(relative):
+            continue
         if path.is_symlink():
             errors.append(f"symlinks are not allowed: {relative}")
             continue
