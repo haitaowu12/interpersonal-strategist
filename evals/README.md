@@ -36,6 +36,10 @@ production claim.
 13. **Controlled pilot:** privacy-minimized formative usability and failure
     discovery, not efficacy proof.
 
+The context-first revision adds [multi-turn development tests](interactive-context-protocol.md)
+with separate actor and private driver packets. Single-turn depth tests remain
+useful for routing but do not establish that the agent waits or updates from answers.
+
 ## Public fixture suites
 
 - `cases.json` — broad public development cases, including bounded role-play,

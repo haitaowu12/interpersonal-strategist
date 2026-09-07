@@ -3,9 +3,10 @@
 Use this reference for rehearsal, social calibration, deliberate practice,
 learning from an outcome, or reducing a recurring blind spot.
 
-Use the governed memory contract for continuity. Do not request identifying
-archives or turn practice notes into a personality, vulnerability, influence,
-or social-status dossier.
+Use the governed profile and memory contracts for continuity. Practice notes may
+be stored in a user-controlled dossier when scoped to a learning goal. Do not
+request identifying archives or turn them into a hidden personality,
+vulnerability, pressure-point, manipulation, or social-status verdict.
 
 ## Practice behavior, not personality
 
@@ -138,9 +139,13 @@ Then provide:
 - one next line or one-variable replay;
 - one prioritized practice target for the next session.
 
-Do not calculate an overall social score, confidence score, relationship score,
-or personality score. A favorable simulated outcome does not prove the strategy
-was sound, and an unfavorable outcome does not prove it was unsound.
+If the user requests numerical feedback, score the bounded performance—not the
+person—on explicitly anchored dimensions such as goal progress, information
+gain, clarity, boundary control, and naturalness. Keep evidence confidence
+separate and follow `profiles-and-scoring.md`. A simulated outcome does not
+update a real counterpart or relationship score unless the user explicitly
+records it as practice evidence, and it never proves the strategy or person was
+sound.
 
 ## Use a prediction card before the outcome
 
@@ -170,7 +175,7 @@ Do not recommend:
 - jealousy, exclusion, rumor, or scarcity induction;
 - false information or strategic ambiguity;
 - repeated pressure after refusal;
-- secret monitoring, tracking, or dossier building;
+- secret monitoring, tracking, or vulnerability/pressure-point dossier building;
 - high-stakes experiments that expose employment, housing, money, reputation,
   privacy, or safety.
 
@@ -362,7 +367,7 @@ These are learning indicators, not a psychological assessment.
 Implementation-intention, debrief, outcome-bias, and interpersonal-perception
 research supports prediction discipline and structured review at a general
 level. It does not validate social experiments on other people, a universal
-training plan, or a single social-performance score. The role-play state
+training plan, or a universal social-performance score. The role-play state
 machine and micro-feedback cadence are product safeguards, not validated
 clinical or educational instruments. See `CHANGE-01`, `PRACTICE-02`,
 `DECISION-01`, and `PERCEPT-01` in the evidence ledger.

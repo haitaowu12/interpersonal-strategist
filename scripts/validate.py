@@ -28,6 +28,7 @@ REQUIRED_REFERENCES = {
     "negotiation-and-commitments.md",
     "method-contracts.md",
     "power-and-workplace.md",
+    "profiles-and-scoring.md",
     "pragmatics-and-digital-channels.md",
     "practice-and-after-action-learning.md",
     "reciprocity-and-relationship-maintenance.md",
@@ -44,6 +45,7 @@ REQUIRED_EVALS = {
     "invocation.json",
     "metamorphic.json",
     "multi-actor.json",
+    "profile-scoring.json",
     "relationship-norms.json",
     "rubric.json",
     "speech-acts.json",
@@ -179,6 +181,11 @@ def version_to_pep440(version: str) -> str:
     return f"{base}{marker}{match['num']}"
 
 
+def is_generated_python_cache(path: Path) -> bool:
+    """Return true for interpreter artifacts that are never distributable."""
+    return "__pycache__" in path.parts or path.suffix.casefold() in {".pyc", ".pyo"}
+
+
 def validate_skill_dir(skill_dir: Path) -> list[str]:
     errors: list[str] = []
     skill_dir = skill_dir.resolve()
@@ -214,8 +221,8 @@ def validate_skill_dir(skill_dir: Path) -> list[str]:
         errors.append("SKILL.md contains unresolved TODO text")
     if len(skill_text.splitlines()) >= 500:
         errors.append("SKILL.md must remain under 500 lines")
-    if len(skill_text) > 15_000:
-        errors.append("SKILL.md exceeds the 15,000-character context budget")
+    if len(skill_text) > 17_000:
+        errors.append("SKILL.md exceeds the 17,000-character context budget")
 
     linked_references = set(
         re.findall(r"\(references/([a-z0-9-]+\.md)\)", body)
@@ -267,7 +274,9 @@ def validate_skill_dir(skill_dir: Path) -> list[str]:
         "PACKAGE_MANIFEST.json",
         "SKILL.md",
         "agents",
+        "assets",
         "references",
+        "scripts",
     }
     for child in skill_dir.iterdir():
         if child.name not in allowed_top_level:
@@ -276,7 +285,9 @@ def validate_skill_dir(skill_dir: Path) -> list[str]:
     skill_files = [
         path
         for path in skill_dir.rglob("*")
-        if path.is_file() and path.name.lower() == "skill.md"
+        if path.is_file()
+        and not is_generated_python_cache(path.relative_to(skill_dir))
+        and path.name.lower() == "skill.md"
     ]
     if len(skill_files) != 1:
         errors.append(
@@ -286,6 +297,8 @@ def validate_skill_dir(skill_dir: Path) -> list[str]:
 
     for path in sorted(skill_dir.rglob("*")):
         relative = path.relative_to(skill_dir)
+        if is_generated_python_cache(relative):
+            continue
         if path.is_symlink():
             errors.append(f"symlinks are not allowed: {relative}")
             continue

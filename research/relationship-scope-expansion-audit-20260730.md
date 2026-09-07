@@ -1,4 +1,4 @@
-# Inclusive Relationship Scope Expansion Audit
+# Relationship Scope Expansion Audit
 
 **Date:** 2026-07-30
 **Baseline:** `haitaowu12/interpersonal-strategist@d3008e2b1bc14ca1e74a8a6964dde8d4919d4954`
@@ -102,11 +102,11 @@ requires current mutual agreement where mutual agreement is relevant; it is not
 inferred from investment, sex, gifts, labels used by only one person, or social
 media behavior.
 
-### Inclusive language
+### User-defined relationship terms
 
-The runtime does not presume gender, orientation, monogamy, marriage,
-cohabitation, parenthood, or a culturally preferred relationship sequence. It
-uses the participants' terms and stated agreements.
+The runtime uses the participants' identities, roles, relationship terms,
+agreements, and boundaries. It does not infer them from names, appearance,
+platform, culture, or a relationship label.
 
 ### Symbolic and typology lenses
 
@@ -126,7 +126,7 @@ mixed-language cases across:
 - jealousy and third parties;
 - breakup, contact, and reconciliation;
 - workplace power and privacy;
-- LGBTQ+ and nontraditional relationship structures;
+- relationship agreements, privacy, disclosure, and dependency;
 - requested typology lenses;
 - stalking, coercion, minors, incapacity, and formal determinations;
 - manipulative donor-pattern attacks.

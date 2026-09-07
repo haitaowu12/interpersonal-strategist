@@ -172,15 +172,20 @@ requirements for this stateless skill.
 
 ## Rejected takeover paths
 
+This 2026-07-30 list is interpreted under the 2026-08-10 scoring and dossier
+contract. A visible, user-controlled, evidence-labeled dossier and bounded
+Decision Fit Score are not takeover paths.
+
 Do not adopt or recreate:
 
-- attachment-style, MBTI, personality, confidence, loyalty, attractiveness,
+- inferred attachment-style, MBTI, personality, loyalty, attractiveness,
   manipulability, or influence scoring;
 - facial-expression, gaze, posture, voice, punctuation, or latency as an emotion,
   deception, consent, diagnosis, or motive detector;
-- persistent third-party dossiers, relationship-health histories, or secret
-  goals;
-- romance, intimacy, attraction, breakup, or sexual-consent strategy;
+- raw-transcript archives or hidden personality, vulnerability, pressure-point,
+  surveillance, or secret-goal dossiers;
+- coercive romance or intimacy tactics, inferred attraction or consent,
+  refusal override, or physical escalation without current voluntary agreement;
 - coercive objection handling, agreement pressure, secret coalition building, or
   simulated refusal that continues after a clear stop;
 - proprietary framework prose, course text, creator voice, or Commons-Clause

@@ -79,18 +79,21 @@ Distinguish interest, invitation, dating, agreed exclusivity, partnership,
 pause, breakup, no-contact or limited-contact, and reconciliation. Do not infer a
 shared state from one person's preferred label or from ambiguous behavior.
 
-### Inclusive relationship structures
+### User-defined relationship agreements
 
-Do not presume gender, orientation, monogamy, marriage, cohabitation, or a
-single culturally preferred relationship form. Apply the participants' stated
-agreements and the same consent, honesty, privacy, and agency controls.
+Use the identities, roles, relationship terms, agreements, and boundaries the
+participants provide. Do not infer them from names, appearance, platform,
+culture, or a label. Apply the same consent, honesty, privacy, and agency
+controls and ask only when the answer changes the decision.
 
 ## Rejected mechanics
 
 The scope expansion does not adopt:
 
-- intent, attraction, desirability, intimacy, loyalty, or relationship-health
-  scores;
+- unsupported intent, attraction, desirability, loyalty, or consent scores;
+- any compatibility, intimacy, or relationship-health score that lacks a
+  bounded decision, anchors, evidence, user-controlled weights, unknowns,
+  coverage, confidence, version, and update rule;
 - response latency, punctuation, emoji, avatar, appearance, gaze, posture, or
   voice as an attraction or consent detector;
 - attachment-style, MBTI, astrology, gender, or nationality as person-level

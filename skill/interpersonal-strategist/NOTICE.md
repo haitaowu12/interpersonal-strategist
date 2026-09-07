@@ -1,6 +1,6 @@
 # Notice
 
-Interpersonal Strategist `0.10.0-rc.1`
+Interpersonal Strategist `0.12.0-alpha.1`
 
 Copyright 2026 Tony Wu. Distributed under the MIT License.
 
@@ -23,10 +23,12 @@ papers, books, courses, standards, and proprietary framework text are not
 redistributed and remain subject to their own terms.
 
 This skill is instruction-level guidance. It does not enforce host permissions,
-automatically send messages, adjudicate legal or clinical questions, or create
-personality, partner, vulnerability, influence, loyalty, pressure-point, or
-social-status dossiers. Optional case memory is scoped, minimal, inspectable,
-correctable, and deletable through a host adapter.
+automatically send messages or adjudicate legal or clinical questions. It may
+create a user-controlled, purpose-scoped dossier and bounded Decision Fit Score;
+it does not create hidden personality, vulnerability, influence, loyalty,
+pressure-point, surveillance, or social-status dossiers. Optional continuity is
+minimal, source-labeled, inspectable, versioned, correctable, expirable,
+exportable, and deletable.
 
 The skill supports consent-aware romantic and intimate communication but does
 not facilitate coercion, pressure after refusal, stalking, grooming, sexual
@@ -34,7 +36,7 @@ activity involving minors or incapacity, or non-consensual intimate-media use.
 It does not replace qualified legal, HR, medical, safeguarding, crisis, or
 emergency advice.
 
-`0.10.0-rc.1` is a production-qualification candidate. A production claim is not
+`0.12.0-alpha.1` is a production-qualification candidate. A production claim is not
 permitted until the repository qualification manifest records passing evidence
 for source resolution, host integration, comparative behavioral evaluation,
 independent untouched holdouts, bilingual review, expanded relationship-scope

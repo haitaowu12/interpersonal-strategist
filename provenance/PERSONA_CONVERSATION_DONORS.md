@@ -2,7 +2,8 @@
 
 ## Record identity
 
-- Review date: 2026-07-30
+- Original review date: 2026-07-30
+- Policy revision: 2026-08-10
 - Target baseline: `haitaowu12/interpersonal-strategist`
   `e1b607286a385faa84cb7f6ad9ef39b73548a6ef`
 - Purpose: evaluate public persona and chat-analysis skills for transferable
@@ -13,7 +14,10 @@
 
 No donor prose, prompts, formulas, examples, catchphrases, style imitation,
 person profiles, transcripts, or source corpora are copied into the
-distributable skill.
+distributable skill. The 2026-08-10 revision supersedes categorical rejections
+of all profiles and all relationship scores: the product now permits the
+original, bounded dossier and Decision Fit Score contract documented in
+`references/profiles-and-scoring.md`.
 
 A permissive license permits copying under its terms; it does not make a donor
 mechanism sound, in scope, or evidence-backed. An index does not grant a blanket license over linked repositories.
@@ -66,15 +70,16 @@ acts, operational effects, and uncertainty. The sequence can identify receipt,
 clarification, proposal, refusal, commitment, repair, closure, or reopening.
 
 Only this observable structure was retained from chat-analysis donors. Their
-social formulas, relationship stages, hidden scores, and strategic escalation
-were not retained.
+unsupported social formulas, hidden scores, and strategic escalation were not
+retained.
 
 ### Correction and versioning
 
 A user correction changes the record. It is not evidence of resistance or
-confirmation. A lens can be revised or discarded. Optional case memory remains
-scoped, inspectable, correctable, deletable, and separate from a third-party
-persona model.
+confirmation. A lens can be revised or discarded. An optional dossier remains
+user-controlled, purpose-scoped, inspectable, versioned, correctable,
+expirable, exportable, and deletable. It must distinguish fact, counterpart
+statement, user report, observation, hypothesis, counterevidence, and unknown.
 
 ### Prediction before outcome
 
@@ -104,13 +109,18 @@ Donor variants of these mechanisms were not added as extra frameworks.
 
 Rejected:
 
-- intent-truth, social-power, attraction, compliance, loyalty, intimacy,
-  deception, relationship, or “window” scores;
+- intent-truth, social-power, another person's attraction or consent,
+  compliance, loyalty, deception, or “window” scores;
 - arbitrary 0.05 adjustments from punctuation, emoji, message length, avatar,
   latency, or demeanor;
-- formulas whose input variables are unsupported psychological constructs.
+- formulas whose input variables are unsupported psychological constructs;
+- a relationship score that lacks a named decision, dimension definitions,
+  anchors, weights, source-labeled evidence and counterevidence, visible
+  unknowns, coverage, confidence, date, version, and correction path.
 
-Precision cannot repair invalid measurement.
+Precision cannot repair invalid measurement. A user-configured Decision Fit
+Score is allowed as a transparent decision aid, not as a psychometric measure,
+person-value score, attraction detector, or outcome guarantee.
 
 ### Refusal override and compliance ladders
 
@@ -134,7 +144,7 @@ Rejected:
   punctuation, emoji, or response time as proof of personality, emotion,
   honesty, attraction, competence, power, or motive.
 
-### Persona imitation and dossiers
+### Persona imitation and abusive dossiers
 
 Rejected:
 
@@ -143,8 +153,8 @@ Rejected:
 - private-thought or current-endorsement claims;
 - MBTI, attachment, astrology, archetype, or nationality as individual
   evidence;
-- persistent third-party transcript, recipient, relationship, vulnerability,
-  influence, loyalty, pressure-point, or status dossiers;
+- raw-transcript archives or hidden personality, vulnerability, influence,
+  loyalty, pressure-point, surveillance, or status dossiers;
 - self-sealing “corrections prove the model” logic;
 - catchphrase or voice fidelity as the primary quality measure.
 
@@ -155,22 +165,27 @@ complete while removing core knowledge and retaining a private version. That
 mechanism conflicts with truth, ownership, and non-deception requirements. It
 is recorded only so regression cases can reject equivalent requests.
 
-### Romance and physical-escalation strategy
+### Coercive romance and physical-escalation strategy
 
-Romance, dating, sexual escalation, attraction scoring, and “attack window”
-content remain outside the target product boundary even when a donor is
-permissively licensed.
+Ordinary romance, dating, partnership, intimacy, breakup, and reconciliation
+are in scope. Coercive sexual escalation, inferred consent, attraction scoring
+about another person, and “attack window” tactics remain outside the product
+boundary even when a donor is permissively licensed.
 
 ## Implementation linkage
 
 - Runtime: `skill/interpersonal-strategist/SKILL.md`
 - Conversation and lens method:
   `skill/interpersonal-strategist/references/pragmatics-and-digital-channels.md`
+- Governed dossier and scoring method:
+  `skill/interpersonal-strategist/references/profiles-and-scoring.md`
 - Public development cases:
   `evals/persona-conversation-regressions.json`
 - Deterministic secondary lane: `evals/persona_conversation.py`
 - Hard-gate wording: `evals/rubric.json`
 - Audit: `research/persona-and-conversation-systems-audit-20260730.md`
+- Scoring and dossier donor audit:
+  `research/scoring-dossier-community-audit-20260810.md`
 
 These additions do not alter `release/qualification.json`, create a production
 claim, or count as untouched holdout evidence.

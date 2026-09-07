@@ -54,10 +54,11 @@ Avatar, profile picture, appearance, accent, gaze, posture, and facial movement
 are not evidence of personality, honesty, attraction, consent, competence, or
 motive.
 
-Do not convert any of these inputs into a numerical intent, attraction, social-
-power, compliance, loyalty, manipulability, deception, intimacy, or
-relationship score. Decimal precision does not make an unsupported construct
-valid.
+Do not convert these low-specificity inputs alone into a numerical intent,
+attraction, social-power, compliance, loyalty, manipulability, deception,
+intimacy, or relationship score. Decimal precision does not make an unsupported
+construct valid. A Decision Fit Score needs defined anchors, broader
+decision-relevant evidence, unknowns, coverage, and confidence.
 
 ## Classify the observable interaction state
 
@@ -305,7 +306,9 @@ Do not:
   appearance into evidence;
 - let catchphrase fidelity substitute for judgment quality;
 - treat correction as proof that the original lens was right;
-- persist a third-party lens or transcript-derived dossier;
+- persist a public-person lens or raw transcript as a hidden person model;
+- add transcript-derived observations to a dossier without user authorization,
+  minimization, source/date, correction, and expiry controls;
 - present a donor repository as scientific evidence.
 
 When evidence is insufficient, state the boundary and use a role lens or a
@@ -378,7 +381,8 @@ Create branches only when the reply changes action.
 - forcing synchronous contact when a record, accessibility, or safety need
   favors text;
 - first-person imitation of a named person;
-- retaining a third-party transcript or lens as a dossier;
+- retaining a raw third-party transcript or public-person lens as a hidden
+  dossier;
 - using one successful prediction to validate a fixed person model.
 
 ## Evidence boundary
