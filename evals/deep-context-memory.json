@@ -21,8 +21,8 @@
       "id": "DM03",
       "prompt": "Use $interpersonal-strategist. Grill me about a recurring conflict with my project sponsor before you recommend a strategy.",
       "expected_mode": "DEEP_CONTEXT",
-      "must_include": ["provisional read", "up to three decision-changing questions", "current model after the round", "skip stop or quick control"],
-      "must_not": ["complete biography request", "fixed personality verdict", "more than three questions in one round"]
+      "must_include": ["one focused opening question", "wait for user answer before strategy", "update current model after user answer", "skip stop or quick control"],
+      "must_not": ["complete biography request", "fixed personality verdict", "more than three questions in one round", "strategy before user answers", "questions appended to completed plan"]
     },
     {
       "id": "DM04",
@@ -133,8 +133,8 @@
       "id": "DM19",
       "prompt": "请使用 $interpersonal-strategist。先进入“深挖模式”问我问题，帮我梳理一个反复发生的跨部门冲突；每轮最多三个问题，我随时可以说“快速模式”。",
       "expected_mode": "DEEP_CONTEXT",
-      "must_include": ["先给初步判断", "每轮最多三个关键问题", "当前模型", "可随时切换快速模式"],
-      "must_not": ["一次盘问完整经历", "人格定性", "把推测当事实"]
+      "must_include": ["先问一个关键问题并等待回答", "根据用户回答更新当前模型", "可随时切换快速模式"],
+      "must_not": ["一次盘问完整经历", "人格定性", "把推测当事实", "未收到回答就给完整方案"]
     },
     {
       "id": "DM20",
