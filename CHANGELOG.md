@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.12.0-alpha.1
+
+- Made missing decision-changing context trigger an interview in the entrypoint,
+  with an explicit ask/wait boundary before strategy and drafting.
+- Separated interview, synthesis, planning, rehearsal, and outcome updates; kept
+  quick, sufficient-context, user-stop, privacy, and urgent-safety paths.
+- Added candid assumption testing, answer-linked recommendations, natural
+  wording, and worked English/Chinese interview examples.
+- Added 19 multi-turn public scenarios, hidden-fact counterfactual pairs, and
+  isolated actor/driver packet preparation with mutation tests.
+- Recorded community design inputs and alpha gaps. Retained blocked production
+  qualification; no comparative efficacy or live-installation claim.
+
+
 ## 0.11.0-rc.1
 
 - Replaced the categorical no-score/no-dossier policy with a governed,

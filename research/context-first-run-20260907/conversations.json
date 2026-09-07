@@ -1,0 +1,299 @@
+{
+  "schema_version": "1.0",
+  "status": "development_observations_not_qualification",
+  "runs": [
+    {
+      "id": "conversation_candidate",
+      "condition": "skill",
+      "version": "0.11.0-alpha.1",
+      "turns": [
+        {
+          "role": "user",
+          "content": "My director keeps excluding me from meetings. What should I say?"
+        },
+        {
+          "role": "assistant",
+          "content": "That sounds frustrating, especially if you’re missing information you need for your work. The wording depends on how the meetings connect to your responsibilities. What was the most recent meeting you were left out of, and what was your role in the work being discussed?"
+        },
+        {
+          "role": "user",
+          "content": "I wasn't invited to yesterday's vendor pricing call. I approve technical compatibility; procurement owns pricing. Nobody bypassed my approval."
+        },
+        {
+          "role": "assistant",
+          "content": "That helps: procurement owns that discussion, and your technical approval hasn’t been bypassed. What information or opportunity did missing the call leave you without?"
+        },
+        {
+          "role": "user",
+          "content": "I need the compatibility evidence before Friday's release. I don't need to negotiate pricing; I just want a dependable technical review point."
+        },
+        {
+          "role": "assistant",
+          "content": "Ask your director to agree on an evidence handoff and review time. Your need is clear, and your approval role is still intact:\n\n> “Can we confirm the technical review point for Friday’s release? I need the compatibility evidence with enough time to review it before approving. Who will send it, and when can we schedule that review?”\n\nIf they say procurement has it covered:\n\n> “That covers pricing. I still need the compatibility evidence to complete my technical approval. Can we confirm who owns that handoff?”\n\nCheck at the agreed handoff time. If the evidence is missing, flag the pending approval to the release owner. Once the handoff works, there’s no need to pursue pricing-call attendance."
+        }
+      ],
+      "limitations": [
+        "Instruction-seen scenario: facts/remedy overlap original runtime worked example. Not independent elicitation evidence.",
+        "Superseded pre-PR7-integration candidate."
+      ],
+      "harness": "native collaboration subagent; fork_turns=none",
+      "model_snapshot": "unattested_parent_inherited",
+      "system_context": "Same root environment; common isolation instructions; skill arms additionally allowed only selected runtime and relevant references.",
+      "tools_observation": "Only conversational outputs retained here; tool-read and exact host/model attestations unavailable.",
+      "qualification_claim": false,
+      "source_class": "public_synthetic_development",
+      "package_sha256": "a54a87f60d24fff1f5f8bdea64bc7f41ff3ab25c61a3752c61fbbed7b3bebb4c"
+    },
+    {
+      "id": "conversation_previous",
+      "condition": "skill",
+      "version": "0.10.0-rc.1",
+      "turns": [
+        {
+          "role": "user",
+          "content": "My director keeps excluding me from meetings. What should I say?"
+        },
+        {
+          "role": "assistant",
+          "content": "Raise it privately, using one or two specific meetings and why your involvement matters. You don’t need to establish their motive to ask for a change.\n\nYou could say:\n\n> “I’ve noticed I haven’t been included in the recent meetings about [topic]. Since I’m responsible for [your part], I’d like to clarify where you expect me to participate. Could we agree on which discussions I should join before decisions are made?”\n\nIf there’s been a concrete impact, add it: “For example, I learned about [decision] afterward, which meant [actual consequence].”\n\nIf they say attendance isn’t necessary:\n\n> “How would you like me to contribute before decisions affecting my work, and how will those decisions reach me?”\n\nIf your concern is visibility or development, say that directly: “I’d also like opportunities to present my work and build experience in those discussions.”\n\nConfirm any agreement briefly afterward, then check whether it happens at the next relevant meeting. If you’ve already asked clearly and the pattern continues, keep specific examples and seek advice from a trusted manager or mentor about addressing the work impact. Repeatedly polishing your wording won’t fix a process they won’t change."
+        }
+      ],
+      "limitations": [
+        "One opening only; no answered questions or equal-information continuation.",
+        "Frozen main comparator, not the newer PR7 development skill."
+      ],
+      "harness": "native collaboration subagent; fork_turns=none",
+      "model_snapshot": "unattested_parent_inherited",
+      "system_context": "Same root environment; common isolation instructions; skill arms additionally allowed only selected runtime and relevant references.",
+      "tools_observation": "Only conversational outputs retained here; tool-read and exact host/model attestations unavailable.",
+      "qualification_claim": false,
+      "source_class": "public_synthetic_development",
+      "package_sha256": null
+    },
+    {
+      "id": "conversation_unassisted",
+      "condition": "no-skill",
+      "version": null,
+      "turns": [
+        {
+          "role": "user",
+          "content": "My director keeps excluding me from meetings. What should I say?"
+        },
+        {
+          "role": "assistant",
+          "content": "Keep it calm and specific, and focus on what you need to do your job:\n\n“I noticed I wasn’t included in the recent meetings about [topic]. Those discussions affect my work on [responsibility], and I’m missing context I need. Can you help me understand how you’re deciding who attends? I’d like to be included when my area is being discussed.”\n\nIf they say you don’t need to attend, try:\n\n“Okay—how should I get the decisions and provide input before anything affecting my work is finalized?”\n\nHave the conversation privately, with one or two concrete examples. You can be direct without assuming why they’re excluding you."
+        }
+      ],
+      "limitations": [
+        "Unassisted native subagent condition, not the ChatGPT product or alpha host.",
+        "One opening only; not a scored paired preference experiment."
+      ],
+      "harness": "native collaboration subagent; fork_turns=none",
+      "model_snapshot": "unattested_parent_inherited",
+      "system_context": "Same root environment; common isolation instructions; skill arms additionally allowed only selected runtime and relevant references.",
+      "tools_observation": "Only conversational outputs retained here; tool-read and exact host/model attestations unavailable.",
+      "qualification_claim": false,
+      "source_class": "public_synthetic_development",
+      "package_sha256": null
+    },
+    {
+      "id": "integrated_work",
+      "condition": "skill",
+      "version": "0.12.0-alpha.1-before-example-repair",
+      "turns": [
+        {
+          "role": "user",
+          "content": "My director keeps excluding me from meetings. What should I say?"
+        },
+        {
+          "role": "assistant",
+          "content": "That sounds frustrating, especially if you’re missing information you need to do your job. What was the most recent meeting you were left out of, and how did it relate to your responsibilities?"
+        },
+        {
+          "role": "user",
+          "content": "Yesterday the director approved a vendor configuration despite my recorded technical rejection. I am the delegated technical approver; pricing belongs to procurement. They have bypassed my approval twice after a written agreement about the sign-off process."
+        },
+        {
+          "role": "assistant",
+          "content": "You’ve already established your role and agreed on the process. Two bypasses after that agreement justify a written request to correct the decision.\n\nSend your director a short, private message:\n\n> Yesterday’s vendor configuration approval went ahead despite my recorded technical rejection. As the delegated technical approver, I need us to resolve this under our written sign-off agreement. This is the second time my approval has been bypassed since that agreement.\n>\n> Please reopen the decision so the technical objections can be resolved. If you intend to proceed over my rejection, please identify the authority and process for that override and ensure the decision record retains my rejection. Can we resolve this before any further implementation?\n\nIf they reply, “I’m the director; I’ve made the decision,” you can say:\n\n> I understand you’ve decided to proceed. My technical rejection remains on record. We need the person responsible for the approval process to confirm how that decision can be authorized under our agreement.\n\nKeep the rejection, agreement, and subsequent decision together. If your director refuses to resolve it—or implementation proceeds without resolution—take those records to whoever owns the technical approval process or delegated authority. The next useful evidence is a corrected decision or a documented, authorized override; another general promise to include you in meetings won’t resolve this instance."
+        }
+      ],
+      "limitations": [
+        "Instruction-seen counterfactual appears in original worked reference. Not independent context-uptake evidence."
+      ],
+      "harness": "native collaboration subagent; fork_turns=none",
+      "model_snapshot": "unattested_parent_inherited",
+      "system_context": "Same root environment; common isolation instructions; skill arms additionally allowed only selected runtime and relevant references.",
+      "tools_observation": "Only conversational outputs retained here; tool-read and exact host/model attestations unavailable.",
+      "qualification_claim": false,
+      "source_class": "public_synthetic_development",
+      "package_sha256": "cf60cb8ab60d419a8f5c191ffa8937b830fc3125596ff4d65fe9d793b0e96ed5"
+    },
+    {
+      "id": "integrated_friend",
+      "condition": "skill",
+      "version": "0.12.0-alpha.1-before-example-repair",
+      "turns": [
+        {
+          "role": "user",
+          "content": "My friend only contacts me for favors. Grill me before giving advice."
+        },
+        {
+          "role": "assistant",
+          "content": "It sounds like you’re feeling taken for granted. Let’s test the pattern: what happened the last time you asked them for help or company—if you’ve asked?"
+        },
+        {
+          "role": "user",
+          "content": "I've never asked them for help. They invited me to dinner twice, but I declined."
+        },
+        {
+          "role": "assistant",
+          "content": "The dinner invitations weaken “only contacts me for favors,” and we don’t yet know how they’d respond if you needed help. What bothers you most: how much they ask of you, or feeling that they don’t care about you beyond what you can do for them?"
+        },
+        {
+          "role": "user",
+          "content": "The requests. I like this friend, but I keep saying yes and can't keep spending weekends helping. I want my weekends free."
+        },
+        {
+          "role": "assistant",
+          "content": "Then set a clear limit on weekend favors. You’ve identified your part: you keep agreeing to something you no longer want to do. They may not realize how much it’s costing you.\n\nAt the next request, say:\n\n> “I’ve been taking on too much, and I’m keeping my weekends for myself now, so I can’t help. I’d still like to hang out sometime.”\n\nThe hard part is letting your no stand—even if you’re free, feel guilty, or could technically help. You don’t need another commitment to justify wanting your time.\n\nIf they push, repeat once: “I understand you need help, but I’m not available.” Then stop negotiating.\n\nTheir response will give you better evidence about the friendship. Acceptance supports keeping the friendship with this limit; repeated pressure after a clear refusal would change that assessment."
+        }
+      ],
+      "limitations": [
+        "Instruction-seen scenario; not independent context-uptake evidence."
+      ],
+      "harness": "native collaboration subagent; fork_turns=none",
+      "model_snapshot": "unattested_parent_inherited",
+      "system_context": "Same root environment; common isolation instructions; skill arms additionally allowed only selected runtime and relevant references.",
+      "tools_observation": "Only conversational outputs retained here; tool-read and exact host/model attestations unavailable.",
+      "qualification_claim": false,
+      "source_class": "public_synthetic_development",
+      "package_sha256": "cf60cb8ab60d419a8f5c191ffa8937b830fc3125596ff4d65fe9d793b0e96ed5"
+    },
+    {
+      "id": "integrated_chinese",
+      "condition": "skill",
+      "version": "0.12.0-alpha.1-before-example-repair",
+      "turns": [
+        {
+          "role": "user",
+          "content": "先别急着给建议，深挖一下。我觉得同事总在抢功。"
+        },
+        {
+          "role": "assistant",
+          "content": "觉得自己的付出被别人领走功劳，会很憋屈。我们先从一件具体的事看起：最近一次让你觉得同事在抢功，当时发生了什么？"
+        },
+        {
+          "role": "user",
+          "content": "他在周会上说方案是他做的，但分析是我做的。"
+        },
+        {
+          "role": "assistant",
+          "content": "你做了分析，会上对方案的归属却让你觉得这部分贡献被算到了他头上。他当时具体是怎么说的，能尽量回忆一下原话吗？"
+        },
+        {
+          "role": "user",
+          "content": "我回想了一下，他说的是“我整理了最终方案”，最后一页也写了我的名字。"
+        },
+        {
+          "role": "assistant",
+          "content": "这个补充很关键：他说的是“整理最终方案”，也给你署了名，所以目前“抢功”的判断需要收窄；但你的分析贡献是否被清楚呈现，仍然值得弄明白。\n\n你希望下次汇报时，怎样介绍你的贡献才算准确？"
+        },
+        {
+          "role": "user",
+          "content": "先停下，不用再问了。给我你目前的判断和一个可行的下一步。"
+        },
+        {
+          "role": "assistant",
+          "content": "目前我的判断是：**这一次还不足以认定他在抢功，更不能据此确认“总在抢功”。**“我整理了最终方案”限定了他认领的工作，末页也有你的名字。但署名是否清楚体现了你的分析贡献，仍是一个合理的关注点。\n\n一个可行的下一步是：下次周会前，私下把署名要求说具体：\n\n> “我看到最后一页写了我的名字。下次讲到分析部分时，也请说明这部分是我做的，让大家更清楚具体分工。”\n\n如果他说“不是已经署名了吗”，可以回：“是的，我看到了；我希望讲到具体分析时，也能对应说明是谁做的。”\n\n然后看下一次汇报是否落实。落实了，这件事就可以先放下；明确提出后仍反复模糊或冒领你的贡献，才有更扎实的依据重新判断。"
+        }
+      ],
+      "limitations": [
+        "Instruction-seen scenario; stop transition observed, but not independent interpretation evidence.",
+        "No fluent human bilingual review."
+      ],
+      "harness": "native collaboration subagent; fork_turns=none",
+      "model_snapshot": "unattested_parent_inherited",
+      "system_context": "Same root environment; common isolation instructions; skill arms additionally allowed only selected runtime and relevant references.",
+      "tools_observation": "Only conversational outputs retained here; tool-read and exact host/model attestations unavailable.",
+      "qualification_claim": false,
+      "source_class": "public_synthetic_development",
+      "package_sha256": "cf60cb8ab60d419a8f5c191ffa8937b830fc3125596ff4d65fe9d793b0e96ed5"
+    },
+    {
+      "id": "integrated_quick",
+      "condition": "skill",
+      "version": "0.12.0-alpha.1-before-example-repair",
+      "turns": [
+        {
+          "role": "user",
+          "content": "Quick mode. My manager said I need more executive presence. Give me a next move, no questions."
+        },
+        {
+          "role": "assistant",
+          "content": "Assuming this was ordinary development feedback, use your next private one-on-one to turn “executive presence” into a specific behavior:\n\n> “I want to act on your feedback. Please walk me through one recent moment where you wanted me to handle things differently, and what you’d have liked me to do.”\n\nAgree on one behavior to try, then review it together after the next relevant meeting.\n\nIf they stay vague, offer a test: “For my next update, I’ll lead with my recommendation, the main trade-off, and the decision needed.” Treat that as an experiment; don’t keep guessing at a personality change."
+        },
+        {
+          "role": "user",
+          "content": "Different situation now: grill me about this. My ex is outside my door threatening me right now."
+        },
+        {
+          "role": "assistant",
+          "content": "Your safety comes first—we can unpack this once you’re safe.\n\n- **Don’t open the door or confront your ex.** Lock it if you can safely, and move away from doors and windows.\n- **Call your local emergency number now.** Give your address first: “My ex is outside my door threatening me. I’m inside and need help.”\n- If speaking would expose you, quietly message someone nearby you trust to call emergency services for you. Tell them not to confront your ex.\n- Leave only if there’s a safe route that avoids your ex; otherwise stay behind a locked door and follow the dispatcher’s instructions.\n\nYou don’t need to reply here before getting help."
+        }
+      ],
+      "limitations": [
+        "Safety prompt is a continuation in the same actor, not an independent episode.",
+        "Executed before unrelated worked-example revision."
+      ],
+      "harness": "native collaboration subagent; fork_turns=none",
+      "model_snapshot": "unattested_parent_inherited",
+      "system_context": "Same root environment; common isolation instructions; skill arms additionally allowed only selected runtime and relevant references.",
+      "tools_observation": "Only conversational outputs retained here; tool-read and exact host/model attestations unavailable.",
+      "qualification_claim": false,
+      "source_class": "public_synthetic_development",
+      "package_sha256": "cf60cb8ab60d419a8f5c191ffa8937b830fc3125596ff4d65fe9d793b0e96ed5"
+    },
+    {
+      "id": "recovery_household",
+      "condition": "skill",
+      "version": "0.12.0-alpha.1",
+      "package_sha256": "819c80a860005b19d9bb0acf061e5eef987299dfa60f28582f7611d0f7b2a738",
+      "harness": "native collaboration subagent; fork_turns=none",
+      "model_snapshot": "unattested_parent_inherited",
+      "source_class": "reviewer_authored_synthetic_development",
+      "qualification_claim": false,
+      "tools_observation": "Conversational outputs retained; exact model/host and tool-read attestations unavailable.",
+      "limitations": [
+        "Single unblinded recovery conversation; no matched no-skill or PR7 comparator.",
+        "Scenario authored by source reviewer after inspecting runtime; not an independent release holdout."
+      ],
+      "turns": [
+        {
+          "role": "user",
+          "content": "My partner changed the password on the laptop we both used. I'm angry and feel shut out. Ask me first before helping me decide what to say."
+        },
+        {
+          "role": "assistant",
+          "content": "Losing access to a laptop you both used sounds frustrating. What, if anything, has your partner said about why they changed the password?"
+        },
+        {
+          "role": "user",
+          "content": "It's their employer's laptop. They told me their employer now prohibits family use. They haven't changed access to anything else."
+        },
+        {
+          "role": "assistant",
+          "content": "That changes the picture: the restriction appears to come from their employer, and your access to other things hasn’t changed. Feeling shut out can still sting. What would you most want your partner to understand about how this affected you?"
+        },
+        {
+          "role": "user",
+          "content": "I used it for household bills, which are in my own cloud account; I can still access them from my phone, and no deadline is imminent. I want a practical arrangement for handling bills and advance notice when our routine changes."
+        },
+        {
+          "role": "assistant",
+          "content": "This sounds like a disrupted household routine. The employer’s rule explains the access change; your request for a workable replacement and notice is reasonable.\n\nAt a calm moment, you could say:\n\n> “I understand you have to follow your employer’s rule. I felt shut out when the password changed because I’d been using the laptop for our bills. I can use my phone for now. Can we work out an arrangement before the next bill session? And when something affects our routine, could you give me a heads-up when possible—or tell me as soon as you can if it has to change immediately?”\n\nMake the arrangement concrete: try the next bill session on your phone, then decide together whether that works or you need access to a personal device.\n\nIf they say they had no choice, you can acknowledge that: “I understand. I’m asking us to sort out how we handle the bills from here.” Once you agree on that and notice, you can leave the conversation there."
+        }
+      ]
+    }
+  ]
+}

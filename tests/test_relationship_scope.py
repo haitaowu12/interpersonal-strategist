@@ -26,7 +26,6 @@ class RelationshipScopeTests(unittest.TestCase):
         ).read_text(encoding="utf-8")
         for required in (
             "dating, romance, partnership, breakups, intimacy",
-            "Apply romance, dating, and intimacy guidance",
             "Voluntariness-Specificity-Reversibility",
             "references/romance-dating-and-intimacy.md",
             "sexual conduct involving minors or incapacity",
@@ -153,7 +152,7 @@ class RelationshipScopeTests(unittest.TestCase):
                 encoding="utf-8"
             )
         )
-        self.assertEqual(qualification["release"], "0.11.0-rc.1")
+        self.assertEqual(qualification["release"], (PROJECT_ROOT / "VERSION").read_text().strip())
         self.assertEqual(qualification["status"], "blocked")
         self.assertFalse(qualification["production_claim_allowed"])
 

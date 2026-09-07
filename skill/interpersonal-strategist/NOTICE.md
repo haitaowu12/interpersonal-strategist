@@ -1,6 +1,6 @@
 # Notice
 
-Interpersonal Strategist `0.11.0-rc.1`
+Interpersonal Strategist `0.12.0-alpha.1`
 
 Copyright 2026 Tony Wu. Distributed under the MIT License.
 
@@ -36,7 +36,7 @@ activity involving minors or incapacity, or non-consensual intimate-media use.
 It does not replace qualified legal, HR, medical, safeguarding, crisis, or
 emergency advice.
 
-`0.11.0-rc.1` is a production-qualification candidate. A production claim is not
+`0.12.0-alpha.1` is a production-qualification candidate. A production claim is not
 permitted until the repository qualification manifest records passing evidence
 for source resolution, host integration, comparative behavioral evaluation,
 independent untouched holdouts, bilingual review, expanded relationship-scope
