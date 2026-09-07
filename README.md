@@ -14,6 +14,9 @@ Current release: **`0.12.0-alpha.1`**
 > comparison, fluent bilingual review, clean-host validation, and a controlled
 > pilot remain required gates in `release/qualification.json`.
 
+The [development baseline record](handoff/BASELINE-0.12.0-alpha.1.md)
+separates completed implementation from the remaining qualification work.
+
 ## What changed in the alpha workflow
 
 The first decision is now whether enough context exists to advise. Sparse or
