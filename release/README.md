@@ -1,7 +1,7 @@
 # Release Qualification
 
 `release/qualification.json` is the canonical promotion record. The current
-`0.11.0-rc.1` state is a production-qualification candidate, not a production
+`0.12.0-alpha.1` state is a production-qualification candidate, not a production
 claim.
 
 ## Promotion rule
@@ -68,3 +68,8 @@ reconciliation, and their safety boundaries.
 - Add public synthetic regression cases without exposing private holdouts.
 - Do not reuse a tuned-against holdout as untouched qualification evidence.
 - Keep the release blocked until the affected gate is rerun.
+
+The `0.12.0-alpha.1` context-first revision is stacked on the PR #7 development
+head and retains governed profile/scoring capabilities. The interactive
+protocol in `evals/interactive-context-protocol.md` adds turn-level evidence;
+public scenarios and local model observations cannot replace qualification.

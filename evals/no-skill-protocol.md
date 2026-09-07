@@ -96,3 +96,18 @@ standards.
 
 Do not promote on a mean score alone or on a comparison that changes model,
 host, tools, context, or response budget between conditions.
+
+## Interactive context-building comparison
+
+Also run `interactive-context-protocol.md` for conversation behavior. Compare the
+new candidate, frozen pre-change skill, and native no-skill baseline with the
+same model, host, scenario facts, sampling policy, and total turn/token budget.
+Only scenario facts responsive to an actual question enter an actor's context.
+Evaluate both end-to-end interaction and an equal-information continuation:
+the former measures elicitation, the latter asks whether the reasoning adds
+value after both conditions receive the same facts. Report these separately.
+
+Do not give hidden facts or expected answers to the strategist. Do not pad the
+baseline with a weaker prompt, force it to answer in one turn, or reward question
+count. Record skipped interviews, ignored answers, unnecessary questions, user
+corrections, usable next moves, and safety failures alongside preference scores.

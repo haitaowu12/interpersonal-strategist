@@ -1,0 +1,119 @@
+{
+  "authority_mode": "standalone",
+  "lead": "/root",
+  "scope": "Independent synthetic forward-tests and review under skill-creator; root owns all writes",
+  "max_total_attempts": 9,
+  "attempt_allocation": {
+    "completed_first_pass_comparators": 3,
+    "integrated_candidate_forward_tests": 4,
+    "independent_review": 1,
+    "recovery_reserve": 1
+  },
+  "descendant_delegation": false,
+  "model_attestation": "parent-inherited; exact snapshot not exposed by collaboration tool",
+  "qualification_claim": false,
+  "attempts": [
+    {
+      "task": "conversation_candidate",
+      "purpose": "first-pass sparse work case",
+      "status": "completed"
+    },
+    {
+      "task": "conversation_previous",
+      "purpose": "frozen main skill comparator",
+      "status": "completed"
+    },
+    {
+      "task": "conversation_unassisted",
+      "purpose": "unassisted comparator",
+      "status": "completed"
+    },
+    {
+      "task": "integrated_work",
+      "purpose": "work approval bypass",
+      "status": "completed"
+    },
+    {
+      "task": "integrated_friend",
+      "purpose": "explicit social interview",
+      "status": "completed"
+    },
+    {
+      "task": "integrated_chinese",
+      "purpose": "Chinese correction and stop",
+      "status": "completed"
+    },
+    {
+      "task": "integrated_quick",
+      "purpose": "quick and safety transition",
+      "status": "completed"
+    },
+    {
+      "task": "integration_review",
+      "purpose": "independent source integration review",
+      "status": "completed"
+    },
+    {
+      "task": "recovery_household",
+      "purpose": "reviewer-authored novel household scenario after example repair",
+      "status": "completed"
+    }
+  ],
+  "initial_runtime_files_sha256": {
+    "LICENSE": "64d92889122f2de2b6421d814a0b893eec13a0be87508516eb294e9398bffa4e",
+    "NOTICE.md": "6c630679ff8800f58c648ed41071089cb9a07a12a0690537a065c8f42db27ed3",
+    "SKILL.md": "4483580613a15f3c72a4392270e2f6cddb92aa4f4654ca1245b61d80759ca632",
+    "agents/openai.yaml": "a58a77db1a01db8868db322764d981abcda0bf6ac01fec63617e0f94cd4cd10d",
+    "assets/profile-score-template.json": "709f067060f0c2caf66f7464c118930aa39b08e24fbce09b6c9e3eb0455deeff",
+    "references/bilingual-pragmatics.md": "3e69d0a5a400de2161c225b6c2e74c4d5d09977d0e36ee94eb62e2e4f456e67d",
+    "references/communication-and-control.md": "3c8d296669f4760d9ef7ac83939ebfa62703651abe7bee27ff93ad1b110a98be",
+    "references/conflict-and-trust-repair.md": "dc4635ad29bd5ebb11219a7f1318d2dafadde52ffee92a5c152e3039356fb52f",
+    "references/deep-context-elicitation.md": "737accd28db59b2a781e332cabbc20b774bdafc8ec1ab4249a32b60cc96bbf07",
+    "references/evidence-and-readiness.md": "c33af121758e3286d936791dadc800b5afff1faf7cf169897b6bdfff0b31f9c4",
+    "references/evidence-ledger.md": "66aae11c0b5becc1dba2908f57ee100ad045dd2a172a4419a6f9a9479f0c03aa",
+    "references/memory-and-continuity.md": "f160ea1d8d01aa1128396a094328056cde4b45f560548a2a23060e96e3d8dee4",
+    "references/method-contracts.md": "968de7366ec5c97606aac412c71949f695b02a47458f70a2433c6f5f6700ccaf",
+    "references/negotiation-and-commitments.md": "136c788979435f7fc14c443f5f585a9f5f838db37fb26d23be5082801c1896be",
+    "references/power-and-workplace.md": "c2c0ace974593dcf4ef8fe7d8fc42bd6f0abea6bca8e4f41a840b4b4a4cec055",
+    "references/practice-and-after-action-learning.md": "7a25788457908696fde2055fe8d36254196db3d3f23aeb5edf735511f1abea4c",
+    "references/pragmatics-and-digital-channels.md": "342ce407d8070c5bd915e20c057d261e0d96faed25015636c1a47252f0a1435d",
+    "references/profiles-and-scoring.md": "8e8be93b034bc349fbfab9967995a7a7c2fa4f87a495954b58badff9127fdb97",
+    "references/reciprocity-and-relationship-maintenance.md": "8aef8657744e3d074fca87c04413e062d726d679c802707ae83dcf7a9fa8f2d5",
+    "references/romance-dating-and-intimacy.md": "fc7406cb23b7c3294b111231c9ba54b285f2697b7212a9497aee6c1ffab7aaef",
+    "references/safety-and-referral.md": "4a5e0cebd1954b40a2e8d72fb94354ba3ae91c35a025a2639a4dd14be48ab1c6",
+    "references/scene-playbooks.md": "009cf5ab562533a641fe778d96ec7a2c7d41e02ac0c60edf80fdabc28be7b525",
+    "references/situation-classification-and-calibration.md": "a83116b661c0782430d43801e9afb5982714e19543f83771829da4abbc6ab35d",
+    "scripts/profile_score.py": "ee011944c749c221881de311eef6aad42fa75a8a99e056181fb343cb6f0fd9d9"
+  },
+  "final_runtime_files_sha256": {
+    "LICENSE": "64d92889122f2de2b6421d814a0b893eec13a0be87508516eb294e9398bffa4e",
+    "NOTICE.md": "6c630679ff8800f58c648ed41071089cb9a07a12a0690537a065c8f42db27ed3",
+    "SKILL.md": "4483580613a15f3c72a4392270e2f6cddb92aa4f4654ca1245b61d80759ca632",
+    "agents/openai.yaml": "a58a77db1a01db8868db322764d981abcda0bf6ac01fec63617e0f94cd4cd10d",
+    "assets/profile-score-template.json": "709f067060f0c2caf66f7464c118930aa39b08e24fbce09b6c9e3eb0455deeff",
+    "references/bilingual-pragmatics.md": "3e69d0a5a400de2161c225b6c2e74c4d5d09977d0e36ee94eb62e2e4f456e67d",
+    "references/communication-and-control.md": "3c8d296669f4760d9ef7ac83939ebfa62703651abe7bee27ff93ad1b110a98be",
+    "references/conflict-and-trust-repair.md": "dc4635ad29bd5ebb11219a7f1318d2dafadde52ffee92a5c152e3039356fb52f",
+    "references/deep-context-elicitation.md": "61ada345d29418e895697a088fb3244d03d01477e62721ef7e5b6e0ccc655683",
+    "references/evidence-and-readiness.md": "c33af121758e3286d936791dadc800b5afff1faf7cf169897b6bdfff0b31f9c4",
+    "references/evidence-ledger.md": "66aae11c0b5becc1dba2908f57ee100ad045dd2a172a4419a6f9a9479f0c03aa",
+    "references/memory-and-continuity.md": "f160ea1d8d01aa1128396a094328056cde4b45f560548a2a23060e96e3d8dee4",
+    "references/method-contracts.md": "968de7366ec5c97606aac412c71949f695b02a47458f70a2433c6f5f6700ccaf",
+    "references/negotiation-and-commitments.md": "136c788979435f7fc14c443f5f585a9f5f838db37fb26d23be5082801c1896be",
+    "references/power-and-workplace.md": "c2c0ace974593dcf4ef8fe7d8fc42bd6f0abea6bca8e4f41a840b4b4a4cec055",
+    "references/practice-and-after-action-learning.md": "7a25788457908696fde2055fe8d36254196db3d3f23aeb5edf735511f1abea4c",
+    "references/pragmatics-and-digital-channels.md": "342ce407d8070c5bd915e20c057d261e0d96faed25015636c1a47252f0a1435d",
+    "references/profiles-and-scoring.md": "8e8be93b034bc349fbfab9967995a7a7c2fa4f87a495954b58badff9127fdb97",
+    "references/reciprocity-and-relationship-maintenance.md": "8aef8657744e3d074fca87c04413e062d726d679c802707ae83dcf7a9fa8f2d5",
+    "references/romance-dating-and-intimacy.md": "fc7406cb23b7c3294b111231c9ba54b285f2697b7212a9497aee6c1ffab7aaef",
+    "references/safety-and-referral.md": "4a5e0cebd1954b40a2e8d72fb94354ba3ae91c35a025a2639a4dd14be48ab1c6",
+    "references/scene-playbooks.md": "009cf5ab562533a641fe778d96ec7a2c7d41e02ac0c60edf80fdabc28be7b525",
+    "references/situation-classification-and-calibration.md": "a83116b661c0782430d43801e9afb5982714e19543f83771829da4abbc6ab35d",
+    "scripts/profile_score.py": "ee011944c749c221881de311eef6aad42fa75a8a99e056181fb343cb6f0fd9d9"
+  },
+  "final_package_sha256": "819c80a860005b19d9bb0acf061e5eef987299dfa60f28582f7611d0f7b2a738",
+  "attempts_used": 9,
+  "attempts_remaining": 0,
+  "root_owned_files": "all changed source and evidence files",
+  "verification_gate": "source review, scenario evidence, full affected checks, exact-head hosted CI; release qualification remains separate"
+}
