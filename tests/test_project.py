@@ -272,7 +272,7 @@ class ProjectTests(unittest.TestCase):
             project = copy_project(Path(raw))
             notice = project / "skill" / "interpersonal-strategist" / "NOTICE.md"
             notice.write_text(
-                notice.read_text(encoding="utf-8").replace("0.11.0-rc.1", "0.7.0-alpha.2"),
+                notice.read_text(encoding="utf-8").replace((project / "VERSION").read_text().strip(), "0.7.0-alpha.2"),
                 encoding="utf-8",
             )
             errors = validate_repository(project)

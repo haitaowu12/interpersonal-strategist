@@ -1,6 +1,6 @@
 {
   "schema_version": "2.0",
-  "release": "0.11.0-rc.1",
+  "release": "0.12.0-alpha.1",
   "release_state": "production_qualification_candidate",
   "historical_v05a_status": "unavailable_not_reconstructed",
   "implementation_sources": [

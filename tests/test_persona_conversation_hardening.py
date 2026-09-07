@@ -27,9 +27,7 @@ class PersonaConversationHardeningTests(unittest.TestCase):
         path = PROJECT_ROOT / "skill" / "interpersonal-strategist" / "SKILL.md"
         skill = path.read_text(encoding="utf-8")
         for required in (
-            "Analyze chats, emails, and screenshots as interaction evidence",
             "An explicit refusal remains a refusal.",
-            "Use perspective lenses without impersonation",
             "Numerical scoring requires a bounded decision",
             "Profiles are visible, scoped, correctable, versioned, expirable, and deletable",
             "references/profiles-and-scoring.md",

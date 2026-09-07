@@ -51,6 +51,9 @@ jobs:
       - name: Validate inclusive relationship regression fixtures
         run: python3 evals/relationship_scope.py validate
 
+      - name: Validate interactive context scenarios
+        run: python3 evals/interactive_context.py validate
+
       - name: Run unit and mutation tests
         run: python3 -m unittest discover -s tests -v
 
@@ -71,6 +74,11 @@ jobs:
           python3 evals/relationship_scope.py prepare \
             --condition no-skill \
             --output build/relationship-scope-no-skill-prompts.jsonl
+
+      - name: Prepare isolated interactive packets
+        run: |
+          python3 evals/interactive_context.py prepare --condition skill --output build/interactive-skill
+          python3 evals/interactive_context.py prepare --condition no-skill --output build/interactive-no-skill
 
       - name: Build deterministic release
         run: python3 scripts/package.py
@@ -95,6 +103,8 @@ jobs:
             dist/interpersonal-strategist-*.zip
             dist/interpersonal-strategist-*.zip.sha256
             dist/interpersonal-strategist-*.manifest.json
+            build/interactive-skill/
+            build/interactive-no-skill/
             build/skill-prompts.jsonl
             build/no-skill-prompts.jsonl
             build/persona-conversation-skill-prompts.jsonl
