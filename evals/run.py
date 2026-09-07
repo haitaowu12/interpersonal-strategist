@@ -31,6 +31,7 @@ CASE_SUITES = {
     "ai-mediated.json": "case_count",
     "trust-reliance.json": "case_count",
     "speech-acts.json": "case_count",
+    "profile-scoring.json": "case_count",
 }
 PAIR_SUITES = {
     "bilingual-parity.json": "pair_count",

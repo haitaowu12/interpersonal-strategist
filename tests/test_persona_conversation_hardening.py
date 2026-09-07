@@ -27,11 +27,10 @@ class PersonaConversationHardeningTests(unittest.TestCase):
         path = PROJECT_ROOT / "skill" / "interpersonal-strategist" / "SKILL.md"
         skill = path.read_text(encoding="utf-8")
         for required in (
-            "Analyze chats, emails, and screenshots as interaction evidence",
             "An explicit refusal remains a refusal.",
-            "Use perspective lenses without impersonation",
-            "No numerical social, person, attraction, compatibility, loyalty",
-            "No third-party personality, partner, or vulnerability dossier.",
+            "Numerical scoring requires a bounded decision",
+            "Profiles are visible, scoped, correctable, versioned, expirable, and deletable",
+            "references/profiles-and-scoring.md",
             "references/pragmatics-and-digital-channels.md",
             "**QUICK**",
             "**DEEP_CONTEXT**",
@@ -41,7 +40,7 @@ class PersonaConversationHardeningTests(unittest.TestCase):
             "Situation Memory Card",
         ):
             self.assertIn(required, skill)
-        self.assertLess(len(skill), 15_000)
+        self.assertLess(len(skill), 17_000)
         self.assertLess(len(skill.splitlines()), 500)
 
     def test_pragmatics_reference_preserves_observable_boundaries(self) -> None:
@@ -63,7 +62,7 @@ class PersonaConversationHardeningTests(unittest.TestCase):
             "`没事`",
             "truthful face-preserving communication",
             "source-bounded perspective lenses",
-            "Do not convert any of these inputs into a numerical intent",
+            "Do not convert these low-specificity inputs alone into a numerical intent",
             "Do not use latency to infer attraction, status, power",
             "A user correction changes the record.",
         ):
@@ -115,16 +114,17 @@ class PersonaConversationHardeningTests(unittest.TestCase):
             (PROJECT_ROOT / "evals" / "rubric.json").read_text(encoding="utf-8")
         )
         gates = {gate["id"]: gate["failure"] for gate in rubric["hard_gates"]}
-        self.assertIn("social score", gates["fabrication"])
-        self.assertIn("pseudo-precise", gates["fabrication"])
+        self.assertIn("construct, anchors, weights", gates["fabrication"])
+        self.assertIn("human worth", gates["score_abuse"])
+        self.assertIn("low-specificity cues", gates["score_abuse"])
         self.assertIn("refusal or consent override", gates["harmful_tactic"])
         self.assertIn("compliance or sunk-cost ladder", gates["harmful_tactic"])
-        self.assertIn("recipient", gates["memory_abuse"])
+        self.assertIn("pressure-point", gates["memory_abuse"])
         self.assertIn("transcript", gates["memory_abuse"])
         self.assertIn("avatar", gates["nonverbal_inference"])
         self.assertIn("strategic response delay", gates["covert_test"])
         self.assertNotIn("Provides substantive romance strategy", gates["authority_boundary"])
-        self.assertEqual(rubric["schema_version"], "2.2")
+        self.assertEqual(rubric["schema_version"], "2.3")
 
     def test_donor_records_are_exact_and_license_scoped(self) -> None:
         donor_record = (

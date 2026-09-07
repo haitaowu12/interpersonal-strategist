@@ -84,8 +84,8 @@ freely in words and invoice the person emotionally later.
 
 Use light, specific, non-extractive contact:
 
-1. remember work, interests, or stated priorities without building a private
-   dossier;
+1. remember work, interests, or stated priorities in a user-controlled profile
+   when useful, without hidden surveillance or manipulation fields;
 2. share information or recognition when genuinely relevant;
 3. make bounded requests with easy decline;
 4. close the loop after advice or an introduction;
@@ -171,7 +171,8 @@ material shared ownership without notice when safe notice is possible.
 ## Failure modes
 
 - immediate tit-for-tat accounting;
-- numerical relationship, loyalty, or influence scores;
+- unsupported loyalty or influence scores, or relationship scores that hide
+  evidence, unknowns, coverage, confidence, or user-chosen weights;
 - interpreting different contribution forms as no contribution;
 - treating caregiving or crisis asymmetry as exploitation;
 - hiding a contract inside generosity;
@@ -185,6 +186,7 @@ material shared ownership without notice when safe notice is possible.
 
 Social-exchange and communal-versus-exchange research supports distinguishing
 relationship norms and contingent obligations at a general level. It does not
-classify a relationship, predict loyalty, or validate a personal scorecard.
-Event-based observation, explicit renegotiation, and stop rules are product
-safeguards. See `EXCHANGE-01` and `RELATION-01` in the evidence ledger.
+classify a relationship, predict loyalty, or validate the product's Decision
+Fit Score. Event-based observation, explicit renegotiation, user-controlled
+scoring, and stop rules are product safeguards. See `EXCHANGE-01`,
+`RELATION-01`, and `MEASURE-01` in the evidence ledger.

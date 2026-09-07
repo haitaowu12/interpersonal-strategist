@@ -44,9 +44,8 @@ A relationship may be in one or more states:
    renewed contact or reliance.
 
 Do not assume every relationship should progress, become exclusive, become
-sexual, cohabit, marry, or continue. People may choose monogamy, consensual
-non-monogamy, casual dating, friendship, distance, or closure. Clarify the actual
-agreement rather than infer it from labels.
+sexual, cohabit, marry, or continue. Clarify the actual agreement, desired form,
+boundaries, and next decision rather than infer them from a label.
 
 ## Calibrate interest without pretending to read attraction
 
@@ -66,8 +65,10 @@ isolated compliments. These may affect how an interaction feels but do not prove
 attraction, consent, exclusivity, or future intent.
 
 Use confidence words—low, moderate, or high—and attach them to an observable
-pattern, not to a private feeling. Do not compute an attraction, chemistry,
-compatibility, intimacy, loyalty, or relationship-health score.
+pattern, not to a private feeling. A user may score their own attraction,
+intimacy satisfaction, relationship fit, or options through the Decision Fit
+Score. Do not score the other person's attraction, consent, loyalty, honesty, or
+private state, and do not build a score from ambiguous cues.
 
 ## Ask someone out once, clearly and with an easy decline
 
@@ -174,8 +175,8 @@ privacy, or shared vulnerability. Clarify:
 - pace and conditions;
 - contraception, barriers, testing, and health information that require a
   qualified current source;
-- trauma, disability, pain, medication, culture, gender, orientation, and
-  sensory needs only as the person explicitly describes them;
+- trauma, accessibility, pain, medication, culture, health, and sensory needs
+  only as the person explicitly describes them and only when decision-relevant;
 - privacy, recording, photos, sexting, storage, and forwarding;
 - aftercare, follow-up, and how to raise a changed boundary.
 
@@ -345,11 +346,11 @@ decline, the boundary, and the stop. Terms such as `随便`, `都行`, `看情�
 `以后再说`, or `没事` do not have one fixed romantic meaning; use local context
 and ask when the interpretation changes action.
 
-## Preserve inclusion without stereotyping
+## Preserve the user's terms without stereotyping
 
-Do not assume genders, sexual orientation, monogamy, marriage, biological
-parenthood, cohabitation, disability status, sexual activity, or culturally
-preferred directness. Ask only what changes the decision.
+Use the identities, roles, relationship terms, agreements, and boundaries the
+user provides. Do not infer them from names, appearance, platform, culture, or
+relationship labels. Ask only what changes the decision.
 
 Cultural and language context may affect address, pacing, privacy, family
 involvement, disclosure, and wording. It does not override consent or establish
@@ -408,9 +409,11 @@ Before answering verify:
 
 ## Evidence boundary
 
-This module combines existing promoted evidence on perception limits, digital
-signals, trust repair, relationship norms, conflict, negotiation, pragmatics,
-and outcome-independent learning with original consent and agency safeguards.
+This module combines promoted evidence on relationship quality, maintenance,
+dyadic coping, demand/withdraw patterns, responsiveness and intimacy, consent,
+safety, perception limits, digital signals, trust repair, conflict,
+negotiation, pragmatics, and outcome-independent learning with original agency
+safeguards.
 It is not a diagnostic relationship instrument, attraction detector, legal
 consent standard, couples-therapy protocol, or predictor of relationship
 success. Candidate romance-specific sources should be reviewed and promoted

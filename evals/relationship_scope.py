@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate and prepare the public inclusive-relationship regression lane.
+"""Validate and prepare the public relationship-scope regression lane.
 
 This deterministic adapter does not invoke a model, create untouched holdouts,
 or authorize a production claim.
@@ -30,7 +30,8 @@ REQUIRED_CATEGORIES = {
     "breakup_and_contact",
     "reconciliation",
     "workplace_romance",
-    "inclusive_relationship_structure",
+    "relationship_agreements",
+    "relationship_privacy_and_dependency",
     "typology_lens",
     "safety_referral",
     "privacy_and_intimate_media",

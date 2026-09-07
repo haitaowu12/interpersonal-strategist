@@ -1,96 +1,110 @@
 # Deep-Context Elicitation and Situational Models
 
-Use this reference when the user explicitly asks to be questioned, when the
-default depth check finds decision-relevant gaps, or when actor and relationship
-hypotheses would materially improve a plan.
+Read before an interview. The entrypoint owns selection and safety precedence.
+Build the smallest shared account that changes a decision, not a biography.
+Interview in the user's language and conversational register.
 
-The purpose is not to collect a complete biography. Build the smallest
-evidence-linked model that changes a decision.
+## Ask, wait, update
 
-## Choose the mode
+One real exchange beats a questionnaire followed by guessed answers. Default to
+one question per turn. Up to three independent questions are useful when the
+user has bandwidth; do not bundle dependencies or hide five requests inside one
+question. After asking, wait. A missing question tool means use chat, not skip
+elicitation. Asynchronous delivery is not an answer.
 
-User control overrides automatic selection.
+Begin with a short reflection of the known stakes, not a motive theory or a
+provisional strategy. If the user says “my boss is sabotaging me,” acknowledge
+that being excluded feels consequential; do not confirm sabotage. Ask for the
+most decision-relevant missing fact. Do not recommend answers to factual
+questions or offer leading personality labels as options.
 
-### QUICK
+When an answer arrives:
 
-Use when the user says “quick mode,” “just answer,” “skip questions,” “draft it
-now,” or equivalent.
+1. Update known facts, interpretation, objective, and open uncertainty internally.
+2. Show the decisive change in one or two sentences; omit a full table unless
+   complexity warrants it.
+3. Resolve the next material gap, or synthesize and advise if ready.
 
-- Give the best bounded recommendation immediately.
-- State assumptions and the main uncertainty.
-- Ask no optional intake questions.
-- Ask a question only when safety, authority, consent, or another route-changing
-  fact prevents a responsible answer.
-- Offer deeper unpacking as an option, not a prerequisite.
+A safety precaution can precede intake when delay would expose someone to harm.
+It is not permission to attach a complete strategy to every opening question.
 
-### DEEP_CONTEXT
+## Choose the next question by its effect
 
-Use when the user says “grill me,” “interview me,” “help me unpack this,” “ask
-me whatever you need,” or equivalent. Give a provisional read first, then use
-bounded rounds.
+These are choices, not a checklist to administer to everyone.
 
-### AUTO
+| Gap | Useful question | Decision it can change |
+|---|---|---|
+| Objective | What would a workable outcome look like after your next interaction? | Repair, clarification, boundary, or exit |
+| Label replacing evidence | What happened in the most recent instance, in their words if you recall? | Whether the concern is wording, conduct, or interpretation |
+| Power/dependency | What can this person actually decide about your work or access? | Directness, audience, protection |
+| Pattern | What happened when you raised this before? | First clarification versus repeated-boundary response |
+| User contribution | What did you tell them you needed, and what was their response? | Unspoken expectation versus ignored agreement |
+| Conflicting goals | If protecting the relationship and getting this outcome conflict, which matters more here? | The real trade-off |
+| Contradiction | Earlier you said they had agreed; now it sounds like they only acknowledged receipt. What did they actually commit to? | Request versus accountability |
+| Constraint | What consequence could you realistically follow through on? | Enforceable boundary versus empty threat |
 
-Use standard mode when the request is narrow, the facts are sufficient, the
-move is low exposure and reversible, or further detail would not change the
-advice.
+Challenge one consequential assumption at a time. Link the challenge to evidence
+and allow correction. Do not cross-examine suffering, blame someone for another
+person's abuse, or insist on an alternative to an explicit refusal. Support can
+mean validating an emotion while questioning the explanation or proposed move.
 
-Enter deep context when one or more material gaps are present:
+## Readiness and user controls
 
-- the user's actual decision or acceptable outcome is unclear;
-- observation, interpretation, and second-hand report are mixed together;
-- chronology, repetition, or prior attempts could change whether this is an
-  event or a pattern;
-- several actors hold different information, authority, dependencies, or
-  exposure;
-- power, privacy, reputation, employment, housing, money, or safety raises the
-  cost of a wrong move;
-- the proposed action is public, formal, difficult to reverse, or likely to
-  narrow future options;
-- the user's account contains a material contradiction or an alternative
-  explanation with different implications;
-- the user is asking about a recurring dynamic, the relationship trajectory, or
-  why the same kind of situation keeps happening.
+Enough context means the goal, concrete evidence, and decisive constraints are
+known, or the next move stays sound under the remaining plausible answers.
+Do not require every field, exhaustive history, or certainty about motives.
+Explicit “grill me” requests at least an actual interview turn unless the user
+changes mode or protection takes priority. With a rich opening, ask the most
+useful challenge or priority question instead of repeating supplied facts.
 
-Do not enter deep context merely because more detail is available.
+Normally stop within three rounds. If uncertainty remains, say what is unknown;
+provide a conditional, reversible move if possible. The round budget is not
+permission to fabricate readiness. Continue only on request or for a necessary
+high-stakes routing question. If the user asks for a longer interview, summarize
+at natural milestones and keep the questions decision-relevant.
 
-## Run bounded rounds
+- **skip / I don't know:** leave the fact unknown; use another source already
+  supplied or narrow the plan. Do not repeat the demand in different words.
+- **pause / stop:** stop interviewing. Do not add “one last question.”
+- **current read / quick mode:** give the best bounded read and next move now.
+- **correction:** replace the superseded fact; identify any changed advice.
+- **confirm my context first:** summarize and wait for correction/confirmation
+  before advice. Otherwise readiness permits synthesis and advice together.
 
-Ask at most three questions in one round. Prefer one strong question over three
-weak ones. Every question must be able to change route, action, channel,
-directness, timing, exposure, escalation, reliance, or stopping rule.
+## Worked interaction (illustration, not an evaluation case)
 
-Use this sequence selectively:
+User: Our community group asked me to organize a fundraiser. I'm worried I'll
+end up doing everything again. Help me work through it first.
 
-1. **Decision and stakes:** What decision does the user face? What outcome,
-   deadline, boundary, and downside matter?
-2. **Event and evidence:** What happened, in what order, through which channel,
-   with what records, witnesses, contradictions, and missing facts?
-3. **Actors and structure:** Who can decide, veto, evaluate, verify, protect, or
-   bear the impact? What dependencies and alternatives exist?
-4. **History and pattern:** Is this isolated or repeated? What is the local norm?
-   What changed? What prior responses produced what observable results?
-5. **Perspectives and contribution:** What has each person explicitly said?
-   What strong alternative reading fits the evidence? What did the user
-   communicate, omit, assume, or delay without requiring false equal blame?
-6. **Action constraints:** What can the user truthfully say, safely do, and
-   actually enforce?
+Assistant: The concern is what accepting would commit you to. What did the group
+actually ask you to take responsibility for?
 
-After each round show:
+User: They asked me to choose a date and reserve a room, not run the whole event.
 
-- **Current model:** compact facts, working interpretations, actors, power, and
-  objective;
-- **What changed:** which answer changed or strengthened the model;
-- **Open uncertainty:** only the gaps that still affect the decision;
-- **Next:** the recommendation now, or up to three next questions.
+Assistant: That is a narrower request than running the fundraiser. What happened
+last time that makes you expect the responsibility to expand?
 
-Default to no more than three rounds. Continue only when the user requests it or
-one unresolved high-stakes fact still blocks responsible advice. Stop when the
-recommended move is stable under the remaining plausible interpretations.
+User: Nobody was assigned the remaining jobs, so I took them on. This time I only
+have time for booking.
 
-The user may say **skip**, **pause**, **current read**, **stop**, or **quick
-mode** at any time. Obey immediately. Do not treat refusal to answer as evidence
-about the situation.
+Assistant: Your concern is unassigned work becoming your responsibility. Accept
+only the booking task and make its limit explicit: “I can choose a date and book
+the room. I won't be able to take on the other event tasks, so let's assign those
+before we proceed.” If an unassigned task later comes to you, refer it back for
+an owner instead of treating your earlier yes as agreement to everything.
+
+The point is the sequence: ask about the actual request, use the answer to
+narrow the problem, then address the remaining pattern. Do not reuse the facts
+or script when the user's account differs. This example is teaching material;
+use separate scenarios to evaluate whether the skill elicits and uses context.
+
+## What makes this more useful than generic advice
+
+After intake, the answer should reveal a consequential distinction, connect the
+selected move to an elicited fact, give usable wording, and prepare the response
+branch most likely to matter. If none of the answers changed anything, check
+whether the questions were unnecessary or the analysis ignored them. More
+questions, more framework names, or a longer report are not added value.
 
 ## Model people without reifying personality
 
@@ -125,7 +139,8 @@ Require more than one ambiguous cue before describing a pattern. Do not infer
 personality from gaze, posture, voice, response delay, nationality, language,
 disability, neurotype, age, gender, or other group averages. Do not diagnose,
 assign MBTI or attachment labels, decide honesty or consent, score
-manipulability or influence, or let every response confirm the theory.
+manipulability or influence, or let every response confirm the theory. Record a
+typology only when the user supplies it as optional reflective vocabulary.
 
 Relationship modeling may describe observable dynamics such as:
 
@@ -141,9 +156,11 @@ Use these as revisable decision aids, not moral verdicts.
 ## Carry the model forward safely
 
 When future continuity would help, apply
+[profiles and scoring](profiles-and-scoring.md) and
 [memory and continuity](memory-and-continuity.md). Store or return the minimum
-Situation Memory Card needed to resume without repeating the whole history.
-Revise or delete stale hypotheses instead of accumulating a dossier.
+Situation Memory Card or user-controlled dossier needed to resume without
+repeating the whole history. Version, expire, revise, or delete stale
+hypotheses instead of accumulating them as truth.
 
 ## Safety and formal-route precedence
 
@@ -158,7 +175,8 @@ pressuring the user to disclose sensitive details.
 
 ## Quality check
 
-Before ending a deep-context exchange confirm:
+Before closing the interview and delivering advice (not before each question
+turn), confirm:
 
 - the user knows the current route and recommended next move;
 - facts, interpretations, hypotheses, and unknowns are visibly distinct;

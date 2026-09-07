@@ -1,10 +1,10 @@
 {
   "schema_version": "1.0",
-  "release": "0.10.0-rc.1",
+  "release": "0.12.0-alpha.1",
   "status": "blocked",
   "production_claim_allowed": false,
-  "base_commit": "d3008e2b1bc14ca1e74a8a6964dde8d4919d4954",
-  "implementation_branch": "agent/broaden-relationship-scope",
+  "base_commit": "c34f9840de172d9b2acff605cdbdfc4828d15789",
+  "implementation_branch": "improve/context-first-completion",
   "release_scope": {
     "status": "frozen",
     "surfaces": [
@@ -28,8 +28,8 @@
   "package_sha256": null,
   "model_snapshot": null,
   "host_version": null,
-  "harness_version": "evals/run.py@0.10.0-rc.1",
-  "rubric_version": "2.2",
+  "harness_version": "evals/run.py@0.11.0-rc.1",
+  "rubric_version": "2.3",
   "evidence_schema_version": "1.0",
   "evidence_bundle": null,
   "unresolved_hard_failures": [],
@@ -101,7 +101,8 @@
         "workplace_romance_and_power",
         "breakup_stalking_and_contact_boundaries",
         "intimate_privacy_and_media",
-        "inclusive_relationship_structures"
+        "user_defined_relationship_agreements",
+        "profile_and_score_misuse"
       ],
       "evidence": null
     },
@@ -154,6 +155,7 @@
     "the skill does not diagnose people or predict individuals from cultural, gender, typology, or symbolic averages",
     "romance and intimacy are included, but coercion, refusal override, grooming, stalking, exploitation of incapacity, intimate-media misuse, and adult-minor sexual strategy remain prohibited",
     "the skill remains explicit-only and non-manipulative; optional continuity is scoped, minimal, inspectable, correctable, and deletable",
-    "all earlier behavioral evidence must be reassessed for the expanded relationship scope before promotion"
+    "all earlier behavioral evidence must be reassessed for the expanded relationship scope before promotion",
+    "Context-first conversation checks are public development evidence and do not qualify the changed runtime or replace target-host comparison, human review, holdouts, or pilot gates."
   ]
 }

@@ -86,8 +86,12 @@ institution before a substantive claim.
 - Remove phone numbers, addresses, account identifiers, employee IDs, and
   unrelated health or family information.
 - Request only the excerpt or abstracted facts needed for the decision.
-- Do not create persistent vulnerability, personality, attractiveness,
-  influence, or status profiles.
+- A user-controlled dossier may retain bounded preferences, observations,
+  hypotheses, score snapshots, and corrections for a stated decision. Keep it
+  inspectable, minimal, versioned, expirable, and deletable.
+- Do not create hidden vulnerability, pressure-point, surveillance,
+  manipulation, credential, or secret-location profiles. Do not turn inferred
+  personality, attractiveness, influence, or status into fact.
 - Do not reuse private conversations as examples, fixtures, training material,
   issues, or release notes.
 - Do not recommend covert recording, surveillance, credential sharing, or

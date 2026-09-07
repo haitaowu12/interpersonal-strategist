@@ -14,11 +14,20 @@ SKILL_DIR = PROJECT_ROOT / "skill" / "interpersonal-strategist"
 DIST_DIR = PROJECT_ROOT / "dist"
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from validate import validate_repository  # noqa: E402
+from validate import is_generated_python_cache, validate_repository  # noqa: E402
 
 
 def sha256_bytes(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest()
+
+
+def distributable_files(skill_dir: Path = SKILL_DIR) -> list[Path]:
+    return sorted(
+        path
+        for path in skill_dir.rglob("*")
+        if path.is_file()
+        and not is_generated_python_cache(path.relative_to(skill_dir))
+    )
 
 
 def build_archive() -> tuple[Path, Path, Path]:
@@ -32,7 +41,7 @@ def build_archive() -> tuple[Path, Path, Path]:
     checksum = archive.with_suffix(archive.suffix + ".sha256")
     manifest_path = DIST_DIR / f"interpersonal-strategist-{version}.manifest.json"
 
-    files = sorted(path for path in SKILL_DIR.rglob("*") if path.is_file())
+    files = distributable_files()
     manifest_files: list[dict[str, object]] = []
 
     entries: list[tuple[str, bytes]] = []
