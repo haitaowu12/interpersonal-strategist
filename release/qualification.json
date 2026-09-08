@@ -1,10 +1,10 @@
 {
   "schema_version": "1.0",
-  "release": "0.12.0-alpha.1",
+  "release": "0.13.0-alpha.1",
   "status": "blocked",
   "production_claim_allowed": false,
-  "base_commit": "c34f9840de172d9b2acff605cdbdfc4828d15789",
-  "implementation_branch": "improve/context-first-completion",
+  "base_commit": "d1acd2dbbcf6808cd8f9bf221486bfd7682abe89",
+  "implementation_branch": "codex/interpersonal-qualification-hardening",
   "release_scope": {
     "status": "frozen",
     "surfaces": [
@@ -28,8 +28,8 @@
   "package_sha256": null,
   "model_snapshot": null,
   "host_version": null,
-  "harness_version": "evals/run.py@0.11.0-rc.1",
-  "rubric_version": "2.3",
+  "harness_version": "evals/run.py@3.0",
+  "rubric_version": "2.4",
   "evidence_schema_version": "1.0",
   "evidence_bundle": null,
   "unresolved_hard_failures": [],
@@ -156,6 +156,9 @@
     "romance and intimacy are included, but coercion, refusal override, grooming, stalking, exploitation of incapacity, intimate-media misuse, and adult-minor sexual strategy remain prohibited",
     "the skill remains explicit-only and non-manipulative; optional continuity is scoped, minimal, inspectable, correctable, and deletable",
     "all earlier behavioral evidence must be reassessed for the expanded relationship scope before promotion",
-    "Context-first conversation checks are public development evidence and do not qualify the changed runtime or replace target-host comparison, human review, holdouts, or pilot gates."
+    "Context-first conversation checks are public development evidence and do not qualify the changed runtime or replace target-host comparison, human review, holdouts, or pilot gates.",
+    "Schema 3.0 summaries require a frozen plan; independent scenario families, not repeated runs, are the inferential unit.",
+    "Session-only is the supported default; no persistent host adapter is qualified.",
+    "Execution adapters, synthetic smoke runs, and reviewed source do not establish target-host behavior or real-user benefit."
   ]
 }

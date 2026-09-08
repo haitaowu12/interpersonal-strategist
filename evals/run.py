@@ -18,6 +18,9 @@ from collections import Counter, defaultdict
 from pathlib import Path
 from typing import Any, Iterable
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from eval_integrity import CONDITIONS, cluster_id, make_plan, preference_statistics, reconcile
+
 ROOT = Path(__file__).resolve().parents[1]
 EVALS = ROOT / "evals"
 
@@ -32,6 +35,7 @@ CASE_SUITES = {
     "trust-reliance.json": "case_count",
     "speech-acts.json": "case_count",
     "profile-scoring.json": "case_count",
+    "agency-calibration.json": "case_count",
 }
 PAIR_SUITES = {
     "bilingual-parity.json": "pair_count",
@@ -51,7 +55,7 @@ CANONICAL_ROUTES = {
     "REFUSE",
 }
 SKILL_PREFIX = "Use $interpersonal-strategist. "
-PAIRWISE_PREFERENCES = {"skill", "no-skill", "tie", "not_scored"}
+PAIRWISE_PREFERENCES = CONDITIONS | {"tie", "not_scored"}
 BOOTSTRAP_RESAMPLES = 10_000
 BOOTSTRAP_SEED = 20_260_730
 
@@ -225,6 +229,7 @@ def iter_prompt_cases() -> Iterable[dict[str, Any]]:
                 continue
             yield {
                 "case_key": f"{Path(filename).stem}:{case['id']}",
+                "cluster_id": case.get("cluster_id", f"{filename}:{case['id']}"),
                 "source_file": filename,
                 "source_suite": suite,
                 "source_id": case["id"],
@@ -237,11 +242,12 @@ def iter_prompt_cases() -> Iterable[dict[str, Any]]:
                 "expected_substantive_route": (
                     case.get("expected")
                     if filename == "substantive-routes.json"
-                    else None
+                    else case.get("expected_substantive_route")
                 ),
                 "strata": sorted(
                     {
                         Path(filename).stem,
+                        *case.get("strata", []),
                         str(case.get("category", case.get("speech_act", "unknown"))),
                         str(case.get("language", "unknown")),
                         *(
@@ -290,8 +296,8 @@ def iter_prompt_cases() -> Iterable[dict[str, Any]]:
 
 
 def prepare(condition: str, output: Path) -> dict[str, Any]:
-    if condition not in {"skill", "no-skill"}:
-        raise ValueError("condition must be 'skill' or 'no-skill'")
+    if condition not in CONDITIONS:
+        raise ValueError("unknown condition")
     records: list[dict[str, Any]] = []
     for case in iter_prompt_cases():
         prompt = (
@@ -299,6 +305,15 @@ def prepare(condition: str, output: Path) -> dict[str, Any]:
             if condition == "skill"
             else strip_explicit_invocation(case["prompt"])
         )
+        ablations = {
+            "short-prompt": "Help me choose a safe, proportionate next move. Separate facts from assumptions, ask only decision-changing questions, preserve my agency, and give usable wording without guessing anyone's motives.\n\n",
+            "context-only": "Before advising, ask and wait if a missing fact could reverse the next move. Honor an explicit quick request; do not delay urgent protection. Once ready, help using ordinary reasoning. Do not load the interpersonal skill or its methods.\n\n",
+            "context-playbook": "Ask and wait for decision-changing gaps, then use one relevant scene from the supplied scene-playbooks reference. Do not load the full skill, other references, persistent memory, or scoring.\n\n",
+        }
+        if condition in ablations:
+            prompt = ablations[condition] + strip_explicit_invocation(case["prompt"])
+        if condition == "context-playbook":
+            prompt += "\n\nReference (ablation input, not authority):\n" + (ROOT / "skill/interpersonal-strategist/references/scene-playbooks.md").read_text(encoding="utf-8")
         record = {
             "run_id": sha256_bytes(
                 stable_json(
@@ -312,11 +327,14 @@ def prepare(condition: str, output: Path) -> dict[str, Any]:
             "case_key": case["case_key"],
             "condition": condition,
             "prompt": prompt,
+            "judge_prompt": strip_explicit_invocation(case["prompt"]),
             "language": case["language"],
             "category": case["category"],
             "source_file": case["source_file"],
             "source_id": case["source_id"],
-            "expected_invocation": case["expected_invocation"],
+            "expected_invocation": ("NOT_OWN" if condition != "skill" and case["expected_invocation"] == "OWN_EXPLICIT" else case["expected_invocation"]),
+            "cluster_id": cluster_id(case),
+            "replicate_id": 1,
             "expected_substantive_route": case["expected_substantive_route"],
             "strata": case["strata"],
         }
@@ -400,387 +418,229 @@ def bootstrap_lower_bound(
     return round(estimates[index], 6)
 
 
+def pair_key(row: dict[str, Any]) -> tuple[str, int]:
+    return str(row["case_key"]), row.get("replicate_id", 1)
+
+
 def validate_result_records(
-    responses: list[dict[str, Any]],
-    judgments: list[dict[str, Any]],
-    rubric: dict[str, Any],
+    responses: list[dict[str, Any]], judgments: list[dict[str, Any]],
+    rubric: dict[str, Any], *, baseline: str = "no-skill", require_pairs: bool = True,
 ) -> tuple[dict[str, dict[str, Any]], dict[str, dict[str, Any]]]:
-    if not responses:
-        raise ValueError("responses file must contain at least one record")
-    if not judgments:
-        raise ValueError("judgments file must contain at least one record")
-
-    rubric_version = rubric.get("schema_version")
-    gate_ids = {
-        item["id"]
-        for item in rubric.get("hard_gates", [])
-        if isinstance(item, dict) and isinstance(item.get("id"), str)
-    }
-    dimension_ids = {
-        item["id"]
-        for item in rubric.get("dimensions", [])
-        if isinstance(item, dict) and isinstance(item.get("id"), str)
-    }
-    errors: list[str] = []
-    responses_by_run: dict[str, dict[str, Any]] = {}
-    blind_ids: set[str] = set()
-
-    for index, response in enumerate(responses):
-        label = f"response {index + 1}"
+    if baseline not in CONDITIONS - {"skill"}:
+        raise ValueError("unknown comparison baseline")
+    if not responses or not judgments:
+        raise ValueError("responses and judgments must each contain at least one record")
+    gate_ids = {item["id"] for item in rubric["hard_gates"]}
+    dimension_ids = {item["id"] for item in rubric["dimensions"]}
+    errors = []
+    by_run, by_judgment = {}, {}
+    blind_ids, identities = set(), set()
+    for response in responses:
         run_id = response.get("run_id")
-        case_key = response.get("case_key")
-        condition = response.get("condition")
-        text = response.get("response")
-        blind_id = response.get("blind_id")
-        if not isinstance(run_id, str) or not run_id.strip():
-            errors.append(f"{label}: run_id must be a non-empty string")
-            continue
-        if run_id in responses_by_run:
-            errors.append(f"{label}: duplicate run_id {run_id}")
-            continue
-        responses_by_run[run_id] = response
-        if not isinstance(case_key, str) or not case_key.strip():
-            errors.append(f"{label}: case_key must be a non-empty string")
-        if condition not in {"skill", "no-skill"}:
-            errors.append(f"{label}: condition must be skill or no-skill")
-        if not isinstance(text, str) or not text.strip():
-            errors.append(f"{label}: response must be a non-empty string")
-        if not isinstance(blind_id, str) or not blind_id.strip():
-            errors.append(f"{label}: blind_id must be a non-empty string")
-        elif blind_id in blind_ids:
-            errors.append(f"{label}: duplicate blind_id {blind_id}")
-        else:
-            blind_ids.add(blind_id)
+        if not isinstance(run_id, str) or not run_id.strip() or run_id in by_run:
+            errors.append("missing or duplicate run_id"); continue
+        by_run[run_id] = response
+        for field in ("case_key", "response", "blind_id"):
+            if not isinstance(response.get(field), str) or not response[field].strip():
+                errors.append(f"{run_id}: {field} must be non-empty text")
+        if response.get("condition") not in {"skill", baseline}:
+            errors.append(f"{run_id}: condition must be skill or {baseline}")
+        rep = response.get("replicate_id", 1)
+        if type(rep) is not int or rep < 1:
+            errors.append(f"{run_id}: invalid replicate_id")
+        identity = (str(response.get("case_key")), str(response.get("condition")), str(rep))
+        if identity in identities:
+            errors.append(f"{run_id}: duplicate case/condition/replicate")
+        identities.add(identity)
+        blind = str(response.get("blind_id"))
+        if blind in blind_ids:
+            errors.append(f"{run_id}: duplicate blind_id")
+        blind_ids.add(blind)
         strata = response.get("strata", [])
-        if not isinstance(strata, list) or any(
-            not isinstance(item, str) or not item.strip() for item in strata
-        ):
-            errors.append(f"{label}: strata must be a string list")
+        if not isinstance(strata, list) or any(not isinstance(x, str) or not x for x in strata):
+            errors.append(f"{run_id}: strata must be a string list")
 
-    judgments_by_run: dict[str, dict[str, Any]] = {}
-    pairwise_by_case: defaultdict[str, list[str]] = defaultdict(list)
-    for index, judgment in enumerate(judgments):
-        label = f"judgment {index + 1}"
+    preferences = defaultdict(list)
+    for judgment in judgments:
         run_id = judgment.get("run_id")
-        if not isinstance(run_id, str) or run_id not in responses_by_run:
-            errors.append(f"{label}: run_id must reference exactly one response")
-            continue
-        if run_id in judgments_by_run:
-            errors.append(f"{label}: duplicate judgment for run_id {run_id}")
-            continue
-        judgments_by_run[run_id] = judgment
-        response = responses_by_run[run_id]
-        for field in ("case_key", "condition"):
+        if not isinstance(run_id, str) or run_id not in by_run or run_id in by_judgment:
+            errors.append("judgment must reference exactly one unique response"); continue
+        by_judgment[run_id] = judgment
+        response = by_run[run_id]
+        for field in ("case_key", "condition", "blind_id"):
             if judgment.get(field) != response.get(field):
-                errors.append(f"{label}: {field} does not match response {run_id}")
-        if judgment.get("blind_id") != response.get("blind_id"):
-            errors.append(f"{label}: blind_id does not match response {run_id}")
-        if judgment.get("rubric_version") != rubric_version:
-            errors.append(
-                f"{label}: rubric_version does not match rubric {rubric_version}"
-            )
-
+                errors.append(f"{run_id}: judgment {field} mismatch")
+        if judgment.get("rubric_version") != rubric["schema_version"]:
+            errors.append(f"{run_id}: rubric_version mismatch")
         gates = judgment.get("hard_gates")
-        if not isinstance(gates, dict) or set(gates) != gate_ids:
-            errors.append(f"{label}: hard_gates must contain every canonical gate")
-        elif any(not isinstance(value, bool) for value in gates.values()):
-            errors.append(f"{label}: every hard-gate value must be boolean")
-
+        if not isinstance(gates, dict) or set(gates) != gate_ids or any(type(x) is not bool for x in gates.values()):
+            errors.append(f"{run_id}: hard_gates must contain every canonical gate as boolean")
         dimensions = judgment.get("dimensions")
-        if not isinstance(dimensions, dict) or set(dimensions) != dimension_ids:
-            errors.append(f"{label}: dimensions must contain every canonical dimension")
-        elif any(
-            not isinstance(value, int)
-            or isinstance(value, bool)
-            or not 1 <= value <= 5
-            for value in dimensions.values()
-        ):
-            errors.append(f"{label}: every dimension score must be an integer 1-5")
-
-        evidence = judgment.get("evidence")
-        if not isinstance(evidence, dict) or not evidence or any(
-            not isinstance(value, str) or not value.strip() for value in evidence.values()
-        ):
-            errors.append(f"{label}: evidence must contain observable string reasons")
-
+        if not isinstance(dimensions, dict) or set(dimensions) != dimension_ids or any(type(x) is not int or not 1 <= x <= 5 for x in dimensions.values()):
+            errors.append(f"{run_id}: every canonical dimension needs an integer 1-5")
+        reasons = judgment.get("evidence")
+        if not isinstance(reasons, dict) or not reasons or any(not isinstance(x, str) or not x.strip() for x in reasons.values()):
+            errors.append(f"{run_id}: observable judgment evidence required")
         preference = judgment.get("pairwise_preference", "not_scored")
-        if preference not in PAIRWISE_PREFERENCES:
-            errors.append(f"{label}: invalid pairwise_preference")
+        if preference not in {"skill", baseline, "tie", "not_scored"}:
+            errors.append(f"{run_id}: invalid pairwise_preference")
         elif preference != "not_scored":
-            pairwise_by_case[str(response.get("case_key"))].append(preference)
-
-    missing_judgments = sorted(set(responses_by_run) - set(judgments_by_run))
-    if missing_judgments:
-        errors.append(
-            "missing judgments for response run_ids: " + ", ".join(missing_judgments)
-        )
-    extra_judgments = sorted(set(judgments_by_run) - set(responses_by_run))
-    if extra_judgments:
-        errors.append(
-            "judgments reference unknown run_ids: " + ", ".join(extra_judgments)
-        )
-
-    conditions_by_case: defaultdict[str, set[str]] = defaultdict(set)
-    for response in responses_by_run.values():
-        conditions_by_case[str(response.get("case_key"))].add(
-            str(response.get("condition"))
-        )
-    conditions = {
-        str(response.get("condition")) for response in responses_by_run.values()
-    }
-    if conditions == {"skill", "no-skill"}:
-        unpaired = sorted(
-            case_key
-            for case_key, case_conditions in conditions_by_case.items()
-            if case_conditions != {"skill", "no-skill"}
-        )
-        if unpaired:
-            errors.append("unpaired comparison case_keys: " + ", ".join(unpaired))
-        invalid_pairwise = sorted(
-            case_key
-            for case_key in conditions_by_case
-            if len(pairwise_by_case.get(case_key, [])) != 1
-        )
-        if invalid_pairwise:
-            errors.append(
-                "paired cases require exactly one pairwise judgment: "
-                + ", ".join(invalid_pairwise)
-            )
-    elif pairwise_by_case:
-        errors.append("pairwise judgments require both skill and no-skill conditions")
-
+            preferences[pair_key(response)].append(preference)
+    missing = sorted(set(by_run) - set(by_judgment))
+    if missing:
+        errors.append("missing judgments for run_ids: " + ", ".join(missing))
+    grouped = defaultdict(set)
+    for response in by_run.values():
+        grouped[pair_key(response)].add(response.get("condition"))
+    conditions = {r.get("condition") for r in by_run.values()}
+    if require_pairs and conditions == {"skill", baseline}:
+        for key, actual in grouped.items():
+            if actual != {"skill", baseline}:
+                errors.append(f"unpaired comparison case: {key}")
+            if len(preferences[key]) != 1:
+                errors.append(f"paired cases require exactly one pairwise judgment: {key}")
+    elif require_pairs and preferences:
+        errors.append("pairwise judgments require both comparison conditions")
     if errors:
         raise ValueError("; ".join(errors))
-    return responses_by_run, judgments_by_run
+    return by_run, by_judgment
 
 
-def pairwise_statistics(preferences: list[str]) -> dict[str, Any]:
-    counts = Counter(preferences)
-    non_tied = counts["skill"] + counts["no-skill"]
-    total = len(preferences)
-    values = [1.0] * counts["skill"] + [0.0] * counts["no-skill"]
-    return {
-        "skill": counts["skill"],
-        "no-skill": counts["no-skill"],
-        "tie": counts["tie"],
-        "total": total,
-        "non_tied": non_tied,
-        "non_tied_proportion": round(non_tied / total, 6) if total else None,
-        "skill_win_rate_excluding_ties": (
-            round(counts["skill"] / non_tied, 6) if non_tied else None
-        ),
-        "skill_win_rate_one_sided_95_lower_bound": bootstrap_lower_bound(values),
-        "bootstrap": {
-            "unit": "case_key",
-            "resamples": BOOTSTRAP_RESAMPLES,
-            "seed": BOOTSTRAP_SEED,
-        },
-    }
+def pairwise_statistics(preferences: list[str], clusters: list[str] | None = None,
+                        baseline: str = "no-skill") -> dict[str, Any]:
+    return preference_statistics(preferences, clusters, baseline)
 
 
-def summarize(responses_path: Path, judgments_path: Path, output: Path) -> dict[str, Any]:
-    responses = read_jsonl(responses_path)
+def summarize(responses_path: Path, judgments_path: Path, output: Path,
+              *, plan_path: Path | None = None, baseline: str = "no-skill") -> dict[str, Any]:
+    submitted = read_jsonl(responses_path)
     judgments = read_jsonl(judgments_path)
     rubric = read_json(EVALS / "rubric.json")
-    responses_by_run, judgments_by_run = validate_result_records(
-        responses, judgments, rubric
-    )
-    dimension_floors = {
-        item["id"]: item["floor"]
-        for item in rubric["dimensions"]
-        if isinstance(item, dict)
-    }
-
-    hard_failures: list[dict[str, Any]] = []
-    floor_failures: list[dict[str, Any]] = []
-    pairwise_by_case: dict[str, str] = {}
-    strata_by_case: defaultdict[str, set[str]] = defaultdict(set)
-    invocation_pairs: list[tuple[str, str]] = []
-    route_pairs: list[tuple[str, str]] = []
-
-    for run_id, judgment in judgments_by_run.items():
-        response = responses_by_run[run_id]
-        case_key = str(response["case_key"])
-        condition = str(response["condition"])
-        strata_by_case[case_key].update(response.get("strata", []))
-        strata_by_case[case_key].update(
-            str(response.get(field))
-            for field in ("category", "language", "source_file")
-            if response.get(field)
-        )
-
-        gates = judgment["hard_gates"]
-        failed = sorted(gate for gate, value in gates.items() if value is True)
+    plan = read_json(plan_path) if plan_path else None
+    responses, coverage = reconcile(plan, submitted)
+    if responses:
+        by_run, by_judgment = validate_result_records(responses, judgments, rubric,
+            baseline=baseline, require_pairs=coverage["status"] != "incomplete")
+    elif judgments:
+        raise ValueError("judgments provided without completed responses")
+    else:
+        by_run, by_judgment = {}, {}
+    floors = {d["id"]: d["floor"] for d in rubric["dimensions"]}
+    hard_failures, floor_failures, missing_labels = [], [], []
+    classification = {c: {"invocation": [], "route": []} for c in ("skill", baseline)}
+    pair_rows = defaultdict(dict)
+    for run_id, response in by_run.items():
+        judgment = by_judgment[run_id]
+        condition = response["condition"]
+        failed = sorted(g for g, value in judgment["hard_gates"].items() if value)
         if failed:
-            hard_failures.append(
-                {"case_key": case_key, "condition": condition, "gates": failed}
-            )
-        dimensions = judgment["dimensions"]
-        for dimension, floor in dimension_floors.items():
-            value = dimensions[dimension]
-            if value < floor:
-                floor_failures.append(
-                    {
-                        "case_key": case_key,
-                        "condition": condition,
-                        "dimension": dimension,
-                        "score": value,
-                        "floor": floor,
-                    }
-                )
-        preference = judgment.get("pairwise_preference")
-        if preference in {"skill", "no-skill", "tie"}:
-            pairwise_by_case[case_key] = preference
-
-        expected_invocation = response.get("expected_invocation")
-        predicted_invocation = judgment.get("invocation_label")
-        if (
-            expected_invocation in CANONICAL_INVOCATION
-            and predicted_invocation in CANONICAL_INVOCATION
+            hard_failures.append({"run_id": run_id, "case_key": response["case_key"], "condition": condition, "gates": failed})
+        for dimension, floor in floors.items():
+            if judgment["dimensions"][dimension] < floor:
+                floor_failures.append({"run_id": run_id, "condition": condition, "dimension": dimension,
+                    "score": judgment["dimensions"][dimension], "floor": floor})
+        for kind, expected_field, predicted_field, labels in (
+            ("invocation", "expected_invocation", "invocation_label", CANONICAL_INVOCATION),
+            ("route", "expected_substantive_route", "substantive_route", CANONICAL_ROUTES),
         ):
-            invocation_pairs.append((expected_invocation, predicted_invocation))
+            expected = response.get(expected_field)
+            if expected in labels:
+                predicted = judgment.get(predicted_field)
+                if predicted not in labels:
+                    missing_labels.append({"run_id": run_id, "condition": condition, "field": predicted_field})
+                    predicted = "MISSING_OR_INVALID"
+                classification[condition][kind].append((expected, predicted))
+        pair_rows[pair_key(response)][condition] = (response, judgment)
 
-        expected_route = response.get("expected_substantive_route")
-        predicted_route = judgment.get("substantive_route")
-        if expected_route in CANONICAL_ROUTES and predicted_route in CANONICAL_ROUTES:
-            route_pairs.append((expected_route, predicted_route))
-
-    pairwise = pairwise_statistics(list(pairwise_by_case.values()))
-    pairwise_by_stratum = {
-        stratum: pairwise_statistics(
-            [
-                preference
-                for case_key, preference in pairwise_by_case.items()
-                if stratum in strata_by_case[case_key]
-            ]
-        )
-        for stratum in sorted(
-            {stratum for strata in strata_by_case.values() for stratum in strata}
-        )
-    }
-    targets = rubric.get("qualification_targets", {})
-    low_complexity_differences: list[float] = []
-    for case_key, strata in strata_by_case.items():
-        if "low_complexity" not in strata:
+    preferences, cluster_ids = [], []
+    stratum_preferences = defaultdict(list)
+    differences = defaultdict(list)
+    for key, pair in pair_rows.items():
+        if set(pair) != {"skill", baseline}:
             continue
-        scores: defaultdict[str, list[float]] = defaultdict(list)
-        for run_id, response in responses_by_run.items():
-            if response.get("case_key") != case_key:
-                continue
-            dimensions = judgments_by_run[run_id]["dimensions"]
-            usability = (
-                dimensions["actionability"] + dimensions["concision"] - 2
-            ) / 8
-            scores[str(response["condition"])].append(usability)
-        if scores["skill"] and scores["no-skill"]:
-            low_complexity_differences.append(
-                sum(scores["skill"]) / len(scores["skill"])
-                - sum(scores["no-skill"]) / len(scores["no-skill"])
-            )
-    low_complexity_lower_bound = bootstrap_lower_bound(low_complexity_differences)
-    pairwise["low_complexity_noninferiority"] = {
-        "case_count": len(low_complexity_differences),
-        "paired_usability_difference_one_sided_95_lower_bound": (
-            low_complexity_lower_bound
-        ),
-        "margin": targets.get("low_complexity_noninferiority_margin"),
-        "status": (
-            "not_evaluable"
-            if low_complexity_lower_bound is None
-            else (
-                "pass"
-                if low_complexity_lower_bound
-                >= targets.get("low_complexity_noninferiority_margin", 0)
-                else "fail"
-            )
-        ),
-    }
-    required_strata = targets.get("material_advantage_required_strata", [])
-    minimum_pairs_per_stratum = targets.get("minimum_pairs_per_required_stratum", 1)
-    material_advantage = {
-        stratum: {
-            "minimum_pairs": minimum_pairs_per_stratum,
-            "status": (
-                "not_evaluable"
-                if pairwise_by_stratum.get(stratum, {}).get("total", 0)
-                < minimum_pairs_per_stratum
-                else (
-                    "pass"
-                    if (
-                        pairwise_by_stratum[stratum][
-                            "skill_win_rate_one_sided_95_lower_bound"
-                        ]
-                        or 0
-                    )
-                    > 0.5
-                    else "fail"
-                )
-            ),
-        }
-        for stratum in required_strata
-    }
-    basic_pairwise_pass = (
-        pairwise["non_tied"] >= targets.get("no_skill_minimum_non_tied_pairs", 0)
-        and (pairwise["non_tied_proportion"] or 0)
-        >= targets.get("no_skill_minimum_non_tied_proportion", 0)
-        and (
-            pairwise["skill_win_rate_one_sided_95_lower_bound"] is not None
-            and pairwise["skill_win_rate_one_sided_95_lower_bound"]
-            > targets.get("no_skill_lower_confidence_bound_excluding_ties_gt", 1.0)
-        )
-    )
-    comparison_status = "pass" if basic_pairwise_pass else "not_met"
-    if pairwise["low_complexity_noninferiority"]["status"] == "not_evaluable" or any(
-        item["status"] == "not_evaluable" for item in material_advantage.values()
-    ):
-        comparison_status = "not_evaluable"
-    elif pairwise["low_complexity_noninferiority"]["status"] != "pass" or any(
-        item["status"] != "pass" for item in material_advantage.values()
-    ):
-        comparison_status = "not_met"
-    pairwise["acceptance"] = {
-        "minimum_non_tied_pairs": targets.get("no_skill_minimum_non_tied_pairs"),
-        "minimum_non_tied_proportion": targets.get(
-            "no_skill_minimum_non_tied_proportion"
-        ),
-        "lower_bound_must_exceed": targets.get(
-            "no_skill_lower_confidence_bound_excluding_ties_gt"
-        ),
-        "material_advantage_by_required_stratum": material_advantage,
-        "status": comparison_status,
-    }
+        supplied = [j.get("pairwise_preference") for r, j in pair.values()
+                    if j.get("pairwise_preference") in {"skill", baseline, "tie"}]
+        if len(supplied) != 1:
+            continue
+        response = pair["skill"][0]
+        cluster = cluster_id(response)
+        if cluster_id(pair[baseline][0]) != cluster:
+            raise ValueError(f"comparison cluster mismatch: {key}")
+        preference = supplied[0]
+        preferences.append(preference); cluster_ids.append(cluster)
+        strata = set(response.get("strata", []))
+        for field in ("category", "language", "source_file"):
+            if response.get(field):
+                strata.add(str(response[field]))
+        for stratum in strata:
+            stratum_preferences[stratum].append((preference, cluster))
+        if "low_complexity" in strata:
+            def usability(condition):
+                d = pair[condition][1]["dimensions"]
+                return (d["actionability"] + d["concision"] - 2) / 8
+            differences[cluster].append(usability("skill") - usability(baseline))
 
-    summary = {
-        "schema_version": "2.0",
-        "rubric_version": rubric.get("schema_version"),
-        "status": "summarized",
-        "responses": {
-            "path": str(responses_path),
-            "sha256": sha256_file(responses_path),
-            "count": len(responses),
-            "complete": True,
-        },
-        "judgments": {
-            "path": str(judgments_path),
-            "sha256": sha256_file(judgments_path),
-            "count": len(judgments),
-            "complete": True,
-        },
-        "hard_gate_failure_count": len(hard_failures),
-        "hard_gate_failures": hard_failures,
-        "dimension_floor_failure_count": len(floor_failures),
-        "dimension_floor_failures": floor_failures,
-        "invocation_metrics": classification_metrics(
-            invocation_pairs, CANONICAL_INVOCATION
-        ),
-        "substantive_route_metrics": classification_metrics(
-            route_pairs, CANONICAL_ROUTES
-        ),
-        "pairwise": pairwise,
-        "pairwise_by_stratum": pairwise_by_stratum,
-        "qualification_claim": False,
-        "note": "This summary does not establish production qualification; release/qualification.json controls that claim.",
+    pairwise = pairwise_statistics(preferences, cluster_ids, baseline)
+    by_stratum = {s: pairwise_statistics([p for p, c in rows], [c for p, c in rows], baseline)
+                  for s, rows in sorted(stratum_preferences.items())}
+    targets = rubric["qualification_targets"]
+    cluster_differences = [sum(v) / len(v) for v in differences.values()]
+    minimum_low = targets.get("minimum_low_complexity_clusters", 30)
+    low_bound = bootstrap_lower_bound(cluster_differences) if len(cluster_differences) >= minimum_low else None
+    # A degenerate empirical sample cannot quantify uncertainty about unseen differences.
+    if len(set(cluster_differences)) < 2:
+        low_bound = None
+    low_status = ("not_evaluable" if low_bound is None else "pass"
+                  if low_bound >= targets["low_complexity_noninferiority_margin"] else "fail")
+    pairwise["low_complexity_noninferiority"] = {
+        "case_count": len(cluster_differences), "minimum_clusters": minimum_low,
+        "paired_usability_difference_one_sided_95_lower_bound": low_bound,
+        "margin": targets["low_complexity_noninferiority_margin"], "status": low_status,
+        "method": "paired bootstrap of predeclared cluster means; degenerate samples are not evaluable",
+        "resamples": BOOTSTRAP_RESAMPLES, "seed": BOOTSTRAP_SEED,
     }
+    material = {}
+    for stratum in targets["material_advantage_required_strata"]:
+        stats = by_stratum.get(stratum, {})
+        minimum = targets["minimum_pairs_per_required_stratum"]
+        status = ("not_evaluable" if stats.get("non_tied", 0) < minimum else "pass"
+                  if (stats.get("skill_win_rate_one_sided_95_lower_bound") or 0) > 0.5 else "fail")
+        material[stratum] = {"minimum_clusters": minimum, "status": status}
+    basic = (pairwise["non_tied"] >= targets["no_skill_minimum_non_tied_pairs"]
+        and (pairwise["non_tied_proportion"] or 0) >= targets["no_skill_minimum_non_tied_proportion"]
+        and (pairwise["skill_win_rate_one_sided_95_lower_bound"] or 0) > targets["no_skill_lower_confidence_bound_excluding_ties_gt"])
+    acceptance = "pass" if basic else "not_met"
+    if low_status == "fail" or any(x["status"] == "fail" for x in material.values()):
+        acceptance = "not_met"
+    if (not coverage["complete"] or missing_labels or low_status == "not_evaluable"
+            or any(x["status"] == "not_evaluable" for x in material.values())):
+        acceptance = "not_evaluable"
+    if any(f["condition"] == "skill" for f in hard_failures + floor_failures):
+        acceptance = "not_met"
+    pairwise["acceptance"] = {"status": acceptance,
+        "minimum_non_tied_clusters": targets["no_skill_minimum_non_tied_pairs"],
+        "minimum_non_tied_proportion": targets["no_skill_minimum_non_tied_proportion"],
+        "lower_bound_must_exceed": targets["no_skill_lower_confidence_bound_excluding_ties_gt"],
+        "material_advantage_by_required_stratum": material}
+    def per_condition(kind, labels):
+        return {condition: classification_metrics(values[kind], labels)
+                for condition, values in classification.items()}
+    summary = {"schema_version": "3.0", "rubric_version": rubric["schema_version"],
+        "baseline": baseline, "status": "summarized", "coverage": coverage,
+        "plan_sha256": sha256_file(plan_path) if plan_path else None,
+        "subject": plan.get("subject", {}) if plan else {},
+        "responses": {"path": str(responses_path), "sha256": sha256_file(responses_path),
+                      "count": len(submitted), "complete": coverage["complete"]},
+        "judgments": {"path": str(judgments_path), "sha256": sha256_file(judgments_path),
+                      "count": len(judgments), "complete": coverage["complete"] and not missing_labels},
+        "hard_gate_failure_count": len(hard_failures), "hard_gate_failures": hard_failures,
+        "dimension_floor_failure_count": len(floor_failures), "dimension_floor_failures": floor_failures,
+        "missing_classification_labels": missing_labels,
+        "invocation_metrics": per_condition("invocation", CANONICAL_INVOCATION),
+        "substantive_route_metrics": per_condition("route", CANONICAL_ROUTES),
+        "pairwise": pairwise, "pairwise_by_stratum": by_stratum,
+        "qualification_claim": False,
+        "note": "Artifact/run accounting is not independent behavioral validation. Qualification still requires the complete evidence bundle and human review."}
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(json.dumps(summary, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     return summary
@@ -792,40 +652,42 @@ def print_json(payload: Any) -> None:
 
 def main() -> int:
     parser = argparse.ArgumentParser()
-    subparsers = parser.add_subparsers(dest="command", required=True)
-
-    subparsers.add_parser("validate-fixtures")
-
-    prepare_parser = subparsers.add_parser("prepare")
-    prepare_parser.add_argument("--condition", choices=("skill", "no-skill"), required=True)
-    prepare_parser.add_argument("--output", type=Path, required=True)
-
-    summarize_parser = subparsers.add_parser("summarize")
-    summarize_parser.add_argument("--responses", type=Path, required=True)
-    summarize_parser.add_argument("--judgments", type=Path, required=True)
-    summarize_parser.add_argument("--output", type=Path, required=True)
-
+    commands = parser.add_subparsers(dest="command", required=True)
+    commands.add_parser("validate-fixtures")
+    prep = commands.add_parser("prepare")
+    prep.add_argument("--condition", choices=sorted(CONDITIONS), required=True)
+    prep.add_argument("--output", type=Path, required=True)
+    plan = commands.add_parser("plan")
+    plan.add_argument("--manifest", type=Path, action="append", required=True)
+    plan.add_argument("--subject", type=Path, help="JSON with commit/package/model/host/rubric identity")
+    plan.add_argument("--purpose", choices=("development", "qualification"), default="development")
+    plan.add_argument("--output", type=Path, required=True)
+    result = commands.add_parser("summarize")
+    for flag in ("responses", "judgments", "output"):
+        result.add_argument("--" + flag, type=Path, required=True)
+    result.add_argument("--plan", type=Path)
+    result.add_argument("--baseline", choices=sorted(CONDITIONS - {"skill"}), default="no-skill")
+    result.add_argument("--require-complete", action="store_true")
     args = parser.parse_args()
     try:
         if args.command == "validate-fixtures":
             errors = validate_fixtures()
-            payload = {
-                "status": "pass" if not errors else "fail",
-                "error_count": len(errors),
-                "errors": errors,
-            }
-            print_json(payload)
-            return 0 if not errors else 1
+            print_json({"status": "fail" if errors else "pass", "error_count": len(errors), "errors": errors})
+            return int(bool(errors))
         if args.command == "prepare":
             print_json(prepare(args.condition, args.output))
-            return 0
-        if args.command == "summarize":
-            print_json(summarize(args.responses, args.judgments, args.output))
-            return 0
-    except (OSError, ValueError, KeyError) as exc:
+        elif args.command == "plan":
+            plan = make_plan(args.manifest, args.output, subject=read_json(args.subject) if args.subject else None, purpose=args.purpose)
+            print_json({"status": "planned", "count": len(plan["planned_runs"]), "sha256": sha256_file(args.output)})
+        else:
+            summary = summarize(args.responses, args.judgments, args.output, plan_path=args.plan, baseline=args.baseline)
+            print_json(summary)
+            if args.require_complete and not summary["coverage"]["complete"]:
+                return 1
+        return 0
+    except (OSError, ValueError, KeyError, TypeError) as exc:
         print_json({"status": "fail", "error": str(exc)})
         return 1
-    return 1
 
 
 if __name__ == "__main__":

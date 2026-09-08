@@ -6,9 +6,9 @@
 
 `interpersonal-strategist` is a portable Agent Skill for everyday interpersonal decisions. It helps a user distinguish evidence from interpretation, map power and decision structure, compare plausible readings, choose a proportionate next move, and prepare wording with response branches and stopping rules.
 
-Current release: **`0.12.0-alpha.1`**
+Current release: **`0.13.0-alpha.1`**
 
-> `0.12.0-alpha.1` is a production-qualification candidate, not a production claim.
+> `0.13.0-alpha.1` is a production-qualification candidate, not a production claim.
 > The runtime, evidence governance, public evaluation program, and release
 > controls are implemented. Independent holdouts, calibrated behavioral
 > comparison, fluent bilingual review, clean-host validation, and a controlled
@@ -16,6 +16,20 @@ Current release: **`0.12.0-alpha.1`**
 
 The [development baseline record](handoff/BASELINE-0.12.0-alpha.1.md)
 separates completed implementation from the remaining qualification work.
+
+## Start here
+
+Use it to prepare a conversation, think through a situation, practice a reply,
+or review what happened. Read the [English/Chinese quickstart](QUICKSTART.md).
+Session-only and an evidence table are the defaults; scoring is optional and
+cannot override missing critical information or an active flag.
+
+`0.13.0-alpha.1` stabilizes the earlier context-first workflow: consistent dossier
+rules, status-first scoring, planned-run accounting, boundary-safe statistics,
+bounded execution and blinding, and actual-artifact qualification checks.
+The [qualification runbook](release/QUALIFICATION-RUNBOOK.md),
+[pilot kit](release/PILOT.md), and [host capability matrix](release/host-capabilities.json)
+separate implemented tooling from unrun human and host gates.
 
 ## What changed in the alpha workflow
 
@@ -360,12 +374,15 @@ Summarize externally collected results:
 
 ```bash
 python3 evals/run.py summarize \
+  --plan build/plan.json \
   --responses build/responses.jsonl \
   --judgments build/judgments.jsonl \
   --output build/summary.json
 ```
 
-The tool does not invoke a model or confer qualification.
+The summarizer does not invoke a model or confer qualification. The optional
+`evals/execute.py` invokes only a reviewed external adapter after explicit opt-in.
+Freeze `build/plan.json` first using the runbook; no plan means unknown completeness.
 
 ## Production qualification
 
@@ -408,9 +425,9 @@ python3 scripts/package.py
 This creates:
 
 ```text
-dist/interpersonal-strategist-0.12.0-alpha.1.zip
-dist/interpersonal-strategist-0.12.0-alpha.1.zip.sha256
-dist/interpersonal-strategist-0.12.0-alpha.1.manifest.json
+dist/interpersonal-strategist-0.13.0-alpha.1.zip
+dist/interpersonal-strategist-0.13.0-alpha.1.zip.sha256
+dist/interpersonal-strategist-0.13.0-alpha.1.manifest.json
 ```
 
 The ZIP contains one directly installable `interpersonal-strategist/` directory.

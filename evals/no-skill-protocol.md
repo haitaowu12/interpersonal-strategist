@@ -29,23 +29,27 @@ condition must not include the skill instructions, references, or answer keys.
 7. Score each output pointwise under blinding.
 8. Apply hard gates before dimensional scoring.
 9. Reveal pairs only for secondary preference judgment.
-10. Bootstrap paired confidence intervals and report results by domain and risk.
+10. Compute family-level exact preference bounds and paired usability intervals; report domain and risk.
 
 ## Statistical contract
 
-- Use the case key as the resampling unit so repeated runs of one prompt remain
-  clustered.
-- Use 10,000 deterministic bootstrap resamples with seed `20260730`.
-- Report the one-sided 95% lower percentile bound for the skill win rate after
-  excluding ties.
-- Require at least 30 non-tied paired cases and a non-tied proportion of at
-  least 0.50.
-- For the declared `low_complexity` stratum, require the one-sided 95% lower
-  bound of the paired usability difference to be at least `-0.05` on a
-  normalized 0–1 scale.
-- A stratum has a material preference advantage only when its one-sided 95%
-  lower skill-win-rate bound is above 0.50. Report `not_evaluable` rather than
-  pass when a required stratum lacks enough paired observations.
+- Freeze every run, prompt hash, stratum, family, replicate and neutral judge
+  prompt in a run plan before execution. Missing or failed runs remain visible.
+- Cluster related case variants and replicates under a predeclared `cluster_id`.
+  One family contributes one net preference vote (skill, baseline or tie).
+- Use a one-sided 95% Clopper–Pearson lower bound for independent non-tied
+  family votes. Report raw pairs separately. Do not use an empirical bootstrap
+  for the binary win rate at all-win/all-loss boundaries.
+- Require at least 30 non-tied families and a non-tied proportion of at least
+  0.50. These thresholds do not establish representativeness.
+- For `low_complexity`, use paired family-mean usability differences on a 0–1
+  scale, at least 30 families, 10,000 bootstrap samples and seed `20260730`.
+  Its one-sided lower bound must be at least -0.05. A degenerate sample is not
+  automatically evidence of non-inferiority.
+- A required stratum needs at least ten non-tied families and a lower
+  preference bound above 0.50. Report insufficient evidence as `not_evaluable`.
+- Reference [the execution runbook](../release/QUALIFICATION-RUNBOOK.md) for
+  plan creation, adapter limits, blinding, raw records and completeness checks.
 
 ## Bias controls
 
@@ -88,7 +92,7 @@ standards.
   "responses_sha256": "...",
   "judgments_sha256": "...",
   "judge_protocol_version": "1.0",
-  "rubric_version": "2.3",
+  "rubric_version": "2.4",
   "results_by_domain": {},
   "hard_failures": []
 }

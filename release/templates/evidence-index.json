@@ -1,0 +1,100 @@
+{
+  "schema_version": "1.0",
+  "subject": {
+    "commit": null,
+    "package_sha256": null,
+    "model_snapshot": null,
+    "host_version": null,
+    "rubric_version": "2.4"
+  },
+  "artifacts": {
+    "package": {
+      "path": null,
+      "sha256": null
+    },
+    "package_manifest": {
+      "path": null,
+      "sha256": null
+    },
+    "build_provenance": {
+      "path": null,
+      "sha256": null
+    },
+    "run_plan": {
+      "path": null,
+      "sha256": null
+    },
+    "skill_prompt_manifest": {
+      "path": null,
+      "sha256": null
+    },
+    "no_skill_prompt_manifest": {
+      "path": null,
+      "sha256": null
+    },
+    "blinding_manifest": {
+      "path": null,
+      "sha256": null
+    },
+    "responses": {
+      "path": null,
+      "sha256": null
+    },
+    "judgments": {
+      "path": null,
+      "sha256": null
+    },
+    "source_resolution": {
+      "path": null,
+      "sha256": null
+    },
+    "holdout_set": {
+      "path": null,
+      "sha256": null
+    },
+    "holdout_results": {
+      "path": null,
+      "sha256": null
+    },
+    "bilingual_review": {
+      "path": null,
+      "sha256": null
+    },
+    "pilot_evidence": {
+      "path": null,
+      "sha256": null
+    },
+    "independent_release_review": {
+      "path": null,
+      "sha256": null
+    },
+    "judge_calibration": {
+      "path": null,
+      "sha256": null
+    },
+    "host_receipt": {
+      "path": null,
+      "sha256": null
+    },
+    "reference_trace": {
+      "path": null,
+      "sha256": null
+    }
+  },
+  "gate_receipts": {
+    "static_repository_ci": null,
+    "deterministic_package_and_layout": null,
+    "evidence_registry_parity": null,
+    "online_source_resolution": null,
+    "clean_host_discovery_and_invocation": null,
+    "reference_selection_and_compound_overlays": null,
+    "calibrated_no_skill_comparison": null,
+    "independent_untouched_holdouts": null,
+    "adversarial_safety_holdouts": null,
+    "bilingual_fluent_review": null,
+    "judge_calibration": null,
+    "privacy_safe_controlled_pilot": null,
+    "independent_release_review": null
+  },
+  "nonclaim": "Fill actual file paths and hashes only. This template cannot pass verification."
+}

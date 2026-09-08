@@ -11,11 +11,13 @@ from __future__ import annotations
 import argparse
 import datetime as dt
 import json
+import re
 import sys
 from pathlib import Path
 from typing import Any
 
-SCHEMA_VERSION = "1.0"
+SCHEMA_VERSION = "1.1"
+SUPPORTED_INPUT_SCHEMAS = {"1.0", "1.1"}
 CONFIDENCE_VALUES = {"low", "moderate", "high"}
 FLAG_TYPES = {"deal_breaker", "safety", "authority", "privacy"}
 FLAG_STATUSES = {"active", "resolved"}
@@ -31,6 +33,8 @@ def require_iso_date(value: Any, field: str, errors: list[str]) -> None:
     require_text(value, field, errors)
     if isinstance(value, str):
         try:
+            if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", value):
+                raise ValueError("date format")
             dt.date.fromisoformat(value)
         except ValueError:
             errors.append(f"{field} must use YYYY-MM-DD")
@@ -52,13 +56,15 @@ def validate_evidence_items(value: Any, field: str, errors: list[str]) -> None:
 
 def validate_payload(payload: dict[str, Any]) -> list[str]:
     errors: list[str] = []
-    if payload.get("schema_version") != SCHEMA_VERSION:
-        errors.append(f"schema_version must be {SCHEMA_VERSION}")
+    if not isinstance(payload, dict):
+        return ["input must be an object"]
+    if not isinstance(payload.get("schema_version"), str) or payload["schema_version"] not in SUPPORTED_INPUT_SCHEMAS:
+        errors.append("schema_version must be 1.0 or 1.1")
     require_text(payload.get("profile_id"), "profile_id", errors)
     require_text(payload.get("purpose"), "purpose", errors)
     require_iso_date(payload.get("as_of"), "as_of", errors)
     require_text(payload.get("review_or_expiry"), "review_or_expiry", errors)
-    if payload.get("mode") not in MODES:
+    if not isinstance(payload.get("mode"), str) or payload["mode"] not in MODES:
         errors.append("mode must be session-only or persistent")
     exclusions = payload.get("sensitive_exclusions")
     if not isinstance(exclusions, list) or not all(
@@ -100,6 +106,10 @@ def validate_payload(payload: dict[str, Any]) -> list[str]:
         elif weight > 0:
             positive_weight = True
 
+        critical = dimension.get("decision_critical", True)
+        if not isinstance(critical, bool):
+            errors.append(f"{prefix}.decision_critical must be boolean")
+
         rating = dimension.get("rating")
         if rating is not None and (
             not isinstance(rating, int)
@@ -114,7 +124,7 @@ def validate_payload(payload: dict[str, Any]) -> list[str]:
                 errors.append(
                     f"{prefix}.confidence must be null or unknown when rating is null"
                 )
-        elif confidence not in CONFIDENCE_VALUES:
+        elif not isinstance(confidence, str) or confidence not in CONFIDENCE_VALUES:
             errors.append(f"{prefix}.confidence must be low, moderate, or high")
 
         validate_evidence_items(
@@ -155,27 +165,15 @@ def validate_payload(payload: dict[str, Any]) -> list[str]:
             if not isinstance(flag, dict):
                 errors.append(f"{prefix} must be an object")
                 continue
-            if flag.get("type") not in FLAG_TYPES:
+            if not isinstance(flag.get("type"), str) or flag["type"] not in FLAG_TYPES:
                 errors.append(
                     f"{prefix}.type must be one of {', '.join(sorted(FLAG_TYPES))}"
                 )
-            if flag.get("status") not in FLAG_STATUSES:
+            if not isinstance(flag.get("status"), str) or flag["status"] not in FLAG_STATUSES:
                 errors.append(f"{prefix}.status must be active or resolved")
             require_text(flag.get("description"), f"{prefix}.description", errors)
 
     return errors
-
-
-def interpretation(score: int) -> str:
-    if score <= 20:
-        return "currently blocked or strongly unfavorable"
-    if score <= 40:
-        return "weak fit; major change or protection needed"
-    if score <= 60:
-        return "mixed; clarify conditions and gather material evidence"
-    if score <= 80:
-        return "promising or workable with named limitations"
-    return "strong current fit under the stated model"
 
 
 def calculate(payload: dict[str, Any]) -> dict[str, Any]:
@@ -184,60 +182,62 @@ def calculate(payload: dict[str, Any]) -> dict[str, Any]:
         raise ValueError("; ".join(errors))
 
     dimensions = payload["dimensions"]
-    planned_weight = sum(item["weight"] for item in dimensions)
-    scored = [
-        item
-        for item in dimensions
-        if item["weight"] > 0 and item["rating"] is not None
-    ]
+    weighted = [item for item in dimensions if item["weight"] > 0]
+    planned_weight = sum(item["weight"] for item in weighted)
+    scored = [item for item in weighted if item["rating"] is not None]
+    missing = [item for item in weighted if item["rating"] is None]
     scored_weight = sum(item["weight"] for item in scored)
-    coverage = round(100 * scored_weight / planned_weight)
-    score = (
-        round(
-            20
-            * sum(item["weight"] * item["rating"] for item in scored)
-            / scored_weight
-        )
-        if scored_weight
-        else None
-    )
-    active_flags = [
-        flag for flag in payload.get("flags", []) if flag["status"] == "active"
+    observed_sum = sum(item["weight"] * item["rating"] for item in scored)
+    partial_score = round(20 * observed_sum / scored_weight, 2) if scored_weight else None
+    critical_unknowns = [
+        item["id"] for item in weighted
+        if item.get("decision_critical", True)
+        and (item["rating"] is None or item["unknowns"])
     ]
+    active_flags = [flag for flag in payload.get("flags", []) if flag["status"] == "active"]
+    # Presentation gates precede arithmetic. Defaults are conservative for v1.0 input.
+    if active_flags:
+        status, headline = "gated", "Blocked: resolve the active flag through the appropriate route."
+    elif not scored:
+        status, headline = "not_calculable", "No rated evidence; an overall score is not calculable."
+    elif critical_unknowns:
+        status, headline = "insufficient_evidence", "Decision-critical information is unresolved; no overall assessment."
+    elif missing:
+        status, headline = "partial", "Partial arithmetic only; no overall assessment."
+    else:
+        status, headline = "scored", "Complete arithmetic under the user's model; not a prediction or recommendation."
 
     return {
         "schema_version": SCHEMA_VERSION,
+        "input_schema_version": payload["schema_version"],
         "profile_id": payload["profile_id"],
         "profile_version": payload["profile_version"],
         "purpose": payload["purpose"],
         "as_of": payload["as_of"],
         "review_or_expiry": payload["review_or_expiry"],
         "mode": payload["mode"],
-        "decision_fit_score": score,
-        "interpretation": interpretation(score) if score is not None else "not calculable",
-        "coverage_percent": coverage,
+        "decision_status": status,
+        "decision_fit_score": partial_score if status == "scored" else None,
+        "interpretation": headline,
+        "coverage_percent": round(100 * scored_weight / planned_weight, 2),
         "planned_weight": planned_weight,
         "scored_weight": scored_weight,
-        "unscored_dimensions": [
-            item["id"]
-            for item in dimensions
-            if item["weight"] > 0 and item["rating"] is None
-        ],
-        "dimension_confidence": {
-            item["id"]: item["confidence"] for item in scored
-        },
+        "unscored_dimensions": [item["id"] for item in missing],
+        "decision_critical_unknowns": critical_unknowns,
+        "dimension_confidence": {item["id"]: item["confidence"] for item in scored},
         "active_flags": active_flags,
-        "decision_status": (
-            "gated"
-            if active_flags
-            else "scored"
-            if score is not None
-            else "not_calculable"
-        ),
+        "arithmetic_only": {
+            "scored_dimensions_score": partial_score,
+            "full_model_bounds": [
+                round(20 * observed_sum / planned_weight, 2),
+                round(20 * (observed_sum + 5 * (planned_weight - scored_weight)) / planned_weight, 2),
+            ],
+            "bounds_meaning": "Unknown ratings span 0 to 5. Sensitivity bounds, not a confidence interval; flags still govern.",
+        },
         "nonclaim": (
             "Custom decision aid only; not human worth, diagnosis, consent, "
-            "deception detection, legal status, compatibility validation, or "
-            "an outcome guarantee."
+            "deception detection, legal status, compatibility validation, or an outcome guarantee. "
+            "Render decision_status and interpretation before arithmetic; never promote a partial or gated number."
         ),
     }
 
