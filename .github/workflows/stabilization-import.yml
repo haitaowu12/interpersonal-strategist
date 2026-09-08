@@ -1,0 +1,46 @@
+name: Import verified stabilization source
+
+on:
+  push:
+    branches: [codex/interpersonal-qualification-hardening]
+    paths: [.github/workflows/stabilization-import.yml]
+
+permissions:
+  contents: write
+
+jobs:
+  import:
+    if: github.repository == 'haitaowu12/interpersonal-strategist' && github.ref == 'refs/heads/codex/interpersonal-qualification-hardening'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 2
+      - name: Apply only the exact tested patch
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD^)" = "8eb391641e502c9d45101c0811fde30659dcadd1"
+          test "$(git show -s --format=%T HEAD^)" = "c35fa91a6f7436a81e9ca59361307c7d1ee00854"
+          test -z "$(git status --porcelain)"
+          test "$(find .github/stabilization-import -name 'part-*.patch' | wc -l)" -eq 27
+          cat .github/stabilization-import/part-*.patch > /tmp/interpersonal-upgrade.patch
+          echo '11fa542b93dc7a29cb322afce270c3511ad23463488c4bf320d004b4a4e23f29  /tmp/interpersonal-upgrade.patch' | sha256sum -c -
+          git rm -r .github/stabilization-import .github/workflows/stabilization-import.yml
+          git restore --source=HEAD^ --staged --worktree .github/workflows/ci.yml
+          test "$(git write-tree)" = "c35fa91a6f7436a81e9ca59361307c7d1ee00854"
+          git apply --index --whitespace=error-all /tmp/interpersonal-upgrade.patch
+          test "$(git write-tree)" = "260ef1c1d2ad86328967a784fd1409ea6b0999f2"
+          git diff --cached --check
+          # Keep workflow files unchanged in the bot push. The connector removes
+          # this temporary importer in the final, separately verified commit.
+          git restore --source=HEAD --staged --worktree .github/workflows/stabilization-import.yml
+          test -z "$(git diff --cached --name-only -- .github/workflows)"
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'Apply checksum-verified stabilization source'
+          git push origin HEAD:refs/heads/codex/interpersonal-qualification-hardening
+          echo "Imported commit: $(git rev-parse HEAD)" >> "$GITHUB_STEP_SUMMARY"
+          echo 'Verified final source tree (after importer removal): 260ef1c1d2ad86328967a784fd1409ea6b0999f2' >> "$GITHUB_STEP_SUMMARY"

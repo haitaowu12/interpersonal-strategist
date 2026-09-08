@@ -1,0 +1,298 @@
+-public scenarios and local model observations cannot replace qualification.
++Before wider public distribution, the owner must assign a maintainer, safety
++reviewer, fluent reviewers, pilot coordinator, and a working private reporting
++route. Roles are required; no named independent reviewers are claimed here.
+diff --git a/release/host-capabilities.json b/release/host-capabilities.json
+new file mode 100644
+index 0000000000000000000000000000000000000000..be56287d1fd04f21489ea17eb8345dd4054f132c
+--- /dev/null
++++ b/release/host-capabilities.json
+@@ -0,0 +1,81 @@
++{
++  "schema_version": "1.0",
++  "release": "0.13.0-alpha.1",
++  "default_mode": "session-only",
++  "persistent_adapter_enabled": false,
++  "status": "unqualified",
++  "hosts": [
++    {
++      "surface": "codex-desktop-personal-agent-skills",
++      "model_snapshot": null,
++      "host_version": null,
++      "capabilities": {
++        "discovery": {
++          "status": "not_verified",
++          "receipt": null
++        },
++        "explicit_invocation": {
++          "status": "not_verified",
++          "receipt": null
++        },
++        "reference_reads": {
++          "status": "not_verified",
++          "receipt": null
++        },
++        "quick_mode": {
++          "status": "not_verified",
++          "receipt": null
++        },
++        "ask_wait_update": {
++          "status": "not_verified",
++          "receipt": null
++        },
++        "stop": {
++          "status": "not_verified",
++          "receipt": null
++        },
++        "scoped_read": {
++          "status": "not_verified",
++          "receipt": null
++        },
++        "scoped_write": {
++          "status": "not_verified",
++          "receipt": null
++        },
++        "inspect": {
++          "status": "not_verified",
++          "receipt": null
++        },
++        "correct": {
++          "status": "not_verified",
++          "receipt": null
++        },
++        "expire": {
++          "status": "not_verified",
++          "receipt": null
++        },
++        "export": {
++          "status": "not_verified",
++          "receipt": null
++        },
++        "delete": {
++          "status": "not_verified",
++          "receipt": null
++        }
++      }
++    }
++  ],
++  "receipt_requirements": [
++    "exact subject and host version",
++    "synthetic case and observed operation",
++    "tool-read/write evidence",
++    "result and limitations",
++    "independent reviewer role and date"
++  ],
++  "nonclaims": [
++    "No persistent host adapter is qualified.",
++    "Layout checks do not prove model loading or reference selection.",
++    "Memory off does not erase host transcripts, backups, or provider logs.",
++    "The offline arithmetic helper does not make cloud model inference local."
++  ]
++}
+diff --git a/release/qualification.json b/release/qualification.json
+index c82e6b0b5669612563d6c31f354e59a80232e668..4d77a929e75a52e4b4e08008261d9a139f745f54 100644
+--- a/release/qualification.json
++++ b/release/qualification.json
+@@ -1,10 +1,10 @@
+ {
+   "schema_version": "1.0",
+-  "release": "0.12.0-alpha.1",
++  "release": "0.13.0-alpha.1",
+   "status": "blocked",
+   "production_claim_allowed": false,
+-  "base_commit": "c34f9840de172d9b2acff605cdbdfc4828d15789",
+-  "implementation_branch": "improve/context-first-completion",
++  "base_commit": "d1acd2dbbcf6808cd8f9bf221486bfd7682abe89",
++  "implementation_branch": "codex/interpersonal-qualification-hardening",
+   "release_scope": {
+     "status": "frozen",
+     "surfaces": [
+@@ -28,8 +28,8 @@
+   "package_sha256": null,
+   "model_snapshot": null,
+   "host_version": null,
+-  "harness_version": "evals/run.py@0.11.0-rc.1",
+-  "rubric_version": "2.3",
++  "harness_version": "evals/run.py@3.0",
++  "rubric_version": "2.4",
+   "evidence_schema_version": "1.0",
+   "evidence_bundle": null,
+   "unresolved_hard_failures": [],
+@@ -156,6 +156,9 @@
+     "romance and intimacy are included, but coercion, refusal override, grooming, stalking, exploitation of incapacity, intimate-media misuse, and adult-minor sexual strategy remain prohibited",
+     "the skill remains explicit-only and non-manipulative; optional continuity is scoped, minimal, inspectable, correctable, and deletable",
+     "all earlier behavioral evidence must be reassessed for the expanded relationship scope before promotion",
+-    "Context-first conversation checks are public development evidence and do not qualify the changed runtime or replace target-host comparison, human review, holdouts, or pilot gates."
++    "Context-first conversation checks are public development evidence and do not qualify the changed runtime or replace target-host comparison, human review, holdouts, or pilot gates.",
++    "Schema 3.0 summaries require a frozen plan; independent scenario families, not repeated runs, are the inferential unit.",
++    "Session-only is the supported default; no persistent host adapter is qualified.",
++    "Execution adapters, synthetic smoke runs, and reviewed source do not establish target-host behavior or real-user benefit."
+   ]
+ }
+diff --git a/release/templates/evidence-index.json b/release/templates/evidence-index.json
+new file mode 100644
+index 0000000000000000000000000000000000000000..abd72d96ad2bc3e1b849a562cd738c5bbe66593f
+--- /dev/null
++++ b/release/templates/evidence-index.json
+@@ -0,0 +1,100 @@
++{
++  "schema_version": "1.0",
++  "subject": {
++    "commit": null,
++    "package_sha256": null,
++    "model_snapshot": null,
++    "host_version": null,
++    "rubric_version": "2.4"
++  },
++  "artifacts": {
++    "package": {
++      "path": null,
++      "sha256": null
++    },
++    "package_manifest": {
++      "path": null,
++      "sha256": null
++    },
++    "build_provenance": {
++      "path": null,
++      "sha256": null
++    },
++    "run_plan": {
++      "path": null,
++      "sha256": null
++    },
++    "skill_prompt_manifest": {
++      "path": null,
++      "sha256": null
++    },
++    "no_skill_prompt_manifest": {
++      "path": null,
++      "sha256": null
++    },
++    "blinding_manifest": {
++      "path": null,
++      "sha256": null
++    },
++    "responses": {
++      "path": null,
++      "sha256": null
++    },
++    "judgments": {
++      "path": null,
++      "sha256": null
++    },
++    "source_resolution": {
++      "path": null,
++      "sha256": null
++    },
++    "holdout_set": {
++      "path": null,
++      "sha256": null
++    },
++    "holdout_results": {
++      "path": null,
++      "sha256": null
++    },
++    "bilingual_review": {
++      "path": null,
++      "sha256": null
++    },
++    "pilot_evidence": {
++      "path": null,
++      "sha256": null
++    },
++    "independent_release_review": {
++      "path": null,
++      "sha256": null
++    },
++    "judge_calibration": {
++      "path": null,
++      "sha256": null
++    },
++    "host_receipt": {
++      "path": null,
++      "sha256": null
++    },
++    "reference_trace": {
++      "path": null,
++      "sha256": null
++    }
++  },
++  "gate_receipts": {
++    "static_repository_ci": null,
++    "deterministic_package_and_layout": null,
++    "evidence_registry_parity": null,
++    "online_source_resolution": null,
++    "clean_host_discovery_and_invocation": null,
++    "reference_selection_and_compound_overlays": null,
++    "calibrated_no_skill_comparison": null,
++    "independent_untouched_holdouts": null,
++    "adversarial_safety_holdouts": null,
++    "bilingual_fluent_review": null,
++    "judge_calibration": null,
++    "privacy_safe_controlled_pilot": null,
++    "independent_release_review": null
++  },
++  "nonclaim": "Fill actual file paths and hashes only. This template cannot pass verification."
++}
+diff --git a/release/templates/gate-receipt.json b/release/templates/gate-receipt.json
+new file mode 100644
+index 0000000000000000000000000000000000000000..c2f604812c64c95db8c24f7caf1a4b28cef4fce1
+--- /dev/null
++++ b/release/templates/gate-receipt.json
+@@ -0,0 +1,19 @@
++{
++  "schema_version": "1.0",
++  "gate_id": null,
++  "subject": {
++    "commit": null,
++    "package_sha256": null,
++    "model_snapshot": null,
++    "host_version": null,
++    "rubric_version": "2.4"
++  },
++  "protocol_version": "1.0",
++  "result": "pending",
++  "reviewer_role": null,
++  "reviewed_at": null,
++  "counts": {},
++  "metrics": {},
++  "supporting_artifacts": {},
++  "limitation": "Template, not a passed gate or an independent review."
++}
+diff --git a/release/templates/pilot-episode.json b/release/templates/pilot-episode.json
+new file mode 100644
+index 0000000000000000000000000000000000000000..61ed27e1950dd0f7806ec8969d8281df8614732a
+--- /dev/null
++++ b/release/templates/pilot-episode.json
+@@ -0,0 +1,20 @@
++{
++  "episode_id": null,
++  "consented": false,
++  "followup_consented": false,
++  "eligible_adult": false,
++  "status": "not_started",
++  "language": null,
++  "task_category": null,
++  "usable_next_move_rating": null,
++  "initial_helpfulness": null,
++  "followup_helpfulness": null,
++  "action_status": "not_observed",
++  "assumption_corrected": null,
++  "voice_preserved": null,
++  "repeated_analysis_increased": null,
++  "followup_status": "not_attempted",
++  "unresolved_adverse_event": null,
++  "retention_deadline": null,
++  "reviewer_role": null
++}
+diff --git a/release/templates/subject.json b/release/templates/subject.json
+new file mode 100644
+index 0000000000000000000000000000000000000000..8c26ffbe8e8e548d1b3bad4cde526cca32b5de85
+--- /dev/null
++++ b/release/templates/subject.json
+@@ -0,0 +1,7 @@
++{
++  "commit": null,
++  "package_sha256": null,
++  "model_snapshot": null,

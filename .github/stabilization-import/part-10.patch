@@ -1,0 +1,180 @@
++    prep.add_argument("--output", type=Path, required=True)
++    plan = commands.add_parser("plan")
++    plan.add_argument("--manifest", type=Path, action="append", required=True)
++    plan.add_argument("--subject", type=Path, help="JSON with commit/package/model/host/rubric identity")
++    plan.add_argument("--purpose", choices=("development", "qualification"), default="development")
++    plan.add_argument("--output", type=Path, required=True)
++    result = commands.add_parser("summarize")
++    for flag in ("responses", "judgments", "output"):
++        result.add_argument("--" + flag, type=Path, required=True)
++    result.add_argument("--plan", type=Path)
++    result.add_argument("--baseline", choices=sorted(CONDITIONS - {"skill"}), default="no-skill")
++    result.add_argument("--require-complete", action="store_true")
+     args = parser.parse_args()
+     try:
+         if args.command == "validate-fixtures":
+             errors = validate_fixtures()
+-            payload = {
+-                "status": "pass" if not errors else "fail",
+-                "error_count": len(errors),
+-                "errors": errors,
+-            }
+-            print_json(payload)
+-            return 0 if not errors else 1
++            print_json({"status": "fail" if errors else "pass", "error_count": len(errors), "errors": errors})
++            return int(bool(errors))
+         if args.command == "prepare":
+             print_json(prepare(args.condition, args.output))
+-            return 0
+-        if args.command == "summarize":
+-            print_json(summarize(args.responses, args.judgments, args.output))
+-            return 0
+-    except (OSError, ValueError, KeyError) as exc:
++        elif args.command == "plan":
++            plan = make_plan(args.manifest, args.output, subject=read_json(args.subject) if args.subject else None, purpose=args.purpose)
++            print_json({"status": "planned", "count": len(plan["planned_runs"]), "sha256": sha256_file(args.output)})
++        else:
++            summary = summarize(args.responses, args.judgments, args.output, plan_path=args.plan, baseline=args.baseline)
++            print_json(summary)
++            if args.require_complete and not summary["coverage"]["complete"]:
++                return 1
++        return 0
++    except (OSError, ValueError, KeyError, TypeError) as exc:
+         print_json({"status": "fail", "error": str(exc)})
+         return 1
+-    return 1
+ 
+ 
+ if __name__ == "__main__":
+diff --git a/provenance/PROVENANCE.md b/provenance/PROVENANCE.md
+index 52baab9ee3a2185791fc3a3e2fb53cf0bb974649..44ec4fec4b5cbe8f08a009c6c78a962475daa249 100644
+--- a/provenance/PROVENANCE.md
++++ b/provenance/PROVENANCE.md
+@@ -4,9 +4,9 @@
+ 
+ This repository begins a new standalone lineage at
+ `interpersonal-strategist 0.6.0-alpha.1`. The current release candidate is
+-`0.12.0-alpha.1`.
++`0.13.0-alpha.1`.
+ 
+-`0.12.0-alpha.1` is a production-qualification candidate, not a production claim.
++`0.13.0-alpha.1` is a production-qualification candidate, not a production claim.
+ Promotion is permitted only when `release/qualification.json` records every
+ required gate as passed and binds the evidence to an exact commit, package,
+ model and host configuration, evaluation harness, and independent holdout set.
+@@ -199,7 +199,7 @@ This repository does not contain:
+ 
+ ## Context-first integration
+ 
+-The `0.12.0-alpha.1` revision preserves the governed profiles and scoring work
++The `0.13.0-alpha.1` revision preserves the governed profiles and scoring work
+ from PR #7 (`c34f9840de172d9b2acff605cdbdfc4828d15789`) and layers the interview
+ changes on that development head. Community inputs are recorded in
+ [CONTEXT_INTERVIEW_DONORS.md](CONTEXT_INTERVIEW_DONORS.md). Comparative model
+diff --git a/provenance/SOURCE_MANIFEST.json b/provenance/SOURCE_MANIFEST.json
+index 8b3bb60b7eeaf784c4040b452b2b14f31f1500cd..059da0938321cce43c099a026f621f5515cd33f8 100644
+--- a/provenance/SOURCE_MANIFEST.json
++++ b/provenance/SOURCE_MANIFEST.json
+@@ -1,7 +1,7 @@
+ {
+   "schema_version": "2.0",
+-  "release": "0.12.0-alpha.1",
+-  "release_state": "production_qualification_candidate",
++  "release": "0.13.0-alpha.1",
++  "release_state": "stabilized_experimental_alpha",
+   "historical_v05a_status": "unavailable_not_reconstructed",
+   "implementation_sources": [
+     {
+diff --git a/provenance/evidence-sources.json b/provenance/evidence-sources.json
+index 9008c8e871e54942d01fa14075e71d074eedb3f9..0183e7d2973997a5cd0c741a2848846acf2b2e07 100644
+--- a/provenance/evidence-sources.json
++++ b/provenance/evidence-sources.json
+@@ -704,6 +704,45 @@
+       "runtime_rule": "Store MBTI only when supplied by the user as optional vocabulary; do not infer it, diagnose from it, or use it as compatibility evidence.",
+       "last_verified": "2026-08-10",
+       "license_note": "Official page link and original summary only."
++    },
++    {
++      "id": "AGENCY-01",
++      "first_author": "Cheng",
++      "year": 2026,
++      "title": "Sycophantic AI decreases prosocial intentions and promotes dependence",
++      "stable_identity": "PMID 41886588; DOI 10.1126/science.aec8352",
++      "evidence_type": "Three preregistered experiments; N=2405",
++      "permitted_claim": "Sycophantic advice can be preferred while reducing responsibility and repair intentions.",
++      "limitation": "Intentions and judgments are not long-term outcomes or validation of this skill.",
++      "runtime_rule": "Evaluate agency and correction separately from satisfaction.",
++      "last_verified": "2026-09-07",
++      "license_note": "Metadata and original bounded summary; no paper or proprietary text redistributed."
++    },
++    {
++      "id": "PERSPECTIVE-01",
++      "first_author": "Eyal",
++      "year": 2018,
++      "title": "Perspective mistaking: Accurately understanding the mind of another requires getting perspective, not taking perspective",
++      "stable_identity": "PMID 29620401; DOI 10.1037/pspa0000115",
++      "evidence_type": "Experimental research",
++      "permitted_claim": "Imagining a perspective did not consistently improve accuracy; directly obtaining information helped in a final experiment.",
++      "limitation": "Not a mandate to contact someone when unsafe or unwanted.",
++      "runtime_rule": "Label simulation as hypothetical; obtain relevant information only where appropriate.",
++      "last_verified": "2026-09-07",
++      "license_note": "Metadata and original bounded summary; no paper or proprietary text redistributed."
++    },
++    {
++      "id": "AICOMM-01",
++      "first_author": "Argyle",
++      "year": 2023,
++      "title": "Leveraging AI for democratic discourse: Chat interventions can improve online political conversations at scale",
++      "stable_identity": "PMID 37788311; DOI 10.1073/pnas.2311627120",
++      "evidence_type": "Randomized online political-conversation experiment",
++      "permitted_claim": "Optional rephrasing improved reported conversation quality without shifting policy positions.",
++      "limitation": "Specific political context; no persistence detected in later follow-up; not general relationship efficacy.",
++      "runtime_rule": "Preserve user choice, meaning, and voice in bounded wording assistance.",
++      "last_verified": "2026-09-07",
++      "license_note": "Metadata and original bounded summary; no paper or proprietary text redistributed."
+     }
+   ]
+ }
+diff --git a/pyproject.toml b/pyproject.toml
+index a37ab9765428f98f8f7d5bc5184a789d942903ad..b18d3ea5878d949143d0369bb67be8121a3584c0 100644
+--- a/pyproject.toml
++++ b/pyproject.toml
+@@ -1,6 +1,6 @@
+ [project]
+ name = "interpersonal-strategist-skill"
+-version = "0.12.0a1"
++version = "0.13.0a1"
+ description = "Validation and packaging tools for the Interpersonal Strategist Codex skill"
+ requires-python = ">=3.11"
+ license = { text = "MIT" }
+diff --git a/release/EVIDENCE-RECORDS.md b/release/EVIDENCE-RECORDS.md
+new file mode 100644
+index 0000000000000000000000000000000000000000..765519935c4c35992f75afc49f6ff596d53b18d9
+--- /dev/null
++++ b/release/EVIDENCE-RECORDS.md
+@@ -0,0 +1,101 @@
++# Private evidence record contracts
++
++All review JSON objects use `schema_version: "1.0"` and the exact `subject`
++object (commit, package hash, model, host, rubric). Null template fields are not
++receipts. Actual records remain private. The verifier checks record consistency,
++not the truth or independence of a person's attestations.
++
++## Artifact index
++
++`templates/evidence-index.json` names required roles. Each descriptor uses a
++relative POSIX `path` and its actual `sha256`. Add one role for each signed-off
++gate receipt and map it in `gate_receipts`. Paths must remain under the index
++folder, with no symlinks. A receipt has `gate_id`, exact `subject`,
++`protocol_version`, `result: "pass"`, reviewer role/date, `counts`, `metrics`,
++and `supporting_artifacts` mapping role names to actual hashes. The public
++qualification evidence object's artifact hash binds that receipt's bytes.
++
++Build provenance must describe a clean candidate. Package and manifest must
++match each other and the runtime in the checkout. The run plan must match the
++actual skill/no-skill prompt manifests. The blinding map binds plan and canonical
++response hashes and identities. Canonical judgments are regenerated by the
++unblinder and the summary is recomputed; a typed favorable summary is insufficient.
++
++## Holdout set and results
++

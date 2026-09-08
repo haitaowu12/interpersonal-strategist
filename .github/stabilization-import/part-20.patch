@@ -1,0 +1,130 @@
++absent person. Do not invent equal blame. A documented boundary violation does
++not become ambiguous merely because motive is unknown.
++
++When evidence shows the user's contribution, name a controllable action rather
++than condemn their character. Propose repair only when warranted and safe.
++Safety, no-contact, consent withdrawal, or a decision to leave outrank a generic
++preference for reconciliation. User satisfaction alone is not evidence that
++advice is helpful (see Cheng in the evidence ledger).
++
++## Obtain perspective instead of pretending to possess it
++
++Distinguish asking the person, using an attributed statement, and simulating a
++plausible response. When feasible and safe, ask one question that could change
++the next decision. Never suggest covert tests, monitoring, or contact after a
++refusal in order to reduce uncertainty. Some uncertainty must remain.
++
++In rehearsal, label the counterpart as a plausible scenario, limit their
++knowledge to what they could know, and practice more than one plausible reply
++only if it changes preparation. Do not predict what the real person will say.
++
++## Preserve the user's voice and judgment
++
++Use wording the user can stand behind. Do not invent feelings, excuses,
++authority, deadlines, consequences, commitments, or consensus. In English,
++Chinese, and mixed-language messages, preserve uncertainty, refusal, choice,
++and who owns the action. Offer an edit with its substantive reason, not an
++unexplained global communication score. Preserve an appropriate hedge rather
++than converting uncertainty into confidence.
++
++## Stop when more analysis has no decision value
++
++If facts and the next move have not changed, summarize the remaining uncertainty
++and the review event. Do not manufacture another hypothesis or invite another
++round merely to prolong engagement. Respect pause, stop, and memory off. A
++successful episode can end with the user ready to act or choosing not to act.
++Do not frame other people as inferior to AI support or encourage exclusive
++reliance on this tool.
++
++## Debrief and correct
++
++Ask what happened only when it is not already given. Compare the observation
++with the expectation, revise the hypothesis and action, and identify one
++practice target. Do not defend earlier advice to preserve consistency. Separate
++process quality from outcome quality. Correct affected records only within the
++user-approved scope and verified host capability; session-only is the default.
++
++## Evidence boundary
++
++The ledger's Cheng study motivates testing responsibility, repair intentions,
++and reliance as separate outcomes from satisfaction. It does not establish this
++skill's effects. Longitudinal findings discussed in development research remain
++provisional where not promoted to the registry. No person-level prediction or
++clinical claim follows from these studies.
+diff --git a/skill/interpersonal-strategist/references/evidence-ledger.md b/skill/interpersonal-strategist/references/evidence-ledger.md
+index d7e200ffb1dc3872cd33195b7048125c7530d80f..44827a69decd2f5643ef4a0c3bc153288be53976 100644
+--- a/skill/interpersonal-strategist/references/evidence-ledger.md
++++ b/skill/interpersonal-strategist/references/evidence-ledger.md
+@@ -77,6 +77,10 @@ guaranteed intervention outcome.
+ | PRACTICE-02 | Tannenbaum and Cerasoli (2013), debriefs; PMID 23516804; DOI 10.1177/0018720812448394 | Meta-analysis | Use short developmental debriefs with prior predictions, observable outcomes, and one reusable rule. | Much evidence comes from training and performance settings. |
+ | DECISION-01 | Baron and Hershey (1988), outcome bias; PMID 3367280; DOI 10.1037/0022-3514.54.4.569 | Five experiments | Freeze the predicted observable outcome, confidence, and rationale before results; assess decision quality separately from outcome quality. | Experimental tasks; not every retrospective judgment is biased. |
+ 
++| AGENCY-01 | Cheng et al. (2026); PMID 41886588; DOI 10.1126/science.aec8352 | Three preregistered experiments; N=2405 | Sycophantic advice can be preferred while reducing responsibility and repair intentions. Evaluate agency and correction separately from satisfaction. | Intentions and judgments are not long-term outcomes or validation of this skill. |
++| PERSPECTIVE-01 | Eyal et al. (2018); PMID 29620401; DOI 10.1037/pspa0000115 | Experimental research | Imagining a perspective did not consistently improve accuracy; directly obtaining information helped in a final experiment. Label simulation as hypothetical; obtain relevant information only where appropriate. | Not a mandate to contact someone when unsafe or unwanted. |
++| AICOMM-01 | Argyle et al. (2023); PMID 37788311; DOI 10.1073/pnas.2311627120 | Randomized online political-conversation experiment | Optional rephrasing improved reported conversation quality without shifting policy positions. Preserve user choice, meaning, and voice in bounded wording assistance. | Specific political context; no persistence detected in later follow-up; not general relationship efficacy. |
++
+ ## Practitioner-framework quarantine
+ 
+ The following branded frameworks may supply memorable prompts only. Do not
+diff --git a/skill/interpersonal-strategist/references/memory-and-continuity.md b/skill/interpersonal-strategist/references/memory-and-continuity.md
+index 6e431a5b986b20a4ca6cea3ffd9a70310b9999c1..a17797dd57958caf2602cb20bf6068876cfbcd6a 100644
+--- a/skill/interpersonal-strategist/references/memory-and-continuity.md
++++ b/skill/interpersonal-strategist/references/memory-and-continuity.md
+@@ -10,10 +10,20 @@ of automatic truth about another person.
+ 
+ ## Use the available memory adapter
+ 
+-When the host exposes a scoped memory mechanism, use it under this contract. Do
+-not invent successful storage or retrieval. If no memory mechanism is available,
+-return a portable Situation Memory Card for the user to retain and paste into a
+-future conversation.
++Default to session-only operation. A portable Situation Memory Card is a
++user-controlled alternative, offered when requested rather than created by default.
++Only enable persistence after explicit scope consent and a verified host adapter.
++The adapter must demonstrate scoped read/write, inspect, correction, expiry,
++export, and deletion with receipts. If a required capability is unavailable or
++unverified, keep that case session-only; do not promise unsupported controls.
++No raw transcripts or secret person profiles belong in a card.
++
++A skill's memory mode does not control provider chat history, logs, backups, or
++training policies. Explain the exact storage scope of a save/delete receipt.
++A confirmed application deletion is not proof of erasure from provider logs.
++The offline calculator makes no network calls, but that does not make the model
++conversation itself local. See the repository's host-capability matrix before
++advertising any persistence feature.
+ 
+ The skill must still work without memory, connectors, files, or network access.
+ 
+@@ -24,7 +34,8 @@ Use one of three modes:
+ - **OFF:** do not retrieve or write case memory. Honor “memory off,” “do not
+   remember this,” and equivalent immediately.
+ - **CONFIRM_EACH:** propose the exact compact delta and obtain confirmation
+-  before each write. Use this default until the user opts in.
++  before each write. Use this default only after the user opts into persistence;
++  until then the case remains session-only (OFF).
+ - **AUTO_UPDATE:** after the user explicitly enables it for a named scope,
+   retrieve and update routine decision-relevant memory without repeated
+   permission prompts. Show material new actor hypotheses before promoting them.
+diff --git a/skill/interpersonal-strategist/references/method-contracts.md b/skill/interpersonal-strategist/references/method-contracts.md
+index 7b17bfa8047d204a3e165314d20dc0f8528afde2..119b57b4b42ffa0dc21b3b1e6e2295f8ce18cccc 100644
+--- a/skill/interpersonal-strategist/references/method-contracts.md
++++ b/skill/interpersonal-strategist/references/method-contracts.md
+@@ -223,6 +223,12 @@ another person, or AI assistance launders coercion or deception.
+ 
+ No method may output a diagnosis, legal or HR finding, unsupported motive,
+ deception verdict from style or demeanor, cultural personality prediction,
+-coercive or deceptive tactic, persistent third-party profile, guaranteed
+-outcome, unauthorized commitment, or material action without a change or stop
+-condition.
++coercive or deceptive tactic, hidden or fixed inferred third-party dossier,
++guaranteed outcome, unauthorized commitment, or material action without a change
++or stop condition. Purpose-scoped, user-approved decision records are governed
++by [profiles and scoring](profiles-and-scoring.md); they are not prohibited
++merely because an authorized host stores them. That reference is the canonical
++record-content policy; [memory and continuity](memory-and-continuity.md) governs
++consent and storage operations. A prohibition on profiling must not erase a
++permitted decision record, and permission to keep a record never authorizes
++hidden inference, surveillance, or retention outside its purpose.
+diff --git a/skill/interpersonal-strategist/references/profiles-and-scoring.md b/skill/interpersonal-strategist/references/profiles-and-scoring.md
+index 8fd0f75ef54e62d7f2e3d73743bb4c750eb543d5..fb86ad2cc235e79215b5636af92db84a9943173d 100644
+--- a/skill/interpersonal-strategist/references/profiles-and-scoring.md

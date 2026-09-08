@@ -1,0 +1,177 @@
++        if blind_id not in by_blind or blind_id in judgments:
++            raise ValueError("unknown or duplicate pointwise blind_id")
++        if row.get("rubric_version") != rubric_version:
++            raise ValueError("pointwise judgment rubric version mismatch")
++        # Identity is reconstructed only from the private map, never judge guesses.
++        judgments[blind_id] = {**row, **by_blind[blind_id], "rubric_version": rubric_version,
++                               "pairwise_preference": "not_scored"}
++    if set(judgments) != set(by_blind):
++        raise ValueError("missing pointwise judgments")
++    for blind_id, judgment in judgments.items():
++        audit = traces.get(judgment["run_id"])
++        if audit:
++            judgment["invocation_label"] = audit["invocation_label"]
++            judgment.setdefault("evidence", {})["invocation_trace"] = audit["evidence"]
++    pairs = {r["pair_id"]: r for r in mapping["pairs"]}
++    members = [p[key] for p in pairs.values() for key in ("left", "right")]
++    if len(pairs) != len(mapping["pairs"]) or len(members) != len(set(members)) or set(members) != set(by_blind):
++        raise ValueError("blinding pairs must cover each response exactly once")
++    for pair in pairs.values():
++        a, b = by_blind[pair["left"]], by_blind[pair["right"]]
++        if a["case_key"] != b["case_key"] or a["condition"] == b["condition"] or a["replicate_id"] != b["replicate_id"]:
++            raise ValueError("blinding pairs must compare matching cases across conditions")
++    seen = set()
++    for row in jsonl(pairwise_path):
++        pid, winner = row.get("pair_id"), row.get("winner")
++        if pid not in pairs or pid in seen or winner not in {"left", "right", "tie"}:
++            raise ValueError("unknown, duplicate, or invalid pairwise judgment")
++        seen.add(pid); pair = pairs[pid]
++        preference = "tie" if winner == "tie" else by_blind[pair[winner]]["condition"]
++        judgments[pair["left"]]["pairwise_preference"] = preference
++    if seen != set(pairs):
++        raise ValueError("missing pairwise judgments")
++    output.parent.mkdir(parents=True, exist_ok=True)
++    write_jsonl(output, list(judgments.values()))
++    return {"status": "reconciled", "judgments": len(judgments), "output_sha256": digest(output)}
++
++
++def main() -> int:
++    parser = argparse.ArgumentParser()
++    sub = parser.add_subparsers(dest="command", required=True)
++    prep = sub.add_parser("prepare")
++    prep.add_argument("--plan", type=Path, required=True)
++    prep.add_argument("--responses", type=Path, required=True)
++    prep.add_argument("--output", type=Path, required=True)
++    prep.add_argument("--seed", type=int, default=20260907)
++    undo = sub.add_parser("unblind")
++    undo.add_argument("--mapping", type=Path, required=True)
++    undo.add_argument("--pointwise", type=Path, required=True)
++    undo.add_argument("--pairwise", type=Path, required=True)
++    undo.add_argument("--output", type=Path, required=True)
++    undo.add_argument("--rubric-version", required=True)
++    undo.add_argument("--trace-audit", type=Path)
++    args = parser.parse_args()
++    try:
++        report = (prepare(args.plan, args.responses, args.output, args.seed) if args.command == "prepare"
++                  else unblind(args.mapping, args.pointwise, args.pairwise, args.output, args.rubric_version, args.trace_audit))
++        print(json.dumps(report, indent=2)); return 0
++    except (OSError, ValueError, KeyError, TypeError) as exc:
++        print(json.dumps({"status": "fail", "error": str(exc)})); return 1
++
++
++if __name__ == "__main__":
++    raise SystemExit(main())
+diff --git a/evals/eval_integrity.py b/evals/eval_integrity.py
+new file mode 100644
+index 0000000000000000000000000000000000000000..203414fad72481696ef5aad9316aa00ba5abe9f4
+--- /dev/null
++++ b/evals/eval_integrity.py
+@@ -0,0 +1,216 @@
++"""Plan reconciliation and boundary-safe statistics; no model or network access."""
++from __future__ import annotations
++
++import hashlib
++import json
++import math
++import random
++import re
++from collections import Counter, defaultdict
++from pathlib import Path
++from typing import Any
++
++CONDITIONS = {"skill", "no-skill", "short-prompt", "context-only", "context-playbook"}
++PLAN_FIELDS = ("case_key", "condition", "replicate_id", "cluster_id", "strata",
++               "expected_invocation", "expected_substantive_route", "prompt_sha256", "judge_prompt")
++
++
++def digest(path: Path) -> str:
++    return hashlib.sha256(path.read_bytes()).hexdigest()
++
++
++def jsonl(path: Path) -> list[dict[str, Any]]:
++    rows = []
++    for number, line in enumerate(path.read_text(encoding="utf-8").splitlines(), 1):
++        if not line.strip():
++            continue
++        value = json.loads(line, parse_constant=lambda s: (_ for _ in ()).throw(ValueError(s)))
++        if not isinstance(value, dict):
++            raise ValueError(f"{path.name}:{number}: expected object")
++        rows.append(value)
++    return rows
++
++
++def cluster_id(row: dict[str, Any]) -> str:
++    explicit = row.get("cluster_id")
++    if explicit is not None:
++        if not isinstance(explicit, str) or not explicit.strip():
++            raise ValueError("cluster_id must be non-empty text")
++        return explicit
++    # Language variants of the same public source case are not independent draws.
++    if row.get("source_file") and row.get("source_id"):
++        return f"{row['source_file']}:{row['source_id']}"
++    return str(row["case_key"])
++
++
++def make_plan(manifests: list[Path], output: Path, *, subject: dict[str, str] | None = None,
++              purpose: str = "development", seed: int = 20260907) -> dict[str, Any]:
++    rows: list[dict[str, Any]] = []
++    for path in manifests:
++        for item in jsonl(path):
++            prompt = item.get("prompt")
++            if not isinstance(prompt, str) or not prompt.strip():
++                raise ValueError("planned prompt must be non-empty")
++            rows.append({
++                "run_id": item["run_id"], "case_key": item["case_key"],
++                "condition": item["condition"], "replicate_id": item.get("replicate_id", 1),
++                "cluster_id": cluster_id(item), "strata": item.get("strata", []),
++                "expected_invocation": item.get("expected_invocation"),
++                "expected_substantive_route": item.get("expected_substantive_route"),
++                "prompt_sha256": hashlib.sha256(prompt.encode("utf-8")).hexdigest(),
++                "judge_prompt": item.get("judge_prompt", prompt.removeprefix("Use $interpersonal-strategist. ")),
++            })
++    random.Random(seed).shuffle(rows)
++    plan = {"execution_order_seed": seed, "schema_version": "1.0", "purpose": purpose, "subject": subject or {},
++            "manifests": [{"name": p.name, "sha256": digest(p)} for p in manifests],
++            "planned_runs": rows,
++            "nonclaim": "Frozen run accounting; this does not attest independent authorship, host identity, or untouched holdouts."}
++    validate_plan(plan)
++    output.parent.mkdir(parents=True, exist_ok=True)
++    output.write_text(json.dumps(plan, ensure_ascii=False, indent=2, sort_keys=True) + "\n", encoding="utf-8")
++    return plan
++
++
++def validate_plan(plan: dict[str, Any]) -> None:
++    if plan.get("schema_version") != "1.0" or plan.get("purpose") not in {"development", "qualification"}:
++        raise ValueError("unsupported plan schema or purpose")
++    if not isinstance(plan.get("subject"), dict):
++        raise ValueError("plan requires a subject object")
++    if plan["purpose"] == "qualification":
++        for name in ("commit", "package_sha256", "model_snapshot", "host_version", "rubric_version"):
++            if not isinstance(plan["subject"].get(name), str) or not plan["subject"][name].strip():
++                raise ValueError(f"qualification plan requires subject.{name}")
++    for name, length in (("commit", 40), ("package_sha256", 64)):
++        value = plan["subject"].get(name)
++        if plan["purpose"] == "qualification" and not re.fullmatch(r"[0-9a-f]{%d}" % length, str(value)):
++            raise ValueError(f"invalid qualification subject.{name}")
++    rows = plan.get("planned_runs")
++    if not isinstance(rows, list) or not rows:
++        raise ValueError("planned_runs must be a non-empty list")
++    ids, identities = set(), set()
++    families: dict[str, tuple[Any, ...]] = {}
++    for row in rows:
++        if not isinstance(row, dict):
++            raise ValueError("planned run must be an object")
++        for name in ("run_id", "case_key", "cluster_id", "prompt_sha256"):
++            if not isinstance(row.get(name), str) or not row[name].strip():
++                raise ValueError(f"planned run requires {name}")
++        if row.get("condition") not in CONDITIONS:
++            raise ValueError("unknown planned condition")
++        rep = row.get("replicate_id")
++        if type(rep) is not int or rep < 1:
++            raise ValueError("replicate_id must be a positive integer")
++        if not isinstance(row.get("strata"), list) or any(not isinstance(s, str) or not s for s in row["strata"]):
++            raise ValueError("planned strata must be a string list")
++        sha = row["prompt_sha256"]
++        if len(sha) != 64 or any(c not in "0123456789abcdef" for c in sha):
++            raise ValueError("invalid prompt_sha256")
++        if not isinstance(row.get("judge_prompt"), str) or not row["judge_prompt"].strip():

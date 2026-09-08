@@ -1,0 +1,155 @@
++                raise ValueError(f"gate receipt {field} differs from declaration: {gate_id}")
++        supporting = receipt.get("supporting_artifacts")
++        if not isinstance(supporting, dict) or not gate_support[gate_id] <= set(supporting):
++            raise ValueError(f"gate receipt needs supporting artifacts: {gate_id}")
++        for support_role, expected_hash in supporting.items():
++            if support_role not in paths or sha256(paths[support_role]) != expected_hash:
++                raise ValueError(f"unbound supporting evidence for {gate_id}")
++        if not receipt.get("reviewer_role") or not receipt.get("reviewed_at"):
++            raise ValueError(f"gate receipt requires reviewer role and date: {gate_id}")
++    sys.path.insert(0, str(project_root / "scripts"))
++    from evidence_metrics import recompute_reviews
++    review_metrics = recompute_reviews(paths, qualification, expected_subject,
++                                      read_json(project_root / "evals/rubric.json"))
++    for gate_id, computed in review_metrics.items():
++        evidence = qualification["gates"][gate_id]["evidence"]
++        for field, values in computed.items():
++            if any(evidence.get(field, {}).get(key) != value for key, value in values.items()):
++                raise ValueError(f"declared {gate_id} {field} differ from raw-review recomputation")
++    comparison = qualification["gates"]["calibrated_no_skill_comparison"]["evidence"]
++    pw = summary["pairwise"]
++    actual_counts = {"non_tied_pairs": pw["non_tied"], "total_pairs": pw["total"],
++                     "hard_failures": sum(f["condition"] == "skill" for f in summary["hard_gate_failures"])}
++    actual_metrics = {"non_tied_proportion": pw["non_tied_proportion"],
++                      "skill_win_rate_lower_bound": pw["skill_win_rate_one_sided_95_lower_bound"],
++                      "low_complexity_lower_bound": pw["low_complexity_noninferiority"]["paired_usability_difference_one_sided_95_lower_bound"]}
++    if any(comparison["counts"].get(k) != v for k, v in actual_counts.items()) or any(comparison["metrics"].get(k) != v for k, v in actual_metrics.items()):
++        raise ValueError("declared comparative counts/metrics differ from recomputation")
++    return {"status": "pass", "artifact_count": len(paths), "subject": expected_subject,
++        "comparison": actual_counts, "evidence_index_sha256": sha256(index_path),
++        "nonclaim": "Verified bytes, planned-run coverage, package parity, receipt consistency, comparative calculations, and review-record counts/metrics. Human review must establish source truth, reviewer independence, and applicability; this script cannot establish them."}
++
++
++def qualification_bundle_errors(project_root: Path, qualification: dict[str, Any]) -> list[str]:
++    if qualification.get("status") != "qualified":
++        return []
++    location = os.environ.get("INTERPERSONAL_EVIDENCE_INDEX")
++    if not location:
++        return ["qualified release requires actual evidence bytes via INTERPERSONAL_EVIDENCE_INDEX; hash declarations alone do not qualify"]
++    try:
++        verify_bundle(Path(location), qualification, project_root=project_root)
++        return []
++    except (OSError, ValueError, KeyError, TypeError, zipfile.BadZipFile) as exc:
++        return [f"evidence bundle verification failed: {exc}"]
++
++
++def main() -> int:
++    parser = argparse.ArgumentParser()
++    parser.add_argument("--index", type=Path, required=True)
++    parser.add_argument("--qualification", type=Path, default=ROOT / "release/qualification.json")
++    args = parser.parse_args()
++    try:
++        result = verify_bundle(args.index, read_json(args.qualification))
++    except (OSError, ValueError, KeyError, TypeError, zipfile.BadZipFile) as exc:
++        print(json.dumps({"status": "fail", "error": str(exc)})); return 1
++    print(json.dumps(result, indent=2)); return 0
++
++
++if __name__ == "__main__":
++    raise SystemExit(main())
+diff --git a/skill/interpersonal-strategist/NOTICE.md b/skill/interpersonal-strategist/NOTICE.md
+index a3793d4cfa0e3f57eb8884c6a8fa798893bbc5ed..f7171525d98e36a0aca7e8b84030498d1715046d 100644
+--- a/skill/interpersonal-strategist/NOTICE.md
++++ b/skill/interpersonal-strategist/NOTICE.md
+@@ -1,6 +1,6 @@
+ # Notice
+ 
+-Interpersonal Strategist `0.12.0-alpha.1`
++Interpersonal Strategist `0.13.0-alpha.1`
+ 
+ Copyright 2026 Tony Wu. Distributed under the MIT License.
+ 
+@@ -36,7 +36,7 @@ activity involving minors or incapacity, or non-consensual intimate-media use.
+ It does not replace qualified legal, HR, medical, safeguarding, crisis, or
+ emergency advice.
+ 
+-`0.12.0-alpha.1` is a production-qualification candidate. A production claim is not
++`0.13.0-alpha.1` is a production-qualification candidate. A production claim is not
+ permitted until the repository qualification manifest records passing evidence
+ for source resolution, host integration, comparative behavioral evaluation,
+ independent untouched holdouts, bilingual review, expanded relationship-scope
+diff --git a/skill/interpersonal-strategist/SKILL.md b/skill/interpersonal-strategist/SKILL.md
+index a09fb1e662b998033535c789675a50bf9dd1e593..0221d5397148c0568f319301ca1c29e52b3d3252 100644
+--- a/skill/interpersonal-strategist/SKILL.md
++++ b/skill/interpersonal-strategist/SKILL.md
+@@ -207,8 +207,9 @@ MBTI, attachment, astrology, or symbolic lenses are reflective prompts, not
+ facts, diagnoses, or grounds to override evidence, correction, consent, or safety.
+ 
+ Follow [memory and continuity](references/memory-and-continuity.md) only when
+-cross-session continuity is relevant. Default to **CONFIRM_EACH** for new or
+-changed case facts; honor **memory off** immediately. A Situation Memory Card or
++cross-session continuity is relevant. Default to session-only; after explicit
++scoped persistence consent and verified host capabilities, use **CONFIRM_EACH**
++for new or changed case facts. Honor **memory off** immediately. A Situation Memory Card or
+ user-controlled dossier is optional, scoped, minimal, inspectable, correctable, versioned, expirable,
+ and deletable. Support rollback and export when the host can do so. Recheck stale
+ facts; keep hypotheses separate from reports. Offer a portable card when asked
+@@ -221,6 +222,19 @@ profiles, or fixed personality verdicts. Do not infer authorization to browse
+ private sources from a request to understand someone. Do not automatically send anything or
+ perform uncontrolled connector actions; drafts remain under the user's control.
+ 
++## Preserve agency and learn without reinforcing a grievance
++
++Use [agency and calibration](references/agency-and-calibration.md) when the user
++asks for validation, returns without new facts, challenges prior advice, or needs
++help separating support from certainty. Validate the stated feeling, not an
++unsupported accusation. Examine the user's contribution only when supported;
++never force equal blame, an apology, reconciliation, or contact after refusal.
++Correct a prior recommendation when the evidence changes. Do not invent new
++interpretations to prolong an unchanged case. When the next move is stable,
++help the user act, pause, or stop analysis; do not encourage dependence on the skill.
++Rehearsal prepares responses to possibilities, not predictions of another person.
++Optional scoring follows the calculator's status-first, incomplete-evidence gates.
++
+ ## Final check for this turn
+ 
+ - Interview needed? Ask and wait; a plan with trailing questions fails this step.
+diff --git a/skill/interpersonal-strategist/assets/profile-score-template.json b/skill/interpersonal-strategist/assets/profile-score-template.json
+index 49ebe9bd7598fe46238293e831ebe76311dabf35..cda654f9f9d8e419c69cf373499924794a597167 100644
+--- a/skill/interpersonal-strategist/assets/profile-score-template.json
++++ b/skill/interpersonal-strategist/assets/profile-score-template.json
+@@ -1,5 +1,5 @@
+ {
+-  "schema_version": "1.0",
++  "schema_version": "1.1",
+   "profile_id": "relationship-alias",
+   "profile_version": 1,
+   "purpose": "State the bounded interpersonal decision being scored.",
+@@ -23,7 +23,8 @@
+       "unknowns": [
+         "Add the decision-relevant missing evidence."
+       ],
+-      "update_condition": "Review after the next comparable commitment or material correction."
++      "update_condition": "Review after the next comparable commitment or material correction.",
++      "decision_critical": true
+     }
+   ],
+   "flags": []
+diff --git a/skill/interpersonal-strategist/references/agency-and-calibration.md b/skill/interpersonal-strategist/references/agency-and-calibration.md
+new file mode 100644
+index 0000000000000000000000000000000000000000..7af6ddbb63e9310aea81b2c3bfaa3a0864f1dc14
+--- /dev/null
++++ b/skill/interpersonal-strategist/references/agency-and-calibration.md
+@@ -0,0 +1,65 @@
++# Agency, perspective, and calibration
++
++Use when a user seeks repeated reassurance, asks you to endorse a grievance,
++requests an interpretation of another person, or reports a correction/outcome.
++These are product safeguards informed by the evidence ledger, not a validated
++intervention or a diagnosis of the user.
++
++## Support without inventing agreement
++
++Acknowledge the concrete stakes or reported feeling. Separately inspect the
++claim: which observation supports it, what is uncertain, and what alternative
++would change the move? Do not turn the user's account into a finding about an

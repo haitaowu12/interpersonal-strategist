@@ -1,0 +1,129 @@
++        internal = json.loads(archive.read("interpersonal-strategist/PACKAGE_MANIFEST.json"))
++        if internal.get("files") != manifest.get("files") or internal.get("version") != manifest.get("version"):
++            raise ValueError("internal package manifest mismatch")
++    root = project_root / "skill/interpersonal-strategist"
++    source_names = {"interpersonal-strategist/" + p.relative_to(root).as_posix()
++                    for p in root.rglob("*") if p.is_file() and "__pycache__" not in p.parts
++                    and p.suffix not in {".pyc", ".pyo"} and p.name != "PACKAGE_MANIFEST.json"}
++    if source_names != set(expected):
++        raise ValueError("package omits or adds runtime files")
++
++
++def verify_bundle(index_path: Path, qualification: dict[str, Any], *, project_root: Path = ROOT) -> dict[str, Any]:
++    index, paths = verify_artifacts(index_path)
++    missing = REQUIRED_ROLES - set(paths)
++    if missing:
++        raise ValueError("missing required artifact roles: " + ", ".join(sorted(missing)))
++    if qualification.get("status") != "qualified" or qualification.get("production_claim_allowed") is not True:
++        raise ValueError("production verification requires a qualified candidate declaration; pending gates remain blocked")
++    subject = index.get("subject", {})
++    expected_subject = {"commit": qualification.get("qualification_commit"),
++        "package_sha256": qualification.get("package_sha256"),
++        "model_snapshot": qualification.get("model_snapshot"), "host_version": qualification.get("host_version"),
++        "rubric_version": qualification.get("rubric_version")}
++    if any(not value or subject.get(key) != value for key, value in expected_subject.items()):
++        raise ValueError("evidence index subject does not match qualification")
++    if sha256(paths["package"]) != subject["package_sha256"]:
++        raise ValueError("subject package hash mismatch")
++    declared = qualification.get("evidence_bundle")
++    if not isinstance(declared, dict):
++        raise ValueError("qualification requires evidence_bundle")
++    for field, value in declared.items():
++        if field.endswith("_sha256") and field.removesuffix("_sha256") in paths:
++            if value != sha256(paths[field.removesuffix("_sha256")]):
++                raise ValueError(f"declared evidence hash differs from actual bytes: {field}")
++    verify_package(paths["package"], paths["package_manifest"], project_root)
++    build = read_json(paths["build_provenance"])
++    if (build.get("candidate_sha") != subject["commit"] or build.get("checkout_sha") != subject["commit"]
++            or build.get("release_zip_sha256") != subject["package_sha256"]
++            or build.get("release_manifest_sha256") != sha256(paths["package_manifest"])
++            or build.get("checkout_tree_sha") != qualification.get("qualification_tree_sha")
++            or build.get("working_tree_clean") is not True):
++        raise ValueError("build provenance does not bind a clean candidate tree and package")
++    plan = read_json(paths["run_plan"])
++    if plan.get("purpose") != "qualification" or plan.get("subject") != expected_subject:
++        raise ValueError("comparison plan must bind the exact qualification subject")
++    for role in ("skill_prompt_manifest", "no_skill_prompt_manifest"):
++        if sha256(paths[role]) not in {m["sha256"] for m in plan.get("manifests", [])}:
++            raise ValueError(f"run plan does not bind {role}")
++    spec = importlib.util.spec_from_file_location("bundle_eval_runner", project_root / "evals/run.py")
++    if spec is None or spec.loader is None:
++        raise ValueError("evaluation runner cannot be loaded")
++    runner = importlib.util.module_from_spec(spec)
++    spec.loader.exec_module(runner)
++    with tempfile.TemporaryDirectory(prefix="interpersonal-verify-") as temporary:
++        rebuilt = runner.make_plan([paths["skill_prompt_manifest"], paths["no_skill_prompt_manifest"]],
++            Path(temporary) / "rebuilt.json", subject=expected_subject, purpose="qualification",
++            seed=plan.get("execution_order_seed", 20260907))
++        by_id = lambda rows: {r["run_id"]: r for r in rows}
++        if by_id(rebuilt["planned_runs"]) != by_id(plan["planned_runs"]):
++            raise ValueError("run plan does not match actual prompt manifests")
++        mapping = read_json(paths["blinding_manifest"])
++        if (mapping.get("plan_sha256") != sha256(paths["run_plan"])
++                or mapping.get("canonical_responses_sha256") != sha256(paths["responses"])):
++            raise ValueError("blinding map does not bind plan and canonical responses")
++        response_ids = {r["blind_id"]: r["run_id"] for r in runner.read_jsonl(paths["responses"])}
++        mapped_ids = {r["blind_id"]: r["run_id"] for r in mapping.get("rows", [])}
++        if response_ids != mapped_ids or len(mapped_ids) != len(mapping.get("rows", [])):
++            raise ValueError("blinding identity coverage mismatch")
++        summary = runner.summarize(paths["responses"], paths["judgments"], Path(temporary) / "summary.json", plan_path=paths["run_plan"])
++    if (not summary["coverage"]["complete"] or not summary["judgments"]["complete"]
++            or summary["pairwise"]["acceptance"]["status"] != "pass"):
++        raise ValueError("recomputed planned comparison does not meet acceptance")
++
++    source_report = read_json(paths["source_resolution"])
++    registry = read_json(project_root / "provenance/evidence-sources.json")
++    source_ids = {s["id"] for s in registry["sources"]}
++    observed = source_report.get("sources", [])
++    if (source_report.get("mode") != "online" or source_report.get("status") != "pass"
++            or source_report.get("registry_errors") != []
++            or source_report.get("registry_sha256") != sha256(project_root / "provenance/evidence-sources.json")
++            or len(observed) != len(source_ids) or {s.get("id") for s in observed} != source_ids
++            or any(s.get("status") != "pass" for s in observed)):
++        raise ValueError("online source-resolution evidence is incomplete or stale")
++    host = read_json(paths["host_receipt"])
++    required_operations = {"discovery", "explicit_invocation", "reference_reads", "quick_mode", "ask_wait_update", "stop"}
++    capabilities = read_json(project_root / "release/host-capabilities.json")
++    if capabilities.get("persistent_adapter_enabled"):
++        required_operations.update({"scoped_read", "scoped_write", "inspect", "correct", "expire", "export", "delete"})
++    observations = host.get("observations", [])
++    if host.get("subject") != expected_subject or not isinstance(observations, list):
++        raise ValueError("host observation subject mismatch")
++    by_operation = {o["operation"]: o for o in observations}
++    if len(by_operation) != len(observations) or not required_operations <= set(by_operation):
++        raise ValueError("host operation coverage is incomplete")
++    if any(by_operation[o].get("status") != "pass" or not by_operation[o].get("evidence") for o in required_operations):
++        raise ValueError("host operations require observed passing evidence")
++    reference_trace = read_json(paths["reference_trace"])
++    if reference_trace.get("subject") != expected_subject or not reference_trace.get("observations"):
++        raise ValueError("reference trace requires exact-subject observations")
++    gate_support = {
++        "static_repository_ci": {"build_provenance"},
++        "deterministic_package_and_layout": {"package", "package_manifest"},
++        "evidence_registry_parity": {"source_resolution"},
++        "online_source_resolution": {"source_resolution"},
++        "clean_host_discovery_and_invocation": {"host_receipt"},
++        "reference_selection_and_compound_overlays": {"reference_trace"},
++        "calibrated_no_skill_comparison": {"run_plan", "responses", "judgments", "blinding_manifest"},
++        "independent_untouched_holdouts": {"holdout_set", "holdout_results"},
++        "adversarial_safety_holdouts": {"holdout_set", "holdout_results"},
++        "bilingual_fluent_review": {"bilingual_review"},
++        "judge_calibration": {"judge_calibration"},
++        "privacy_safe_controlled_pilot": {"pilot_evidence"},
++        "independent_release_review": {"independent_release_review"},
++    }
++    gate_roles = index.get("gate_receipts")
++    if not isinstance(gate_roles, dict) or set(gate_roles) != set(qualification.get("gates", {})):
++        raise ValueError("one bound receipt is required for every qualification gate")
++    for gate_id, gate in qualification["gates"].items():
++        role = gate_roles[gate_id]
++        if gate.get("status") != "passed" or role not in paths:
++            raise ValueError(f"gate not passed or receipt unavailable: {gate_id}")
++        receipt = read_json(paths[role])
++        if receipt.get("gate_id") != gate_id or receipt.get("subject") != expected_subject or receipt.get("result") != "pass":
++            raise ValueError(f"gate receipt identity/result mismatch: {gate_id}")
++        evidence = gate.get("evidence", {})
++        if evidence.get("artifact_sha256") != sha256(paths[role]):
++            raise ValueError(f"gate receipt bytes differ from declared evidence: {gate_id}")
++        for field in ("counts", "metrics", "protocol_version"):
++            if receipt.get(field) != evidence.get(field):

@@ -1,0 +1,180 @@
++    minimum_low = targets.get("minimum_low_complexity_clusters", 30)
++    low_bound = bootstrap_lower_bound(cluster_differences) if len(cluster_differences) >= minimum_low else None
++    # A degenerate empirical sample cannot quantify uncertainty about unseen differences.
++    if len(set(cluster_differences)) < 2:
++        low_bound = None
++    low_status = ("not_evaluable" if low_bound is None else "pass"
++                  if low_bound >= targets["low_complexity_noninferiority_margin"] else "fail")
+     pairwise["low_complexity_noninferiority"] = {
+-        "case_count": len(low_complexity_differences),
+-        "paired_usability_difference_one_sided_95_lower_bound": (
+-            low_complexity_lower_bound
+-        ),
+-        "margin": targets.get("low_complexity_noninferiority_margin"),
+-        "status": (
+-            "not_evaluable"
+-            if low_complexity_lower_bound is None
+-            else (
+-                "pass"
+-                if low_complexity_lower_bound
+-                >= targets.get("low_complexity_noninferiority_margin", 0)
+-                else "fail"
+-            )
+-        ),
+-    }
+-    required_strata = targets.get("material_advantage_required_strata", [])
+-    minimum_pairs_per_stratum = targets.get("minimum_pairs_per_required_stratum", 1)
+-    material_advantage = {
+-        stratum: {
+-            "minimum_pairs": minimum_pairs_per_stratum,
+-            "status": (
+-                "not_evaluable"
+-                if pairwise_by_stratum.get(stratum, {}).get("total", 0)
+-                < minimum_pairs_per_stratum
+-                else (
+-                    "pass"
+-                    if (
+-                        pairwise_by_stratum[stratum][
+-                            "skill_win_rate_one_sided_95_lower_bound"
+-                        ]
+-                        or 0
+-                    )
+-                    > 0.5
+-                    else "fail"
+-                )
+-            ),
+-        }
+-        for stratum in required_strata
+-    }
+-    basic_pairwise_pass = (
+-        pairwise["non_tied"] >= targets.get("no_skill_minimum_non_tied_pairs", 0)
+-        and (pairwise["non_tied_proportion"] or 0)
+-        >= targets.get("no_skill_minimum_non_tied_proportion", 0)
+-        and (
+-            pairwise["skill_win_rate_one_sided_95_lower_bound"] is not None
+-            and pairwise["skill_win_rate_one_sided_95_lower_bound"]
+-            > targets.get("no_skill_lower_confidence_bound_excluding_ties_gt", 1.0)
+-        )
+-    )
+-    comparison_status = "pass" if basic_pairwise_pass else "not_met"
+-    if pairwise["low_complexity_noninferiority"]["status"] == "not_evaluable" or any(
+-        item["status"] == "not_evaluable" for item in material_advantage.values()
+-    ):
+-        comparison_status = "not_evaluable"
+-    elif pairwise["low_complexity_noninferiority"]["status"] != "pass" or any(
+-        item["status"] != "pass" for item in material_advantage.values()
+-    ):
+-        comparison_status = "not_met"
+-    pairwise["acceptance"] = {
+-        "minimum_non_tied_pairs": targets.get("no_skill_minimum_non_tied_pairs"),
+-        "minimum_non_tied_proportion": targets.get(
+-            "no_skill_minimum_non_tied_proportion"
+-        ),
+-        "lower_bound_must_exceed": targets.get(
+-            "no_skill_lower_confidence_bound_excluding_ties_gt"
+-        ),
+-        "material_advantage_by_required_stratum": material_advantage,
+-        "status": comparison_status,
++        "case_count": len(cluster_differences), "minimum_clusters": minimum_low,
++        "paired_usability_difference_one_sided_95_lower_bound": low_bound,
++        "margin": targets["low_complexity_noninferiority_margin"], "status": low_status,
++        "method": "paired bootstrap of predeclared cluster means; degenerate samples are not evaluable",
++        "resamples": BOOTSTRAP_RESAMPLES, "seed": BOOTSTRAP_SEED,
+     }
+-
+-    summary = {
+-        "schema_version": "2.0",
+-        "rubric_version": rubric.get("schema_version"),
+-        "status": "summarized",
+-        "responses": {
+-            "path": str(responses_path),
+-            "sha256": sha256_file(responses_path),
+-            "count": len(responses),
+-            "complete": True,
+-        },
+-        "judgments": {
+-            "path": str(judgments_path),
+-            "sha256": sha256_file(judgments_path),
+-            "count": len(judgments),
+-            "complete": True,
+-        },
+-        "hard_gate_failure_count": len(hard_failures),
+-        "hard_gate_failures": hard_failures,
+-        "dimension_floor_failure_count": len(floor_failures),
+-        "dimension_floor_failures": floor_failures,
+-        "invocation_metrics": classification_metrics(
+-            invocation_pairs, CANONICAL_INVOCATION
+-        ),
+-        "substantive_route_metrics": classification_metrics(
+-            route_pairs, CANONICAL_ROUTES
+-        ),
+-        "pairwise": pairwise,
+-        "pairwise_by_stratum": pairwise_by_stratum,
++    material = {}
++    for stratum in targets["material_advantage_required_strata"]:
++        stats = by_stratum.get(stratum, {})
++        minimum = targets["minimum_pairs_per_required_stratum"]
++        status = ("not_evaluable" if stats.get("non_tied", 0) < minimum else "pass"
++                  if (stats.get("skill_win_rate_one_sided_95_lower_bound") or 0) > 0.5 else "fail")
++        material[stratum] = {"minimum_clusters": minimum, "status": status}
++    basic = (pairwise["non_tied"] >= targets["no_skill_minimum_non_tied_pairs"]
++        and (pairwise["non_tied_proportion"] or 0) >= targets["no_skill_minimum_non_tied_proportion"]
++        and (pairwise["skill_win_rate_one_sided_95_lower_bound"] or 0) > targets["no_skill_lower_confidence_bound_excluding_ties_gt"])
++    acceptance = "pass" if basic else "not_met"
++    if low_status == "fail" or any(x["status"] == "fail" for x in material.values()):
++        acceptance = "not_met"
++    if (not coverage["complete"] or missing_labels or low_status == "not_evaluable"
++            or any(x["status"] == "not_evaluable" for x in material.values())):
++        acceptance = "not_evaluable"
++    if any(f["condition"] == "skill" for f in hard_failures + floor_failures):
++        acceptance = "not_met"
++    pairwise["acceptance"] = {"status": acceptance,
++        "minimum_non_tied_clusters": targets["no_skill_minimum_non_tied_pairs"],
++        "minimum_non_tied_proportion": targets["no_skill_minimum_non_tied_proportion"],
++        "lower_bound_must_exceed": targets["no_skill_lower_confidence_bound_excluding_ties_gt"],
++        "material_advantage_by_required_stratum": material}
++    def per_condition(kind, labels):
++        return {condition: classification_metrics(values[kind], labels)
++                for condition, values in classification.items()}
++    summary = {"schema_version": "3.0", "rubric_version": rubric["schema_version"],
++        "baseline": baseline, "status": "summarized", "coverage": coverage,
++        "plan_sha256": sha256_file(plan_path) if plan_path else None,
++        "subject": plan.get("subject", {}) if plan else {},
++        "responses": {"path": str(responses_path), "sha256": sha256_file(responses_path),
++                      "count": len(submitted), "complete": coverage["complete"]},
++        "judgments": {"path": str(judgments_path), "sha256": sha256_file(judgments_path),
++                      "count": len(judgments), "complete": coverage["complete"] and not missing_labels},
++        "hard_gate_failure_count": len(hard_failures), "hard_gate_failures": hard_failures,
++        "dimension_floor_failure_count": len(floor_failures), "dimension_floor_failures": floor_failures,
++        "missing_classification_labels": missing_labels,
++        "invocation_metrics": per_condition("invocation", CANONICAL_INVOCATION),
++        "substantive_route_metrics": per_condition("route", CANONICAL_ROUTES),
++        "pairwise": pairwise, "pairwise_by_stratum": by_stratum,
+         "qualification_claim": False,
+-        "note": "This summary does not establish production qualification; release/qualification.json controls that claim.",
+-    }
++        "note": "Artifact/run accounting is not independent behavioral validation. Qualification still requires the complete evidence bundle and human review."}
+     output.parent.mkdir(parents=True, exist_ok=True)
+     output.write_text(json.dumps(summary, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+     return summary
+@@ -792,40 +652,42 @@ def print_json(payload: Any) -> None:
+ 
+ def main() -> int:
+     parser = argparse.ArgumentParser()
+-    subparsers = parser.add_subparsers(dest="command", required=True)
+-
+-    subparsers.add_parser("validate-fixtures")
+-
+-    prepare_parser = subparsers.add_parser("prepare")
+-    prepare_parser.add_argument("--condition", choices=("skill", "no-skill"), required=True)
+-    prepare_parser.add_argument("--output", type=Path, required=True)
+-
+-    summarize_parser = subparsers.add_parser("summarize")
+-    summarize_parser.add_argument("--responses", type=Path, required=True)
+-    summarize_parser.add_argument("--judgments", type=Path, required=True)
+-    summarize_parser.add_argument("--output", type=Path, required=True)
+-
++    commands = parser.add_subparsers(dest="command", required=True)
++    commands.add_parser("validate-fixtures")
++    prep = commands.add_parser("prepare")
++    prep.add_argument("--condition", choices=sorted(CONDITIONS), required=True)
