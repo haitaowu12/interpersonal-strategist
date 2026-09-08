@@ -1,5 +1,22 @@
 # Changelog
 
+## 0.13.0-alpha.1
+
+Stabilization and qualification tooling; not production qualification.
+
+- Resolve the counterpart-record policy conflict; default to session-only and
+  require verified adapter capabilities before persistence claims.
+- Make scoring status-first: withhold overall scores for missing evidence or
+  active flags; preserve partial arithmetic and sensitivity bounds for audit.
+- Freeze expected runs, retain failed/missing/excluded cases, separate condition
+  metrics, and use exact binomial bounds on independent scenario-family votes.
+- Add bounded opt-in adapter execution, shuffled judging packets, short-prompt
+  and context ablations, and actual-artifact evidence verification.
+- Add agency/calibration guidance, regression fixtures, a staged onboarding and
+  pilot kit, capability receipts, and a single qualification runbook.
+- Preserve blocked production gates. No independent human review, untouched
+  holdout, bilingual qualification, host qualification, or user pilot is claimed.
+
 ## 0.12.0-alpha.1
 
 - Made missing decision-changing context trigger an interview in the entrypoint,

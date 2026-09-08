@@ -1,7 +1,7 @@
 {
   "schema_version": "2.0",
-  "release": "0.12.0-alpha.1",
-  "release_state": "production_qualification_candidate",
+  "release": "0.13.0-alpha.1",
+  "release_state": "stabilized_experimental_alpha",
   "historical_v05a_status": "unavailable_not_reconstructed",
   "implementation_sources": [
     {

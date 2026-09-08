@@ -77,6 +77,10 @@ guaranteed intervention outcome.
 | PRACTICE-02 | Tannenbaum and Cerasoli (2013), debriefs; PMID 23516804; DOI 10.1177/0018720812448394 | Meta-analysis | Use short developmental debriefs with prior predictions, observable outcomes, and one reusable rule. | Much evidence comes from training and performance settings. |
 | DECISION-01 | Baron and Hershey (1988), outcome bias; PMID 3367280; DOI 10.1037/0022-3514.54.4.569 | Five experiments | Freeze the predicted observable outcome, confidence, and rationale before results; assess decision quality separately from outcome quality. | Experimental tasks; not every retrospective judgment is biased. |
 
+| AGENCY-01 | Cheng et al. (2026); PMID 41886588; DOI 10.1126/science.aec8352 | Three preregistered experiments; N=2405 | Sycophantic advice can be preferred while reducing responsibility and repair intentions. Evaluate agency and correction separately from satisfaction. | Intentions and judgments are not long-term outcomes or validation of this skill. |
+| PERSPECTIVE-01 | Eyal et al. (2018); PMID 29620401; DOI 10.1037/pspa0000115 | Experimental research | Imagining a perspective did not consistently improve accuracy; directly obtaining information helped in a final experiment. Label simulation as hypothetical; obtain relevant information only where appropriate. | Not a mandate to contact someone when unsafe or unwanted. |
+| AICOMM-01 | Argyle et al. (2023); PMID 37788311; DOI 10.1073/pnas.2311627120 | Randomized online political-conversation experiment | Optional rephrasing improved reported conversation quality without shifting policy positions. Preserve user choice, meaning, and voice in bounded wording assistance. | Specific political context; no persistence detected in later follow-up; not general relationship efficacy. |
+
 ## Practitioner-framework quarantine
 
 The following branded frameworks may supply memorable prompts only. Do not

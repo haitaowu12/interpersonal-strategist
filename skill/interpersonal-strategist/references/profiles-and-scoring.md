@@ -4,8 +4,32 @@ Use this reference when the user asks to create, update, compare, score, review,
 remember, correct, export, roll back, or delete a profile about themselves,
 another person, a relationship, a stakeholder, or an interpersonal option.
 
-The product supports dossiers and numerical scoring. Treat them as inspectable
-decision aids, not objective truth about a person.
+The product supports optional dossiers and numerical scoring. Start with a
+session-only evidence table; do not introduce a score merely to make advice look
+precise. This is the canonical record-content policy for every method and overlay.
+Persistent decision records are permitted only under the consent and verified
+host-capability requirements in [memory and continuity](memory-and-continuity.md).
+Hidden, fixed, diagnostic, vulnerability, or manipulation profiles remain prohibited.
+
+## Render uncertainty before arithmetic
+
+Calculator output schema 1.1 accepts legacy 1.0 inputs, but intentionally changes
+headline-score behavior. Every positive-weight dimension defaults to
+`decision_critical: true` unless the user explicitly marks it otherwise.
+Unresolved unknowns in a critical dimension block an overall assessment even
+when someone supplied a rating. An active flag always takes precedence.
+
+Render `decision_status`, `interpretation`, coverage, critical unknowns, and
+flags first. `decision_fit_score` is null while gated, unassessed, or incomplete.
+`arithmetic_only.scored_dimensions_score` may be shown as partial arithmetic,
+never a favorable overall verdict. `full_model_bounds` spans the user model when
+unknown ratings range from 0 to 5; it is not a probability or confidence interval.
+Do not impute the unknown ratings or lower weights to obtain a reassuring score.
+
+For example, one 5/5 dimension among eight equally weighted dimensions yields
+12.5% coverage, a null headline score, and sensitivity bounds of 12.5–100.
+An active safety flag still blocks a favorable verdict if every rating is 5/5.
+Show the evidence and next information need instead of rating the person.
 
 ## Start with user control
 
@@ -204,38 +228,33 @@ For each rating record:
 - confidence: low, moderate, or high;
 - update condition.
 
-### Step 4: calculate score and coverage
+### Step 4: calculate status before optional arithmetic
 
-For dimensions with evidence:
+Use the schema 1.1 status-first contract above. Positive-weight dimensions with
+unknown ratings remain in planned coverage. Missing decision-critical evidence
+(including unresolved material unknowns on a rated dimension) prevents an overall
+score. Any active safety, consent, authority, or deal-breaker flag gates it first.
 
 ```text
-DFS = round(20 × sum(weight × rating) / sum(weight))
+partial arithmetic = 20 × sum(scored weight × rating) / sum(scored weight)
 coverage = scored planned weight / total planned weight × 100
+lower sensitivity bound = 20 × sum(scored weight × rating) / total planned weight
+upper sensitivity bound = 20 × (sum(scored weight × rating) + 5 × missing weight)
+                          / total planned weight
 ```
 
-Exclude `unknown` dimensions from the DFS numerator and scored denominator, but
-include their planned weight in coverage. Never hide a low-coverage score.
+These bounds only vary missing ratings over their declared 0–5 range. They do
+not represent probability, measurement error, or uncertainty in the supplied
+ratings. Keep confidence and counterevidence visible. No universal favorable
+interpretation bands are supported. Even complete arithmetic is not a
+recommendation and does not validate the user's chosen dimensions or weights.
 
-For deterministic arithmetic, copy
-`assets/profile-score-template.json`, keep each evidence item source- and
-date-labeled, then run `scripts/profile_score.py --input <model.json>`. The
-helper validates structure and calculates the composite; it does not infer
-ratings, write memory, or establish that the model is valid for the user's
-decision. Use `--output` only when the user explicitly chooses a destination.
-
-Interpretation bands:
-
-| DFS | Decision-fit reading |
-|---:|---|
-| 0–20 | Currently blocked or strongly unfavorable |
-| 21–40 | Weak fit; major change or protection needed |
-| 41–60 | Mixed; clarify conditions and gather material evidence |
-| 61–80 | Promising or workable with named limitations |
-| 81–100 | Strong current fit under the stated model |
-
-Bands are communication aids, not empirical thresholds. A result below 50 does
-not order the user to leave, and a result above 80 does not certify safety or
-success.
+For deterministic arithmetic, copy `assets/profile-score-template.json`, retain
+source/date on evidence, and run `scripts/profile_score.py --input <model.json>`.
+Render `decision_status`, `interpretation`, missing critical evidence, and flags
+before `arithmetic_only`. Never turn partial arithmetic into an overall headline.
+The helper does not infer ratings or write memory. Use `--output` only when the
+user explicitly chooses a destination. A saved output file is not host memory.
 
 ### Step 5: report confidence separately
 

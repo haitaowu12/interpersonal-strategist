@@ -84,7 +84,7 @@ python3 evals/persona_conversation.py prepare --condition skill --output build/p
 python3 evals/persona_conversation.py prepare --condition no-skill --output build/persona-conversation-no-skill-prompts.jsonl
 python3 evals/relationship_scope.py prepare --condition skill --output build/relationship-scope-skill-prompts.jsonl
 python3 evals/relationship_scope.py prepare --condition no-skill --output build/relationship-scope-no-skill-prompts.jsonl
-python3 evals/run.py summarize --responses build/responses.jsonl --judgments build/judgments.jsonl --output build/summary.json
+python3 evals/run.py summarize --plan build/plan.json --responses build/responses.jsonl --judgments build/judgments.jsonl --output build/summary.json
 ```
 
 `prepare` creates stable prompt manifests and hashes. A host runner must invoke
@@ -183,3 +183,14 @@ health details, facial or voice recordings, biometric inferences, or confidentia
 attachments to public fixtures, issues, logs, snapshots, or release artifacts.
 Private pilot material must be minimized, access-controlled, and deleted under
 the pilot protocol.
+
+## Harness 3.0 execution and integrity
+
+Follow [the current runbook](../release/QUALIFICATION-RUNBOOK.md) for frozen plans,
+bounded adapter execution, shuffled packets, trace audits, and record schemas.
+The plan is required for completeness and acceptance; submitted rows alone are
+not a denominator. Public fixtures remain development evidence. Binary
+preference intervals are now exact and clustered by predeclared family; legacy
+bootstrap-only win-rate summaries must be recomputed. Missing eligible
+classifications are retained, and metrics are reported separately by condition.
+Rubric 2.4 adds agency/calibration and stage-specific scoring.

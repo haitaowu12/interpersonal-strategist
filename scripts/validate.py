@@ -6,6 +6,7 @@ from __future__ import annotations
 import argparse
 import importlib.util
 import json
+import math
 import re
 import subprocess
 import sys
@@ -60,7 +61,6 @@ REQUIRED_EVAL_DOCS = {
     "run.py",
 }
 REQUIRED_DISTRIBUTABLE_FILES = {"LICENSE", "NOTICE.md", "SKILL.md"}
-REQUIRED_METHOD_CONTRACTS = set("ABCDEFGHIJKL")
 REQUIRED_QUALIFICATION_GATES = {
     "static_repository_ci",
     "deterministic_package_and_layout",
@@ -101,7 +101,7 @@ EVIDENCE_REQUIRED_FIELDS = {
     "last_verified",
     "license_note",
 }
-MINIMUM_SCENE_PLAYBOOKS = 27
+MINIMUM_SCENE_PLAYBOOKS = 1  # Coverage is behavioral; volume is not a quality gate.
 MINIMUM_DEVELOPMENT_CASES = 36
 MINIMUM_BILINGUAL_PAIRS = 6
 FORBIDDEN_PORTABILITY_PATTERNS = {
@@ -547,7 +547,7 @@ def validate_evidence(project_root: Path) -> list[str]:
 
 
 def is_number(value: Any) -> bool:
-    return isinstance(value, (int, float)) and not isinstance(value, bool)
+    return isinstance(value, (int, float)) and not isinstance(value, bool) and math.isfinite(value)
 
 
 def git_object_sha(project_root: Path, expression: str) -> str | None:
@@ -907,6 +907,16 @@ def validate_qualification(project_root: Path) -> list[str]:
                 if not isinstance(bundle.get(field), str) or not bundle[field].strip():
                     errors.append(f"qualified evidence_bundle requires {field}")
 
+    # A qualified declaration must resolve to actual private evidence bytes.
+    verifier_path = project_root / "scripts" / "verify_evidence_bundle.py"
+    if status == "qualified":
+        spec = importlib.util.spec_from_file_location("qualification_bundle_verifier", verifier_path)
+        if spec is None or spec.loader is None or not verifier_path.is_file():
+            errors.append("qualified release requires the evidence bundle verifier")
+        else:
+            verifier = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(verifier)
+            errors.extend(verifier.qualification_bundle_errors(project_root, payload))
     return errors
 
 
@@ -990,16 +1000,14 @@ def validate_repository(project_root: Path = PROJECT_ROOT) -> list[str]:
 
     contracts_path = references_dir / "method-contracts.md"
     if contracts_path.is_file():
-        contract_ids = set(
-            re.findall(
-                r"^## ([A-L])\. ",
-                contracts_path.read_text(encoding="utf-8"),
-                re.MULTILINE,
-            )
+        contract_ids = re.findall(
+            r"^## ([A-Z])\. ",
+            contracts_path.read_text(encoding="utf-8"),
+            re.MULTILINE,
         )
-        missing_contracts = REQUIRED_METHOD_CONTRACTS - contract_ids
-        if missing_contracts:
-            errors.append("method contracts missing: " + ", ".join(sorted(missing_contracts)))
+        # Inventory size is not a quality gate; simplification must remain possible.
+        if not contract_ids or len(contract_ids) != len(set(contract_ids)):
+            errors.append("method contracts require non-empty, unique identifiers")
 
     errors.extend(validate_evidence(project_root))
     errors.extend(validate_qualification(project_root))

@@ -10,10 +10,20 @@ of automatic truth about another person.
 
 ## Use the available memory adapter
 
-When the host exposes a scoped memory mechanism, use it under this contract. Do
-not invent successful storage or retrieval. If no memory mechanism is available,
-return a portable Situation Memory Card for the user to retain and paste into a
-future conversation.
+Default to session-only operation. A portable Situation Memory Card is a
+user-controlled alternative, offered when requested rather than created by default.
+Only enable persistence after explicit scope consent and a verified host adapter.
+The adapter must demonstrate scoped read/write, inspect, correction, expiry,
+export, and deletion with receipts. If a required capability is unavailable or
+unverified, keep that case session-only; do not promise unsupported controls.
+No raw transcripts or secret person profiles belong in a card.
+
+A skill's memory mode does not control provider chat history, logs, backups, or
+training policies. Explain the exact storage scope of a save/delete receipt.
+A confirmed application deletion is not proof of erasure from provider logs.
+The offline calculator makes no network calls, but that does not make the model
+conversation itself local. See the repository's host-capability matrix before
+advertising any persistence feature.
 
 The skill must still work without memory, connectors, files, or network access.
 
@@ -24,7 +34,8 @@ Use one of three modes:
 - **OFF:** do not retrieve or write case memory. Honor “memory off,” “do not
   remember this,” and equivalent immediately.
 - **CONFIRM_EACH:** propose the exact compact delta and obtain confirmation
-  before each write. Use this default until the user opts in.
+  before each write. Use this default only after the user opts into persistence;
+  until then the case remains session-only (OFF).
 - **AUTO_UPDATE:** after the user explicitly enables it for a named scope,
   retrieve and update routine decision-relevant memory without repeated
   permission prompts. Show material new actor hypotheses before promoting them.

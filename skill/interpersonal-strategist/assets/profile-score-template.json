@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.0",
+  "schema_version": "1.1",
   "profile_id": "relationship-alias",
   "profile_version": 1,
   "purpose": "State the bounded interpersonal decision being scored.",
@@ -23,7 +23,8 @@
       "unknowns": [
         "Add the decision-relevant missing evidence."
       ],
-      "update_condition": "Review after the next comparable commitment or material correction."
+      "update_condition": "Review after the next comparable commitment or material correction.",
+      "decision_critical": true
     }
   ],
   "flags": []

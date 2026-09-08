@@ -1,0 +1,81 @@
+{
+  "schema_version": "1.0",
+  "release": "0.13.0-alpha.1",
+  "default_mode": "session-only",
+  "persistent_adapter_enabled": false,
+  "status": "unqualified",
+  "hosts": [
+    {
+      "surface": "codex-desktop-personal-agent-skills",
+      "model_snapshot": null,
+      "host_version": null,
+      "capabilities": {
+        "discovery": {
+          "status": "not_verified",
+          "receipt": null
+        },
+        "explicit_invocation": {
+          "status": "not_verified",
+          "receipt": null
+        },
+        "reference_reads": {
+          "status": "not_verified",
+          "receipt": null
+        },
+        "quick_mode": {
+          "status": "not_verified",
+          "receipt": null
+        },
+        "ask_wait_update": {
+          "status": "not_verified",
+          "receipt": null
+        },
+        "stop": {
+          "status": "not_verified",
+          "receipt": null
+        },
+        "scoped_read": {
+          "status": "not_verified",
+          "receipt": null
+        },
+        "scoped_write": {
+          "status": "not_verified",
+          "receipt": null
+        },
+        "inspect": {
+          "status": "not_verified",
+          "receipt": null
+        },
+        "correct": {
+          "status": "not_verified",
+          "receipt": null
+        },
+        "expire": {
+          "status": "not_verified",
+          "receipt": null
+        },
+        "export": {
+          "status": "not_verified",
+          "receipt": null
+        },
+        "delete": {
+          "status": "not_verified",
+          "receipt": null
+        }
+      }
+    }
+  ],
+  "receipt_requirements": [
+    "exact subject and host version",
+    "synthetic case and observed operation",
+    "tool-read/write evidence",
+    "result and limitations",
+    "independent reviewer role and date"
+  ],
+  "nonclaims": [
+    "No persistent host adapter is qualified.",
+    "Layout checks do not prove model loading or reference selection.",
+    "Memory off does not erase host transcripts, backups, or provider logs.",
+    "The offline arithmetic helper does not make cloud model inference local."
+  ]
+}
