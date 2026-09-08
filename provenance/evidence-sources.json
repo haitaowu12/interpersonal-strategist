@@ -704,6 +704,45 @@
       "runtime_rule": "Store MBTI only when supplied by the user as optional vocabulary; do not infer it, diagnose from it, or use it as compatibility evidence.",
       "last_verified": "2026-08-10",
       "license_note": "Official page link and original summary only."
+    },
+    {
+      "id": "AGENCY-01",
+      "first_author": "Cheng",
+      "year": 2026,
+      "title": "Sycophantic AI decreases prosocial intentions and promotes dependence",
+      "stable_identity": "PMID 41886588; DOI 10.1126/science.aec8352",
+      "evidence_type": "Three preregistered experiments; N=2405",
+      "permitted_claim": "Sycophantic advice can be preferred while reducing responsibility and repair intentions.",
+      "limitation": "Intentions and judgments are not long-term outcomes or validation of this skill.",
+      "runtime_rule": "Evaluate agency and correction separately from satisfaction.",
+      "last_verified": "2026-09-07",
+      "license_note": "Metadata and original bounded summary; no paper or proprietary text redistributed."
+    },
+    {
+      "id": "PERSPECTIVE-01",
+      "first_author": "Eyal",
+      "year": 2018,
+      "title": "Perspective mistaking: Accurately understanding the mind of another requires getting perspective, not taking perspective",
+      "stable_identity": "PMID 29620401; DOI 10.1037/pspa0000115",
+      "evidence_type": "Experimental research",
+      "permitted_claim": "Imagining a perspective did not consistently improve accuracy; directly obtaining information helped in a final experiment.",
+      "limitation": "Not a mandate to contact someone when unsafe or unwanted.",
+      "runtime_rule": "Label simulation as hypothetical; obtain relevant information only where appropriate.",
+      "last_verified": "2026-09-07",
+      "license_note": "Metadata and original bounded summary; no paper or proprietary text redistributed."
+    },
+    {
+      "id": "AICOMM-01",
+      "first_author": "Argyle",
+      "year": 2023,
+      "title": "Leveraging AI for democratic discourse: Chat interventions can improve online political conversations at scale",
+      "stable_identity": "PMID 37788311; DOI 10.1073/pnas.2311627120",
+      "evidence_type": "Randomized online political-conversation experiment",
+      "permitted_claim": "Optional rephrasing improved reported conversation quality without shifting policy positions.",
+      "limitation": "Specific political context; no persistence detected in later follow-up; not general relationship efficacy.",
+      "runtime_rule": "Preserve user choice, meaning, and voice in bounded wording assistance.",
+      "last_verified": "2026-09-07",
+      "license_note": "Metadata and original bounded summary; no paper or proprietary text redistributed."
     }
   ]
 }

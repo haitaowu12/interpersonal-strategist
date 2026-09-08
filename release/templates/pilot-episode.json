@@ -1,0 +1,20 @@
+{
+  "episode_id": null,
+  "consented": false,
+  "followup_consented": false,
+  "eligible_adult": false,
+  "status": "not_started",
+  "language": null,
+  "task_category": null,
+  "usable_next_move_rating": null,
+  "initial_helpfulness": null,
+  "followup_helpfulness": null,
+  "action_status": "not_observed",
+  "assumption_corrected": null,
+  "voice_preserved": null,
+  "repeated_analysis_increased": null,
+  "followup_status": "not_attempted",
+  "unresolved_adverse_event": null,
+  "retention_deadline": null,
+  "reviewer_role": null
+}

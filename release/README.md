@@ -1,75 +1,67 @@
-# Release Qualification
+# Release and qualification
 
-`release/qualification.json` is the canonical promotion record. The current
-`0.12.0-alpha.1` state is a production-qualification candidate, not a production
-claim.
+Current version: `0.13.0-alpha.1`. This is a stabilized experimental candidate,
+not a supported production release or a claim of improved social outcomes.
+`qualification.json` remains the canonical blocked promotion record.
 
-## Promotion rule
+The [execution runbook](QUALIFICATION-RUNBOOK.md) defines the next bounded cycle;
+the [pilot kit](PILOT.md) defines consent, outcomes, and stopping. Host capability
+claims are limited by [host-capabilities.json](host-capabilities.json).
 
-Production wording may be used only when:
+## What may ship, and what may be claimed
 
-- every required gate is `passed`;
-- `status` is `qualified`;
-- `production_claim_allowed` is `true`;
-- `qualification_commit` equals the exact release commit;
-- the release ZIP, prompt manifests, responses, judgments, source-resolution
-  report, holdouts, bilingual review, and pilot evidence have recorded hashes;
-- no unresolved hard-gate failure remains.
+A development PR may merge when source review, regression checks, deterministic
+packaging, and layout smoke tests pass. Those checks do not authorize a
+production claim. A downloadable prerelease may be marked experimental only;
+clean-host behavior must still be measured before claiming host compatibility.
 
-Static CI, a deterministic ZIP, or public development-case performance alone
-cannot change the status.
+A production promotion requires every existing required gate to pass against
+one unchanged subject, actual evidence bytes, independent review, and zero
+unresolved hard failures. Human and behavioral gates are not replaced by new
+unit tests, generated fixtures, scripted mock adapters, or receipt templates.
+Do not loosen thresholds because the candidate fails them.
 
-## Evidence packages
+## Freeze one subject, not a moving branch
 
-Qualification evidence should be stored outside the distributable skill and may
-be private when it contains sealed holdouts or privacy-controlled pilot data.
-The public manifest may record cryptographic hashes, counts, protocol versions,
-reviewer roles, aggregate results, and links to access-controlled artifacts.
+Use the immutable candidate commit, its tree, the ZIP hash, exact model and host,
+rubric and harness versions. Keep the runtime frozen during qualification.
+A later metadata-only promotion can point to that already-qualified candidate;
+it cannot claim that a different runtime was evaluated. Rebuild and compare
+package bytes, and retain the candidate object in release history. Do not try to
+embed a commit's own not-yet-existing hash into itself.
 
-Do not commit real conversations, identifying workplace records, confidential
-attachments, or holdout answer structure.
+Private evidence belongs outside the repository. Set
+`INTERPERSONAL_EVIDENCE_INDEX` to its local index during promotion validation.
+`scripts/verify_evidence_bundle.py` checks actual artifact hashes and paths,
+package/source parity, frozen-run completeness, blinding identity, receipts,
+comparative statistics, and adjudicated review-record counts. Hash identity and
+consistent records cannot establish reviewer independence or source truth.
 
-Every passed gate must use the versioned evidence-object contract enforced by
-`scripts/validate.py`. Evidence objects bind the subject commit and package,
-protocol version, result, artifact hash, and access-controlled location. A
-qualified manifest additionally requires the complete top-level evidence bundle
-and an empty `unresolved_hard_failures` list.
+A metadata-only promotion still needs access to the evidence. Public CI cannot
+verify absent private files and must not bypass this check. Run qualification in
+a controlled environment with read-only evidence access and publish only the
+redacted report and cryptographic receipts. Ordinary blocked-alpha CI requires
+no private data or model credentials.
 
-## Release sequence
+## Maintainer operations
 
-1. Freeze the candidate PR head without merging it.
-2. Build the deterministic ZIP and record its SHA-256.
-3. Verify source identities and registry parity.
-4. Run clean-host discovery, explicit invocation, and reference-selection tests,
-   including ordinary romance, consent, breakup, reconciliation, workplace
-   power, stalking, intimate privacy, and dossier/scoring routes.
-5. Calibrate human and automated judges.
-6. Run blinded no-skill comparison.
-7. Run independently authored untouched and adversarial holdouts, including
-   the expanded relationship and consent strata.
-8. Complete fluent English-Simplified Chinese review.
-9. Run the privacy-safe controlled pilot.
-10. Obtain independent release review.
-11. Confirm every gate passed against the unchanged candidate head and package.
-12. Merge that exact candidate PR.
-13. Update the qualification manifest on a metadata-only promotion PR.
+Use one PR per bounded stabilization slice. Keep static checks in CI; run paid
+model evaluations only against a frozen candidate with an explicit run budget.
+Do not repeatedly review or repair until a desired score appears. Preserve a
+failure, classify it once, fix a reproducible cause, and use fresh holdouts for
+any tuned behavior. Existing public fixtures remain regression tests.
 
-A substantive runtime fix after steps 5-9 invalidates affected evidence and
-requires a fresh qualification tranche. The `0.10.0-rc.1` relationship-scope
-expansion invalidates prior claims that did not test romance, intimacy, breakup,
-reconciliation, and their safety boundaries.
+For a model/host/runtime change, record which claims and tests it invalidates.
+Recheck routing, reference reads, quick/interview/stop behavior, scores, memory,
+and the relevant comparison before renewing compatibility claims. A new source
+citation alone does not establish new behavior.
 
-## Failure handling
+For a reported harmful output or privacy issue: stop the affected feature or
+version, record a private minimal incident, assess scope, correct or withdraw the
+claim/package, add a synthetic regression, and publish a redacted disposition.
+Deletion requests need storage-specific receipts. No response-time or support
+service level is promised without an assigned operator.
 
-- Preserve raw failures in the internal qualification report.
-- Classify root cause as routing, method selection, reference retrieval,
-  generated wording, branch/control quality, bilingual function, judge error,
-  host integration, or fixture defect.
-- Add public synthetic regression cases without exposing private holdouts.
-- Do not reuse a tuned-against holdout as untouched qualification evidence.
-- Keep the release blocked until the affected gate is rerun.
-
-The `0.12.0-alpha.1` context-first revision is stacked on the PR #7 development
-head and retains governed profile/scoring capabilities. The interactive
-protocol in `evals/interactive-context-protocol.md` adds turn-level evidence;
-public scenarios and local model observations cannot replace qualification.
+Before wider public distribution, the owner must assign a maintainer, safety
+reviewer, fluent reviewers, pilot coordinator, and a working private reporting
+route. Roles are required; no named independent reviewers are claimed here.

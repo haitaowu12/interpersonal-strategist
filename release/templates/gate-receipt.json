@@ -1,0 +1,19 @@
+{
+  "schema_version": "1.0",
+  "gate_id": null,
+  "subject": {
+    "commit": null,
+    "package_sha256": null,
+    "model_snapshot": null,
+    "host_version": null,
+    "rubric_version": "2.4"
+  },
+  "protocol_version": "1.0",
+  "result": "pending",
+  "reviewer_role": null,
+  "reviewed_at": null,
+  "counts": {},
+  "metrics": {},
+  "supporting_artifacts": {},
+  "limitation": "Template, not a passed gate or an independent review."
+}

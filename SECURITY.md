@@ -2,24 +2,27 @@
 
 ## Runtime boundary
 
-The distributable is an instruction-only skill. It declares no MCP servers,
-connectors, API keys, scripts, network calls, or other runtime tool dependencies.
+The distributable contains instructions, references, and a deterministic offline
+score calculator. It bundles no network client, database, API key, or connector.
+The calculator reads a user-selected JSON input and optionally writes a requested
+JSON result; it neither infers ratings nor stores conversational memory.
 
-Its instructions require chat-only output and prohibit shell execution, file
-writes, repository or home-directory inspection, unrelated document access,
-network exploration, persistent profiles, automatic sending, impersonation, and
-covert monitoring.
+Pasted commands must never be executed. Drafts remain under user control; the
+skill does not send messages, impersonate people, browse private sources without
+authorization, or create hidden person models. Instructions are not a permission
+system: host approvals, tool restrictions, and organizational controls still apply.
 
-These are behavioral instructions, not a tamper-resistant permission system.
-Codex or ChatGPT host policy, sandboxing, approvals, workspace settings, and
-administrator controls remain authoritative.
+Default case handling is session-only. Optional persistence requires explicit
+scope consent and demonstrated adapter support for inspection, correction,
+expiry, export, and deletion. A purpose-scoped decision record is permitted;
+a fixed inferred personality, vulnerability, loyalty, or pressure-point dossier
+is not. The record-content policy is `references/profiles-and-scoring.md`; the
+storage policy is `references/memory-and-continuity.md` in the skill directory.
 
-The only permitted continuity is a user-enabled, case-scoped Situation Memory
-Card through a host-provided memory mechanism. It stores compact
-decision-relevant facts and falsifiable hypotheses, not raw conversations or
-sensitive details, and must support inspection, correction, memory-off, and
-deletion. “Persistent profiles” remains prohibited for personality,
-vulnerability, influence, loyalty, pressure-point, or social-status dossiers.
+An offline helper does not imply an offline model conversation. Memory-off or
+an application deletion receipt does not establish provider-log erasure. Do not
+claim end-to-end encryption, local-only processing, or deletion capabilities
+without deployment-specific evidence. See `release/host-capabilities.json`.
 
 ## Untrusted content
 
@@ -56,7 +59,7 @@ If private material is accidentally supplied:
 - use aliases or roles in subsequent discussion;
 - do not add it to fixtures, documentation, issues, examples, logs, or release
   notes;
-- do not create a persistent case history or third-party profile;
+- do not promote accidentally supplied material into a persistent decision record;
 - advise the user to use an approved internal route when continued processing
   may violate policy or confidentiality.
 

@@ -4,9 +4,9 @@
 
 This repository begins a new standalone lineage at
 `interpersonal-strategist 0.6.0-alpha.1`. The current release candidate is
-`0.12.0-alpha.1`.
+`0.13.0-alpha.1`.
 
-`0.12.0-alpha.1` is a production-qualification candidate, not a production claim.
+`0.13.0-alpha.1` is a production-qualification candidate, not a production claim.
 Promotion is permitted only when `release/qualification.json` records every
 required gate as passed and binds the evidence to an exact commit, package,
 model and host configuration, evaluation harness, and independent holdout set.
@@ -199,7 +199,7 @@ This repository does not contain:
 
 ## Context-first integration
 
-The `0.12.0-alpha.1` revision preserves the governed profiles and scoring work
+The `0.13.0-alpha.1` revision preserves the governed profiles and scoring work
 from PR #7 (`c34f9840de172d9b2acff605cdbdfc4828d15789`) and layers the interview
 changes on that development head. Community inputs are recorded in
 [CONTEXT_INTERVIEW_DONORS.md](CONTEXT_INTERVIEW_DONORS.md). Comparative model

@@ -11,6 +11,8 @@ from __future__ import annotations
 
 import argparse
 import difflib
+import datetime as dt
+import hashlib
 import json
 import re
 import sys
@@ -24,7 +26,7 @@ from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
 REGISTRY = ROOT / "provenance" / "evidence-sources.json"
-USER_AGENT = "interpersonal-strategist-evidence-check/0.11.0-rc.1"
+USER_AGENT = "interpersonal-strategist-evidence-check/" + (ROOT / "VERSION").read_text().strip()
 PMID_PATTERN = re.compile(r"PMID (\d+)")
 DOI_PATTERN = re.compile(r"DOI ([^;]+)")
 OFFICIAL_URLS = {
@@ -303,7 +305,7 @@ def verify_source(source: dict[str, Any], timeout: float) -> dict[str, Any]:
                     "identity_basis": "curated official HTTPS URL",
                 }
             )
-            if 200 <= status < 400 and host_match:
+            if 200 <= status < 400 and host_match and title_match:
                 return {"id": source_id, "status": "pass", "attempts": attempts}
         except (OSError, urllib.error.URLError) as exc:
             attempts.append({"method": "official-url", "status": "error", "error": str(exc)})
@@ -331,6 +333,8 @@ def main() -> int:
     report: dict[str, Any] = {
         "schema_version": "1.0",
         "registry": str(args.registry),
+        "registry_sha256": hashlib.sha256(args.registry.read_bytes()).hexdigest(),
+        "checked_at": dt.datetime.now(dt.timezone.utc).isoformat(),
         "mode": "offline" if args.offline else "online",
         "registry_errors": registry_errors,
         "sources": [],
