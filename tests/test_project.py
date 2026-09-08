@@ -70,9 +70,9 @@ def make_qualified_manifest(project: Path) -> dict:
                 "qualification_commit": commit,
                 "qualification_tree_sha": "e" * 40,
                 "package_sha256": package_sha,
-                "rubric_version": "2.3",
+                "rubric_version": "2.4",
                 "judge_protocol_version": "1.0",
-                "harness_version": "evals/run.py@0.11.0-rc.1",
+                "harness_version": "evals/run.py@3.0",
             },
         }
     )
@@ -320,7 +320,7 @@ class ProjectTests(unittest.TestCase):
             any("non-passing gates" in item for item in errors), errors
         )
 
-    def test_complete_qualified_manifest_satisfies_evidence_schema(self) -> None:
+    def test_hash_only_qualified_manifest_requires_actual_artifacts(self) -> None:
         with tempfile.TemporaryDirectory(prefix="interpersonal-project-") as raw:
             project = copy_project(Path(raw))
             path = project / "release" / "qualification.json"
@@ -330,7 +330,7 @@ class ProjectTests(unittest.TestCase):
                 encoding="utf-8",
             )
             errors = validate_repository(project)
-        self.assertEqual(errors, [])
+        self.assertTrue(any("actual evidence bytes" in e for e in errors), errors)
 
     def test_validator_rejects_truthy_untyped_gate_evidence(self) -> None:
         with tempfile.TemporaryDirectory(prefix="interpersonal-project-") as raw:
@@ -414,7 +414,7 @@ class ProjectTests(unittest.TestCase):
         dimension_ids = {dimension["id"] for dimension in rubric["dimensions"]}
         self.assertIn("simulation_control", dimension_ids)
         self.assertIn("profile_scoring", dimension_ids)
-        self.assertEqual(rubric["schema_version"], "2.3")
+        self.assertEqual(rubric["schema_version"], "2.4")
 
     def test_validator_rejects_stale_rubric_version_reference(self) -> None:
         with tempfile.TemporaryDirectory(prefix="interpersonal-project-") as raw:
@@ -422,7 +422,7 @@ class ProjectTests(unittest.TestCase):
             protocol = project / "evals" / "judge-protocol.md"
             protocol.write_text(
                 protocol.read_text(encoding="utf-8").replace(
-                    '"rubric_version": "2.3"',
+                    '"rubric_version": "2.4"',
                     '"rubric_version": "2.0"',
                 ),
                 encoding="utf-8",
@@ -520,7 +520,7 @@ class ProjectTests(unittest.TestCase):
             "case_key": "cases:test",
             "condition": "skill",
             "blind_id": "blind-1",
-            "rubric_version": "2.3",
+            "rubric_version": "2.4",
             "hard_gates": {},
             "dimensions": {dimension_id: 3 for dimension_id in dimension_ids},
             "evidence": {"summary": "Observable reason."},
@@ -560,7 +560,7 @@ class ProjectTests(unittest.TestCase):
                 "case_key": "cases:paired",
                 "condition": condition,
                 "blind_id": f"blind-{condition}",
-                "rubric_version": "2.3",
+                "rubric_version": "2.4",
                 "hard_gates": gates,
                 "dimensions": dimensions,
                 "evidence": {"summary": "Observable reason."},
@@ -586,7 +586,7 @@ class ProjectTests(unittest.TestCase):
             summary = runner.summarize(responses_path, judgments_path, output)
         self.assertEqual(summary["pairwise"]["skill"], 1)
         self.assertEqual(summary["pairwise"]["acceptance"]["status"], "not_evaluable")
-        self.assertEqual(summary["schema_version"], "2.0")
+        self.assertEqual(summary["schema_version"], "3.0")
 
 
 if __name__ == "__main__":

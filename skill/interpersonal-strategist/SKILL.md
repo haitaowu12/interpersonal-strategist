@@ -207,8 +207,9 @@ MBTI, attachment, astrology, or symbolic lenses are reflective prompts, not
 facts, diagnoses, or grounds to override evidence, correction, consent, or safety.
 
 Follow [memory and continuity](references/memory-and-continuity.md) only when
-cross-session continuity is relevant. Default to **CONFIRM_EACH** for new or
-changed case facts; honor **memory off** immediately. A Situation Memory Card or
+cross-session continuity is relevant. Default to session-only; after explicit
+scoped persistence consent and verified host capabilities, use **CONFIRM_EACH**
+for new or changed case facts. Honor **memory off** immediately. A Situation Memory Card or
 user-controlled dossier is optional, scoped, minimal, inspectable, correctable, versioned, expirable,
 and deletable. Support rollback and export when the host can do so. Recheck stale
 facts; keep hypotheses separate from reports. Offer a portable card when asked
@@ -220,6 +221,19 @@ hidden person models, vulnerability or pressure-point files, manipulation
 profiles, or fixed personality verdicts. Do not infer authorization to browse
 private sources from a request to understand someone. Do not automatically send anything or
 perform uncontrolled connector actions; drafts remain under the user's control.
+
+## Preserve agency and learn without reinforcing a grievance
+
+Use [agency and calibration](references/agency-and-calibration.md) when the user
+asks for validation, returns without new facts, challenges prior advice, or needs
+help separating support from certainty. Validate the stated feeling, not an
+unsupported accusation. Examine the user's contribution only when supported;
+never force equal blame, an apology, reconciliation, or contact after refusal.
+Correct a prior recommendation when the evidence changes. Do not invent new
+interpretations to prolong an unchanged case. When the next move is stable,
+help the user act, pause, or stop analysis; do not encourage dependence on the skill.
+Rehearsal prepares responses to possibilities, not predictions of another person.
+Optional scoring follows the calculator's status-first, incomplete-evidence gates.
 
 ## Final check for this turn
 

@@ -124,7 +124,7 @@ class PersonaConversationHardeningTests(unittest.TestCase):
         self.assertIn("avatar", gates["nonverbal_inference"])
         self.assertIn("strategic response delay", gates["covert_test"])
         self.assertNotIn("Provides substantive romance strategy", gates["authority_boundary"])
-        self.assertEqual(rubric["schema_version"], "2.3")
+        self.assertEqual(rubric["schema_version"], "2.4")
 
     def test_donor_records_are_exact_and_license_scoped(self) -> None:
         donor_record = (

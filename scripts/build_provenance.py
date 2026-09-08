@@ -55,8 +55,16 @@ def build_provenance(
         if not required.is_file():
             raise ValueError(f"missing build-provenance input: {required}")
 
+    dirty = subprocess.run(
+        ["git", "status", "--porcelain", "--untracked-files=normal"], cwd=project_root,
+        check=True, capture_output=True, text=True,
+    ).stdout.strip()
+    if dirty:
+        raise ValueError("build provenance requires a clean tracked and untracked source tree")
+
     payload: dict[str, object] = {
-        "schema_version": "1.0",
+        "schema_version": "1.1",
+        "working_tree_clean": True,
         "candidate_sha": candidate_sha,
         "checkout_sha": checkout_sha,
         "checkout_tree_sha": checkout_tree_sha,

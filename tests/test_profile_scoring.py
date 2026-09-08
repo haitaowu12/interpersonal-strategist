@@ -85,10 +85,11 @@ class ProfileScoringTests(unittest.TestCase):
 
     def test_calculates_score_coverage_and_unknowns(self) -> None:
         result = self.module.calculate(payload())
-        self.assertEqual(result["decision_fit_score"], 72)
-        self.assertEqual(result["coverage_percent"], 83)
+        self.assertIsNone(result["decision_fit_score"])
+        self.assertEqual(result["arithmetic_only"]["scored_dimensions_score"], 72)
+        self.assertEqual(result["coverage_percent"], 83.33)
         self.assertEqual(result["unscored_dimensions"], ["constraints"])
-        self.assertEqual(result["decision_status"], "scored")
+        self.assertEqual(result["decision_status"], "insufficient_evidence")
         self.assertIn("not human worth", result["nonclaim"])
 
     def test_unknown_dimension_is_not_imputed_as_neutral(self) -> None:
@@ -105,11 +106,12 @@ class ProfileScoringTests(unittest.TestCase):
         ]
         changed["dimensions"][2]["unknowns"] = []
         second = self.module.calculate(changed)
-        self.assertEqual(first["decision_fit_score"], 72)
+        self.assertIsNone(first["decision_fit_score"])
+        self.assertEqual(first["arithmetic_only"]["scored_dimensions_score"], 72)
         self.assertEqual(second["decision_fit_score"], 60)
         self.assertEqual(second["coverage_percent"], 100)
 
-    def test_active_safety_flag_gates_score_without_erasing_it(self) -> None:
+    def test_active_safety_flag_withholds_headline_and_preserves_audit_arithmetic(self) -> None:
         model = payload()
         model["flags"] = [
             {
@@ -119,7 +121,8 @@ class ProfileScoringTests(unittest.TestCase):
             }
         ]
         result = self.module.calculate(model)
-        self.assertEqual(result["decision_fit_score"], 72)
+        self.assertIsNone(result["decision_fit_score"])
+        self.assertEqual(result["arithmetic_only"]["scored_dimensions_score"], 72)
         self.assertEqual(result["decision_status"], "gated")
         self.assertEqual(len(result["active_flags"]), 1)
 

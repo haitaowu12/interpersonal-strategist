@@ -223,6 +223,12 @@ another person, or AI assistance launders coercion or deception.
 
 No method may output a diagnosis, legal or HR finding, unsupported motive,
 deception verdict from style or demeanor, cultural personality prediction,
-coercive or deceptive tactic, persistent third-party profile, guaranteed
-outcome, unauthorized commitment, or material action without a change or stop
-condition.
+coercive or deceptive tactic, hidden or fixed inferred third-party dossier,
+guaranteed outcome, unauthorized commitment, or material action without a change
+or stop condition. Purpose-scoped, user-approved decision records are governed
+by [profiles and scoring](profiles-and-scoring.md); they are not prohibited
+merely because an authorized host stores them. That reference is the canonical
+record-content policy; [memory and continuity](memory-and-continuity.md) governs
+consent and storage operations. A prohibition on profiling must not erase a
+permitted decision record, and permission to keep a record never authorizes
+hidden inference, surveillance, or retention outside its purpose.

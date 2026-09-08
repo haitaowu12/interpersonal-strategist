@@ -1,0 +1,179 @@
+# One frozen qualification cycle
+
+This runbook is operational guidance for `0.13.0-alpha.1`, harness 3.0 and rubric
+2.4. It replaces the older bootstrap-only and hash-declaration recipes. None of
+the commands below manufactures qualification or calls a model by default.
+
+## 1. Stabilize and record the subject
+
+From a clean checkout:
+
+```bash
+python3 -m compileall -q scripts evals tests
+python3 scripts/validate.py
+python3 scripts/check_evidence.py --offline
+python3 evals/run.py validate-fixtures
+python3 evals/interactive_context.py validate
+python3 -m unittest discover -s tests -v
+python3 scripts/package.py
+python3 scripts/smoke_install.py --archive "dist/interpersonal-strategist-$(cat VERSION).zip"
+python3 scripts/build_provenance.py --output build/build-provenance.json
+```
+
+Record commit/tree, package and workflow hashes from the actual output. Never
+substitute a local test snapshot for the remote candidate. Online source
+resolution is a separate gate: run `scripts/check_evidence.py --output
+build/source-resolution.json` on a connected approved host and retain failures.
+
+Copy `templates/subject.json` to `evidence-private/subject.json`. Replace each
+null with the observed candidate/model/host identity; never guess a model
+snapshot from a display label. Keep sampling, reasoning configuration, tools,
+permissions, context, memory, turn and output budgets equal across conditions.
+Do not change them after seeing outcomes without starting a new recorded run.
+
+## 2. Build public development lanes, then seal independent qualification cases
+
+```bash
+python3 evals/run.py prepare --condition skill --output build/skill.jsonl
+python3 evals/run.py prepare --condition no-skill --output build/no-skill.jsonl
+python3 evals/run.py prepare --condition short-prompt --output build/short-prompt.jsonl
+python3 evals/run.py prepare --condition context-only --output build/context-only.jsonl
+python3 evals/run.py prepare --condition context-playbook --output build/context-playbook.jsonl
+python3 evals/run.py plan --manifest build/skill.jsonl --manifest build/no-skill.jsonl --output build/plan.json
+```
+
+Use a separate two-condition plan for each baseline/ablation. The short prompt
+is a competent alternative, not an intentionally weakened model. Context-only
+isolates elicitation; context-playbook adds supplied playbook guidance without
+full routing, memory or scoring. Separately compare requested memory/scoring
+on versus off under the same facts and budgets; those host-dependent ablations
+are protocol work, not implemented storage adapters.
+
+Public cases are never qualification holdouts. An independent author creates
+untouched private manifests in the same format after the candidate is frozen.
+Keep author, sealing time, access history and overlap review in private evidence.
+Do not expose expected responses to either the skill or the actor. Freeze
+`cluster_id` for related scenarios, language variants, and repeats before running.
+Give every replicate its own positive `replicate_id` and unique `run_id`.
+
+Create a qualification plan from those private manifests using `--purpose
+qualification --subject evidence-private/subject.json`. A purpose field does
+not prove independent authorship. Review it. The plan freezes every run,
+neutral judge prompt, strata, labels, prompt hash, family and shuffled execution
+order. Failures, exclusions and absent runs remain accounted for and cannot
+silently disappear. Do not patch the frozen denominator after results arrive.
+
+## 3. Execute with a trusted host adapter and a bounded budget
+
+The runner supports POSIX hosts and a user-reviewed argv array, never shell
+text. It sends a JSON object on stdin with `run_id`, `condition`, `prompt`, and
+`subject`. The adapter returns `{"response":"...","receipt":{...}}` and exits.
+The receipt should record actual host/model identity, reference reads, permitted
+tools, elapsed time, tokens/cost when available, and end status. A fabricated
+receipt is not attestation. Host isolation and actual skill loading are the
+adapter's responsibility and need independent inspection.
+
+Dry-run first (no adapter is invoked):
+
+```bash
+python3 evals/execute.py --plan build/plan.json --manifest build/skill.jsonl --manifest build/no-skill.jsonl --output evidence-private/responses.jsonl
+```
+
+For actual execution, add `--allow-execution --command-json
+'["python3","/absolute/path/to/reviewed_host_adapter.py"]' --max-runs 20
+--timeout 120 --output-limit 1000000`. These are operational per-batch limits,
+not an estimate of model cost. Approve a separate total token/cost ceiling in
+the host. The runner cannot enforce provider billing. It stops on the first
+adapter failure, records it without leaking stderr, and never retries silently.
+Rerunning resumes unobserved IDs, not failed IDs. Preserve any rerun as a new
+predeclared replicate or a separate diagnostic tranche. Concurrent writers to
+the same output file are unsupported; use one executor per plan output.
+
+A mock adapter tests plumbing only. It cannot satisfy clean-host, model-behavior,
+reference-selection, comparison, or pilot gates. The no-skill adapter session
+must not have the package, hidden answers, earlier skill turns, or memory loaded.
+
+## 4. Judge without giving the author control over the answer
+
+```bash
+python3 evals/blind.py prepare --plan build/plan.json --responses evidence-private/responses.jsonl --output evidence-private/blind
+```
+
+Give independent judges only `judge-packets.jsonl`, then `judge-pairs.jsonl`
+after pointwise scoring. Keep `mapping-private.json` and canonical responses
+private. Packets omit condition labels but prose can still reveal the condition;
+record order-swapped and verbosity probes. The code does not certify blindness.
+
+Pointwise JSONL requires `blind_id`, `rubric_version: "2.4"`, every canonical
+`hard_gates` boolean, every dimension 1–5, and short observable `evidence`.
+`true` on a hard gate means failure. Apply stage rules: an appropriate interview
+turn does not need an action plan; unused optional features earn no extra credit.
+Pairwise JSONL requires `pair_id` and `winner: left|right|tie`.
+
+Invocation ownership needs an independent trace audit, not an inference from
+prose. Provide a private JSONL with `run_id`, canonical `invocation_label`, and
+an observable `evidence` string bound to actual host traces. The unblinder can
+attach it with `--trace-audit`; missing eligible labels remain failures.
+
+```bash
+python3 evals/blind.py unblind --mapping evidence-private/blind/mapping-private.json --pointwise evidence-private/pointwise.jsonl --pairwise evidence-private/pairwise.jsonl --trace-audit evidence-private/trace-audit.jsonl --rubric-version 2.4 --output evidence-private/judgments.jsonl
+python3 evals/run.py summarize --plan build/plan.json --responses evidence-private/blind/canonical-responses.jsonl --judgments evidence-private/judgments.jsonl --output evidence-private/summary.json --require-complete
+```
+
+For a short-prompt or context ablation, supply the corresponding `--baseline`.
+No plan means completeness is unknown and comparison cannot pass. Classification
+metrics are per condition; missing predictions remain false negatives rather
+than shrinking the denominator. `--require-complete` checks coverage, not whether
+the candidate won: inspect `pairwise.acceptance.status` and every failure.
+
+## 5. Interpret without overclaiming
+
+The inferential unit is one predeclared independent scenario family. Replicates
+and bilingual variants contribute to that family's net win/loss/tie, not new
+independent trials. Report raw pair counts as well. Win-rate bounds use a
+one-sided exact binomial interval; 30 wins in 30 independent families has a
+lower 95% bound about 0.905, not 1.0. The independence assumption still requires
+review. Do not infer population prevalence from an adversarial convenience set.
+
+Low-complexity non-inferiority uses paired family-mean usability differences,
+10,000 bootstrap samples with the recorded seed, at least 30 families, and the
+existing -0.05 margin. A degenerate sample is not automatically qualified.
+Per-stratum preference advantage remains required; sample size and acceptance
+thresholds are product criteria, not universal scientific standards. Preserve
+losses, ties, output length, latency/cost missingness, and all hard failures.
+A statistical pass is not evidence of real-world benefit.
+
+## 6. Complete human, safety, host and pilot gates
+
+Use the existing `holdout-protocol.md`, `judge-protocol.md`, bilingual requirements,
+and 150-case adversarial safety contract without reducing coverage. Use the
+[review record schemas](EVIDENCE-RECORDS.md) to capture adjudicated results and
+expected sets. Obtain two fluent reviewers and calibrate automated judges against
+human judgments. Record consented pilot episodes with follow-up missingness,
+agency and adverse effects rather than satisfaction alone. See [PILOT.md](PILOT.md).
+
+Readiness decisions: keep the public alpha experimental after engineering
+checks; consider a scope-limited beta only after comparison and human evidence;
+claim production only after all gates. A failed comparison calls for removing
+unhelpful complexity, not adding more methods or testing until it wins.
+
+## 7. Bind actual evidence and review a metadata-only promotion
+
+Store all artifacts under a private bundle root. Copy the index and receipt
+templates, fill only observed values, and reference relative paths with actual
+SHA-256 values. No symlinks or path traversal. Human receipts name reviewer roles,
+dates, supporting artifacts and their subject. Recompute fields using the
+verifier rather than typing favorable aggregates.
+
+```bash
+python3 scripts/verify_evidence_bundle.py --index evidence-private/index.json --qualification release/qualification.json
+INTERPERSONAL_EVIDENCE_INDEX=evidence-private/index.json python3 scripts/validate.py
+```
+
+These commands are expected to reject the current blocked alpha as production
+qualification. Promote only once actual artifacts, complete evidence, independent
+review and compatible package bytes exist. Preserve candidate identity through
+merge; do not qualify the merge commit automatically. Publish a redacted report
+with scope, failures, uncertainty, tested hosts and package hash, not private
+records or sealed prompts. No generated document or automated self-review counts
+as an independent human release review.

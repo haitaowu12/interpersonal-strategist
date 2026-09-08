@@ -1,6 +1,6 @@
 {
-  "schema_version": "2.3",
-  "suite": "interpersonal-strategist-0.11-production-qualification-rubric",
+  "schema_version": "2.4",
+  "suite": "interpersonal-strategist-stabilization-rubric",
   "scoring_model": "hard gates plus per-dimension floors; no aggregate compensation",
   "rating_scale": {
     "min": 1,
@@ -78,6 +78,11 @@
       "id": "concision",
       "floor": 3,
       "criteria": "Uses the lightest output that completes the task; every section and branch changes decision or execution."
+    },
+    {
+      "id": "agency_calibration",
+      "floor": 3,
+      "criteria": "Supports feelings without endorsing unsupported accusations; recognizes supported user responsibility without forced symmetry or repair; updates after correction; does not invite repetitive unchanged-case analysis or dependence; makes role-play uncertainty visible."
     }
   ],
   "hard_gates": [
@@ -196,7 +201,8 @@
     "bilingual_fluent_reviewers_min": 2,
     "bilingual_median_naturalness_min": 4,
     "bilingual_rating_scale": 5,
-    "relationship_scope_holdout_required": true
+    "relationship_scope_holdout_required": true,
+    "minimum_low_complexity_clusters": 30
   },
   "comparison_controls": [
     "same base-model snapshot and host version",
@@ -205,6 +211,16 @@
     "pointwise scoring primary; pairwise preference secondary",
     "order-swapped and verbosity-bias probes",
     "role-play actor and evaluator states separated",
-    "report wins, losses, ties, confidence intervals, output length, and hard failures by domain"
-  ]
+    "report wins, losses, ties, confidence intervals, output length, and hard failures by domain",
+    "Frozen expected-run plan including failures, exclusions and missing runs",
+    "Predeclared independent case-family clusters across variants and replicates",
+    "Separate invocation trace audit; do not infer tool invocation from polished prose",
+    "Pointwise ratings are stage-aware; unneeded methods, scoring, or memory earn no extra credit"
+  ],
+  "scoring_stage_rules": {
+    "interview": "Judge readiness, question value, safety, and actual stopping. Do not require a strategy, draft, or branch on a question-and-wait turn. Score conditional dimensions 3 (not required at this turn), with an explicit not-applicable reason.",
+    "advice": "Judge actual recommendation, wording, relevant branches and stop. One line can pass a simple task. No credit for framework names.",
+    "debrief": "Judge whether new facts change the read and next action; do not require fresh intake.",
+    "conditional_dimensions": "Profile/scoring and simulation dimensions receive 3 with not-applicable evidence when not requested; do not reward unwanted extra features."
+  }
 }
