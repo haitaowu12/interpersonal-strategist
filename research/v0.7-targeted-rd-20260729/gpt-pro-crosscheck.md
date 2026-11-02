@@ -4,12 +4,7 @@ Date: 2026-07-29
 
 Surface verified: ChatGPT Pro
 
-Conversation:
-<https://chatgpt.com/c/6a6abd15-f7b0-83ea-b2f5-13c95d20ec96>
-
 Mode: targeted architecture and evidence review
-
-Elapsed Pro work shown by UI: 6m 47s
 
 ## Outbound disclosure
 

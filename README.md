@@ -14,9 +14,6 @@ Current release: **`0.13.0-alpha.1`**
 > comparison, fluent bilingual review, clean-host validation, and a controlled
 > pilot remain required gates in `release/qualification.json`.
 
-The
-separates completed implementation from the remaining qualification work.
-
 ## Start here
 
 Use it to prepare a conversation, think through a situation, practice a reply,
