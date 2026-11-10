@@ -459,4 +459,4 @@ holdout governance are recorded in `provenance/`.
 MIT. See [LICENSE](LICENSE). Third-party works remain subject to their own
 terms.
 
-Built by [Tony Wu](https://haitaowu12.github.io/tony-wu-home/) · [More projects](https://haitaowu12.github.io/tony-wu-home/#work).
+Built by [Tony Wu](https://haitaowu12.github.io/tony-wu-home/) · [More projects](https://tony-wu-home.web.app/#work).
